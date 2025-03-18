@@ -24,7 +24,9 @@
 <img src="https://github.com/user-attachments/assets/d0069a23-4c31-4381-8506-9d0bce6c4226" width="300">
 <img src="https://github.com/user-attachments/assets/8fd3cb41-6df4-4130-bb0b-d7b55e2fca19" width="300">
 <img src="https://github.com/user-attachments/assets/c1ea99be-7298-48d2-8200-ce634b3e1d75" width="300">
-<img src="https://github.com/user-attachments/assets/50e59f7b-a29c-429c-9742-ff538ed4e719" width="300">
+<img src="https://github.com/user-attachments/assets/905fc78b-9f1f-4988-9f1b-2ffa1e9053c7" width="300">
+<img src="https://github.com/user-attachments/assets/d7a67509-ddea-494d-a0f9-36603d5f8e9d" width="300">
+<img src="https://github.com/user-attachments/assets/461df791-3258-4fd5-8d91-82c307403f7d" width="300">
 
 ## 7. Xem thông báo những người khó khăn đăng bài - Nhà hảo tâm:
 <img src="https://github.com/user-attachments/assets/7edeb50f-de5b-4440-9ae3-314292795bdc" width="300">
