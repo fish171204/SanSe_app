@@ -1,0 +1,139 @@
+import 'package:flutter/material.dart';
+import '../constants/MyColors.dart';
+import 'package:tester/src/resources/DaDuocGiup.dart';
+
+class ViewUI2 extends StatelessWidget {
+  const ViewUI2({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0, // Loại bỏ bóng cho AppBar
+        backgroundColor: Colors.blue.shade700, // Màu nền AppBar
+        automaticallyImplyLeading: false, // Tùy chỉnh nút quay lại
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Daduocgiup(),
+              ),
+            );
+          },
+          child: Container(
+            margin: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  blurRadius: 5,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(30),
+              onTap: () {
+                Navigator.pop(context); // Quay lại màn hình trước đó
+              },
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.blue, // Icon màu trắng để nổi bật
+                  size: 28,
+                ),
+              ),
+            ),
+          ),
+        ),
+        title: const Text(
+          "Danh sách nhà hảo tâm",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.favorite,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // Hành động cho nút yêu thích
+            },
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Container(
+          constraints: const BoxConstraints.expand(),
+          color: MyColors.surfaceContainerLowest,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //
+
+              // Expanded(
+              //   child: ListView.builder(
+              //     padding: const EdgeInsets.symmetric(horizontal: 16),
+              //     itemCount: 5, // Replace with actual data length
+              //     itemBuilder: (context, index) {
+              //       return Card(
+              //         elevation: 3,
+              //         margin: const EdgeInsets.only(bottom: 16),
+              //         shape: RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.circular(12),
+              //         ),
+              //         child: ListTile(
+              //           leading: CircleAvatar(
+              //             backgroundColor: Colors.grey.shade300,
+              //             child: const Icon(
+              //               Icons.person,
+              //               color: Colors.white,
+              //             ),
+              //           ),
+              //           title: Text(
+              //             "Nhà hảo tâm ${index + 1}",
+              //             style: const TextStyle(
+              //               fontWeight: FontWeight.bold,
+              //             ),
+              //           ),
+              //           subtitle: const Text("Chi tiết thông tin nhà hảo tâm"),
+              //           trailing: const Icon(
+              //             Icons.arrow_forward_ios,
+              //             size: 16,
+              //           ),
+              //           onTap: () {
+              //             // Add navigation or actions here
+              //           },
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // ),
+              // Footer
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Center(
+                  child: Text(
+                    "Danh sách giúp đỡ trống",
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
+                      fontSize: 20,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
