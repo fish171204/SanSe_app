@@ -33,6 +33,7 @@
 <img src="https://github.com/user-attachments/assets/0a5b6fb2-801c-4c24-b517-de3dceb96d84" width="300">
 <img src="https://github.com/user-attachments/assets/8ecde1b7-8e08-4636-a595-e5e5e7a5a57c" width="300">
 <img src="https://github.com/user-attachments/assets/50f58c5a-2a0e-4012-9ca9-2994d291ab8f" width="300">
+<img src="https://github.com/user-attachments/assets/b6b23e73-7fce-4418-87fb-1700b640df0f" width="300">
 
 ## 9. Chức năng giúp đỡ - Nhà hảo tâm:
 <img src="https://github.com/user-attachments/assets/1fc7d9f0-c926-4d91-b85e-b3c025531d2d" width="300">
