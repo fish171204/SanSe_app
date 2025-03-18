@@ -1,4 +1,5 @@
 # **SanSe App - Final Version (AISC 2024)**  
+## Description: An application that connects people in difficult situations with charitable individuals, creating a free platform for philanthropy. 
 
 ## **1. Màn hình Welcome:**  
 ![image](https://github.com/user-attachments/assets/ef1e1089-7855-40fa-a4a5-132c45b97a10)  
