@@ -64,11 +64,12 @@ class _FormDKyHTState extends State<FormDKyHT> {
                     // Form fields (e.g., Số CCCD/CMND, Họ tên, Số điện thoại Zalo, etc.)
                     _buildFormField("Số CCCD/CMND", "054204003257",
                         isRequired: true),
-                    _buildFormField("Họ tên", "Nguyễn Trần Đoan Thi",
+                    _buildFormField("Họ tên", "Nguyễn Đăng Khoa",
                         isRequired: true),
-                    _buildFormField("Số điện thoại Zalo", "0353189861",
+                    _buildFormField(
+                        "Số điện thoại Zalo", "03934165740393416574",
                         isRequired: true),
-                    _buildFormField("Ngày sinh", "12/03/2004",
+                    _buildFormField("Ngày sinh", "17/12/2004",
                         isRequired: true),
                     _buildFormField("Email", "2221004199@sv.ufm.edu.vn"),
                     _buildFormField("Mật khẩu", "nhahaotam", isRequired: true),
