@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/resources/DangKyNhap.dart';
+import 'package:tester/src/resources/DanhKyNhap2.dart';
 
-/* da xem*/
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,16 +13,14 @@ class Welcome extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
-                decoration: const BoxDecoration(
-                  color: Color(0xFFECEDEC),
-                ),
+                decoration: const BoxDecoration(color: Color(0xFFECEDEC)),
                 width: double.infinity,
                 child: Stack(
                   children: [
                     Positioned.fill(
                       child: Image.asset(
-                        "assets/welcome.png",
-                        fit: BoxFit.cover,
+                        "assets/sapa4_welcome.jpg",
+                        fit: BoxFit.fill,
                       ),
                     ),
                     Column(
@@ -35,8 +34,8 @@ class Welcome extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                margin: const EdgeInsets.only(
-                                    bottom: 20, left: 15, right: 15),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 15),
                                 width: double.infinity,
                                 alignment: Alignment.center,
                                 child: const Text.rich(
@@ -45,7 +44,7 @@ class Welcome extends StatelessWidget {
                                       TextSpan(
                                         text: "Cùng nhau ",
                                         style: TextStyle(
-                                          color: Color(0xFF090A0A),
+                                          color: Colors.white70,
                                           fontSize: 32,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -54,14 +53,14 @@ class Welcome extends StatelessWidget {
                                         text: "SAN SẺ",
                                         style: TextStyle(
                                           fontSize: 32,
-                                          color: Colors.red,
-                                          fontWeight: FontWeight.bold,
+                                          color: Colors.orange,
+                                          fontWeight: FontWeight.w700,
                                         ),
                                       ),
                                       TextSpan(
                                         text: ",\nkết nối yêu thương",
                                         style: TextStyle(
-                                          color: Color(0xFF090A0A),
+                                          color: Colors.white70,
                                           fontSize: 32,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -77,35 +76,62 @@ class Welcome extends StatelessWidget {
                       ],
                     ),
                     Positioned(
-                      bottom: 20,
-                      left: 20,
-                      right: 20,
-                      child: GestureDetector(
-                        onTap: () {
-                          var push = Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Dangkynhap()),
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(35),
-                            color: const Color(0xFF3555FF),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          width: double.infinity,
-                          child: const Center(
-                            child: Text(
-                              "Bắt đầu",
-                              style: TextStyle(
-                                color: Color(0xFFFFFFFF),
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                      bottom: 58,
+                      left: 22,
+                      right: 16,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.orange,
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Dangkynhap()),
+                                );
+                              },
+                              child: const Text(
+                                "Đăng nhập",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                          const SizedBox(width: 15),
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.center, // Đẩy sang phải
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const Dangkynhap2()),
+                                  );
+                                },
+                                child: const Text(
+                                  "Đăng ký",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 2,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
