@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/Ayns/XemBaiDemo.dart';
+import 'package:tester/src/resources/widgets/CustomDrawer.dart';
+import 'package:tester/src/resources/widgets/SearchBarWidget .dart';
+import 'package:tester/src/resources/widgets/filter_button_widget.dart';
+import 'package:tester/src/resources/widgets/user_avatar_widget.dart';
 import '../constants/MyColors.dart';
 import '../constants/MyFontSize.dart';
 import 'package:tester/src/resources/MyNavigationBar.dart';
@@ -20,6 +24,7 @@ class MainNguoiHT extends StatefulWidget {
 class _MainNguoiHTState extends State<MainNguoiHT> {
   int _currentIndex = 0;
   String? selectedValue;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _onTabTapped(int index) {
     setState(() {
@@ -30,6 +35,8 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: const CustomDrawer(),
       body: SafeArea(
         child: Container(
           constraints: const BoxConstraints.expand(),
@@ -46,489 +53,505 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                   width: double.infinity,
                   height: double.infinity,
                   child: SingleChildScrollView(
-                      padding: const EdgeInsets.only(top: 20),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Stack(
                         children: [
-                          IntrinsicHeight(
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                  bottom: 5, left: 15, right: 12),
-                              width: double.infinity,
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                          Container(
+                            width: double.infinity,
+                            height: 600,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: const AssetImage(
+                                    "assets/sapa41_welcome.jpg"),
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                  Colors.black.withOpacity(0.3),
+                                  BlendMode.darken,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: 16,
+                            left: 16,
+                            child: Image.asset(
+                              "assets/logo.png",
+                              height: 70,
+                            ),
+                          ),
+                          Positioned(
+                            top: 16,
+                            right: 16,
+                            child: Row(
+                              children: [
+                                Stack(
                                   children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        // Mở màn hình danh mục từ thiện khi nhấn vào hình "danhmuc"
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: const Text(
-                                                'DANH MỤC TỪ THIỆN',
-                                                style: TextStyle(
-                                                  color: Color(
-                                                      0xFF0866FF), // Màu chữ: #0866FF
-                                                ),
-                                              ),
-                                              content: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  _buildItemRow(
-                                                      "assets/quaylai.png",
-                                                      "Từ thiện trực tiếp"),
-                                                  _buildItemRow(
-                                                      "assets/quaylai.png",
-                                                      "Từ thiện chủ đề"),
-                                                  _buildItemRow(
-                                                      "assets/quaylai.png",
-                                                      "Từ thiện khẩn cấp"),
-                                                  GestureDetector(
-                                                    onTap: () {
-                                                      // Điều hướng đến màn hình affiliateMarketing.dart khi nhấn vào "Mua hàng doanh nghiệp từ thiện"
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              const affiliateMarkteting(), // Chuyển đến màn hình affiliateMarketing
-                                                        ),
-                                                      );
-                                                    },
-                                                    child: _buildItemRow(
-                                                        "assets/giohang.png",
-                                                        "Mua hàng doanh nghiệp từ thiện"),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      },
-                                      child: Container(
-                                        child: Image.asset(
-                                          "assets/danhmuc.png",
-                                          fit: BoxFit.fill,
-                                          width: 30,
-                                          height: 30,
-                                        ),
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: const BoxDecoration(
+                                        color: Colors.grey,
+                                        shape: BoxShape.circle,
                                       ),
+                                      child: const Icon(Icons.list,
+                                          color: Colors.white, size: 20),
                                     ),
-                                    IntrinsicHeight(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          color: const Color(0xFFD9D9D9),
-                                        ),
-                                        padding:
-                                            const EdgeInsets.only(right: 10),
-                                        width: 350,
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              IntrinsicHeight(
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    color:
-                                                        const Color(0xFFE6E2E2),
-                                                  ),
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 5, right: 5),
-                                                  width: 40,
-                                                  child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Container(
-                                                          margin:
-                                                              const EdgeInsets
-                                                                  .only(top: 5),
-                                                          height: 29,
-                                                          width:
-                                                              double.infinity,
-                                                          child: Image.asset(
-                                                            "assets/search.png",
-                                                            fit: BoxFit.fill,
-                                                          ),
-                                                        ),
-                                                      ]),
-                                                ),
-                                              ),
-                                              const IntrinsicHeight(
-                                                child: Text(
-                                                  "Nhập nội dung tìm kiếm",
-                                                  style: TextStyle(
-                                                    color: MyColors.shadow,
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 24,
-                                                height: 24,
-                                                child: Image.asset(
-                                                  "assets/caidat.png",
-                                                  fit: BoxFit.fill,
-                                                ),
-                                              ),
-                                            ]),
-                                      ),
-                                    ),
-                                  ]),
-                            ),
-                          ),
-                          IntrinsicHeight(
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                top: 8, // Khoảng cách với các chi tiết bên trên
-                                bottom: 10, // Khoảng cách bên dưới
-                                left: 10,
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 8, // Điều chỉnh padding dọc
-                                horizontal: 12, // Điều chỉnh padding ngang
-                              ),
-                              decoration: const BoxDecoration(
-                                color:
-                                    Color(0xFFE3F2FD), // Light blue background
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(
-                                      10), // Bo tròn góc trên bên trái
-                                  bottomLeft: Radius.circular(
-                                      10), // Bo tròn góc dưới bên trái
+                                  ],
                                 ),
-                              ),
-                              child: const Row(
-                                crossAxisAlignment: CrossAxisAlignment
-                                    .center, // Căn giữa các thành phần
-                                children: [
-                                  CircleAvatar(
-                                    radius: 16, // Kích thước avatar
-                                    backgroundColor: Color(0xFF0288D1), // Blue
-                                    child: Icon(
-                                      Icons.favorite_outline_outlined,
-                                      size:
-                                          20, // Kích thước icon bên trong avatar
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                      width:
-                                          15), // Khoảng cách ngang giữa các thành phần
-                                  Flexible(
-                                    child: Text(
-                                      "Hoàn cảnh khó khăn gần đây",
-                                      style: TextStyle(
-                                        color: Color(0xFF01579B), // Darker blue
-                                        fontSize: 16, // Kích thước chữ
-                                        fontWeight: FontWeight.bold,
+                                const SizedBox(width: 10),
+                                Stack(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: const BoxDecoration(
+                                        color: Colors.grey,
+                                        shape: BoxShape.circle,
                                       ),
+                                      child: const Icon(Icons.search,
+                                          color: Colors.white, size: 20),
                                     ),
-                                  ),
-                                  SizedBox(width: 70), // Khoảng cách ngang
-                                  Icon(
-                                    Icons.arrow_forward,
-                                    color: Color(0xFF0288D1), // Màu icon
-                                    size: 20, // Kích thước icon
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 2),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width:
-                                        388, // Set a fixed width for each card
-                                    child: CustomCardWidget(
-                                      imagePath: "assets/HinhAnh_Demo.jpg",
-                                      label: "Trẻ em",
-                                      location: "Bình Định",
-                                      description:
-                                          "Tính mạng mong manh của bé gái 3 tuổi\n mắc bệnh xơ gan",
-                                      onCardTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const XemBaiDangKhoKhanDemo(),
-                                          ),
-                                        );
-                                      },
-                                      onDonateTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const XemBaiDangKhoKhanDemo()),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        388, // Set a fixed width for each card
-                                    child: CustomCardWidget(
-                                      imagePath: "assets/nguoikhokhan1.jpg",
-                                      label: "Người già",
-                                      location: "TP. HCM",
-                                      description:
-                                          "3 CHA CON SỐNG TRONG CĂN NHÀ 2M2,\nCƠM ĂN BỮA ĐÓI BỮA NO",
-                                      onCardTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const XemBaiDangKhoKhan2(),
-                                          ),
-                                        );
-                                      },
-                                      onDonateTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const XemBaiDangKhoKhan2()),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        388, // Set a fixed width for each card
-                                    child: CustomCardWidget(
-                                      imagePath: "assets/nguoikhokhan8.jpg",
-                                      label: "Người già",
-                                      location: "Kiên Giang",
-                                      description:
-                                          "Cụ bà 90 tuổi bị 4 con bỏ rơi, tự bò ngoài \nđường bắt xe đi khám bệnh",
-                                      onCardTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const XemBaiDemo(),
-                                          ),
-                                        );
-                                      },
-                                      onDonateTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const XemBaiDemo()),
-                                        );
-                                      },
-                                    ),
-                                  ),
-
-                                  SizedBox(
-                                    width:
-                                        388, // Set a fixed width for each card
-                                    child: CustomCardWidget(
-                                      imagePath: "assets/nguoikhokhan9.jpg",
-                                      label: "Đặc biệt",
-                                      location: "Nam Định",
-                                      description:
-                                          "Mẹ già 80 tuổi còng lưng chăm con trai \nsuy thận, con gái mắc bệnh ung thư",
-                                      onCardTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const XemBaiDangKhoKhan2(),
-                                          ),
-                                        );
-                                      },
-                                      onDonateTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const XemBaiDangKhoKhan2()),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                  // You can add more CustomCardWidgets here as needed
-                                ],
-                              ),
-                            ),
-                          ),
-                          // const Divider(
-                          //   color: Colors.grey, // Màu của đường kẻ
-                          //   thickness: 2, // Độ dày của đường kẻ
-                          //   indent: 0, // Lề bên trái của đường kẻ
-                          //   endIndent: 0, // Lề bên phải của đường kẻ
-                          // ),
-                          // IntrinsicHeight(
-                          //   child: Container(
-                          //     padding: const EdgeInsets.symmetric(
-                          //         vertical: 0,
-                          //         horizontal:
-                          //             12), // Giảm thêm chiều cao padding
-
-                          //     child: Row(
-                          //       children: [
-                          //         const Icon(Icons.favorite,
-                          //             size: 28, color: Colors.red),
-                          //         const SizedBox(width: 12),
-                          //         const Flexible(
-                          //           child: Text(
-                          //             "Các hoàn cảnh đã nhận hỗ trợ",
-                          //             style: TextStyle(
-                          //               color: Color.fromARGB(255, 56, 65, 228),
-                          //               fontSize: 17,
-                          //               fontWeight: FontWeight.bold,
-                          //             ),
-                          //           ),
-                          //         ),
-                          //         const SizedBox(width: 45),
-                          //         IconButton(
-                          //           onPressed: () {},
-                          //           icon: const Icon(Icons.arrow_forward,
-                          //               color: Colors.blueAccent),
-                          //         ),
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
-                          IntrinsicHeight(
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                top: 10,
-                                bottom: 10,
-                                left: 10,
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 8,
-                                horizontal: 12,
-                              ),
-                              decoration: const BoxDecoration(
-                                color: Color(0xFF81D4FA), // Sky Blue
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(
-                                      10), // Bo tròn góc trên bên trái
-                                  bottomLeft: Radius.circular(
-                                      10), // Bo tròn góc dưới bên trái
+                                  ],
                                 ),
-                              ),
-                              child: const Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  CircleAvatar(
-                                    radius: 16,
-                                    backgroundColor: Color(0xFF0288D1),
-                                    child: Icon(
-                                      Icons.favorite,
-                                      size: 20,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(width: 15),
-                                  Flexible(
-                                    child: Text(
-                                      "Các hoàn cảnh đã nhận hỗ trợ",
-                                      style: TextStyle(
-                                        color: Color(
-                                            0xFF006064), // Dark Teal Blue (Đậm hơn)
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold,
+                                const SizedBox(width: 10),
+                                Stack(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: const BoxDecoration(
+                                        color: Colors.grey,
+                                        shape: BoxShape.circle,
                                       ),
+                                      child: const Icon(Icons.person,
+                                          color: Colors.white, size: 20),
                                     ),
-                                  ),
-                                  SizedBox(width: 45),
-                                  Icon(
-                                    Icons.arrow_forward,
-                                    color: Color(0xFF0288D1), // Màu icon
-                                    size: 20,
-                                  ),
-                                ],
-                              ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 10, left: 2),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width:
-                                        390, // Set a fixed width for each card
-                                    child: CustomCardWidget2(
-                                      imagePath2: "assets/rectangle_18.png",
-                                      label2: "Người già",
-                                      location2: "Quảng Nam",
-                                      description2:
-                                          "Hỗ trợ hoàn cảnh khó khăn ở xóm Hộ Sơn \nxã Nam Tiến",
-                                      onCardTap2: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const XemBaiDangKhoKhan2(),
-                                          ),
-                                        );
-                                      },
-                                      onDonateTap2: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Donate()),
-                                        );
-                                      },
-                                    ),
+                          Positioned(
+                            left: 16,
+                            bottom: 16,
+                            right: 16,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Chào mừng bạn đến với",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 34,
+                                    fontWeight: FontWeight.w500,
                                   ),
-                                  SizedBox(
-                                    width:
-                                        388, // Set a fixed width for each card
-                                    child: CustomCardWidget2(
-                                      imagePath2: "assets/nguoikhokhan2.jpg",
-                                      label2: "Người già",
-                                      location2: "TP. HCM",
-                                      description2:
-                                          "3 CHA CON SỐNG TRONG CĂN NHÀ 2M2,\nCƠM ĂN BỮA ĐÓI BỮA NO",
-                                      onCardTap2: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const XemBaiDangKhoKhan2(),
-                                          ),
-                                        );
-                                      },
-                                      onDonateTap2: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Donate()),
-                                        );
-                                      },
-                                    ),
+                                ),
+                                const Text(
+                                  "Cộng đồng người Việt nhân ái",
+                                  style: TextStyle(
+                                    color: Colors.orangeAccent,
+                                    fontSize: 34,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  // You can add more CustomCardWidgets here as needed
-                                ],
-                              ),
+                                ),
+                                const SizedBox(height: 15),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      FilterButtonWidget(
+                                        text: "Xóa đói",
+                                        icon: Icons.food_bank,
+                                        onPressed: () {},
+                                      ),
+                                      FilterButtonWidget(
+                                        text: "Trẻ em",
+                                        icon: Icons.child_care,
+                                        onPressed: () {},
+                                      ),
+                                      FilterButtonWidget(
+                                        text: "Người cao tuổi",
+                                        icon: Icons.elderly,
+                                        onPressed: () {},
+                                      ),
+                                      FilterButtonWidget(
+                                        text: "Bệnh nhân",
+                                        icon: Icons.local_hospital,
+                                        onPressed: () {},
+                                      ),
+                                      FilterButtonWidget(
+                                        text: "Người khuyết tật",
+                                        icon: Icons.accessible,
+                                        onPressed: () {},
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
-                      )),
+                      ),
+                      IntrinsicHeight(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              top: 5, left: 15, right: 12),
+                          width: double.infinity,
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(child: SearchBarWidget()),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 12),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
+                          ),
+                        ),
+                        child: const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Đồng hành tích cực",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  UserAvatarWidget(
+                                      imagePath: "assets/images/user1.png",
+                                      name: "Hang MU"),
+                                  UserAvatarWidget(
+                                      imagePath: "assets/images/user2.png",
+                                      name: "Double2T"),
+                                  UserAvatarWidget(
+                                      imagePath: "assets/images/user3.jpg",
+                                      name: "Siberian Wellness"),
+                                  UserAvatarWidget(
+                                      imagePath: "assets/images/user4.png",
+                                      name: "Ngọc Anh"),
+                                  UserAvatarWidget(
+                                      imagePath: "assets/images/user5.jpg",
+                                      name: "Hòa Minzy"),
+                                  UserAvatarWidget(
+                                      imagePath: "assets/images/user6.png",
+                                      name: "Quỹ chăm sóc.."),
+                                  UserAvatarWidget(
+                                      imagePath: "assets/images/user7.jpg",
+                                      name: "NSND Quyền Linh"),
+                                  UserAvatarWidget(
+                                      imagePath: "assets/images/user8.png",
+                                      name: "Vingroup"),
+                                  UserAvatarWidget(
+                                      imagePath: "assets/images/user4.png",
+                                      name: "Phoenix Ho"),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      IntrinsicHeight(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            top: 8,
+                            bottom: 10,
+                            left: 10,
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 12,
+                          ),
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFE3F2FD),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                            ),
+                          ),
+                          child: const Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                radius: 16,
+                                backgroundColor: Color(0xFF0288D1),
+                                child: Icon(
+                                  Icons.favorite_outline_outlined,
+                                  size: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(width: 15),
+                              Flexible(
+                                child: Text(
+                                  "Hoàn cảnh khó khăn gần đây",
+                                  style: TextStyle(
+                                    color: Color(0xFF01579B),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 70), // Khoảng cách ngang
+                              Icon(
+                                Icons.arrow_forward,
+                                color: Color(0xFF0288D1), // Màu icon
+                                size: 20, // Kích thước icon
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(left: 2),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 410, // Set a fixed width for each card
+                                child: CustomCardWidget(
+                                  imagePath: "assets/HinhAnh_Demo.jpg",
+                                  label: "Trẻ em",
+                                  location: "Bình Định",
+                                  description:
+                                      "Tính mạng mong manh của bé gái 3 tuổi\n mắc bệnh xơ gan",
+                                  onCardTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const XemBaiDangKhoKhanDemo(),
+                                      ),
+                                    );
+                                  },
+                                  onDonateTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const XemBaiDangKhoKhanDemo()),
+                                    );
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                width: 388, // Set a fixed width for each card
+                                child: CustomCardWidget(
+                                  imagePath: "assets/nguoikhokhan1.jpg",
+                                  label: "Người già",
+                                  location: "TP. HCM",
+                                  description:
+                                      "3 CHA CON SỐNG TRONG CĂN NHÀ 2M2,\nCƠM ĂN BỮA ĐÓI BỮA NO",
+                                  onCardTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const XemBaiDangKhoKhan2(),
+                                      ),
+                                    );
+                                  },
+                                  onDonateTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const XemBaiDangKhoKhan2()),
+                                    );
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                width: 388, // Set a fixed width for each card
+                                child: CustomCardWidget(
+                                  imagePath: "assets/nguoikhokhan8.jpg",
+                                  label: "Người già",
+                                  location: "Kiên Giang",
+                                  description:
+                                      "Cụ bà 90 tuổi bị 4 con bỏ rơi, tự bò ngoài \nđường bắt xe đi khám bệnh",
+                                  onCardTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const XemBaiDemo(),
+                                      ),
+                                    );
+                                  },
+                                  onDonateTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const XemBaiDemo()),
+                                    );
+                                  },
+                                ),
+                              ),
+
+                              SizedBox(
+                                width: 388, // Set a fixed width for each card
+                                child: CustomCardWidget(
+                                  imagePath: "assets/nguoikhokhan9.jpg",
+                                  label: "Đặc biệt",
+                                  location: "Nam Định",
+                                  description:
+                                      "Mẹ già 80 tuổi còng lưng chăm con trai \nsuy thận, con gái mắc bệnh ung thư",
+                                  onCardTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const XemBaiDangKhoKhan2(),
+                                      ),
+                                    );
+                                  },
+                                  onDonateTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const XemBaiDangKhoKhan2()),
+                                    );
+                                  },
+                                ),
+                              ),
+                              // You can add more CustomCardWidgets here as needed
+                            ],
+                          ),
+                        ),
+                      ),
+                      IntrinsicHeight(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            top: 10,
+                            bottom: 10,
+                            left: 10,
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 12,
+                          ),
+                          decoration: const BoxDecoration(
+                            color: Color(0xFF81D4FA), // Sky Blue
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(
+                                  10), // Bo tròn góc trên bên trái
+                              bottomLeft: Radius.circular(
+                                  10), // Bo tròn góc dưới bên trái
+                            ),
+                          ),
+                          child: const Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                radius: 16,
+                                backgroundColor: Color(0xFF0288D1),
+                                child: Icon(
+                                  Icons.favorite,
+                                  size: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(width: 15),
+                              Flexible(
+                                child: Text(
+                                  "Các hoàn cảnh đã nhận hỗ trợ",
+                                  style: TextStyle(
+                                    color: Color(
+                                        0xFF006064), // Dark Teal Blue (Đậm hơn)
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 45),
+                              Icon(
+                                Icons.arrow_forward,
+                                color: Color(0xFF0288D1), // Màu icon
+                                size: 20,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 10, left: 2),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 410, // Set a fixed width for each card
+                                child: CustomCardWidget2(
+                                  imagePath2: "assets/rectangle_18.png",
+                                  label2: "Người già",
+                                  location2: "Quảng Nam",
+                                  description2:
+                                      "Hỗ trợ hoàn cảnh khó khăn ở xóm Hộ Sơn \nxã Nam Tiến",
+                                  onCardTap2: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const XemBaiDangKhoKhan2(),
+                                      ),
+                                    );
+                                  },
+                                  onDonateTap2: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => const Donate()),
+                                    );
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                width: 388, // Set a fixed width for each card
+                                child: CustomCardWidget2(
+                                  imagePath2: "assets/nguoikhokhan2.jpg",
+                                  label2: "Người già",
+                                  location2: "TP. HCM",
+                                  description2:
+                                      "3 CHA CON SỐNG TRONG CĂN NHÀ 2M2,\nCƠM ĂN BỮA ĐÓI BỮA NO",
+                                  onCardTap2: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const XemBaiDangKhoKhan2(),
+                                      ),
+                                    );
+                                  },
+                                  onDonateTap2: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => const Donate()),
+                                    );
+                                  },
+                                ),
+                              ),
+                              // You can add more CustomCardWidgets here as needed
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
                 ),
               ),
             ],

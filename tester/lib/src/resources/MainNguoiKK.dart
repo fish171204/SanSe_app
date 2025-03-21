@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/Ayns/XemBaiDemo.dart';
 import '../constants/MyColors.dart';
+import 'package:tester/src/resources/widgets/CustomDrawer02.dart';
 import '../constants/MyFontSize.dart';
 import 'package:tester/src/resources/MyNavigationBar.dart';
 import 'package:tester/src/resources/XemBaiDangKhoKhan2.dart';
@@ -18,6 +19,7 @@ class MainNguoiKK extends StatefulWidget {
 
 class _MainNguoiKKState extends State<MainNguoiKK> {
   int _currentIndex = 0;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _onTabTapped(int index) {
     setState(() {
@@ -56,6 +58,8 @@ class _MainNguoiKKState extends State<MainNguoiKK> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
+        drawer: const CustomDrawer02(),
         body: SafeArea(
           child: Container(
             constraints: const BoxConstraints.expand(),
@@ -87,59 +91,20 @@ class _MainNguoiKKState extends State<MainNguoiKK> {
                                     children: [
                                       GestureDetector(
                                         onTap: () {
-                                          // Mở màn hình danh mục từ thiện khi nhấn vào hình "danhmuc"
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                title: const Text(
-                                                  'DANH MỤC TỪ THIỆN',
-                                                  style: TextStyle(
-                                                    color: Color(
-                                                        0xFF0866FF), // Màu chữ: #0866FF
-                                                  ),
-                                                ),
-                                                content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    _buildItemRow(
-                                                        "assets/quaylai.png",
-                                                        "Từ thiện trực tiếp"),
-                                                    _buildItemRow(
-                                                        "assets/quaylai.png",
-                                                        "Từ thiện chủ đề"),
-                                                    _buildItemRow(
-                                                        "assets/quaylai.png",
-                                                        "Từ thiện khẩn cấp"),
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        // Điều hướng đến màn hình affiliateMarketing.dart khi nhấn vào "Mua hàng doanh nghiệp từ thiện"
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const affiliateMarkteting(), // Chuyển đến màn hình affiliateMarketing
-                                                          ),
-                                                        );
-                                                      },
-                                                      child: _buildItemRow(
-                                                          "assets/giohang.png",
-                                                          "Mua hàng doanh nghiệp từ thiện"),
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                                content: Text(
+                                                    "Mở danh mục từ thiện")),
                                           );
+                                          _scaffoldKey.currentState
+                                              ?.openDrawer();
                                         },
-                                        child: Container(
-                                          child: Image.asset(
-                                            "assets/danhmuc.png",
-                                            fit: BoxFit.fill,
-                                            width: 30,
-                                            height: 30,
-                                          ),
+                                        child: Image.asset(
+                                          "assets/danhmuc.png",
+                                          fit: BoxFit.fill,
+                                          width: 30,
+                                          height: 30,
                                         ),
                                       ),
                                       IntrinsicHeight(
