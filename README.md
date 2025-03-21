@@ -2,13 +2,14 @@
 ## Description: An application that connects people in difficult situations with charitable individuals, creating a free platform for philanthropy. 
 
 ## **1. Màn hình Welcome:**  
-![image](https://github.com/user-attachments/assets/ef1e1089-7855-40fa-a4a5-132c45b97a10)  
+<img src="https://github.com/user-attachments/assets/a7f041a2-8307-4ad6-a710-f938da0f1ef6" width="300">
+
 
 ## 2. Màn hình Đăng nhập:
 <img src="https://github.com/user-attachments/assets/bc363687-6a03-46ef-954f-034528dc6a56" width="300">
 
 ## 3. Màn hình Đăng ký:
-<img src="https://github.com/user-attachments/assets/97f946a6-38bc-44dd-a658-d32e0dc25baa" width="300">
+<img src="https://github.com/user-attachments/assets/17a2deca-0bb5-48d7-bd9b-5ee40854db8e" width="300">
 
 ## 4. Màn hình Đăng ký - Người khó khăn:
 <img src="https://github.com/user-attachments/assets/854e7ae0-da1d-45e8-b781-c5a89a78201c" width="300">
@@ -33,10 +34,12 @@
 <img src="https://github.com/user-attachments/assets/7edeb50f-de5b-4440-9ae3-314292795bdc" width="300">
 
 ## 8. Xem bài đăng khó khăn - Nhà hảo tâm:
-<img src="https://github.com/user-attachments/assets/0a5b6fb2-801c-4c24-b517-de3dceb96d84" width="300">
-<img src="https://github.com/user-attachments/assets/8ecde1b7-8e08-4636-a595-e5e5e7a5a57c" width="300">
+<img src="https://github.com/user-attachments/assets/5c23b674-e172-49d9-8b8f-9e7f8a5cc064" width="300">
+<img src="https://github.com/user-attachments/assets/39c439dc-eb2c-4c7a-8bef-21815ff1374c" width="300">
 <img src="https://github.com/user-attachments/assets/50f58c5a-2a0e-4012-9ca9-2994d291ab8f" width="300">
 <img src="https://github.com/user-attachments/assets/b6b23e73-7fce-4418-87fb-1700b640df0f" width="300">
+
+
 
 ## 9. Chức năng giúp đỡ - Nhà hảo tâm:
 <img src="https://github.com/user-attachments/assets/1fc7d9f0-c926-4d91-b85e-b3c025531d2d" width="300">
