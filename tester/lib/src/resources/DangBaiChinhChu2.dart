@@ -513,7 +513,7 @@ class _DangBaiChinhChu2State extends State<DangBaiChinhChu2> {
 
                         _buildTextField2(_cccdController, "054204005258"),
                         _buildLabel2("Họ tên người làm chứng *"),
-                        _buildTextField2(_cccdController, "Nguyễn Kim Dũng"),
+                        _buildTextField2(_cccdController, "Nguyễn Đăng Khoa"),
                         _buildLabel2("Số điện thoại Zalo *"),
                         _buildTextField2(_cccdController, "0383416574"),
                         _buildLabel2("Tư cách làm chứng *"),
