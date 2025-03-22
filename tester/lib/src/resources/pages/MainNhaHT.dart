@@ -4,15 +4,15 @@ import 'package:tester/src/resources/widgets/CustomDrawer.dart';
 import 'package:tester/src/resources/widgets/SearchBarWidget .dart';
 import 'package:tester/src/resources/widgets/filter_button_widget.dart';
 import 'package:tester/src/resources/widgets/user_avatar_widget.dart';
-import '../constants/MyColors.dart';
-import '../constants/MyFontSize.dart';
-import 'package:tester/src/resources/MyNavigationBar.dart';
-import 'package:tester/src/resources/XemBaiDangKhoKhan2.dart';
+import '../../constants/MyColors.dart';
+import '../../constants/MyFontSize.dart';
+import 'package:tester/src/resources/pages/MyNavigationBar.dart';
+import 'package:tester/src/resources/pages/XemBaiDangKhoKhan2.dart';
 import 'package:tester/src/Ayns/mainTest.dart';
-import 'package:tester/src/resources/XemBaiDangKhoKhanDemo.dart';
-import 'package:tester/src/resources/affiliateMarkteting.dart';
-import 'package:tester/src/resources/Donate.dart';
-import 'package:tester/src/resources/xemProfile.dart';
+import 'package:tester/src/resources/pages/XemBaiDangKhoKhanDemo.dart';
+import 'package:tester/src/resources/pages/affiliateMarkteting.dart';
+import 'package:tester/src/resources/pages/Donate.dart';
+import 'package:tester/src/resources/pages/xemProfile.dart';
 
 class MainNguoiHT extends StatefulWidget {
   const MainNguoiHT({super.key});
@@ -320,7 +320,7 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                           child: Row(
                             children: [
                               SizedBox(
-                                width: 410, // Set a fixed width for each card
+                                width: 390, // Set a fixed width for each card
                                 child: CustomCardWidget(
                                   imagePath: "assets/HinhAnh_Demo.jpg",
                                   label: "Trẻ em",
@@ -494,7 +494,7 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                           child: Row(
                             children: [
                               SizedBox(
-                                width: 410, // Set a fixed width for each card
+                                width: 390, // Set a fixed width for each card
                                 child: CustomCardWidget2(
                                   imagePath2: "assets/rectangle_18.png",
                                   label2: "Người già",

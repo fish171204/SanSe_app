@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/resources/MainNguoiKK.dart';
-import 'package:tester/src/resources/MainNhaHT.dart';
+import 'package:tester/src/resources/pages/MainNguoiKK.dart';
+import 'package:tester/src/resources/pages/MainNhaHT.dart';
 import 'package:tester/src/resources/ThongBao/XemThongBao.dart';
-import 'package:tester/src/resources/DangKyNhap.dart';
-import 'package:tester/src/resources/SharedPreferences.dart';
-import 'package:tester/src/resources/MyNavigationBar.dart';
+import 'package:tester/src/resources/pages/DangKyNhap.dart';
+import 'package:tester/src/resources/pages/SharedPreferences.dart';
+import 'package:tester/src/resources/pages/MyNavigationBar.dart';
 
 class KhanCap extends StatefulWidget {
   const KhanCap({super.key});

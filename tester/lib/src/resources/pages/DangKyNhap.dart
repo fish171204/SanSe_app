@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/resources/DanhKyNhap2.dart';
-import 'package:tester/src/resources/MainNguoiKK.dart';
-import 'package:tester/src/resources/MainNhaHT.dart';
-import 'package:tester/src/resources/SharedPreferences.dart';
+import 'package:tester/src/resources/pages/DanhKyNhap2.dart';
+import 'package:tester/src/resources/pages/MainNguoiKK.dart';
+import 'package:tester/src/resources/pages/MainNhaHT.dart';
+import 'package:tester/src/resources/pages/SharedPreferences.dart';
 import 'package:flutter/gestures.dart';
 
 //

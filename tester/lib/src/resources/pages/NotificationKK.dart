@@ -1,4 +1,4 @@
-import 'package:tester/src/resources/DangKyNhap.dart';
+import 'package:tester/src/resources/pages/DangKyNhap.dart';
 import 'package:flutter/material.dart';
 
 /* da xem*/

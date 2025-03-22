@@ -1,12 +1,12 @@
 import 'package:tester/src/Ayns/ViewUI2.dart';
 import 'package:tester/src/Ayns/mainTestKK.dart';
-import 'package:tester/src/resources/DsGiupDo1.dart';
-import 'package:tester/src/resources/MainNguoiKK.dart';
-import 'package:tester/src/resources/MainNhaHT.dart';
-import 'package:tester/src/resources/DangKyNhap.dart';
-import 'package:tester/src/resources/SharedPreferences.dart';
+import 'package:tester/src/resources/pages/DsGiupDo1.dart';
+import 'package:tester/src/resources/pages/MainNguoiKK.dart';
+import 'package:tester/src/resources/pages/MainNhaHT.dart';
+import 'package:tester/src/resources/pages/DangKyNhap.dart';
+import 'package:tester/src/resources/pages/SharedPreferences.dart';
 import 'package:flutter/material.dart';
-import 'package:tester/src/resources/Donate.dart';
+import 'package:tester/src/resources/pages/Donate.dart';
 
 class ViewUI extends StatelessWidget {
   const ViewUI({super.key});

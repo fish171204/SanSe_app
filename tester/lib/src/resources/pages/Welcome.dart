@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/resources/DangKyNhap.dart';
-import 'package:tester/src/resources/DanhKyNhap2.dart';
+import 'package:tester/src/resources/pages/DangKyNhap.dart';
+import 'package:tester/src/resources/pages/DanhKyNhap2.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});

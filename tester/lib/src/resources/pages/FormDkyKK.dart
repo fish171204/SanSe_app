@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/resources/NotificationKK.dart';
+import 'package:tester/src/resources/pages/NotificationKK.dart';
 import 'package:tester/src/models/tinh_thanh.dart';
 import 'package:tester/src/models/quan_huyen.dart';
 import 'package:tester/src/models/phuong_xa.dart';

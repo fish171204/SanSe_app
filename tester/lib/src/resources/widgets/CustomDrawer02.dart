@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/resources/DangKyNhap.dart';
-import 'package:tester/src/resources/affiliateMarkteting.dart';
+import 'package:tester/src/resources/pages/DangKyNhap.dart';
+import 'package:tester/src/resources/pages/affiliateMarkteting.dart';
 
 class CustomDrawer02 extends StatelessWidget {
   const CustomDrawer02({super.key});

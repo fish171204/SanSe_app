@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../constants/MyColors.dart';
-import 'package:tester/src/resources/DaDuocGiup.dart';
+import '../../constants/MyColors.dart';
+import 'package:tester/src/resources/pages/DaDuocGiup.dart';
 
 class DsGiupDo1 extends StatefulWidget {
   const DsGiupDo1({super.key});

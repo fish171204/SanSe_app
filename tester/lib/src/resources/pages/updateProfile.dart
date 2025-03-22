@@ -1,8 +1,8 @@
-import 'package:tester/src/resources/xemProfile.dart';
-import 'package:tester/src/resources/MainNguoiKK.dart';
+import 'package:tester/src/resources/pages/xemProfile.dart';
+import 'package:tester/src/resources/pages/MainNguoiKK.dart';
 import 'package:flutter/material.dart';
-import '../constants/MyColors.dart';
-import '../constants/MyFontSize.dart';
+import '../../constants/MyColors.dart';
+import '../../constants/MyFontSize.dart';
 
 class UpdateProfile extends StatefulWidget {
   const UpdateProfile({super.key});

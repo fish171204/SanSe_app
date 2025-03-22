@@ -1,12 +1,12 @@
-import 'package:tester/src/resources/MainNguoiKK.dart';
-import 'package:tester/src/resources/MainNhaHT.dart';
-import 'package:tester/src/resources/DangKyNhap.dart';
-import 'package:tester/src/resources/SharedPreferences.dart';
-import 'package:tester/src/resources/MyNavigationBar.dart';
-import 'package:tester/src/resources/updateProfile.dart';
+import 'package:tester/src/resources/pages/MainNguoiKK.dart';
+import 'package:tester/src/resources/pages/MainNhaHT.dart';
+import 'package:tester/src/resources/pages/DangKyNhap.dart';
+import 'package:tester/src/resources/pages/SharedPreferences.dart';
+import 'package:tester/src/resources/pages/MyNavigationBar.dart';
+import 'package:tester/src/resources/pages/updateProfile.dart';
 import 'package:flutter/material.dart';
-import '../constants/MyColors.dart';
-import '../constants/MyFontSize.dart';
+import '../../constants/MyColors.dart';
+import '../../constants/MyFontSize.dart';
 
 class Xemprofile extends StatefulWidget {
   const Xemprofile({super.key});

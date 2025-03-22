@@ -3,12 +3,12 @@ import 'package:tester/src/Ayns/GD1.dart';
 import 'package:tester/src/Ayns/XemBaiDemo.dart';
 import '../constants/MyColors.dart';
 import '../constants/MyFontSize.dart';
-import 'package:tester/src/resources/MyNavigationBar.dart';
-import 'package:tester/src/resources/XemBaiDangKhoKhan2.dart';
-import 'package:tester/src/resources/XemBaiDangKhoKhanDemo.dart';
-import 'package:tester/src/resources/affiliateMarkteting.dart';
-import 'package:tester/src/resources/Donate.dart';
-import 'package:tester/src/resources/xemProfile.dart';
+import 'package:tester/src/resources/pages/MyNavigationBar.dart';
+import 'package:tester/src/resources/pages/XemBaiDangKhoKhan2.dart';
+import 'package:tester/src/resources/pages/XemBaiDangKhoKhanDemo.dart';
+import 'package:tester/src/resources/pages/affiliateMarkteting.dart';
+import 'package:tester/src/resources/pages/Donate.dart';
+import 'package:tester/src/resources/pages/xemProfile.dart';
 
 class mainTest extends StatefulWidget {
   const mainTest({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants/MyColors.dart';
-import 'package:tester/src/resources/DaDuocGiup.dart';
+import 'package:tester/src/resources/pages/DaDuocGiup.dart';
 
 class ViewUI2 extends StatelessWidget {
   const ViewUI2({super.key});

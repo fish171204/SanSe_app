@@ -1,11 +1,11 @@
-import 'package:tester/src/resources/XemBaiDangKhoKhanDemo.dart';
+import 'package:tester/src/resources/pages/XemBaiDangKhoKhanDemo.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
-import '../constants/MyColors.dart';
-import '../constants/MyFontSize.dart';
-import 'package:tester/src/resources/Donate2.dart';
+import '../../constants/MyColors.dart';
+import '../../constants/MyFontSize.dart';
+import 'package:tester/src/resources/pages/Donate2.dart';
 import 'package:image_picker/image_picker.dart'; // Import image_picker package
 import 'dart:io';
 

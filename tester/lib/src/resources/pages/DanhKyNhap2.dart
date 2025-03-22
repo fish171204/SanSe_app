@@ -1,5 +1,5 @@
-import 'package:tester/src/resources/FormDkyHT.dart';
-import 'package:tester/src/resources/FormDkyKK.dart';
+import 'package:tester/src/resources/pages/FormDkyHT.dart';
+import 'package:tester/src/resources/pages/FormDkyKK.dart';
 import 'package:flutter/material.dart';
 
 class Dangkynhap2 extends StatefulWidget {

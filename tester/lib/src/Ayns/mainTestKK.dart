@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:tester/src/Ayns/XemBaiDemo.dart';
 import '../constants/MyColors.dart';
 import '../constants/MyFontSize.dart';
-import 'package:tester/src/resources/MyNavigationBar.dart';
-import 'package:tester/src/resources/XemBaiDangKhoKhan2.dart';
+import 'package:tester/src/resources/pages/MyNavigationBar.dart';
+import 'package:tester/src/resources/pages/XemBaiDangKhoKhan2.dart';
 import 'package:tester/src/Ayns/ViewUI.dart';
-import 'package:tester/src/resources/affiliateMarkteting.dart';
-import 'package:tester/src/resources/DaDuocGiup.dart';
-import 'package:tester/src/resources/xemProfile.dart';
-import 'package:tester/src/resources/DangBaiChinhChu2.dart';
+import 'package:tester/src/resources/pages/affiliateMarkteting.dart';
+import 'package:tester/src/resources/pages/DaDuocGiup.dart';
+import 'package:tester/src/resources/pages/xemProfile.dart';
+import 'package:tester/src/resources/pages/DangBaiChinhChu2.dart';
 
 class mainTestKK extends StatefulWidget {
   const mainTestKK({super.key});

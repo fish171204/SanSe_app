@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants/MyColors.dart';
-import 'package:tester/src/resources/DaDuocGiup.dart';
+import 'package:tester/src/resources/pages/DaDuocGiup.dart';
 
 class GD2 extends StatefulWidget {
   const GD2({super.key});

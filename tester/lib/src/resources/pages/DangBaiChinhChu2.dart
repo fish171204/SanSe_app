@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tester/src/Ayns/mainTestKK.dart';
-import '../constants/MyColors.dart';
+import '../../constants/MyColors.dart';
 import 'package:image_picker/image_picker.dart'; // Import image_picker package
 import 'dart:io';
-import 'package:tester/src/resources/MainNguoiKK.dart';
+import 'package:tester/src/resources/pages/MainNguoiKK.dart';
 
 class DangBaiChinhChu2 extends StatefulWidget {
   const DangBaiChinhChu2({super.key});
