@@ -14,6 +14,7 @@ import 'package:tester/src/resources/pages/affiliateMarkteting.dart';
 import 'package:tester/src/resources/pages/DaDuocGiup.dart';
 import 'package:tester/src/resources/pages/xemProfile.dart';
 import 'package:tester/src/resources/pages/DangBaiChinhChu2.dart';
+import 'dart:async';
 
 class MainNguoiKK extends StatefulWidget {
   const MainNguoiKK({super.key});
@@ -25,6 +26,38 @@ class MainNguoiKK extends StatefulWidget {
 class _MainNguoiKKState extends State<MainNguoiKK> {
   int _currentIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final PageController _pageController = PageController(initialPage: 0);
+  int _currentPage = 0;
+  final List<String> _images = [
+    "assets/sapa41_welcome.jpg",
+    "assets/images/sapa5_dangky.jpg",
+    "assets/images/sapa8.png",
+    "assets/images/sapa7.png"
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(const Duration(seconds: 2), (Timer timer) {
+      if (!mounted) return;
+      if (_pageController.hasClients) {
+        setState(() {
+          _currentPage = (_currentPage + 1) % _images.length;
+        });
+        _pageController.animateToPage(
+          _currentPage,
+          duration: const Duration(milliseconds: 800),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   void _onTabTapped(int index) {
     setState(() {
@@ -86,19 +119,32 @@ class _MainNguoiKKState extends State<MainNguoiKK> {
                       children: [
                         Stack(
                           children: [
-                            Container(
-                              width: double.infinity,
+                            // Ảnh nền chuyển động
+                            SizedBox(
                               height: 600,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: const AssetImage(
-                                      "assets/sapa41_welcome.jpg"),
-                                  fit: BoxFit.cover,
-                                  colorFilter: ColorFilter.mode(
-                                    Colors.black.withOpacity(0.3),
-                                    BlendMode.darken,
-                                  ),
-                                ),
+                              width: double.infinity,
+                              child: PageView.builder(
+                                controller: _pageController,
+                                itemCount: _images.length,
+                                onPageChanged: (index) {
+                                  setState(() {
+                                    _currentPage = index;
+                                  });
+                                },
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(_images[index]),
+                                        fit: BoxFit.cover,
+                                        colorFilter: ColorFilter.mode(
+                                          Colors.black.withOpacity(0.3),
+                                          BlendMode.darken,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                             Positioned(
