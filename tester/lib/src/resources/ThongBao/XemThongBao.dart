@@ -268,6 +268,30 @@ class _XemThongBaoState extends State<XemThongBao> {
                   imageAsset: 'assets/nguoikhokhan9.jpg',
                   color: Colors.red,
                 ),
+                NotificationCard(
+                  title:
+                      'Dự Án Xây Cầu Tại Xã Rạch Chèo; huyện Phú Tân; Tỉnh Cà Mau',
+                  organization: 'Trường Thành',
+                  amount: '500.000.000 VND',
+                  imageAsset: 'assets/images/chiendich5.jpg',
+                  color: Colors.red,
+                ),
+                NotificationCard(
+                  title:
+                      'Lời khẩn cầu của một người mẹ tìm liều thuốc mắc nhất thế giới để cứu mạng con trai!',
+                  organization: 'Quynh Thai',
+                  amount: '40.000.000.000 VND',
+                  imageAsset: 'assets/images/chiendich8.jpg',
+                  color: Colors.red,
+                ),
+                NotificationCard(
+                  title:
+                      'Dự Án Hiện Thực Hoá Ước Mơ Nhà GĐ Phạm Văn Hiệu huyện Ba Tơ Quảng Ngãi vs GĐ Đỗ Văn Minh',
+                  organization: 'Cộng đồng kết nối hạ tầngtầng',
+                  amount: '100.000.000 VND',
+                  imageAsset: 'assets/images/chiendich7.jpg',
+                  color: Colors.red,
+                ),
               ],
             ),
           ),

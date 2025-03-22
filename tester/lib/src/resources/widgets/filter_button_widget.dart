@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tester/src/resources/pages/CampaignListScreen.dart';
 
 class FilterButtonWidget extends StatelessWidget {
   final String text;
@@ -17,7 +18,12 @@ class FilterButtonWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 8),
       child: ElevatedButton.icon(
-        onPressed: onPressed,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const CampaignListScreen()));
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white.withOpacity(0.3),
           foregroundColor: Colors.white,
