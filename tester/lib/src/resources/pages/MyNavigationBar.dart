@@ -5,13 +5,17 @@ import 'package:tester/src/resources/pages/MainNhaHT.dart';
 import 'package:tester/src/resources/pages/DangKyNhap.dart';
 import 'package:tester/src/resources/ThongBao/XemThongBao.dart';
 import 'package:tester/src/resources/pages/SharedPreferences.dart';
+import 'package:tester/src/resources/pages/CampaignListScreen.dart';
 
 class MyNavigationBar extends StatefulWidget {
   final int currentIndex;
   final Function(int) onTap;
 
-  const MyNavigationBar(
-      {super.key, required this.currentIndex, required this.onTap});
+  const MyNavigationBar({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
 
   @override
   _MyNavigationBarState createState() => _MyNavigationBarState();
@@ -29,80 +33,38 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
         bool isLoggedIn = await SharedPreferencesHelper.getLoginStatus();
         String? userType = await SharedPreferencesHelper.getUserType();
 
-        // Điều hướng theo người dùng đã đăng nhập
-        if (index == 0) {
-          if (isLoggedIn && userType == "nguoikhokhan") {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const MainNguoiKK()),
-            );
-          } else if (isLoggedIn && userType == "045304004088") {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const MainNguoiKK()),
-            );
-          } else if (isLoggedIn && userType == "nhahaotam") {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const MainNguoiHT()),
-            );
-          } else if (isLoggedIn && userType == "054204003257") {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const MainNguoiHT()),
-            );
-          } else {
-            // Nếu chưa đăng nhập, điều hướng đến màn hình đăng nhập
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const Dangkynhap()),
-            );
-          }
-        } else if (index == 3) {
-          if (isLoggedIn && userType == "nguoikhokhan") {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const Xemprofile()),
-            );
-          } else if (isLoggedIn && userType == "045304004088") {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const Xemprofile()),
-            );
-          } else if (isLoggedIn && userType == "nhahaotam") {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const Xemprofile()),
-            );
-          } else if (isLoggedIn && userType == "054204003257") {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const Xemprofile()),
-            );
-          }
-        } else if (index == 2) {
-          if (isLoggedIn && userType == "nguoikhokhan") {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const XemThongBao()),
-            );
-          } else if (isLoggedIn && userType == "045304004088") {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const XemThongBao()),
-            );
-          } else if (isLoggedIn && userType == "nhahaotam") {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const XemThongBao()),
-            );
-          } else if (isLoggedIn && userType == "054204003257") {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const XemThongBao()),
-            );
+        // Các nhóm userType
+        final Set<String> nguoiKhoKhan = {"nguoikhokhan", "045304004088"};
+        final Set<String> nhaHaoTam = {"nhahaotam", "054204003257"};
+
+        // Điều hướng theo tab
+        Widget page =
+            const Dangkynhap(); // Mặc định là trang đăng nhập nếu chưa đăng nhập
+
+        if (isLoggedIn) {
+          switch (index) {
+            case 0: // Trang chủ
+              page = nguoiKhoKhan.contains(userType)
+                  ? const MainNguoiKK()
+                  : const MainNguoiHT();
+              break;
+            case 1: // Xu hướng (Chiến dịch)
+              page = const CampaignListScreen();
+              break;
+            case 2: // Thông báo
+              page = const XemThongBao();
+              break;
+            case 3: // Trang cá nhân
+              page = const Xemprofile();
+              break;
           }
         }
+
+        // Chuyển trang
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => page),
+        );
       },
       items: [
         BottomNavigationBarItem(
