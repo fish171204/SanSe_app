@@ -127,7 +127,8 @@ class _DangkynhapState extends State<Dangkynhap> {
                       focusedBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
-                          width: 1, // Viền đậm hơn khi focus
+                          width: 2,
+                          color: Colors.blue,
                         ),
                       ),
                       disabledBorder: const OutlineInputBorder(
@@ -180,7 +181,8 @@ class _DangkynhapState extends State<Dangkynhap> {
                       focusedBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
-                          width: 1, // Viền đậm hơn khi focus
+                          width: 2,
+                          color: Colors.blue,
                         ),
                       ),
                       disabledBorder: const OutlineInputBorder(
