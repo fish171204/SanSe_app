@@ -12,10 +12,9 @@ class _GD2State extends State<GD2> {
   @override
   final List<Map<String, dynamic>> nhaHaoTamData = [
     {
-      "name": "Nguyễn Trần Đoan Thi",
+      "name": "Nguyễn Đăng Khoa",
       "details": "Giúp đỡ thành công 5.000.000 VNĐ",
-      "avatar":
-          "https://scontent.xx.fbcdn.net/v/t1.15752-9/461774565_911513157504564_8379069972821139045_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=0024fc&_nc_ohc=dyd1vDipHGQQ7kNvgEWTfaX&_nc_ad=z-m&_nc_cid=0&_nc_pt=1&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD1QGjozWKr4V1WAAoq5DZMn4iQH8QTgMd73gOGi7gFMbDqw&oe=6777DD55" // Link ảnh đại diện
+      "avatar": "assets/AnhCV.jpg"
     },
   ];
 
@@ -23,12 +22,12 @@ class _GD2State extends State<GD2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0, // Loại bỏ bóng cho AppBar
-        backgroundColor: Colors.blue.shade700, // Màu nền AppBar
-        automaticallyImplyLeading: false, // Tùy chỉnh nút quay lại
+        elevation: 0,
+        backgroundColor: Colors.blue.shade700,
+        automaticallyImplyLeading: false,
         leading: GestureDetector(
           onTap: () {
-            Navigator.pop(context); // Quay lại màn hình trước đó
+            Navigator.pop(context);
           },
           child: Container(
             margin: const EdgeInsets.all(8),
@@ -46,13 +45,13 @@ class _GD2State extends State<GD2> {
             child: InkWell(
               borderRadius: BorderRadius.circular(30),
               onTap: () {
-                Navigator.pop(context); // Quay lại màn hình trước đó
+                Navigator.pop(context);
               },
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Icon(
                   Icons.arrow_back,
-                  color: Colors.blue, // Icon màu trắng để nổi bật
+                  color: Colors.blue,
                   size: 28,
                 ),
               ),
@@ -86,16 +85,12 @@ class _GD2State extends State<GD2> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //
-
               Expanded(
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  itemCount:
-                      nhaHaoTamData.length, // Số lượng phần tử trong danh sách
+                  itemCount: nhaHaoTamData.length,
                   itemBuilder: (context, index) {
-                    final nhaHaoTam =
-                        nhaHaoTamData[index]; // Lấy dữ liệu từng mục
+                    final nhaHaoTam = nhaHaoTamData[index];
                     return Card(
                       elevation: 3,
                       margin: const EdgeInsets.only(bottom: 16),
@@ -104,24 +99,22 @@ class _GD2State extends State<GD2> {
                       ),
                       child: ListTile(
                         leading: CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(nhaHaoTam["avatar"]), // Ảnh đại diện
+                          backgroundImage: AssetImage(nhaHaoTam[
+                              "avatar"]), // Đổi từ NetworkImage sang AssetImage
                           backgroundColor: Colors.grey.shade300,
                         ),
                         title: Text(
-                          nhaHaoTam["name"], // Tên nhà hảo tâm
+                          nhaHaoTam["name"],
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle:
-                            Text(nhaHaoTam["details"]), // Chi tiết đóng góp
+                        subtitle: Text(nhaHaoTam["details"]),
                         trailing: const Icon(
                           Icons.arrow_forward_ios,
                           size: 16,
                         ),
                         onTap: () {
-                          // Hành động khi bấm vào
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
@@ -141,7 +134,6 @@ class _GD2State extends State<GD2> {
                   },
                 ),
               ),
-              // Footer
             ],
           ),
         ),
