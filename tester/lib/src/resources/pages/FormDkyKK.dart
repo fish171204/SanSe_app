@@ -122,6 +122,9 @@ class _FormDKyKKState extends State<FormDKyKK> {
                     _buildFormField(
                         "Họ tên người hỗ trợ", _isChecked ? "" : "Nguyễn Văn A",
                         isEnabled: _isChecked, isRequired: true),
+                    _buildFormField(
+                        "Số Điện thoại Zalo", _isChecked ? "" : "039341xxxx",
+                        isEnabled: _isChecked, isRequired: true),
 
                     // Register Button
                     GestureDetector(

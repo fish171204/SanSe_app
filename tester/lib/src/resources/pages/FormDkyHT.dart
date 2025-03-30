@@ -66,8 +66,7 @@ class _FormDKyHTState extends State<FormDKyHT> {
                         isRequired: true),
                     _buildFormField("Họ tên", "Nguyễn Đăng Khoa",
                         isRequired: true),
-                    _buildFormField(
-                        "Số điện thoại Zalo", "03934165740393416574",
+                    _buildFormField("Số điện thoại Zalo", "0393416574",
                         isRequired: true),
                     _buildFormField("Ngày sinh", "17/12/2004",
                         isRequired: true),
