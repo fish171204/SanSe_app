@@ -86,7 +86,7 @@ class _Donate2State extends State<Donate2> {
                     8), // Rounded corners for a modern look
               ),
               child: const Text(
-                'Ngày 24 Tháng 12',
+                'Ngày 01 Tháng 04',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold, // Bold text to make it stand out

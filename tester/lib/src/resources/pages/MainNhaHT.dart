@@ -288,7 +288,7 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                                 children: [
                                   UserAvatarWidget(
                                       imagePath: "assets/images/user1.png",
-                                      name: "Hang MU"),
+                                      name: "M.U VietNam"),
                                   UserAvatarWidget(
                                       imagePath: "assets/images/user2.png",
                                       name: "Double2T"),

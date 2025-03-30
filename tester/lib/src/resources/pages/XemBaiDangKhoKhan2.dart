@@ -233,7 +233,7 @@ class XemBaiDangKhoKhan2 extends StatelessWidget {
                                             ),
                                           ),
                                           const Text(
-                                            "Ngày đăng: 01/09/2024",
+                                            "Ngày đăng: 01/04/2025",
                                             style: TextStyle(
                                               color: Color(0xFFAEA7A7),
                                               fontSize: 13,
