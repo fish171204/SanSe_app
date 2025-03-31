@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tester/src/Ayns/ViewUI.dart';
 import 'package:tester/src/Ayns/XemBaiDemo.dart';
 import 'package:tester/src/Ayns/mainTest.dart';
+import 'package:tester/src/Ayns/mainTestKK.dart';
 import 'package:tester/src/resources/pages/XemBaiDangKhoKhanDemo.dart';
 import 'package:tester/src/resources/widgets/SearchBarWidget%20.dart';
 import 'package:tester/src/resources/widgets/filter_button_widget.dart';
@@ -305,7 +307,7 @@ class _MainNguoiKKState extends State<MainNguoiKK> {
                                   children: [
                                     UserAvatarWidget(
                                         imagePath: "assets/images/user1.png",
-                                        name: "Hang MU"),
+                                        name: "M.U VietNam"),
                                     UserAvatarWidget(
                                         imagePath: "assets/images/user2.png",
                                         name: "Double2T"),
@@ -355,8 +357,7 @@ class _MainNguoiKKState extends State<MainNguoiKK> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const XemBaiDangKhoKhanDemo()),
+                                        builder: (context) => const ViewUI()),
                                   );
                                 },
                                 child: const Text(

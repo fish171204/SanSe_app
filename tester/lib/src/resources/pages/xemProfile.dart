@@ -37,7 +37,7 @@ class _XemprofileState extends State<Xemprofile> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(20),
                       color: const Color(0xFFF6F3F3),
                     ),
                     width: double.infinity,

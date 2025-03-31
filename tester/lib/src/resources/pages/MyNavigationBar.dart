@@ -87,9 +87,9 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
           icon: Stack(
             children: [
               const Icon(
-                Icons.notifications, // Icon thông báo
+                Icons.notifications,
                 size: 24,
-                color: Colors.grey, // Màu mặc định khi không được chọn
+                color: Colors.grey,
               ),
               Positioned(
                 right: 0,
@@ -97,7 +97,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                 child: Container(
                   padding: const EdgeInsets.all(2),
                   decoration: const BoxDecoration(
-                    color: Colors.red, // Màu thông báo
+                    color: Colors.red,
                     shape: BoxShape.circle,
                   ),
                   constraints: const BoxConstraints(
@@ -105,7 +105,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                     minHeight: 12,
                   ),
                   child: const Text(
-                    '7', // Số thông báo
+                    '7',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
