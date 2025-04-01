@@ -214,7 +214,7 @@ class XemBaiDangKhoKhan2 extends StatelessWidget {
                                     )),
                                 IntrinsicHeight(
                                   child: Container(
-                                    margin: const EdgeInsets.only(right: 90),
+                                    margin: const EdgeInsets.only(right: 70),
                                     width: 153,
                                     child: Column(
                                         crossAxisAlignment:
@@ -222,22 +222,43 @@ class XemBaiDangKhoKhan2 extends StatelessWidget {
                                         children: [
                                           Container(
                                             margin: const EdgeInsets.only(
-                                                bottom: 7),
+                                                bottom: 5),
                                             child: const Text(
                                               "Nguyễn Văn Huy",
                                               style: TextStyle(
                                                 color: Color(0xFF0866FF),
-                                                fontSize: 13,
+                                                fontSize: 15,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
                                           ),
-                                          const Text(
-                                            "Ngày đăng: 01/04/2025",
-                                            style: TextStyle(
-                                              color: Color(0xFFAEA7A7),
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold,
+                                          Container(
+                                            margin:
+                                                const EdgeInsets.only(right: 6),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize
+                                                  .min, // This ensures the row takes the minimum space required by its children
+                                              children: [
+                                                SizedBox(
+                                                  width: 20,
+                                                  height: 20,
+                                                  child: Image.asset(
+                                                    "assets/chuahoanthanh.png",
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                    width:
+                                                        5), // Space between the image and the text
+                                                const Text(
+                                                  "Chưa hoàn thành",
+                                                  style: TextStyle(
+                                                    color: Color(0xFFFF0303),
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ]),
@@ -256,34 +277,16 @@ class XemBaiDangKhoKhan2 extends StatelessWidget {
                           IntrinsicHeight(
                             child: Container(
                               margin: const EdgeInsets.only(
-                                  bottom: 18, left: 65, right: 30),
+                                  bottom: 0, left: 65, right: 30),
                               width: double.infinity,
-                              child: Row(children: [
-                                Container(
-                                    margin: const EdgeInsets.only(right: 6),
-                                    width: 20,
-                                    height: 20,
-                                    child: Image.asset(
-                                      "assets/chuahoanthanh.png",
-                                      fit: BoxFit.fill,
-                                    )),
-                                const IntrinsicHeight(
-                                  child: Text(
-                                    "Chưa hoàn thành",
-                                    style: TextStyle(
-                                      color: Color(0xFFFF0303),
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                const Expanded(
+                              child: const Row(children: [
+                                Expanded(
                                   child: SizedBox(
                                     width: double.infinity,
                                     child: SizedBox(),
                                   ),
                                 ),
-                                const IntrinsicHeight(
+                                IntrinsicHeight(
                                   child: Text(
                                     "Thông tin liên lạc",
                                     style: TextStyle(
@@ -297,14 +300,51 @@ class XemBaiDangKhoKhan2 extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            margin: const EdgeInsets.only(bottom: 21, left: 66),
+                            margin: const EdgeInsets.only(bottom: 10, left: 66),
                             child: const Text(
-                              "Tiền mặt: 10,000,000 VND",
+                              "Tiền mặt: 20,000,000 VND",
                               style: TextStyle(
                                 color: Color(0xFF675F5F),
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 10, left: 66),
+                            child: const Text(
+                              "Ngày đăng: 01/04/2025",
+                              style: TextStyle(
+                                color: Color(0xFF675F5F),
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 10, left: 66),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize
+                                  .min, // Ensures the row sizes based on its children
+                              children: [
+                                Text(
+                                  "Thời gian: 20 ngày",
+                                  style: TextStyle(
+                                    color: Color(0xFF675F5F),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                    width:
+                                        5), // Space between the text and the icon
+                                Icon(
+                                  Icons.access_time, // Time icon
+                                  color: Color(
+                                      0xFF675F5F), // Same color as the text
+                                  size: 20, // Icon size
+                                ),
+                              ],
                             ),
                           ),
                           GestureDetector(

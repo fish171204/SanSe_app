@@ -6,6 +6,7 @@ class FirAuth {
   final DatabaseReference _userRef =
       FirebaseDatabase.instance.ref().child("users");
 
+  // Hàm đăng ký
   void signUp(
       String cccd,
       String hoten,
@@ -15,14 +16,15 @@ class FirAuth {
       String email,
       Function onSuccess,
       Function(String) onRegisterError) {
-    // Trước khi gọi createUserWithEmailAndPassword, kiểm tra xem CCCD đã có trong _userRef
+    // Kiểm tra xem CCCD đã có trong database chưa
     _userRef.orderByChild("cccd").equalTo(cccd).once().then((snapshot) {
       if (snapshot.snapshot.value != null) {
         onRegisterError("CCCD này đã được đăng ký!");
       } else {
+        // Sử dụng cccd làm email để tạo tài khoản
         _firebaseAuth
             .createUserWithEmailAndPassword(
-                email: "$cccd@cccd.com", password: matkhau)
+                email: cccd, password: matkhau) // Sử dụng CCCD làm email
             .then((userCredential) {
           User? user = userCredential.user;
           if (user != null) {
@@ -30,25 +32,27 @@ class FirAuth {
                 onSuccess, onRegisterError);
           }
         }).catchError((error) {
+          print("Error from Firebase signUp: $error");
           if (error is FirebaseAuthException) {
-            _onSignUpErr(error.code, onRegisterError);
-          } else {
-            onRegisterError("Lỗi không xác định: ${error.toString()}");
+            print("FirebaseAuthException: ${error.code}, ${error.message}");
           }
+          onRegisterError("Đăng ký thất bại: ${error.toString()}");
         });
       }
+    }).catchError((error) {
+      // Lỗi khi truy vấn Realtime Database
+      onRegisterError("Lỗi khi kiểm tra dữ liệu, vui lòng thử lại.");
     });
   }
 
+  // Hàm đăng nhập
   void signIn(String cccd, String pass, void Function() onSuccess,
       void Function(String) onSignInError) {
-    // Tạo email giả từ CCCD
-    String fakeEmail = "$cccd@cccd.com";
-
+    // Dùng cccd làm email để đăng nhập
     _firebaseAuth
-        .signInWithEmailAndPassword(email: fakeEmail, password: pass)
+        .signInWithEmailAndPassword(email: cccd, password: pass)
         .then((userCredential) {
-      print("On sign in success");
+      print("Đăng nhập thành công");
       onSuccess();
     }).catchError((error) {
       if (error is FirebaseAuthException) {
@@ -59,6 +63,7 @@ class FirAuth {
     });
   }
 
+  // Hàm tạo người dùng trong Firebase Realtime Database
   void _createUser(
       String userId,
       String cccd,
@@ -77,14 +82,15 @@ class FirAuth {
     };
 
     _userRef.child(userId).set(user).then((_) {
-      // success
+      // Thành công
       onSuccess();
     }).catchError((error) {
-      // TODO
-      onRegisterError("SignUp fail, please try again");
+      // Lỗi khi thêm vào Realtime Database
+      onRegisterError("Đăng ký không thành công, vui lòng thử lại.");
     });
   }
 
+  // Xử lý lỗi khi đăng ký
   void _onSignUpErr(String code, Function(String) onRegisterError) {
     print("SignUp Error: $code");
 
@@ -106,8 +112,9 @@ class FirAuth {
     }
   }
 
+  // Xử lý lỗi khi đăng nhập
   void _onSignInErr(String code, Function(String) onSignInError) {
-    print("SignIn Error: $code"); // In lỗi ra console để debug
+    print("SignIn Error: $code");
 
     switch (code) {
       case "invalid-email":
@@ -130,12 +137,3 @@ class FirAuth {
     }
   }
 }
-
-
-// Bước 1: Gọi createUserWithEmailAndPassword() để đăng ký tài khoản.
-
-// Bước 2: Nếu đăng ký thành công (then), lấy thông tin user.
-
-// Bước 3: Nếu user != null, gọi hàm _createUser() để lưu thông tin vào Firebase Database.
-
-// Bước 4: Nếu có lỗi (catchError), gọi onError(error.message) để báo lỗi.
