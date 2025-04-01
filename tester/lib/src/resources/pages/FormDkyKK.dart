@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/resources/pages/NotificationKK.dart';
+import 'package:tester/src/resources/widgets/buildComboBoxTinhThanh.dart';
+import 'package:tester/src/resources/widgets/buildComboBoxQuanHuyen.dart';
+import 'package:tester/src/resources/widgets/buildComboBoxPhuongXa.dart';
 import 'package:tester/src/models/tinh_thanh.dart';
 import 'package:tester/src/models/quan_huyen.dart';
 import 'package:tester/src/models/phuong_xa.dart';
@@ -13,8 +16,8 @@ class FormDKyKK extends StatefulWidget {
 
 class _FormDKyKKState extends State<FormDKyKK> {
   bool _isChecked = false;
-  String? _selectedTinhThanh; // Tỉnh/Thành phố được chọn
-  String? _selectedQuanHuyen; // Quận/Huyện được chọn
+  String? _selectedTinhThanh;
+  String? _selectedQuanHuyen;
   String? _selectedPhuongXa;
 
   @override
@@ -76,17 +79,43 @@ class _FormDKyKKState extends State<FormDKyKK> {
                     _buildFormField("Nhập lại mật khẩu", "nguoikhokhan",
                         isRequired: true),
 
-                    // Combobox Tỉnh/Thành phố
-                    _buildComboBoxTinhThanh(),
-                    // _buildFormField("Tỉnh/Thành phố", "Quảng Trị",
-                    //     isRequired: true),
+                    ComboBoxTinhThanh(
+                      selectedTinhThanh: _selectedTinhThanh,
+                      provinces: provinces, // Danh sách tỉnh/thành phố
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedTinhThanh = newValue;
+                          _selectedQuanHuyen = null; // Reset quận/huyện
+                          _selectedPhuongXa = null; // Reset phường/xã
+                        });
+                      },
+                    ),
 
-                    // Combobox Quận/Huyện, dựa vào tỉnh thành đã chọn
-                    _buildComboBoxQuanHuyen(),
-                    // _buildFormField("Quận/Huyện", "Hướng Hóa", isRequired: true),
+                    ComboBoxQuanHuyen(
+                      selectedQuanHuyen: _selectedQuanHuyen,
+                      selectedTinhThanh: _selectedTinhThanh,
+                      danhSachQuanHuyen:
+                          danhSachQuanHuyen, // Danh sách quận/huyện
+                      provinces: provinces,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedQuanHuyen = newValue;
+                          _selectedPhuongXa = null; // Reset phường/xã
+                        });
+                      },
+                    ),
 
-                    _buildComboBoxPhuongXa(),
-                    // _buildFormField("Phường/Xã", "Hướng Phùng", isRequired: true),
+                    ComboBoxPhuongXa(
+                      selectedPhuongXa: _selectedPhuongXa,
+                      selectedQuanHuyen: _selectedQuanHuyen,
+                      phuongXaList: phuongXaList, // Danh sách phường/xã
+                      danhSachQuanHuyen: danhSachQuanHuyen,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedPhuongXa = newValue;
+                        });
+                      },
+                    ),
 
                     _buildFormField("Thôn/Xóm/Số nhà, tên đường", "Thôn Tân Lệ",
                         isRequired: true),
@@ -235,273 +264,6 @@ class _FormDKyKKState extends State<FormDKyKK> {
             ),
           ),
         ),
-      ],
-    );
-  }
-  // Widget _buildFormField(String label, String placeholder,
-  //     {bool isEnabled = true, bool isRequired = false}) {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       Container(
-  //         margin: const EdgeInsets.only(bottom: 10),
-  //         child: RichText(
-  //           text: TextSpan(
-  //             children: [
-  //               TextSpan(
-  //                 text: label,
-  //                 style: const TextStyle(
-  //                   color: Color(0xFF000000),
-  //                   fontSize: 15,
-  //                   fontWeight: FontWeight.bold,
-  //                 ),
-  //               ),
-  //               if (isRequired) ...[
-  //                 const TextSpan(
-  //                   text: ' *',
-  //                   style: TextStyle(
-  //                     color: Colors.red, // Red asterisk for required fields
-  //                     fontSize: 15,
-  //                     fontWeight: FontWeight.bold,
-  //                   ),
-  //                 ),
-  //               ],
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //       IntrinsicHeight(
-  //         child: Container(
-  //           decoration: BoxDecoration(
-  //             border: Border.all(color: const Color(0xFFE8E8E8), width: 2),
-  //             borderRadius: BorderRadius.circular(5),
-  //             color:
-  //                 isEnabled ? const Color(0xFFFFFFFF) : const Color(0xFFE8E8E8),
-  //           ),
-  //           padding: const EdgeInsets.all(18),
-  //           margin: const EdgeInsets.only(bottom: 13),
-  //           width: double.infinity,
-  //           child: TextField(
-  //             enabled: isEnabled,
-  //             decoration: InputDecoration(
-  //               hintText: placeholder,
-  //               border: InputBorder.none,
-  //             ),
-  //             style: TextStyle(
-  //               color: isEnabled
-  //                   ? const Color(0xFF000000)
-  //                   : const Color(0xFFB0B0B0),
-  //               fontSize: 15,
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
-
-  // Combobox Tỉnh/Thành phố
-  Widget _buildComboBoxTinhThanh() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        RichText(
-          text: const TextSpan(
-            children: [
-              TextSpan(
-                text: "Tỉnh/Thành phố",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-              TextSpan(
-                text: " *",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.red),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 8),
-        DropdownButtonFormField<String>(
-          value: _selectedTinhThanh,
-          hint: const Text("Chọn tỉnh/thành"),
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          icon: const Icon(Icons.arrow_drop_down),
-          items: provinces.map((TinhThanh province) {
-            return DropdownMenuItem<String>(
-              value: province.tenTinhThanh,
-              child: Row(
-                children: [
-                  const Icon(Icons.location_city, color: Colors.blue),
-                  const SizedBox(width: 8),
-                  Text(province.tenTinhThanh),
-                ],
-              ),
-            );
-          }).toList(),
-          onChanged: (String? newValue) {
-            setState(() {
-              _selectedTinhThanh = newValue;
-              _selectedQuanHuyen = null; // Reset quận/huyện
-              _selectedPhuongXa = null; // Reset phường/xã
-            });
-          },
-        ),
-        const SizedBox(height: 16),
-      ],
-    );
-  }
-
-  // Combobox Quận/Huyện
-  Widget _buildComboBoxQuanHuyen() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        RichText(
-          text: const TextSpan(
-            children: [
-              TextSpan(
-                text: "Quận/Huyện",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-              TextSpan(
-                text: " *",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.red),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 8),
-        DropdownButtonFormField<String>(
-          value: _selectedQuanHuyen,
-          hint: const Text("Chọn quận/huyện"),
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          icon: const Icon(Icons.arrow_drop_down),
-          items: _selectedTinhThanh != null
-              ? [
-                  ...danhSachQuanHuyen
-                      .where((quanHuyen) =>
-                          quanHuyen.maTinhThanh ==
-                          provinces
-                              .firstWhere(
-                                (province) =>
-                                    province.tenTinhThanh == _selectedTinhThanh,
-                              )
-                              .maTinhThanh)
-                      .map((QuanHuyen quanHuyen) {
-                    return DropdownMenuItem<String>(
-                      value: quanHuyen.tenQuanHuyen,
-                      child: Row(
-                        children: [
-                          const Icon(Icons.location_city, color: Colors.blue),
-                          const SizedBox(width: 8),
-                          Text(quanHuyen.tenQuanHuyen),
-                        ],
-                      ),
-                    );
-                  })
-                ]
-              : [],
-          onChanged: (String? newValue) {
-            setState(() {
-              _selectedQuanHuyen = newValue;
-              _selectedPhuongXa = null; // Reset phường/xã khi thay đổi quận
-            });
-          },
-        ),
-        const SizedBox(height: 16),
-      ],
-    );
-  }
-
-  Widget _buildComboBoxPhuongXa() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        RichText(
-          text: const TextSpan(
-            children: [
-              TextSpan(
-                text: "Phường/Xã",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-              TextSpan(
-                text: " *",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.red),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 8),
-        DropdownButtonFormField<String>(
-          value: _selectedPhuongXa,
-          hint: const Text("Chọn phường/xã"),
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          icon: const Icon(Icons.arrow_drop_down),
-          items: _selectedQuanHuyen != null
-              ? [
-                  ...phuongXaList
-                      .where((phuongXa) =>
-                          phuongXa.maQuanHuyen ==
-                          danhSachQuanHuyen
-                              .firstWhere(
-                                (quanHuyen) =>
-                                    quanHuyen.tenQuanHuyen ==
-                                    _selectedQuanHuyen,
-                              )
-                              .maQuanHuyen)
-                      .map((PhuongXa phuongXa) {
-                    return DropdownMenuItem<String>(
-                      value: phuongXa.tenPhuongXa,
-                      child: Row(
-                        children: [
-                          const Icon(Icons.location_city, color: Colors.blue),
-                          const SizedBox(width: 8),
-                          Text(phuongXa.tenPhuongXa),
-                        ],
-                      ),
-                    );
-                  })
-                ]
-              : [],
-          onChanged: (String? newValue) {
-            setState(() {
-              _selectedPhuongXa = newValue;
-            });
-          },
-        ),
-        const SizedBox(height: 16),
       ],
     );
   }
