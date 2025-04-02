@@ -622,7 +622,7 @@ class XemBaiDangKhoKhanDemo extends StatelessWidget {
                                     ),
                                   ),
                                   TextSpan(
-                                    text: "Ông Nguyễn Kim Dũng\n",
+                                    text: "Ông Nguyễn Đăng Khoa\n",
                                     style: TextStyle(
                                       color:
                                           Colors.black, // Thay đổi màu nếu cần

@@ -1,6 +1,5 @@
-import 'package:tester/src/resources/pages/xemProfile.dart';
-import 'package:tester/src/resources/pages/MainNguoiKK.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../constants/MyColors.dart';
 import '../../constants/MyFontSize.dart';
 
@@ -13,373 +12,118 @@ class UpdateProfile extends StatefulWidget {
 
 class _UpdateProfileState extends State<UpdateProfile> {
   int _currentIndex = 3;
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _dobController = TextEditingController();
+  final TextEditingController _cccdController =
+      TextEditingController(); // Thêm controller cho CCCD
 
-  // Screens corresponding to BottomNavigationBar items
+  @override
+  void initState() {
+    super.initState();
+    _loadProfile();
+  }
+
+  Future<void> _loadProfile() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _nameController.text = prefs.getString("name") ?? "Nguyễn Đăng Khoa";
+      _emailController.text =
+          prefs.getString("email") ?? "2221004199@sv.ufm.edu.vn";
+      _phoneController.text = prefs.getString("phone") ?? "0393416574";
+      _dobController.text = prefs.getString("dob") ?? "17/12/2004";
+      _cccdController.text = prefs.getString("cccd") ?? "054204003257";
+    });
+  }
+
+  Future<void> _updateProfile() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("name", _nameController.text);
+    await prefs.setString("email", _emailController.text);
+    await prefs.setString("phone", _phoneController.text);
+    await prefs.setString("dob", _dobController.text);
+    await prefs.setString("cccd", _cccdController.text);
+
+    _showSuccessDialog();
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != DateTime.now()) {
+      setState(() {
+        _dobController.text = "${picked.day}/${picked.month}/${picked.year}";
+      });
+    }
+  }
+
   final List<Widget> _screens = [
-    // ignore: prefer_const_constructors
-    MainNguoiKK(), // Replace with your actual widget
+    const Center(child: Text("Trang cá nhân")),
     const Center(child: Text("Xu hướng")),
     const Center(child: Text("Thông báo")),
-    const Center(child: Text("Trang cá nhân")),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          constraints: const BoxConstraints.expand(),
-          color: MyColors.surfaceContainerLowest,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: const Color(0xFFF6F3F3),
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: SingleChildScrollView(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(
-                            top: 36, bottom: 169, left: 24, right: 24),
-                        margin: const EdgeInsets.only(bottom: 14),
-                        height: 237,
-                        width: double.infinity,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("assets/teamaisc.jpg"),
-                              fit: BoxFit.cover),
-                        ),
-                        child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              IntrinsicHeight(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: const Color(0xFFD2D2D2),
-                                    ),
-                                    borderRadius: BorderRadius.circular(24),
-                                    color: MyColors.surfaceContainerLowest,
-                                  ),
-                                  padding:
-                                      const EdgeInsets.only(left: 9, right: 9),
-                                  margin: const EdgeInsets.only(right: 50),
-                                  width: 32,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(1),
-                                        ),
-                                        margin: const EdgeInsets.only(top: 5),
-                                        height: 25,
-                                        width: 25,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            // Điều hướng tới màn hình xemProfile.dart
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const Xemprofile()),
-                                            );
-                                          },
-                                          child: Image.asset(
-                                            "assets/profile5.png",
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const Expanded(
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  child: Text(
-                                    "TRANG CÁ NHÂN",
-                                    style: TextStyle(
-                                      color: MyColors.surfaceContainerLowest,
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ]),
-                      ),
-                      Container(
-                          margin: const EdgeInsets.only(
-                              bottom: 6, left: 21, right: 21),
-                          width: 33,
-                          height: 28,
-                          child: Image.asset(
-                            "assets/mayanh.png",
-                            fit: BoxFit.cover,
-                          )),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 12, left: 34),
-                        child: const Text(
-                          "Tên của bạn",
-                          style: TextStyle(
-                            color: MyColors.shadow,
-                            fontSize: MyFontSize.body_medium,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      IntrinsicHeight(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: const Color(0xFFD2D2D2),
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                            color: MyColors.surfaceContainerLowest,
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Color(0x26F4694C),
-                                blurRadius: 14,
-                                offset: Offset(0, 0),
-                              ),
-                            ],
-                          ),
-                          padding: const EdgeInsets.only(
-                              top: 9, bottom: 9, left: 12, right: 12),
-                          margin: const EdgeInsets.only(
-                              bottom: 21, left: 33, right: 33),
-                          width: double.infinity,
-                          child: Row(children: [
-                            Container(
-                                margin: const EdgeInsets.only(right: 19),
-                                width: 24,
-                                height: 24,
-                                child: Image.asset(
-                                  "assets/profile1.png",
-                                  fit: BoxFit.cover,
-                                )),
-                            const Expanded(
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: Text(
-                                  "Nguyễn Đăng Khoa",
-                                  style: TextStyle(
-                                    color: MyColors.shadow,
-                                    fontSize: MyFontSize.body_medium,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ]),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 15, left: 35),
-                        child: const Text(
-                          "Mật khẩu hiện tại",
-                          style: TextStyle(
-                            color: MyColors.shadow,
-                            fontSize: MyFontSize.body_medium,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      IntrinsicHeight(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: const Color(0xFFD2D2D2),
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                            color: MyColors.surfaceContainerLowest,
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Color(0x26F4694C),
-                                blurRadius: 14,
-                                offset: Offset(0, 0),
-                              ),
-                            ],
-                          ),
-                          padding: const EdgeInsets.only(
-                              top: 9, bottom: 9, left: 12, right: 12),
-                          margin: const EdgeInsets.only(
-                              bottom: 21, left: 33, right: 33),
-                          width: double.infinity,
-                          child: Row(children: [
-                            Container(
-                                margin: const EdgeInsets.only(right: 19),
-                                width: 24,
-                                height: 24,
-                                child: Image.asset(
-                                  "assets/profile2.png",
-                                  fit: BoxFit.cover,
-                                )),
-                            const Expanded(
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: Text(
-                                  "*****************",
-                                  style: TextStyle(
-                                    color: MyColors.shadow,
-                                    fontSize: MyFontSize.body_medium,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ]),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 12, left: 33),
-                        child: const Text(
-                          "Địa chỉ Email",
-                          style: TextStyle(
-                            color: MyColors.shadow,
-                            fontSize: MyFontSize.body_medium,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      IntrinsicHeight(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: const Color(0xFFD2D2D2),
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                            color: MyColors.surfaceContainerLowest,
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Color(0x26F4694C),
-                                blurRadius: 14,
-                                offset: Offset(0, 0),
-                              ),
-                            ],
-                          ),
-                          padding: const EdgeInsets.only(
-                              top: 10, bottom: 10, left: 13, right: 13),
-                          margin: const EdgeInsets.only(
-                              bottom: 23, left: 33, right: 33),
-                          width: double.infinity,
-                          child: Row(children: [
-                            Container(
-                                margin: const EdgeInsets.only(right: 17),
-                                width: 24,
-                                height: 21,
-                                child: Image.asset(
-                                  "assets/profile3.png",
-                                  fit: BoxFit.cover,
-                                )),
-                            const Expanded(
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: Text(
-                                  "2221004199@sv.ufm.edu.vn",
-                                  style: TextStyle(
-                                    color: MyColors.shadow,
-                                    fontSize: MyFontSize.body_medium,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ]),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 13, left: 33),
-                        child: const Text(
-                          "Số điện thoại",
-                          style: TextStyle(
-                            color: MyColors.shadow,
-                            fontSize: MyFontSize.body_medium,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      IntrinsicHeight(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: const Color(0xFFD2D2D2),
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                            color: MyColors.surfaceContainerLowest,
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Color(0x26F4694C),
-                                blurRadius: 14,
-                                offset: Offset(0, 0),
-                              ),
-                            ],
-                          ),
-                          padding: const EdgeInsets.only(
-                              top: 10, bottom: 10, left: 13, right: 13),
-                          margin: const EdgeInsets.only(
-                              bottom: 31, left: 33, right: 33),
-                          width: double.infinity,
-                          child: Row(children: [
-                            Container(
-                                margin: const EdgeInsets.only(right: 21),
-                                width: 20,
-                                height: 25,
-                                child: Image.asset(
-                                  "assets/profile4.png",
-                                  fit: BoxFit.cover,
-                                )),
-                            const Expanded(
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: Text(
-                                  "0393416574",
-                                  style: TextStyle(
-                                    color: MyColors.shadow,
-                                    fontSize: MyFontSize.body_medium,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ]),
-                        ),
-                      ),
-                      IntrinsicHeight(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: const Color(0xFFFFB800),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 17),
-                          margin: const EdgeInsets.only(
-                              bottom: 40, left: 33, right: 33),
-                          width: double.infinity,
-                          child: const Column(children: [
-                            Text(
-                              "CẬP NHẬT CHỈNH SỬA",
-                              style: TextStyle(
-                                color: Color(0xFF512D13),
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ]),
-                        ),
-                      ),
-                    ],
-                  )),
+                  const Text(
+                    "TRANG CÁ NHÂN",
+                    style: TextStyle(
+                      color: MyColors.shadow,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              _buildTextField(
+                  "CCCD của bạn", _cccdController, Icons.credit_card,
+                  isEditable: false),
+              _buildTextField("Tên của bạn", _nameController, Icons.person),
+              _buildTextField("Địa chỉ Email", _emailController, Icons.email),
+              _buildTextField("Số điện thoại", _phoneController, Icons.phone,
+                  isEditable: false),
+              GestureDetector(
+                onTap: () => _selectDate(context),
+                child: _buildTextField(
+                    "Ngày sinh", _dobController, Icons.calendar_today),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _updateProfile,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange,
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                ),
+                child: const Center(
+                  child: Text(
+                    "CẬP NHẬT CHỈNH SỬA",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -427,10 +171,106 @@ class _UpdateProfileState extends State<UpdateProfile> {
             label: "Trang cá nhân",
           ),
         ],
-        selectedItemColor: Colors.blue, // Màu của mục được chọn
-        unselectedItemColor: Colors.grey, // Màu của mục không được chọn
-        type: BottomNavigationBarType.fixed, // Đảm bảo hiển thị đủ các mục
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        type: BottomNavigationBarType.fixed,
       ),
+    );
+  }
+
+  Widget _buildTextField(
+      String label, TextEditingController controller, IconData icon,
+      {bool isEditable = true}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            color: MyColors.shadow,
+            fontSize: MyFontSize.body_medium,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 8),
+        TextField(
+          controller: controller,
+          readOnly: !isEditable, // Điều chỉnh tính chỉnh sửa của trường
+          decoration: InputDecoration(
+            prefixIcon: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(icon, size: 24),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            filled: true,
+            fillColor: isEditable
+                ? Colors.white
+                : Colors.grey[300], // Làm mờ các trường không chỉnh sửa
+            hintText: isEditable
+                ? null
+                : "Không thể sửa", // Hiển thị thông báo không thể sửa nếu trường không chỉnh sửa
+            hintStyle: const TextStyle(color: Colors.grey),
+          ),
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  void _showSuccessDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.check_circle, color: Colors.green, size: 80),
+                const SizedBox(height: 10),
+                const Text(
+                  "Cập nhật thành công!",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  "Thông tin của bạn đã được lưu lại.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 10),
+                  ),
+                  child: const Text(
+                    "OK",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
