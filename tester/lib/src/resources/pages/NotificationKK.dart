@@ -1,165 +1,102 @@
-import 'package:tester/src/resources/pages/DangKyNhap.dart';
 import 'package:flutter/material.dart';
+import 'package:tester/src/resources/pages/DangKyNhap.dart';
 
-/* da xem*/
 class NotificationKK extends StatelessWidget {
   const NotificationKK({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          constraints: const BoxConstraints.expand(),
-          color: const Color(0xFFFFFFFF),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(32),
-                    color: const Color(0xFFFFFFFF),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Logo & Title
+                const Text(
+                  "CỘNG ĐỒNG SAN SẺ",
+                  style: TextStyle(
+                    color: Color(0xFFFF4545),
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
                   ),
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.only(top: 28),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Header section with logo and title
-                        IntrinsicHeight(
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                                bottom: 25, left: 80, right: 55),
-                            width: double.infinity,
-                            child: const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "CỘNG ĐỒNG SAN SẺ",
-                                    style: TextStyle(
-                                      color: Color(0xFFFF4545),
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ]),
-                          ),
-                        ),
-                        // Image section
-                        Container(
-                          margin: const EdgeInsets.only(
-                              bottom: 44, left: 89, right: 89),
-                          height: 197,
-                          width: double.infinity,
-                          child: Image.asset(
-                            "assets/thongbaodangky.png",
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        // Success text
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 11, left: 100),
-                          child: const Text(
-                            "Đăng ký thành công!",
-                            style: TextStyle(
-                              color: Color(0xFF0866FF),
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        // Description text
-                        Container(
-                          margin: const EdgeInsets.only(
-                              bottom: 250, left: 31, right: 31),
-                          width: double.infinity,
-                          child: RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              style: const TextStyle(
-                                color: Color(
-                                    0xFF090A0A), // Default color for the rest of the text
-                                fontSize: 18,
-                              ),
-                              children: [
-                                const TextSpan(
-                                  text:
-                                      "Chúc mừng bạn đã tạo tài khoản thành công! Chúng tôi hy vọng rằng bạn sẽ nhận được sự hỗ trợ mà bạn cần từ ",
-                                ),
-                                TextSpan(
-                                  text: "Cộng đồng San Sẻ",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        18, // You can adjust the font size here
-                                    foreground: Paint()
-                                      ..shader = const LinearGradient(
-                                        colors: [
-                                          Color(0xFFFF4545),
-                                          Color(0xFFFF4545)
-                                        ], // Gradient with the same color
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                      ).createShader(const Rect.fromLTWH(
-                                          0.0, 0.0, 200.0, 70.0)),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        // Login Button
-                        GestureDetector(
-                          onTap: () {
-                            // Navigate to DangKyNhap screen
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const Dangkynhap()), // Ensure DangKyNhap.dart is imported
-                            );
-                          },
-                          child: IntrinsicHeight(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: const Color(0xFF0866FF),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color(0x40000000),
-                                    blurRadius: 4,
-                                    offset: Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              padding: const EdgeInsets.symmetric(vertical: 14),
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 80),
-                              width: double.infinity,
-                              child: const Column(
-                                children: [
-                                  Text(
-                                    "Đăng nhập",
-                                    style: TextStyle(
-                                      color: Color(0xFFFFFFFF),
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                ),
+                const SizedBox(height: 20),
+
+                // Success Image
+                Container(
+                  height: 200,
+                  width: 200,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.blue.shade50,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Image.asset(
+                      "assets/thongbaodangky.png",
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 20),
+
+                // Success Message
+                const Text(
+                  "Đăng ký thành công!",
+                  style: TextStyle(
+                    color: Color(0xFF0866FF),
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Description
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text(
+                    "Chúc mừng bạn đã tạo tài khoản thành công! Chúng tôi hy vọng rằng bạn sẽ nhận được sự hỗ trợ mà bạn cần từ Cộng đồng San Sẻ.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 40),
+
+                // Login Button
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF0866FF),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    elevation: 5,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Dangkynhap()),
+                    );
+                  },
+                  child: const Text(
+                    "Đăng nhập",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
