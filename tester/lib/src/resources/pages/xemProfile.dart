@@ -214,7 +214,7 @@ class _XemprofileState extends State<Xemprofile> {
                                                           BorderRadius.circular(
                                                               80),
                                                       child: Image.asset(
-                                                        "assets/teamaisc.jpg",
+                                                        "assets/AnhCV.jpg",
                                                         fit: BoxFit.cover,
                                                       ))),
                                             ]),

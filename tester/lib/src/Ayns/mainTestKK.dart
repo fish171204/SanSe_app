@@ -359,8 +359,7 @@ class _mainTestKKState extends State<mainTestKK> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const XemBaiDangKhoKhanDemo()),
+                                        builder: (context) => const ViewUI()),
                                   );
                                 },
                                 child: const Text(

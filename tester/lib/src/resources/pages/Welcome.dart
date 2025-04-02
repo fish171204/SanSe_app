@@ -28,11 +28,34 @@ class Welcome extends StatelessWidget {
                       children: [
                         Container(
                           padding: const EdgeInsets.only(top: 5, bottom: 50),
-                          margin: const EdgeInsets.only(top: 35),
+                          margin: const EdgeInsets.only(top: 2),
                           width: double.infinity,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 25, 0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Dangkynhap()),
+                                        );
+                                      },
+                                      child: const Text(
+                                        "Bỏ qua",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 16),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               Container(
                                 margin:
                                     const EdgeInsets.symmetric(horizontal: 15),
