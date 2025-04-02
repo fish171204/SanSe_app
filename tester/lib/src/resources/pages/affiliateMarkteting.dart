@@ -13,16 +13,25 @@ class affiliateMarkteting extends StatefulWidget {
 }
 
 class _affiliateMarktetingState extends State<affiliateMarkteting> {
-  // Danh sách doanh nghiệp hiện tại (thay đổi theo danh mục)
   List<Map<String, String>> currentItems = [];
-  // Biến để lưu trữ danh mục đang được chọn
+  List<Map<String, String>> filteredItems = [];
   String selectedCategory = "Đồ uống";
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     // Đặt danh mục mặc định là "Đồ uống"
     currentItems = categoryData[selectedCategory] ?? [];
+    filteredItems = currentItems;
+    searchController.addListener(_filterItems);
+  }
+
+  @override
+  void dispose() {
+    searchController.removeListener(_filterItems);
+    searchController.dispose();
+    super.dispose();
   }
 
   // Hàm cập nhật danh sách doanh nghiệp
@@ -30,6 +39,18 @@ class _affiliateMarktetingState extends State<affiliateMarkteting> {
     setState(() {
       selectedCategory = category;
       currentItems = categoryData[category] ?? [];
+      filteredItems = currentItems;
+    });
+  }
+
+  // Hàm lọc doanh nghiệp theo từ khóa tìm kiếm
+  void _filterItems() {
+    setState(() {
+      filteredItems = currentItems
+          .where((item) => item['title']!
+              .toLowerCase()
+              .contains(searchController.text.toLowerCase()))
+          .toList();
     });
   }
 
@@ -40,7 +61,7 @@ class _affiliateMarktetingState extends State<affiliateMarkteting> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.pop(context); // Go back to the previous screen
+            Navigator.pop(context);
           },
         ),
         title: const Text(
@@ -62,7 +83,6 @@ class _affiliateMarktetingState extends State<affiliateMarkteting> {
       ),
       body: Row(
         children: [
-          // Danh sách danh mục bên trái
           Container(
             width: 100,
             color: Colors.grey.shade200,
@@ -84,7 +104,6 @@ class _affiliateMarktetingState extends State<affiliateMarkteting> {
               ],
             ),
           ),
-          // Nội dung bên phải
           Expanded(
             child: Column(
               children: [
@@ -92,6 +111,7 @@ class _affiliateMarktetingState extends State<affiliateMarkteting> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextField(
+                    controller: searchController,
                     decoration: InputDecoration(
                       hintText: "Bạn muốn mua gì...",
                       prefixIcon: const Icon(Icons.search),
@@ -102,20 +122,18 @@ class _affiliateMarktetingState extends State<affiliateMarkteting> {
                     ),
                   ),
                 ),
-                // Lưới doanh nghiệp
                 Expanded(
                   child: GridView.count(
                     crossAxisCount: 2,
-                    crossAxisSpacing: 16, // Khoảng cách ngang
-                    mainAxisSpacing: 16, // Khoảng cách dọc
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
                     padding: const EdgeInsets.all(16),
-                    children: currentItems.map((item) {
+                    children: filteredItems.map((item) {
                       return gridItem(
                         item["image"] ??
-                            'https://yourdefaultimageurl.com/default.jpg', // Ảnh mặc định nếu null
-                        item["title"] ??
-                            'Không có tiêu đề', // Tiêu đề mặc định nếu null
-                        item["url"], // url có thể là null, không cần ép kiểu
+                            'https://yourdefaultimageurl.com/default.jpg',
+                        item["title"] ?? 'Không có tiêu đề',
+                        item["url"],
                       );
                     }).toList(),
                   ),
@@ -128,40 +146,31 @@ class _affiliateMarktetingState extends State<affiliateMarkteting> {
     );
   }
 
-  // Hàm tạo nút danh mục với căn chỉnh đồng đều
   Widget categoryButton(String text) {
-    bool isSelected =
-        text == selectedCategory; // Kiểm tra xem nút này có được chọn không
+    bool isSelected = text == selectedCategory;
     return Padding(
-      padding:
-          const EdgeInsets.symmetric(vertical: 4.0), // Khoảng cách giữa các nút
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: TextButton(
         onPressed: () => updateGridItems(text),
         style: TextButton.styleFrom(
-          backgroundColor: isSelected
-              ? Colors.white
-              : Colors.transparent, // Màu nền khi chọn
+          backgroundColor: isSelected ? Colors.white : Colors.transparent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
             side: BorderSide(
-                color: isSelected
-                    ? Colors.blue
-                    : Colors.transparent), // Màu viền khi chọn
+                color: isSelected ? Colors.blue : Colors.transparent),
           ),
-          padding: const EdgeInsets.symmetric(
-              vertical: 12.0, horizontal: 10.0), // Căn chỉnh
+          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
         ),
         child: Align(
-          alignment: Alignment.center, // Căn giữa chữ
+          alignment: Alignment.center,
           child: Text(
             text,
             style: TextStyle(
-              color:
-                  isSelected ? Colors.blue : Colors.black, // Màu chữ khi chọn
-              fontSize: 14, // Kích thước chữ
-              fontWeight: FontWeight.w500, // Độ dày chữ
+              color: isSelected ? Colors.blue : Colors.black,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
             ),
-            textAlign: TextAlign.center, // Căn giữa chữ
+            textAlign: TextAlign.center,
           ),
         ),
       ),
@@ -188,14 +197,14 @@ class _affiliateMarktetingState extends State<affiliateMarkteting> {
               borderRadius: BorderRadius.circular(30),
               child: Image.network(
                 imageUrl,
-                fit: BoxFit.cover, // This ensures the image fits the container
+                fit: BoxFit.cover,
               ),
             ),
           ),
           const SizedBox(height: 8),
           Text(
             title,
-            textAlign: TextAlign.center, // Apply textAlign directly here
+            textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
