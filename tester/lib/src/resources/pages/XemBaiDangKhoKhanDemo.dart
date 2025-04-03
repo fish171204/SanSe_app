@@ -56,7 +56,6 @@ class XemBaiDangKhoKhanDemo extends StatelessWidget {
                                         children: [
                                           GestureDetector(
                                             onTap: () {
-                                              // Quay lại màn hình trước đó mà không kiểm tra trạng thái đăng nhập
                                               Navigator.pop(context);
                                             },
                                             child: Container(
@@ -155,10 +154,8 @@ class XemBaiDangKhoKhanDemo extends StatelessWidget {
                               decoration: BoxDecoration(
                                 gradient: const LinearGradient(
                                   colors: [
-                                    Color(
-                                        0xFFCCE7FF), // Soft light blue gradient start
-                                    Color(
-                                        0xFFB3D8FF), // Slightly deeper blue for a smoother effect
+                                    Color(0xFFCCE7FF),
+                                    Color(0xFFB3D8FF),
                                   ],
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
@@ -267,15 +264,6 @@ class XemBaiDangKhoKhanDemo extends StatelessWidget {
                                               ],
                                             ),
                                           ),
-
-                                          // const Text(
-                                          //   "Ngày đăng: 01/09/2024",
-                                          //   style: TextStyle(
-                                          //     color: Color(0xFFAEA7A7),
-                                          //     fontSize: 13,
-                                          //     fontWeight: FontWeight.bold,
-                                          //   ),
-                                          // ),
                                         ]),
                                   ),
                                 ),
@@ -364,7 +352,6 @@ class XemBaiDangKhoKhanDemo extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // Chuyển đến màn hình Donate khi nhấn vào bất kỳ thành phần nào trong IntrinsicHeight
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -624,8 +611,7 @@ class XemBaiDangKhoKhanDemo extends StatelessWidget {
                                   TextSpan(
                                     text: "Ông Nguyễn Đăng Khoa\n",
                                     style: TextStyle(
-                                      color:
-                                          Colors.black, // Thay đổi màu nếu cần
+                                      color: Colors.black,
                                       fontSize: 16,
                                     ),
                                   ),
@@ -633,24 +619,21 @@ class XemBaiDangKhoKhanDemo extends StatelessWidget {
                                     text:
                                         "Chức vụ: Công an Xã Cát Tân,huyện Phù Cát\n",
                                     style: TextStyle(
-                                      color:
-                                          Colors.black, // Thay đổi màu nếu cần
+                                      color: Colors.black,
                                       fontSize: 16,
                                     ),
                                   ),
                                   TextSpan(
                                     text: "Số điện thoại Zalo : 0383416574\n",
                                     style: TextStyle(
-                                      color:
-                                          Colors.black, // Thay đổi màu nếu cần
+                                      color: Colors.black,
                                       fontSize: 16,
                                     ),
                                   ),
                                   TextSpan(
                                     text: "Số CCCD : 054204005258",
                                     style: TextStyle(
-                                      color:
-                                          Colors.black, // Thay đổi màu nếu cần
+                                      color: Colors.black,
                                       fontSize: 16,
                                     ),
                                   ),
@@ -854,29 +837,6 @@ class XemBaiDangKhoKhanDemo extends StatelessWidget {
                                   ),
                                 ]),
                           ),
-                          // Container(
-                          //   margin: const EdgeInsets.only(
-                          //       bottom: 10, left: 22, right: 22),
-                          //   width: double.infinity,
-                          //   child: const Text(
-                          //     "Trần Thị B\n02/09/2024\nMong rằng gia đình chị sẽ sớm có một cuốc sống tốt hơn!",
-                          //     style: TextStyle(
-                          //       color: Color(0xFFAEA7A7),
-                          //       fontSize: 15,
-                          //     ),
-                          //   ),
-                          // ),
-                          // Container(
-                          //   margin: const EdgeInsets.symmetric(horizontal: 22),
-                          //   width: double.infinity,
-                          //   child: const Text(
-                          //     "Lê Văn C\n03/09/2024\nTôi đã ủng hộ 1 triệu đồng, hy vọng sẽ có nhiều người chung tay giúp đỡ hơn.",
-                          //     style: TextStyle(
-                          //       color: Color(0xFFAEA7A7),
-                          //       fontSize: 15,
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       )),
                 ),

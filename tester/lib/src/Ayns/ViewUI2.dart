@@ -76,47 +76,6 @@ class ViewUI2 extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //
-
-              // Expanded(
-              //   child: ListView.builder(
-              //     padding: const EdgeInsets.symmetric(horizontal: 16),
-              //     itemCount: 5, // Replace with actual data length
-              //     itemBuilder: (context, index) {
-              //       return Card(
-              //         elevation: 3,
-              //         margin: const EdgeInsets.only(bottom: 16),
-              //         shape: RoundedRectangleBorder(
-              //           borderRadius: BorderRadius.circular(12),
-              //         ),
-              //         child: ListTile(
-              //           leading: CircleAvatar(
-              //             backgroundColor: Colors.grey.shade300,
-              //             child: const Icon(
-              //               Icons.person,
-              //               color: Colors.white,
-              //             ),
-              //           ),
-              //           title: Text(
-              //             "Nhà hảo tâm ${index + 1}",
-              //             style: const TextStyle(
-              //               fontWeight: FontWeight.bold,
-              //             ),
-              //           ),
-              //           subtitle: const Text("Chi tiết thông tin nhà hảo tâm"),
-              //           trailing: const Icon(
-              //             Icons.arrow_forward_ios,
-              //             size: 16,
-              //           ),
-              //           onTap: () {
-              //             // Add navigation or actions here
-              //           },
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
-              // Footer
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Center(

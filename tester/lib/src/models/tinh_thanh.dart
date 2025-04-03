@@ -1,6 +1,6 @@
 class TinhThanh {
-  final String maTinhThanh; // Mã Tỉnh/Thành phố
-  final String tenTinhThanh; // Tên Tỉnh/Thành phố
+  final String maTinhThanh;
+  final String tenTinhThanh;
 
   TinhThanh({required this.maTinhThanh, required this.tenTinhThanh});
 }

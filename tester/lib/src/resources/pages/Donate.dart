@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import '../../constants/MyColors.dart';
 import '../../constants/MyFontSize.dart';
 import 'package:tester/src/resources/pages/Donate2.dart';
-import 'package:image_picker/image_picker.dart'; // Import image_picker package
+import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class Donate extends StatefulWidget {
@@ -19,25 +19,21 @@ class _DonateState extends State<Donate> {
   List<XFile>? _images;
 
   Future<void> _pickImage() async {
-    final pickedFiles = await ImagePicker()
-        .pickMultiImage(); // Sử dụng pickMultiImage để chọn nhiều ảnh
+    final pickedFiles = await ImagePicker().pickMultiImage();
 
     if (pickedFiles.length <= 5) {
       setState(() {
         _images = pickedFiles;
       });
     } else {
-      // Nếu số ảnh chọn vượt quá 5, thông báo cho người dùng
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Bạn chỉ có thể tải tối đa 5 ảnh.")),
       );
     }
   }
 
-  // Lưu trữ mệnh giá được chọn
   String? _selectedAmount;
 
-  // Lưu trữ giá trị nhập từ người dùng
   final TextEditingController _amountController = TextEditingController();
   final NumberFormat _numberFormat =
       NumberFormat("#,###", "vi_VN"); // Định dạng số VND
@@ -50,7 +46,7 @@ class _DonateState extends State<Donate> {
     _amountController.addListener(_onAmountChanged);
   }
 
-  String _donationAmount = "0 VND"; // Giá trị mặc định cho số tiền
+  String _donationAmount = "0 VND";
   List<String> amounts = [
     '100.000',
     '200.000',
@@ -64,17 +60,16 @@ class _DonateState extends State<Donate> {
     setState(() {
       _donationAmount =
           '$amount VND'; // Cập nhật số tiền hiển thị trên nút "Giúp đỡ"
-      _amountController.text = amount; // Cập nhật số tiền vào TextField
+      _amountController.text = amount;
     });
   }
 
   // Hàm xử lý thay đổi khi người dùng nhập số tiền
   void _onAmountChanged() {
-    final String text =
-        _amountController.text.replaceAll('.', ''); // Loại bỏ dấu chấm cũ
+    final String text = _amountController.text.replaceAll('.', '');
     if (text.isNotEmpty) {
       final int value = int.tryParse(text) ?? 0; // Chuyển thành số nguyên
-      final String formattedText = _numberFormat.format(value); // Định dạng lại
+      final String formattedText = _numberFormat.format(value);
       if (_amountController.text != formattedText) {
         // Cập nhật giá trị mới vào controller
         _amountController.value = TextEditingValue(
@@ -550,130 +545,6 @@ class _DonateState extends State<Donate> {
                                   ]),
                             ),
                           ),
-                          // Container(
-                          //   margin: const EdgeInsets.only(bottom: 13, left: 23),
-                          //   child: const Text(
-                          //     "Minh chứng giúp đỡ",
-                          //     style: TextStyle(
-                          //       color: MyColors.shadow,
-                          //       fontSize: MyFontSize.body_large,
-                          //       fontWeight: FontWeight.bold,
-                          //     ),
-                          //   ),
-                          // ),
-                          // Container(
-                          //   decoration: const BoxDecoration(
-                          //     borderRadius: BorderRadius.only(
-                          //       topLeft: Radius.circular(10),
-                          //       topRight: Radius.circular(10),
-                          //     ),
-                          //     color: Color(0xFFDED8FF),
-                          //     boxShadow: [
-                          //       BoxShadow(
-                          //         color: Color(0x40000000),
-                          //         blurRadius: 4,
-                          //         offset: Offset(0, 4),
-                          //       ),
-                          //     ],
-                          //   ),
-                          //   padding: const EdgeInsets.only(
-                          //       top: 6, bottom: 6, left: 120, right: 55),
-                          //   margin: const EdgeInsets.only(
-                          //       bottom: 1, left: 15, right: 15),
-                          //   width: double.infinity,
-                          //   child: const Column(
-                          //     crossAxisAlignment: CrossAxisAlignment.start,
-                          //     children: [
-                          //       Text(
-                          //         "Đính kèm file ở đây",
-                          //         style: TextStyle(
-                          //           color: Color(0xFF675F5F),
-                          //           fontSize: 17,
-                          //           fontWeight: FontWeight.bold,
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     border: Border.all(
-                          //       color: const Color(0xFFE8E8E8),
-                          //       width: 2,
-                          //     ),
-                          //     borderRadius: BorderRadius.circular(5),
-                          //     color: MyColors.surfaceContainerLowest,
-                          //   ),
-                          //   margin: const EdgeInsets.only(
-                          //       left: 15,
-                          //       right: 15,
-                          //       bottom: 19), // Giảm margin ngang để dính liền
-                          //   padding: const EdgeInsets.symmetric(
-                          //       horizontal: 10, vertical: 20),
-                          //   width: double.infinity,
-                          //   height: 200,
-                          //   child: Column(
-                          //     mainAxisAlignment: MainAxisAlignment
-                          //         .center, // Căn giữa theo chiều dọc
-                          //     crossAxisAlignment: CrossAxisAlignment
-                          //         .center, // Căn giữa theo chiều ngang
-                          //     children: [
-                          //       Container(
-                          //         decoration: BoxDecoration(
-                          //           borderRadius: BorderRadius.circular(30),
-                          //           color: const Color(0xFF0866FF),
-                          //         ),
-                          //         padding: const EdgeInsets.only(
-                          //             top: 14, bottom: 14, left: 3, right: 3),
-                          //         margin: const EdgeInsets.only(
-                          //             bottom: 27, left: 86, right: 86),
-                          //         width: double.infinity,
-                          //         child: Row(
-                          //           mainAxisAlignment: MainAxisAlignment
-                          //               .center, // Căn giữa theo chiều ngang
-                          //           crossAxisAlignment: CrossAxisAlignment
-                          //               .center, // Căn giữa theo chiều dọc
-                          //           children: [
-                          //             GestureDetector(
-                          //               onTap: _pickImage,
-                          //               child: Container(
-                          //                 margin:
-                          //                     const EdgeInsets.only(right: 15),
-                          //                 width: 24,
-                          //                 height: 24,
-                          //                 child: Image.asset(
-                          //                   "assets/taianhlen.png",
-                          //                   fit: BoxFit.fill,
-                          //                 ),
-                          //               ),
-                          //             ),
-                          //             const Text(
-                          //               "Tải ảnh lên",
-                          //               style: TextStyle(
-                          //                 color: Colors.white,
-                          //                 fontSize: 15,
-                          //                 fontWeight: FontWeight.bold,
-                          //               ),
-                          //             ),
-                          //           ],
-                          //         ),
-                          //       ),
-                          //       // Hiển thị ảnh đã chọn
-                          //       if (_images != null && _images!.isNotEmpty)
-                          //         Column(
-                          //           children: _images!.map((image) {
-                          //             return Center(
-                          //               child: Image.file(
-                          //                 File(image.path),
-                          //                 width: 300,
-                          //                 height: 300,
-                          //               ),
-                          //             );
-                          //           }).toList(),
-                          //         ),
-                          //     ],
-                          //   ),
-                          // ),
                           IntrinsicHeight(
                             child: GestureDetector(
                               onTap: () {

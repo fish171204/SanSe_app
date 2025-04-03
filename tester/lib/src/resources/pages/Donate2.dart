@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../constants/MyColors.dart';
 import '../../constants/MyFontSize.dart';
-import 'package:image_picker/image_picker.dart'; // Import image_picker package
+import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
 
@@ -20,15 +20,13 @@ class _Donate2State extends State<Donate2> {
   List<XFile>? _images;
 
   Future<void> _pickImage() async {
-    final pickedFiles = await ImagePicker()
-        .pickMultiImage(); // Sử dụng pickMultiImage để chọn nhiều ảnh
+    final pickedFiles = await ImagePicker().pickMultiImage();
 
     if (pickedFiles.length <= 5) {
       setState(() {
         _images = pickedFiles;
       });
     } else {
-      // Nếu số ảnh chọn vượt quá 5, thông báo cho người dùng
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Bạn chỉ có thể tải tối đa 5 ảnh.")),
       );

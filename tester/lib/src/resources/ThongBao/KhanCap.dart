@@ -55,12 +55,10 @@ class _KhanCapState extends State<KhanCap> {
                           selectedFilter = value!;
                         });
                         Navigator.pop(context);
-                        // Chuyển hướng tới giao diện KhanCap.dart
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                const XemThongBao(), // Gọi màn hình KhanCap
+                            builder: (context) => const XemThongBao(),
                           ),
                         );
                       },
@@ -140,8 +138,7 @@ class _KhanCapState extends State<KhanCap> {
               );
             }
           },
-          child: const Icon(Icons.arrow_back,
-              color: Colors.black), // Chỉ dùng Icon ở đây
+          child: const Icon(Icons.arrow_back, color: Colors.black),
         ),
         title: const Text(
           'Thông báo',
@@ -154,7 +151,7 @@ class _KhanCapState extends State<KhanCap> {
                 icon: const Icon(
                   Icons.notification_important,
                   color: Colors.red,
-                  size: 26, // Thay đổi kích thước ở đây
+                  size: 26,
                 ),
                 onPressed: () {},
               ),

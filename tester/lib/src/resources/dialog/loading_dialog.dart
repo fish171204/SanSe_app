@@ -6,7 +6,6 @@ class LoadingDialog {
     showDialog(
         context: context,
         // barrierDismissible: false
-        // 👉 Người dùng KHÔNG THỂ bấm ra ngoài để đóng dialog, chỉ có thể đóng bằng cách nhấn nút trong dialog.
         barrierDismissible: false,
         builder: (context) => Dialog(
               child: Container(

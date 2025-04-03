@@ -59,8 +59,7 @@ class GD1 extends StatelessWidget {
                                         children: [
                                           GestureDetector(
                                             onTap: () {
-                                              Navigator.pop(
-                                                  context); // Quay lại màn hình trước đó
+                                              Navigator.pop(context);
                                             },
                                             child: Container(
                                               margin: const EdgeInsets.only(
@@ -735,29 +734,6 @@ class GD1 extends StatelessWidget {
                                   ),
                                 ]),
                           ),
-                          // Container(
-                          //   margin: const EdgeInsets.only(
-                          //       bottom: 10, left: 22, right: 22),
-                          //   width: double.infinity,
-                          //   child: const Text(
-                          //     "Trần Thị B\n02/09/2024\nMong rằng gia đình chị sẽ sớm có một cuốc sống tốt hơn!",
-                          //     style: TextStyle(
-                          //       color: Color(0xFFAEA7A7),
-                          //       fontSize: 15,
-                          //     ),
-                          //   ),
-                          // ),
-                          // Container(
-                          //   margin: const EdgeInsets.symmetric(horizontal: 22),
-                          //   width: double.infinity,
-                          //   child: const Text(
-                          //     "Lê Văn C\n03/09/2024\nTôi đã ủng hộ 1 triệu đồng, hy vọng sẽ có nhiều người chung tay giúp đỡ hơn.",
-                          //     style: TextStyle(
-                          //       color: Color(0xFFAEA7A7),
-                          //       fontSize: 15,
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       )),
                 ),

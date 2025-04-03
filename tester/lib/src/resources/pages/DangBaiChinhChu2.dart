@@ -18,15 +18,13 @@ class _DangBaiChinhChu2State extends State<DangBaiChinhChu2> {
   List<XFile>? _images2;
 
   Future<void> _pickImage2() async {
-    final pickedFiles2 = await ImagePicker()
-        .pickMultiImage(); // Sử dụng pickMultiImage để chọn nhiều ảnh
+    final pickedFiles2 = await ImagePicker().pickMultiImage();
 
     if (pickedFiles2.length <= 5) {
       setState(() {
         _images2 = pickedFiles2;
       });
     } else {
-      // Nếu số ảnh chọn vượt quá 5, thông báo cho người dùng
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Bạn chỉ có thể tải tối đa 5 ảnh.")),
       );
@@ -34,15 +32,13 @@ class _DangBaiChinhChu2State extends State<DangBaiChinhChu2> {
   }
 
   Future<void> _pickImage() async {
-    final pickedFiles = await ImagePicker()
-        .pickMultiImage(); // Sử dụng pickMultiImage để chọn nhiều ảnh
+    final pickedFiles = await ImagePicker().pickMultiImage();
 
     if (pickedFiles.length <= 5) {
       setState(() {
         _images = pickedFiles;
       });
     } else {
-      // Nếu số ảnh chọn vượt quá 5, thông báo cho người dùng
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Bạn chỉ có thể tải tối đa 5 ảnh.")),
       );
@@ -837,191 +833,6 @@ class _DangBaiChinhChu2State extends State<DangBaiChinhChu2> {
                             ),
                           ),
                         ),
-                        // Row(
-                        //   crossAxisAlignment:
-                        //       CrossAxisAlignment.start, // Căn chỉnh hàng dọc
-                        //   children: [
-                        //     // Checkbox với thiết kế hiện đại
-                        //     Transform.scale(
-                        //       scale: 1.3, // Tăng kích thước checkbox để dễ bấm
-                        //       child: Checkbox(
-                        //         value: _isAgree, // Biến lưu trạng thái checkbox
-                        //         onChanged: (bool? value) {
-                        //           setState(() {
-                        //             _isAgree = value!;
-                        //           });
-                        //         },
-                        //         activeColor: const Color(
-                        //             0xFF007BFF), // Màu xanh dương chuyên nghiệp
-                        //         checkColor:
-                        //             Colors.white, // Màu của dấu tick bên trong
-                        //         shape: RoundedRectangleBorder(
-                        //           borderRadius: BorderRadius.circular(
-                        //               4), // Bo góc checkbox
-                        //         ),
-                        //       ),
-                        //     ),
-
-                        //     // Label với phong cách hiện đại
-                        //     Expanded(
-                        //       child: GestureDetector(
-                        //         onTap: () {
-                        //           setState(() {
-                        //             _isAgree =
-                        //                 !_isAgree; // Cho phép bấm vào label để toggle checkbox
-                        //           });
-                        //         },
-                        //         child: RichText(
-                        //           text: const TextSpan(
-                        //             text: "Tôi cam kết ", // Phần chữ đầu
-                        //             style: TextStyle(
-                        //               fontSize:
-                        //                   16, // Kích thước chữ lớn, dễ đọc
-                        //               color: Colors.black87, // Màu chữ dễ nhìn
-                        //               height: 1.5, // Khoảng cách dòng thoải mái
-                        //             ),
-                        //             children: [
-                        //               TextSpan(
-                        //                 text:
-                        //                     "chịu trách nhiệm pháp lý ", // Phần nổi bật
-                        //                 style: TextStyle(
-                        //                   color: Color(
-                        //                       0xFF007BFF), // Màu xanh dương để thu hút
-                        //                   fontWeight: FontWeight
-                        //                       .bold, // Tô đậm phần nổi bật
-                        //                 ),
-                        //               ),
-                        //               TextSpan(
-                        //                 text:
-                        //                     "về các thông tin đã trình bày.", // Phần chữ cuối
-                        //               ),
-                        //             ],
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                        // IntrinsicHeight(
-                        //   child: GestureDetector(
-                        //     onTap: () {
-                        //       // Hiển thị thông báo khi nhấn vào nút
-                        //       showDialog(
-                        //         context: context,
-                        //         builder: (context) => AlertDialog(
-                        //           shape: RoundedRectangleBorder(
-                        //             borderRadius: BorderRadius.circular(20),
-                        //           ),
-                        //           backgroundColor: const Color(
-                        //               0xFFF5F5F5), // Nền sáng hiện đại
-                        //           titlePadding: const EdgeInsets.all(20),
-                        //           contentPadding: const EdgeInsets.all(20),
-                        //           title: const Row(
-                        //             mainAxisAlignment: MainAxisAlignment.center,
-                        //             children: [
-                        //               Icon(
-                        //                 Icons.check_circle_outline,
-                        //                 color: Color(
-                        //                     0xFF4CAF50), // Màu xanh lá hiện đại
-                        //                 size: 30,
-                        //               ),
-                        //               SizedBox(width: 10),
-                        //               Text(
-                        //                 "Thành công!",
-                        //                 style: TextStyle(
-                        //                   color: Color(0xFF0866FF),
-                        //                   fontWeight: FontWeight.bold,
-                        //                   fontSize: 20,
-                        //                 ),
-                        //               ),
-                        //             ],
-                        //           ),
-                        //           content: Column(
-                        //             mainAxisSize: MainAxisSize.min,
-                        //             children: [
-                        //               const Text(
-                        //                 "Hoàn cảnh của bạn đã được gửi tới các nhà hảo tâm. Xin chờ hỗ trợ!",
-                        //                 textAlign: TextAlign.center,
-                        //                 style: TextStyle(
-                        //                   fontSize: 18,
-                        //                   color: Colors.black87,
-                        //                 ),
-                        //               ),
-                        //               const SizedBox(height: 20),
-                        //               Container(
-                        //                 padding: const EdgeInsets.all(10),
-                        //                 decoration: const BoxDecoration(
-                        //                   shape: BoxShape.circle,
-                        //                   color:
-                        //                       Color(0xFFFFF3E0), // Nền cam nhạt
-                        //                 ),
-                        //                 child: const Icon(
-                        //                   Icons.notifications,
-                        //                   color: Color(0xFFFFA726),
-                        //                   size: 40,
-                        //                 ),
-                        //               ),
-                        //             ],
-                        //           ),
-                        //           actions: [
-                        //             Center(
-                        //               child: ElevatedButton(
-                        //                 onPressed: () {
-                        //                   Navigator.pop(context); // Đóng dialog
-                        //                   Navigator.pushReplacement(
-                        //                     context,
-                        //                     MaterialPageRoute(
-                        //                       builder: (context) =>
-                        //                           const mainTestKK(),
-                        //                     ),
-                        //                   ); // Chuyển tới màn hình MainNguoiKK
-                        //                 },
-                        //                 style: ElevatedButton.styleFrom(
-                        //                   padding: const EdgeInsets.symmetric(
-                        //                       horizontal: 30, vertical: 10),
-                        //                   backgroundColor:
-                        //                       const Color(0xFF0866FF),
-                        //                   shape: RoundedRectangleBorder(
-                        //                     borderRadius:
-                        //                         BorderRadius.circular(10),
-                        //                   ),
-                        //                 ),
-                        //                 child: const Text(
-                        //                   "OK",
-                        //                   style: TextStyle(
-                        //                       color: Colors.white,
-                        //                       fontSize: 16),
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //           ],
-                        //         ),
-                        //       );
-                        //     },
-                        //     child: Container(
-                        //       decoration: BoxDecoration(
-                        //         borderRadius: BorderRadius.circular(30),
-                        //         color: const Color(0xFF0866FF),
-                        //       ),
-                        //       padding: const EdgeInsets.symmetric(vertical: 15),
-                        //       margin: const EdgeInsets.only(
-                        //           top: 20, bottom: 18, left: 92, right: 92),
-                        //       width: double.infinity,
-                        //       child: const Column(
-                        //         children: [
-                        //           Text(
-                        //             "Chia sẻ",
-                        //             style: TextStyle(
-                        //               color: Colors.white,
-                        //               fontSize: 20,
-                        //               fontWeight: FontWeight.bold,
-                        //             ),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
