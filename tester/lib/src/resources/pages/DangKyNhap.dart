@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/resources/pages/DanhKyNhap2.dart';
 import 'package:tester/src/resources/pages/MainNguoiKK.dart';
+import 'package:tester/src/resources/pages/AdminScreen.dart';
 import 'package:tester/src/resources/pages/MainNhaHT.dart';
 import 'package:tester/src/resources/pages/SharedPreferences.dart';
 import 'package:flutter/gestures.dart';
@@ -14,7 +15,7 @@ class Dangkynhap extends StatefulWidget {
 }
 
 final TextEditingController _passwordController = TextEditingController();
-bool _isPasswordHidden = true; // Biến để kiểm tra mật khẩu có bị ẩn không
+bool _isPasswordHidden = true;
 
 class _DangkynhapState extends State<Dangkynhap> {
   final TextEditingController _cccdController = TextEditingController();
@@ -24,7 +25,13 @@ class _DangkynhapState extends State<Dangkynhap> {
     String cccd = _cccdController.text.trim();
     String password = _passwordController.text.trim();
 
-    if (cccd == "nguoikhokhan" && password == "nguoikhokhan") {
+    if (cccd == "admin" && password == "admin") {
+      await SharedPreferencesHelper.setLoginStatus(true, "admin");
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const AdminScreen()),
+      );
+    } else if (cccd == "nguoikhokhan" && password == "nguoikhokhan") {
       // Lưu trạng thái đăng nhập vào SharedPreferences
       await SharedPreferencesHelper.setLoginStatus(true, "nguoikhokhan");
 
