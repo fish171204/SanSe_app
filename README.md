@@ -6,6 +6,8 @@
 
 <img src="https://github.com/user-attachments/assets/a7f041a2-8307-4ad6-a710-f938da0f1ef6" width="300">
 
+<img src="https://github.com/user-attachments/assets/a7f041a2-8307-4ad6-a710-f938da0f1ef6" width="300">
+
 ## 2. Màn hình Đăng nhập:
 
 <img src="https://github.com/user-attachments/assets/bc363687-6a03-46ef-954f-034528dc6a56" width="300">
