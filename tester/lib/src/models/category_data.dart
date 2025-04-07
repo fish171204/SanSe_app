@@ -242,7 +242,8 @@ final Map<String, List<Map<String, String>>> categoryData = {
       "image":
           "https://content.accesstrade.vn/adv/1705403074_avatar_1705403074.jpg",
       "title": "TH TrueMilk",
-      "url": 'https://shorten.asia/YD972Me5'
+      "url":
+          'https://www.thshop.vn/?utm_campaign=1961156&aff_sid=El0lU8Rvahy4Nyh13ebjArRAxhLCSh0nFKaXiW1743581278&ref=accesstrade&utm_source=accesstrade&utm_content=El0lU8Rvahy4Nyh13ebjArRAxhLCS%20h0nFKaXiW1743581278'
     },
     {
       "image":

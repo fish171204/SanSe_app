@@ -5,6 +5,27 @@ class TinhThanh {
   TinhThanh({required this.maTinhThanh, required this.tenTinhThanh});
 }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 final List<TinhThanh> provinces = [
   TinhThanh(maTinhThanh: '001', tenTinhThanh: 'An Giang'),
   TinhThanh(maTinhThanh: '002', tenTinhThanh: 'Bà Rịa - Vũng Tàu'),

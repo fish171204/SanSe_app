@@ -4,7 +4,6 @@ import 'package:tester/src/fire_base/fire_base_auth.dart';
 class AuthBloc {
   final _fireAuth = FirAuth();
 
-  // Khai báo StreamControllers
   final StreamController _cccdController = StreamController();
   final StreamController _nameController = StreamController();
   final StreamController _phoneController = StreamController();
@@ -12,7 +11,6 @@ class AuthBloc {
   final StreamController _emailController = StreamController();
   final StreamController _passController = StreamController();
 
-  // Getter để truy cập Stream
   Stream get cccdStream => _cccdController.stream;
   Stream get dateOfBirthStream => _dateOfBirthController.stream;
   Stream get nameStream => _nameController.stream;
@@ -74,7 +72,6 @@ class AuthBloc {
     return isValid;
   }
 
-  // Hàm đăng ký
   void signUp(
     String cccd,
     String hoten,
@@ -85,17 +82,13 @@ class AuthBloc {
     Function onSuccess,
     Function(String) onRegisterError,
   ) {
-    // Sử dụng cccd làm email để đăng ký
     _fireAuth.signUp(cccd, hoten, dtzalo, ngaysinh, matkhau, cccd, onSuccess,
-        onRegisterError); // Dùng cccd thay vì email giả
+        onRegisterError);
   }
 
-  // Hàm đăng nhập
   void signIn(String cccd, String pass, void Function() onSuccess,
       void Function(String) onSignInError) {
-    // Sử dụng cccd làm email để đăng nhập
-    _fireAuth.signIn(
-        cccd, pass, onSuccess, onSignInError); // Dùng cccd thay vì email giả
+    _fireAuth.signIn(cccd, pass, onSuccess, onSignInError);
   }
 
   void dispose() {
@@ -107,7 +100,6 @@ class AuthBloc {
     _cccdController.close();
   }
 
-  // Hàm kiểm tra định dạng email
   bool _isValidEmail(String email) {
     final regex = RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
     return regex.hasMatch(email);

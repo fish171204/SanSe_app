@@ -321,7 +321,7 @@ class GD1 extends StatelessWidget {
                           Container(
                             margin: const EdgeInsets.only(bottom: 10, left: 66),
                             child: const Text(
-                              "Ngày đăng: 01/04/2025",
+                              "Ngày đăng: 12/04/2025",
                               style: TextStyle(
                                 color: Color(0xFF675F5F),
                                 fontSize: 15,
