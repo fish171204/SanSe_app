@@ -6,7 +6,6 @@
 
 <img src="https://github.com/user-attachments/assets/a7f041a2-8307-4ad6-a710-f938da0f1ef6" width="300">
 
-<img src="https://github.com/user-attachments/assets/a7f041a2-8307-4ad6-a710-f938da0f1ef6" width="300">
 
 ## 2. Màn hình Đăng nhập:
 
