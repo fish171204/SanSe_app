@@ -79,7 +79,7 @@ class _FormDKyKKState extends State<FormDKyKK> {
                     _buildFormField("Nhập lại mật khẩu", "nguoikhokhan",
                         isRequired: true),
 
-                    ComboBoxTinhThanh(
+                    BuildComboBoxProvince(
                       selectedTinhThanh: _selectedTinhThanh,
                       provinces: provinces, // Danh sách tỉnh/thành phố
                       onChanged: (String? newValue) {
@@ -91,7 +91,7 @@ class _FormDKyKKState extends State<FormDKyKK> {
                       },
                     ),
 
-                    ComboBoxQuanHuyen(
+                    BuildComboBoxDistrict(
                       selectedQuanHuyen: _selectedQuanHuyen,
                       selectedTinhThanh: _selectedTinhThanh,
                       danhSachQuanHuyen:
@@ -105,7 +105,7 @@ class _FormDKyKKState extends State<FormDKyKK> {
                       },
                     ),
 
-                    ComboBoxPhuongXa(
+                    BuildComboBoxWard(
                       selectedPhuongXa: _selectedPhuongXa,
                       selectedQuanHuyen: _selectedQuanHuyen,
                       phuongXaList: phuongXaList, // Danh sách phường/xã

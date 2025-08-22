@@ -3,12 +3,12 @@ import 'package:tester/src/models/user_province.dart';
 
 import 'package:flutter/material.dart';
 
-class ComboBoxTinhThanh extends StatelessWidget {
+class BuildComboBoxProvince extends StatelessWidget {
   final String? selectedTinhThanh;
   final List<dynamic> provinces;
   final ValueChanged<String?> onChanged;
 
-  const ComboBoxTinhThanh({
+  const BuildComboBoxProvince({
     super.key,
     required this.selectedTinhThanh,
     required this.provinces,

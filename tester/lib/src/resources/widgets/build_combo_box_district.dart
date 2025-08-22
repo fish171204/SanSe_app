@@ -3,14 +3,14 @@ import 'package:tester/src/models/user_ward.dart';
 import 'package:tester/src/models/user_province.dart';
 import 'package:flutter/material.dart';
 
-class ComboBoxQuanHuyen extends StatelessWidget {
+class BuildComboBoxDistrict extends StatelessWidget {
   final String? selectedQuanHuyen;
   final String? selectedTinhThanh;
   final List<dynamic> danhSachQuanHuyen;
   final List<dynamic> provinces;
   final ValueChanged<String?> onChanged;
 
-  const ComboBoxQuanHuyen({
+  const BuildComboBoxDistrict({
     super.key,
     required this.selectedQuanHuyen,
     required this.selectedTinhThanh,

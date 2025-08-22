@@ -4,14 +4,14 @@ import 'package:tester/src/models/user_district.dart';
 import 'package:tester/src/models/user_ward.dart';
 import 'package:tester/src/models/user_province.dart';
 
-class ComboBoxPhuongXa extends StatelessWidget {
+class BuildComboBoxWard extends StatelessWidget {
   final String? selectedPhuongXa;
   final String? selectedQuanHuyen;
   final List<dynamic> phuongXaList;
   final List<dynamic> danhSachQuanHuyen;
   final ValueChanged<String?> onChanged;
 
-  const ComboBoxPhuongXa({
+  const BuildComboBoxWard({
     super.key,
     required this.selectedPhuongXa,
     required this.selectedQuanHuyen,
