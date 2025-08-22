@@ -1,10 +1,8 @@
 plugins {
-    id "com.android.application"
-    // START: FlutterFire Configuration
-    id 'com.google.gms.google-services'
-    // END: FlutterFire Configuration
-    id "kotlin-android"  // Không cần chỉ định phiên bản ở đây
-    id "dev.flutter.flutter-gradle-plugin"
+    id 'com.android.application'
+    id 'com.google.gms.google-services'  // Phải có dòng này
+    id 'kotlin-android'
+    id 'dev.flutter.flutter-gradle-plugin'
 
 }
 

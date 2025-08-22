@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "580871116724",
+    "project_id": "socialcharity-10473",
+    "storage_bucket": "socialcharity-10473.firebasestorage.app"
+  },
+  "database_url": "https://socialcharity-10473-default-rtdb.firebaseio.com/",
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580871116724:android:7e9c2e7311dd64c62f84e1",
+        "android_client_info": {
+          "package_name": "com.example.tester"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlaT-0H6KzYmb8_snoMCvtzCEUNofAZP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
