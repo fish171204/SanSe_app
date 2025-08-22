@@ -7,14 +7,14 @@ import 'package:tester/src/resources/pages/SharedPreferences.dart';
 import 'package:tester/src/resources/pages/MyNavigationBar.dart';
 import 'package:tester/src/resources/pages/XemBaiDangKhoKhanDemo.dart';
 
-class ViewNotification extends StatefulWidget {
-  const ViewNotification({super.key});
+class NotiNormal extends StatefulWidget {
+  const NotiNormal({super.key});
 
   @override
-  _ViewNotificationState createState() => _ViewNotificationState();
+  _NotiNormalState createState() => _NotiNormalState();
 }
 
-class _ViewNotificationState extends State<ViewNotification> {
+class _NotiNormalState extends State<NotiNormal> {
   int _currentIndex = 2;
 
   void _onTabTapped(int index) {
@@ -23,7 +23,7 @@ class _ViewNotificationState extends State<ViewNotification> {
     });
   }
 
-  String selectedFilter = "Regular difficult circumstances";
+  String selectedFilter = "Hoàn cảnh khó khăn thông thường";
 
   void showFilterOptions() {
     showModalBottomSheet(
@@ -40,7 +40,7 @@ class _ViewNotificationState extends State<ViewNotification> {
               child: Column(
                 children: [
                   const Text(
-                    "Filter",
+                    "Bộ lọc",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class _ViewNotificationState extends State<ViewNotification> {
                   const Divider(),
                   ListTile(
                     leading: Radio<String>(
-                      value: "Regular difficult circumstances",
+                      value: "Hoàn cảnh khó khăn thông thường",
                       groupValue: selectedFilter,
                       onChanged: (String? value) {
                         setState(() {
@@ -58,30 +58,30 @@ class _ViewNotificationState extends State<ViewNotification> {
                         Navigator.pop(context);
                       },
                     ),
-                    title: const Text("Regular difficult circumstances"),
+                    title: const Text("Hoàn cảnh khó khăn thông thường"),
                     trailing:
                         const Icon(Icons.notifications, color: Colors.orange),
                   ),
                   ListTile(
                     leading: Radio<String>(
-                      value: "Emergency difficult circumstances",
+                      value: "Hoàn cảnh khó khăn khẩn cấp",
                       groupValue: selectedFilter,
                       onChanged: (String? value) {
                         setState(() {
                           selectedFilter = value!;
                         });
                         Navigator.pop(context);
-                        // Navigate to Emergency.dart screen
+                        // Chuyển hướng tới giao diện KhanCap.dart
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                const Emergency(), // Call Emergency screen
+                                const NotiEmergency(), // Gọi màn hình KhanCap
                           ),
                         );
                       },
                     ),
-                    title: const Text("Emergency difficult circumstances"),
+                    title: const Text("Hoàn cảnh khó khăn khẩn cấp"),
                     trailing: const Icon(Icons.notification_important,
                         color: Colors.red),
                   ),
@@ -102,11 +102,11 @@ class _ViewNotificationState extends State<ViewNotification> {
         elevation: 0,
         leading: GestureDetector(
           onTap: () async {
-            // Get login status and account type
+            // Lấy trạng thái đăng nhập và loại tài khoản
             bool isLoggedIn = await SharedPreferencesHelper.getLoginStatus();
             String? userType = await SharedPreferencesHelper.getUserType();
 
-            // Navigate based on account type
+            // Điều hướng dựa trên loại tài khoản
             if (isLoggedIn && userType == "nguoikhokhan") {
               Navigator.pushReplacement(
                 context,
@@ -132,7 +132,7 @@ class _ViewNotificationState extends State<ViewNotification> {
                 MaterialPageRoute(builder: (context) => const MainNguoiHT()),
               );
             } else {
-              // If not logged in, navigate to login screen
+              // Nếu chưa đăng nhập, điều hướng đến màn hình đăng nhập
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -142,10 +142,10 @@ class _ViewNotificationState extends State<ViewNotification> {
             }
           },
           child: const Icon(Icons.arrow_back,
-              color: Colors.black), // Only use Icon here
+              color: Colors.black), // Chỉ dùng Icon ở đây
         ),
         title: const Text(
-          'Notifications',
+          'Thông báo',
           style: TextStyle(color: Colors.black),
         ),
         actions: [
@@ -186,7 +186,7 @@ class _ViewNotificationState extends State<ViewNotification> {
               children: [
                 const Expanded(
                   child: Text(
-                    'LIST OF DIFFICULT CIRCUMSTANCES',
+                    'DANH SÁCH HOÀN CẢNH KHÓ KHĂN',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -219,7 +219,7 @@ class _ViewNotificationState extends State<ViewNotification> {
                           ),
                         ),
                         const Text(
-                          "Filter",
+                          "Bộ lọc",
                           style: TextStyle(
                             color: Color(0xFF0866FF),
                             fontSize: 15,
@@ -238,7 +238,7 @@ class _ViewNotificationState extends State<ViewNotification> {
               children: const [
                 NotificationCard(
                   title:
-                      'The fragile life of a 3-year-old girl with liver cirrhosis',
+                      'Tính mạng mong manh của bé gái 3 tuổi mắc bệnh xơ gan',
                   organization: 'Lê Thị Thuý Kiều',
                   amount: '5.000.000 VND',
                   imageAsset: 'assets/HinhAnh_Demo.jpg',
@@ -246,7 +246,7 @@ class _ViewNotificationState extends State<ViewNotification> {
                 ),
                 NotificationCard(
                   title:
-                      '90-year-old grandmother abandoned by 4 children, crawling on the street to catch a ride to the hospital',
+                      'Cụ bà 90 tuổi bị 4 con bỏ rơi, tự bò ngoài đường bắt xe đi khám bệnh',
                   organization: 'Quỹ Thiện Tâm',
                   amount: '3.000.000 VND',
                   imageAsset: 'assets/nguoikhokhan8.jpg',
@@ -254,7 +254,7 @@ class _ViewNotificationState extends State<ViewNotification> {
                 ),
                 NotificationCard(
                   title:
-                      '3 father and son living in a 2m2 house, eating irregularly',
+                      '3 cha con sống trong căn nhà 2m2, cơm ăn bữa đói bữa no',
                   organization: 'Nguyễn Văn Huy',
                   amount: '10.000.000 VND',
                   imageAsset: 'assets/HinhAnh_0.png',
@@ -262,7 +262,7 @@ class _ViewNotificationState extends State<ViewNotification> {
                 ),
                 NotificationCard(
                   title:
-                      '80-year-old mother with hunched back caring for son with kidney failure and daughter with cancer',
+                      'Mẹ già 80 tuổi còng lưng chăm con trai suy thận, con gái mắc bệnh ung thư',
                   organization: 'Trương Anh Vịnh',
                   amount: '60.000.000 VND',
                   imageAsset: 'assets/nguoikhokhan9.jpg',
@@ -270,7 +270,7 @@ class _ViewNotificationState extends State<ViewNotification> {
                 ),
                 NotificationCard(
                   title:
-                      'Bridge Construction Project at Rach Cheo Commune, Phu Tan District, Ca Mau Province',
+                      'Dự Án Xây Cầu Tại Xã Rạch Chèo; huyện Phú Tân; Tỉnh Cà Mau',
                   organization: 'Trường Thành',
                   amount: '500.000.000 VND',
                   imageAsset: 'assets/images/chiendich5.jpg',
@@ -278,7 +278,7 @@ class _ViewNotificationState extends State<ViewNotification> {
                 ),
                 NotificationCard(
                   title:
-                      'A mother\'s plea to find the world\'s most expensive medicine to save her son\'s life!',
+                      'Lời khẩn cầu của một người mẹ tìm liều thuốc mắc nhất thế giới để cứu mạng con trai!',
                   organization: 'Quynh Thai',
                   amount: '40.000.000.000 VND',
                   imageAsset: 'assets/images/chiendich8.jpg',
@@ -286,8 +286,8 @@ class _ViewNotificationState extends State<ViewNotification> {
                 ),
                 NotificationCard(
                   title:
-                      'Project to Realize the Dream House of Pham Van Hieu Family in Ba To District, Quang Ngai and Do Van Minh Family',
-                  organization: 'Infrastructure Connection Community',
+                      'Dự Án Hiện Thực Hoá Ước Mơ Nhà GĐ Phạm Văn Hiệu huyện Ba Tơ Quảng Ngãi vs GĐ Đỗ Văn Minh',
+                  organization: 'Cộng đồng kết nối hạ tầngtầng',
                   amount: '100.000.000 VND',
                   imageAsset: 'assets/images/chiendich7.jpg',
                   color: Colors.red,
@@ -326,8 +326,7 @@ class NotificationCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // Only navigate if the title matches the specific one
-        if (title ==
-            'The fragile life of a 3-year-old girl with liver cirrhosis') {
+        if (title == 'Tính mạng mong manh của bé gái 3 tuổi mắc bệnh xơ gan') {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -370,12 +369,12 @@ class NotificationCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Posted by: $organization',
+                      'Đăng bởi: $organization',
                       style: const TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Amount: $amount',
+                      'Số tiền: $amount',
                       style: TextStyle(
                         fontSize: 12,
                         color: color,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tester/src/resources/pages/DangKyNhap.dart';
 import 'package:tester/src/resources/pages/DanhKyNhap2.dart';
 
-class Welcome extends StatelessWidget {
-  const Welcome({super.key});
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

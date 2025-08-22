@@ -3,7 +3,7 @@ import 'package:tester/src/resources/pages/MainNhaHT.dart';
 import 'package:tester/src/resources/pages/DangKyNhap.dart';
 import 'package:tester/src/resources/pages/SharedPreferences.dart';
 import 'package:tester/src/resources/pages/MyNavigationBar.dart';
-import 'package:tester/src/resources/pages/UpdateProfile.dart';
+import 'package:tester/src/resources/pages/user_profile_update.dart';
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_size.dart';
@@ -286,12 +286,12 @@ class _UserProfileViewState extends State<UserProfileView> {
                             IntrinsicHeight(
                               child: GestureDetector(
                                 onTap: () {
-                                  // Navigate to updateProfile.dart
+                                  // Navigate to user_profile_update.dart
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const UpdateProfile()),
+                                            const UserProfileUpdate()),
                                   );
                                 },
                                 child: Container(

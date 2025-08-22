@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tester/src/resources/Notification/noti_normal.dart';
 import 'package:tester/src/resources/pages/xemProfile.dart';
 import 'package:tester/src/resources/pages/MainNguoiKK.dart';
 import 'package:tester/src/resources/pages/MainNhaHT.dart';
 import 'package:tester/src/resources/pages/DangKyNhap.dart';
-import 'package:tester/src/resources/ThongBao/XemThongBao.dart';
 import 'package:tester/src/resources/pages/SharedPreferences.dart';
 import 'package:tester/src/resources/pages/CampaignListScreen.dart';
 
@@ -52,7 +52,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
               page = const CampaignListScreen();
               break;
             case 2: // Thông báo
-              page = const XemThongBao();
+              page = const NotiNormal();
               break;
             case 3: // Trang cá nhân
               page = const Xemprofile();

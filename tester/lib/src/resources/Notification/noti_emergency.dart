@@ -6,14 +6,14 @@ import 'package:tester/src/resources/pages/DangKyNhap.dart';
 import 'package:tester/src/resources/pages/SharedPreferences.dart';
 import 'package:tester/src/resources/pages/MyNavigationBar.dart';
 
-class Emergency extends StatefulWidget {
-  const Emergency({super.key});
+class NotiEmergency extends StatefulWidget {
+  const NotiEmergency({super.key});
 
   @override
-  _EmergencyState createState() => _EmergencyState();
+  _NotiEmergencyState createState() => _NotiEmergencyState();
 }
 
-class _EmergencyState extends State<Emergency> {
+class _NotiEmergencyState extends State<NotiEmergency> {
   int _currentIndex = 2;
 
   void _onTabTapped(int index) {
@@ -22,7 +22,7 @@ class _EmergencyState extends State<Emergency> {
     });
   }
 
-  String selectedFilter = "Emergency difficult circumstances";
+  String selectedFilter = "Hoàn cảnh khó khăn khẩn cấp";
 
   void showFilterOptions() {
     showModalBottomSheet(
@@ -39,7 +39,7 @@ class _EmergencyState extends State<Emergency> {
               child: Column(
                 children: [
                   const Text(
-                    "Filter",
+                    "Bộ lọc",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -48,7 +48,7 @@ class _EmergencyState extends State<Emergency> {
                   const Divider(),
                   ListTile(
                     leading: Radio<String>(
-                      value: "Regular difficult circumstances",
+                      value: "Hoàn cảnh khó khăn thông thường",
                       groupValue: selectedFilter,
                       onChanged: (String? value) {
                         setState(() {
@@ -58,18 +58,18 @@ class _EmergencyState extends State<Emergency> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const ViewNotification(),
+                            builder: (context) => const NotiNormal(),
                           ),
                         );
                       },
                     ),
-                    title: const Text("Regular difficult circumstances"),
+                    title: const Text("Hoàn cảnh khó khăn thông thường"),
                     trailing:
                         const Icon(Icons.notifications, color: Colors.orange),
                   ),
                   ListTile(
                     leading: Radio<String>(
-                      value: "Emergency difficult circumstances",
+                      value: "Hoàn cảnh khó khăn khẩn cấp",
                       groupValue: selectedFilter,
                       onChanged: (String? value) {
                         setState(() {
@@ -78,7 +78,7 @@ class _EmergencyState extends State<Emergency> {
                         Navigator.pop(context);
                       },
                     ),
-                    title: const Text("Emergency difficult circumstances"),
+                    title: const Text("Hoàn cảnh khó khăn khẩn cấp"),
                     trailing: const Icon(Icons.notification_important,
                         color: Colors.red),
                   ),
@@ -99,11 +99,11 @@ class _EmergencyState extends State<Emergency> {
         elevation: 0,
         leading: GestureDetector(
           onTap: () async {
-            // Get login status and account type
+            // Lấy trạng thái đăng nhập và loại tài khoản
             bool isLoggedIn = await SharedPreferencesHelper.getLoginStatus();
             String? userType = await SharedPreferencesHelper.getUserType();
 
-            // Navigate based on account type
+            // Điều hướng dựa trên loại tài khoản
             if (isLoggedIn && userType == "nguoikhokhan") {
               Navigator.pushReplacement(
                 context,
@@ -129,7 +129,7 @@ class _EmergencyState extends State<Emergency> {
                 MaterialPageRoute(builder: (context) => const MainNguoiHT()),
               );
             } else {
-              // If not logged in, navigate to login screen
+              // Nếu chưa đăng nhập, điều hướng đến màn hình đăng nhập
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -141,7 +141,7 @@ class _EmergencyState extends State<Emergency> {
           child: const Icon(Icons.arrow_back, color: Colors.black),
         ),
         title: const Text(
-          'Notifications',
+          'Thông báo',
           style: TextStyle(color: Colors.black),
         ),
         actions: [
@@ -186,7 +186,7 @@ class _EmergencyState extends State<Emergency> {
               children: [
                 const Expanded(
                   child: Text(
-                    'LIST OF EMERGENCY CIRCUMSTANCES',
+                    'DANH SÁCH HOÀN CẢNH KHẨN CẤP',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -219,7 +219,7 @@ class _EmergencyState extends State<Emergency> {
                           ),
                         ),
                         const Text(
-                          "Filter",
+                          "Bộ lọc",
                           style: TextStyle(
                             color: Color(0xFF0866FF),
                             fontSize: 15,
@@ -236,18 +236,18 @@ class _EmergencyState extends State<Emergency> {
           Expanded(
             child: ListView(
               children: const [
-                EmergencyNotificationCard(
+                NotificationCard(
                   title:
-                      '3 father and son living in a 2m2 house, eating irregularly',
-                  organization: 'Emergency Relief Fund ...',
+                      '3 cha con sống trong căn nhà 2m2, cơm ăn bữa đói bữa no',
+                  organization: 'Quỹ Cứu Trợ Người ...',
                   amount: '10.000.000 VND',
                   imageAsset: 'assets/HinhAnh_0.png',
                   color: Colors.red,
                 ),
-                EmergencyNotificationCard(
+                NotificationCard(
                   title:
-                      '90-year-old grandmother abandoned by 4 children, crawling on the street to catch a ride to the hospital',
-                  organization: 'Charity Fund',
+                      'Cụ bà 90 tuổi bị 4 con bỏ rơi, tự bò ngoài đường bắt xe đi khám bệnh',
+                  organization: 'Quỹ Thiện Tâm',
                   amount: '3.000.000 VND',
                   imageAsset: 'assets/HinhAnh1.png',
                   color: Colors.red,
@@ -265,14 +265,14 @@ class _EmergencyState extends State<Emergency> {
   }
 }
 
-class EmergencyNotificationCard extends StatelessWidget {
+class NotificationCard extends StatelessWidget {
   final String title;
   final String organization;
   final String amount;
   final String imageAsset;
   final Color color;
 
-  const EmergencyNotificationCard({
+  const NotificationCard({
     super.key,
     required this.title,
     required this.organization,
@@ -316,12 +316,12 @@ class EmergencyNotificationCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Posted by: $organization',
+                    'Đăng bởi: $organization',
                     style: const TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Amount: $amount',
+                    'Số tiền: $amount',
                     style: TextStyle(
                       fontSize: 12,
                       color: color,

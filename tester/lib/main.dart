@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tester/src/theme/app_responsive_ui.dart';
 import 'package:tester/src/theme/app_responsive_ui_config.dart';
-import 'src/resources/pages/Welcome.dart';
+import 'src/resources/pages/welcome_screen.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 void main() async {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     ScreenConfig.init(context);
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Welcome(),
+      home: WelcomeScreen(),
     );
   }
 }
