@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:tester/src/models/quan_huyen.dart';
-import 'package:tester/src/models/phuong_xa.dart';
+import 'package:tester/src/models/user_district.dart';
+import 'package:tester/src/models/user_ward.dart';
+import 'package:tester/src/models/user_province.dart';
 
 class ComboBoxPhuongXa extends StatelessWidget {
   final String? selectedPhuongXa;

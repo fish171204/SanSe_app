@@ -1,5 +1,6 @@
-import 'package:tester/src/models/tinh_thanh.dart';
-import 'package:tester/src/models/quan_huyen.dart';
+import 'package:tester/src/models/user_district.dart';
+import 'package:tester/src/models/user_ward.dart';
+import 'package:tester/src/models/user_province.dart';
 import 'package:flutter/material.dart';
 
 class ComboBoxQuanHuyen extends StatelessWidget {

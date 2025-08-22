@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/models/tinh_thanh.dart';
+import 'package:tester/src/models/user_province.dart';
 
 import 'package:flutter/material.dart';
 

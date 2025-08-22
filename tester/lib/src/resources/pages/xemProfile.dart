@@ -5,8 +5,8 @@ import 'package:tester/src/resources/pages/SharedPreferences.dart';
 import 'package:tester/src/resources/pages/MyNavigationBar.dart';
 import 'package:tester/src/resources/pages/updateProfile.dart';
 import 'package:flutter/material.dart';
-import '../../constants/MyColors.dart';
-import '../../constants/MyFontSize.dart';
+import '../../constants/app_colors.dart';
+import '../../constants/app_size.dart';
 
 class Xemprofile extends StatefulWidget {
   const Xemprofile({super.key});

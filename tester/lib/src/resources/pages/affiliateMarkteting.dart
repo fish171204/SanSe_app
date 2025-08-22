@@ -3,7 +3,7 @@ import 'package:tester/src/resources/pages/MainNhaHT.dart';
 import 'package:tester/src/resources/pages/MainNguoiKK.dart';
 import 'package:tester/src/resources/pages/SharedPreferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:tester/src/models/category_data.dart';
+import 'package:tester/src/models/ac_category_data.dart';
 
 class affiliateMarkteting extends StatefulWidget {
   const affiliateMarkteting({super.key});

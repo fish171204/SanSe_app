@@ -4,8 +4,8 @@ import 'package:tester/src/resources/pages/MainNhaHT.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../constants/MyColors.dart';
-import '../../constants/MyFontSize.dart';
+import '../../constants/app_colors.dart';
+import '../../constants/app_size.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
