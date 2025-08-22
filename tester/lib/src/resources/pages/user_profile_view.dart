@@ -3,19 +3,19 @@ import 'package:tester/src/resources/pages/MainNhaHT.dart';
 import 'package:tester/src/resources/pages/DangKyNhap.dart';
 import 'package:tester/src/resources/pages/SharedPreferences.dart';
 import 'package:tester/src/resources/pages/MyNavigationBar.dart';
-import 'package:tester/src/resources/pages/user_profile_update.dart';
+import 'package:tester/src/resources/pages/UpdateProfile.dart';
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_size.dart';
 
-class Xemprofile extends StatefulWidget {
-  const Xemprofile({super.key});
+class UserProfileView extends StatefulWidget {
+  const UserProfileView({super.key});
 
   @override
-  _XemprofileState createState() => _XemprofileState();
+  _UserProfileViewState createState() => _UserProfileViewState();
 }
 
-class _XemprofileState extends State<Xemprofile> {
+class _UserProfileViewState extends State<UserProfileView> {
   int _currentIndex = 3;
 
   void _onTabTapped(int index) {
@@ -86,7 +86,7 @@ class _XemprofileState extends State<Xemprofile> {
                                                     children: [
                                                       GestureDetector(
                                                         onTap: () async {
-                                                          // Lấy trạng thái đăng nhập và loại tài khoản
+                                                          // Get login status and account type
                                                           bool isLoggedIn =
                                                               await SharedPreferencesHelper
                                                                   .getLoginStatus();
@@ -94,7 +94,7 @@ class _XemprofileState extends State<Xemprofile> {
                                                               await SharedPreferencesHelper
                                                                   .getUserType();
 
-                                                          // Điều hướng dựa trên loại tài khoản
+                                                          // Navigate based on account type
                                                           if (isLoggedIn &&
                                                               userType ==
                                                                   "nguoikhokhan") {
@@ -140,7 +140,7 @@ class _XemprofileState extends State<Xemprofile> {
                                                                           const MainNguoiHT()),
                                                             );
                                                           } else {
-                                                            // Nếu chưa đăng nhập, điều hướng đến màn hình đăng nhập
+                                                            // If not logged in, navigate to login screen
                                                             Navigator
                                                                 .pushReplacement(
                                                               context,
@@ -191,7 +191,7 @@ class _XemprofileState extends State<Xemprofile> {
                                                     bottom: 8, left: 40),
                                                 width: double.infinity,
                                                 child: const Text(
-                                                  "TRANG CÁ NHÂN",
+                                                  "PROFILE PAGE",
                                                   style: TextStyle(
                                                     color: Color(0xFF512D13),
                                                     fontSize: 23,
@@ -228,7 +228,7 @@ class _XemprofileState extends State<Xemprofile> {
                               margin:
                                   const EdgeInsets.only(bottom: 12, left: 30),
                               child: const Text(
-                                "Số điện thoại", // Dòng chữ "Số điện thoại"
+                                "Phone Number", // Phone number label
                                 style: TextStyle(
                                   color: MyColors.shadow,
                                   fontSize: MyFontSize.body_medium,
@@ -286,12 +286,12 @@ class _XemprofileState extends State<Xemprofile> {
                             IntrinsicHeight(
                               child: GestureDetector(
                                 onTap: () {
-                                  // Điều hướng tới màn hình updateProfile.dart
+                                  // Navigate to updateProfile.dart
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const UserProfileUpdate()),
+                                            const UpdateProfile()),
                                   );
                                 },
                                 child: Container(
@@ -309,7 +309,7 @@ class _XemprofileState extends State<Xemprofile> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "CHỈNH SỬA TRANG CÁ NHÂN",
+                                        "EDIT PROFILE",
                                         style: TextStyle(
                                           color: Color(0xFF512D13),
                                           fontSize: 15,
@@ -363,9 +363,9 @@ class _XemprofileState extends State<Xemprofile> {
                                     width: 12,
                                     height: 15,
                                     child: Image.asset(
-                                      "assets/xanh.png", // Thay thế hình ảnh trong container
+                                      "assets/xanh.png", // Replace image in container
                                       fit: BoxFit
-                                          .cover, // Điều chỉnh hình ảnh để phủ kín container
+                                          .cover, // Adjust image to cover container
                                     ),
                                   ),
                                 ]),
@@ -392,7 +392,7 @@ class _XemprofileState extends State<Xemprofile> {
                                         fit: BoxFit.cover,
                                       )),
                                   const Text(
-                                    "Trung tâm hỗ trợ",
+                                    "Support Center",
                                     style: TextStyle(
                                       color: MyColors.shadow,
                                       fontSize: MyFontSize.body_large,
@@ -413,9 +413,9 @@ class _XemprofileState extends State<Xemprofile> {
                                     width: 12,
                                     height: 15,
                                     child: Image.asset(
-                                      "assets/xanh.png", // Thay thế hình ảnh trong container
+                                      "assets/xanh.png", // Replace image in container
                                       fit: BoxFit
-                                          .cover, // Điều chỉnh hình ảnh để phủ kín container
+                                          .cover, // Adjust image to cover container
                                     ),
                                   ),
                                 ]),
@@ -463,9 +463,9 @@ class _XemprofileState extends State<Xemprofile> {
                                     width: 12,
                                     height: 15,
                                     child: Image.asset(
-                                      "assets/xanh.png", // Thay thế hình ảnh trong container
+                                      "assets/xanh.png", // Replace image in container
                                       fit: BoxFit
-                                          .cover, // Điều chỉnh hình ảnh để phủ kín container
+                                          .cover, // Adjust image to cover container
                                     ),
                                   ),
                                 ]),
@@ -492,7 +492,7 @@ class _XemprofileState extends State<Xemprofile> {
                                         fit: BoxFit.cover,
                                       )),
                                   const Text(
-                                    "Cài đặt",
+                                    "Settings",
                                     style: TextStyle(
                                       color: MyColors.shadow,
                                       fontSize: MyFontSize.body_large,
@@ -513,9 +513,9 @@ class _XemprofileState extends State<Xemprofile> {
                                     width: 12,
                                     height: 15,
                                     child: Image.asset(
-                                      "assets/xanh.png", // Thay thế hình ảnh trong container
+                                      "assets/xanh.png", // Replace image in container
                                       fit: BoxFit
-                                          .cover, // Điều chỉnh hình ảnh để phủ kín container
+                                          .cover, // Adjust image to cover container
                                     ),
                                   ),
                                 ]),
@@ -524,7 +524,7 @@ class _XemprofileState extends State<Xemprofile> {
                             IntrinsicHeight(
                               child: GestureDetector(
                                 onTap: () {
-                                  // Điều hướng tới màn hình DangKyNhap.dart
+                                  // Navigate to LoginRegister.dart
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -556,7 +556,7 @@ class _XemprofileState extends State<Xemprofile> {
                                       child: SizedBox(
                                         width: double.infinity,
                                         child: Text(
-                                          "Đăng xuất",
+                                          "Log Out",
                                           style: TextStyle(
                                             color: MyColors.shadow,
                                             fontSize: MyFontSize.body_large,

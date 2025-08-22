@@ -3,14 +3,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_size.dart';
 
-class UpdateProfile extends StatefulWidget {
-  const UpdateProfile({super.key});
+class UserProfileUpdate extends StatefulWidget {
+  const UserProfileUpdate({super.key});
 
   @override
-  _UpdateProfileState createState() => _UpdateProfileState();
+  _UserProfileUpdateState createState() => _UserProfileUpdateState();
 }
 
-class _UpdateProfileState extends State<UpdateProfile> {
+class _UserProfileUpdateState extends State<UserProfileUpdate> {
   int _currentIndex = 3;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
