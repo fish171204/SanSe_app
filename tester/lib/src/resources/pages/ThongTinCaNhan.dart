@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../constants/app_colors.dart';
-import '../../constants/app_size.dart';
+import '../../theme/app_colors.dart';
+import '../../theme/app_size.dart';
 
 // import '../components/Tab.dart';
 class Taikhoan extends StatelessWidget {

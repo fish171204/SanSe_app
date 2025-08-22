@@ -4,7 +4,7 @@ import 'package:tester/src/Ayns/XemBaiDemo.dart';
 import 'package:tester/src/Ayns/mainTestKK.dart';
 import 'package:tester/src/resources/pages/Donate.dart';
 import 'package:tester/src/resources/widgets/custom_card_widget_2.dart';
-import '../constants/app_colors.dart';
+import '../theme/app_colors.dart';
 import 'package:tester/src/resources/pages/MyNavigationBar.dart';
 import 'package:tester/src/resources/pages/XemBaiDangKhoKhan2.dart';
 import 'package:tester/src/resources/pages/XemBaiDangKhoKhanDemo.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constants/app_colors.dart';
+import '../theme/app_colors.dart';
 import 'package:tester/src/resources/pages/DaDuocGiup.dart';
 
 class ViewUI2 extends StatelessWidget {

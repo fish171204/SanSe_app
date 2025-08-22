@@ -3,8 +3,8 @@ import 'package:tester/src/resources/pages/XemBaiDangKhoKhanDemo.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
-import '../../constants/app_colors.dart';
-import '../../constants/app_size.dart';
+import '../../theme/app_colors.dart';
+import '../../theme/app_size.dart';
 import 'package:tester/src/resources/pages/Donate2.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
