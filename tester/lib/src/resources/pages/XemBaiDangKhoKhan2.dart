@@ -1,8 +1,4 @@
 import 'package:tester/src/resources/pages/Donate.dart';
-import 'package:tester/src/resources/pages/MainNguoiKK.dart';
-import 'package:tester/src/resources/pages/MainNhaHT.dart';
-import 'package:tester/src/resources/pages/DangKyNhap.dart';
-import 'package:tester/src/resources/pages/SharedPreferences.dart';
 import 'package:flutter/material.dart';
 
 class XemBaiDangKhoKhan2 extends StatelessWidget {

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:tester/src/models/user_district.dart';
-import 'package:tester/src/models/user_ward.dart';
-import 'package:tester/src/models/user_province.dart';
-
 class BuildComboBoxWard extends StatelessWidget {
   final String? selectedPhuongXa;
   final String? selectedQuanHuyen;

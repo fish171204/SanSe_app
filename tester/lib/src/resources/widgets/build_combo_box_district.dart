@@ -1,6 +1,3 @@
-import 'package:tester/src/models/user_district.dart';
-import 'package:tester/src/models/user_ward.dart';
-import 'package:tester/src/models/user_province.dart';
 import 'package:flutter/material.dart';
 
 class BuildComboBoxDistrict extends StatelessWidget {
