@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:tester/src/theme/app_responsive_ui.dart';
+import 'package:tester/src/theme/app_responsive_ui_config.dart';
 import 'src/resources/pages/Welcome.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -14,6 +16,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil().init(context);
+    ScreenConfig.init(context);
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Welcome(),
