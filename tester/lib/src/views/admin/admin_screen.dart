@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/views/DangKyNhap.dart';
-import 'package:tester/src/views/adminPostManagementTab.dart';
-import 'package:tester/src/views/adminUserManagementTab.dart';
+import 'package:tester/src/views/admin/admin_post_management_tab.dart';
+import 'package:tester/src/views/admin/admin_user_management_tab.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
