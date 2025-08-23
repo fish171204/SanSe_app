@@ -35,7 +35,7 @@ class ViewUI extends StatelessWidget {
                             width: double.infinity,
                             decoration: const BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage("assets/HinhAnh_Demo.jpg"),
+                                  image: AssetImage("assets/images/HinhAnh_Demo.jpg"),
                                   fit: BoxFit.cover),
                             ),
                             child: Column(
@@ -65,7 +65,7 @@ class ViewUI extends StatelessWidget {
                                               width: 35,
                                               height: 32,
                                               child: Image.asset(
-                                                "assets/quaylai.png",
+                                                "assets/images/quaylai.png",
                                                 fit: BoxFit.fill,
                                               ),
                                             ),
@@ -125,7 +125,7 @@ class ViewUI extends StatelessWidget {
                                           width: 14,
                                           height: 20,
                                           child: Image.asset(
-                                            "assets/location.png",
+                                            "assets/images/location.png",
                                             fit: BoxFit.fill,
                                           )),
                                       const Expanded(
@@ -213,7 +213,7 @@ class ViewUI extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(
                                         30), // Adjust the radius for desired roundness
                                     child: Image.asset(
-                                      "assets/HinhAnh_Demo1.jpg",
+                                      "assets/images/HinhAnh_Demo1.jpg",
                                       fit: BoxFit.fill,
                                     ),
                                   ),
@@ -249,7 +249,7 @@ class ViewUI extends StatelessWidget {
                                                   width: 20,
                                                   height: 20,
                                                   child: Image.asset(
-                                                    "assets/chuahoanthanh.png",
+                                                    "assets/images/chuahoanthanh.png",
                                                     fit: BoxFit.fill,
                                                   ),
                                                 ),
@@ -283,7 +283,7 @@ class ViewUI extends StatelessWidget {
                                     width: 40,
                                     height: 38,
                                     child: Image.asset(
-                                      "assets/zalo.png",
+                                      "assets/images/zalo.png",
                                       fit: BoxFit.fill,
                                     )),
                               ]),
@@ -403,7 +403,7 @@ class ViewUI extends StatelessWidget {
                                       width: 14,
                                       height: 12,
                                       child: Image.asset(
-                                        "assets/giupdo.png",
+                                        "assets/images/giupdo.png",
                                         fit: BoxFit.fill,
                                       ),
                                     ),
@@ -459,7 +459,7 @@ class ViewUI extends StatelessWidget {
                                                   width: 18,
                                                   height: 18,
                                                   child: Image.asset(
-                                                    "assets/lichsu.png",
+                                                    "assets/images/lichsu.png",
                                                     fit: BoxFit.fill,
                                                   )),
                                             ]),
@@ -493,7 +493,7 @@ class ViewUI extends StatelessWidget {
                                                   width: 22,
                                                   height: 22,
                                                   child: Image.asset(
-                                                    "assets/chiase.png",
+                                                    "assets/images/chiase.png",
                                                     fit: BoxFit.fill,
                                                   )),
                                               const IntrinsicHeight(
@@ -678,7 +678,7 @@ class ViewUI extends StatelessWidget {
                                           builder: (BuildContext context) {
                                             return AlertDialog(
                                               content: Image.asset(
-                                                "assets/HinhAnh_Demo3.jpg",
+                                                "assets/images/HinhAnh_Demo3.jpg",
                                                 fit: BoxFit.cover,
                                               ),
                                             );
@@ -696,7 +696,7 @@ class ViewUI extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(30),
                                           child: Image.asset(
-                                            "assets/HinhAnh_Demo3.jpg",
+                                            "assets/images/HinhAnh_Demo3.jpg",
                                             fit: BoxFit.cover,
                                           ),
                                         ),
@@ -742,7 +742,7 @@ class ViewUI extends StatelessWidget {
                                           builder: (BuildContext context) {
                                             return AlertDialog(
                                               content: Image.asset(
-                                                "assets/HinhAnh_Demo1.jpg",
+                                                "assets/images/HinhAnh_Demo1.jpg",
                                                 fit: BoxFit.cover,
                                               ),
                                             );
@@ -760,7 +760,7 @@ class ViewUI extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(30),
                                           child: Image.asset(
-                                            "assets/HinhAnh_Demo1.jpg",
+                                            "assets/images/HinhAnh_Demo1.jpg",
                                             fit: BoxFit.cover,
                                           ),
                                         ),
@@ -776,7 +776,7 @@ class ViewUI extends StatelessWidget {
                                           builder: (BuildContext context) {
                                             return AlertDialog(
                                               content: Image.asset(
-                                                "assets/HinhAnh_Demo2.jpeg",
+                                                "assets/images/HinhAnh_Demo2.jpeg",
                                                 fit: BoxFit.cover,
                                               ),
                                             );
@@ -794,7 +794,7 @@ class ViewUI extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(30),
                                           child: Image.asset(
-                                            "assets/HinhAnh_Demo2.jpeg",
+                                            "assets/images/HinhAnh_Demo2.jpeg",
                                             fit: BoxFit.cover,
                                           ),
                                         ),

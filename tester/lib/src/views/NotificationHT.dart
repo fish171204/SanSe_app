@@ -55,7 +55,7 @@ class NotificationHT extends StatelessWidget {
                           height: 197,
                           width: double.infinity,
                           child: Image.asset(
-                            "assets/thongbaodangky.png",
+                            "assets/images/thongbaodangky.png",
                             fit: BoxFit.fill,
                           ),
                         ),

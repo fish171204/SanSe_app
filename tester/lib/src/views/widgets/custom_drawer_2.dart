@@ -57,7 +57,7 @@ class CustomDrawer02 extends StatelessWidget {
         children: [
           const CircleAvatar(
             radius: 40,
-            backgroundImage: AssetImage("assets/HinhAnh_Demo.jpg"),
+            backgroundImage: AssetImage("assets/images/HinhAnh_Demo.jpg"),
           ),
           const SizedBox(height: 10),
           const Text(

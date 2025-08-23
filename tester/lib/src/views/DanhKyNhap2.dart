@@ -85,7 +85,7 @@ class _Dangkynhap2State extends State<Dangkynhap2> {
                               ),
                             ),
                             Image.asset(
-                              "assets/logo.png",
+                              "assets/images/logo.png",
                               height: 50,
                               width: 100,
                             )

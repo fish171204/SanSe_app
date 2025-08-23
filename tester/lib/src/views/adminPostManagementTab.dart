@@ -13,7 +13,7 @@ class _PostManagementTabState extends State<PostManagementTab> {
   final TextEditingController _searchController = TextEditingController();
   List<Map<String, dynamic>> posts = [
     {
-      "imagePath": "assets/HinhAnh_Demo.jpg",
+      "imagePath": "assets/images/HinhAnh_Demo.jpg",
       "title": "Tính mạng mong manh của bé gái 3 tuổi mắc bệnh xơ gan",
       "subtitle": "1 lượt ủng hộ • Còn lại 18 ngày",
       "amount": "5.000.000 đ",

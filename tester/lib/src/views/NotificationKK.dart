@@ -36,7 +36,7 @@ class NotificationKK extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Image.asset(
-                      "assets/thongbaodangky.png",
+                      "assets/images/thongbaodangky.png",
                       fit: BoxFit.contain,
                     ),
                   ),

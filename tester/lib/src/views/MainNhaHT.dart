@@ -28,9 +28,9 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
   int _currentPage = 0;
   final List<String> _images = [
     "assets/sapa41_welcome.jpg",
-    "assets/images/sapa5_dangky.jpg",
-    "assets/images/sapa8.png",
-    "assets/images/sapa7.png"
+    "assets/sapa5_dangky.jpg",
+    "assets/sapa8.png",
+    "assets/sapa7.png"
   ];
 
   @override
@@ -123,7 +123,7 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                             top: 16,
                             left: 16,
                             child: Image.asset(
-                              "assets/logo.png",
+                              "assets/images/logo.png",
                               height: 70,
                             ),
                           ),
@@ -131,7 +131,7 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                             top: 16,
                             left: 16,
                             child: Image.asset(
-                              "assets/logo.png",
+                              "assets/images/logo.png",
                               height: 70,
                             ),
                           ),
@@ -376,7 +376,7 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                               SizedBox(
                                 width: 390, // Set a fixed width for each card
                                 child: CustomCardWidget(
-                                  imagePath: "assets/HinhAnh_Demo.jpg",
+                                  imagePath: "assets/images/HinhAnh_Demo.jpg",
                                   label: "Trẻ em",
                                   location: "Bình Định",
                                   description:
@@ -403,7 +403,7 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                               SizedBox(
                                 width: 388, // Set a fixed width for each card
                                 child: CustomCardWidget(
-                                  imagePath: "assets/nguoikhokhan1.jpg",
+                                  imagePath: "assets/images/nguoikhokhan1.jpg",
                                   label: "Người già",
                                   location: "TP. HCM",
                                   description:
@@ -430,7 +430,7 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                               SizedBox(
                                 width: 388, // Set a fixed width for each card
                                 child: CustomCardWidget(
-                                  imagePath: "assets/nguoikhokhan8.jpg",
+                                  imagePath: "assets/images/nguoikhokhan8.jpg",
                                   label: "Người già",
                                   location: "Kiên Giang",
                                   description:
@@ -458,7 +458,7 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                               SizedBox(
                                 width: 388, // Set a fixed width for each card
                                 child: CustomCardWidget(
-                                  imagePath: "assets/nguoikhokhan9.jpg",
+                                  imagePath: "assets/images/nguoikhokhan9.jpg",
                                   label: "Đặc biệt",
                                   location: "Nam Định",
                                   description:
@@ -550,7 +550,7 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                               SizedBox(
                                 width: 390, // Set a fixed width for each card
                                 child: CustomCardWidget2(
-                                  imagePath2: "assets/rectangle_18.png",
+                                  imagePath2: "assets/images/rectangle_18.png",
                                   label2: "Người già",
                                   location2: "Quảng Nam",
                                   description2:
@@ -576,7 +576,7 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                               SizedBox(
                                 width: 388, // Set a fixed width for each card
                                 child: CustomCardWidget2(
-                                  imagePath2: "assets/nguoikhokhan2.jpg",
+                                  imagePath2: "assets/images/nguoikhokhan2.jpg",
                                   label2: "Người già",
                                   location2: "TP. HCM",
                                   description2:

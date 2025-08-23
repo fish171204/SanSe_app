@@ -13,7 +13,7 @@ class _GD2State extends State<GD2> {
     {
       "name": "Nguyễn Đăng Khoa",
       "details": "Giúp đỡ thành công 5.000.000 VNĐ",
-      "avatar": "assets/AnhCV.jpg"
+      "avatar": "assets/images/AnhCV.jpg"
     },
   ];
 

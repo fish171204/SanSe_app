@@ -27,9 +27,9 @@ class _MainNguoiKKState extends State<MainNguoiKK> {
   int _currentPage = 0;
   final List<String> _images = [
     "assets/sapa41_welcome.jpg",
-    "assets/images/sapa5_dangky.jpg",
-    "assets/images/sapa8.png",
-    "assets/images/sapa7.png"
+    "assets/sapa5_dangky.jpg",
+    "assets/sapa8.png",
+    "assets/sapa7.png"
   ];
 
   @override
@@ -64,26 +64,26 @@ class _MainNguoiKKState extends State<MainNguoiKK> {
 
   final List<Map<String, String>> items = [
     {
-      "image": "assets/nguoikhokhan4.jpg",
+      "image": "assets/images/nguoikhokhan4.jpg",
       "title": "Bệnh hiểm nghèo",
       "location": "Thừa Thiên Huế",
       "description":
           "XIN GIÚP ĐỠ KINH PHÍ CHỮA BỆNH CHO \nEM NGUYỄN VĂN HIẾU 16 TUỔI"
     },
     {
-      "image": "assets/nguoikhokhan5.jpg",
+      "image": "assets/images/nguoikhokhan5.jpg",
       "title": "Người nghèo",
       "location": "Điện Biên",
       "description": "Chia sẻ Yêu thương Đồng bào biên giới"
     },
     {
-      "image": "assets/nguoikhokhan6.jpg",
+      "image": "assets/images/nguoikhokhan6.jpg",
       "title": "Người khuyết tật",
       "location": "Bình Phước",
       "description": "Giúp đỡ anh Đào Văn Sắc có thêm kinh phí chữa bệnh"
     },
     {
-      "image": "assets/nguoikhokhan7.jpg",
+      "image": "assets/images/nguoikhokhan7.jpg",
       "title": "Người già",
       "location": "Hà Nội",
       "description": "Phòng trọ cho người vô gia cư"
@@ -148,7 +148,7 @@ class _MainNguoiKKState extends State<MainNguoiKK> {
                               top: 16,
                               left: 16,
                               child: Image.asset(
-                                "assets/logo.png",
+                                "assets/images/logo.png",
                                 height: 70,
                               ),
                             ),
@@ -453,7 +453,7 @@ class _MainNguoiKKState extends State<MainNguoiKK> {
                                 SizedBox(
                                   width: 388, // Set a fixed width for each card
                                   child: CustomCardWidget(
-                                    imagePath: "assets/nguoikhokhan1.jpg",
+                                    imagePath: "assets/images/nguoikhokhan1.jpg",
                                     label: "Người già",
                                     location: "TP. HCM",
                                     description:
@@ -480,7 +480,7 @@ class _MainNguoiKKState extends State<MainNguoiKK> {
                                 SizedBox(
                                   width: 388, // Set a fixed width for each card
                                   child: CustomCardWidget(
-                                    imagePath: "assets/nguoikhokhan8.jpg",
+                                    imagePath: "assets/images/nguoikhokhan8.jpg",
                                     label: "Người già",
                                     location: "Kiên Giang",
                                     description:
@@ -507,7 +507,7 @@ class _MainNguoiKKState extends State<MainNguoiKK> {
                                 SizedBox(
                                   width: 388, // Set a fixed width for each card
                                   child: CustomCardWidget(
-                                    imagePath: "assets/nguoikhokhan9.jpg",
+                                    imagePath: "assets/images/nguoikhokhan9.jpg",
                                     label: "Đặc biệt",
                                     location: "Nam Định",
                                     description:
@@ -691,7 +691,7 @@ class _MainNguoiKKState extends State<MainNguoiKK> {
                                                       width: 14,
                                                       height: 20,
                                                       child: Image.asset(
-                                                        "assets/location.png",
+                                                        "assets/images/location.png",
                                                         fit: BoxFit.fill,
                                                       ),
                                                     ),

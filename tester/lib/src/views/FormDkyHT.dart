@@ -46,7 +46,7 @@ class _FormDKyHTState extends State<FormDKyHT> {
                             width: 35,
                             height: 32,
                             child: Image.asset(
-                              "assets/quaylai.png",
+                              "assets/images/quaylai.png",
                               fit: BoxFit.fill,
                             ),
                           ),

@@ -141,7 +141,7 @@ class _DangBaiChinhChu2State extends State<DangBaiChinhChu2> {
                                     );
                                   },
                                   child: Image.asset(
-                                    "assets/quaylai.png",
+                                    "assets/images/quaylai.png",
                                     fit: BoxFit.fill,
                                   ),
                                 ),
@@ -164,7 +164,7 @@ class _DangBaiChinhChu2State extends State<DangBaiChinhChu2> {
                                 width: 60,
                                 height: 62,
                                 child: Image.asset(
-                                  "assets/logo.png",
+                                  "assets/images/logo.png",
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -236,7 +236,7 @@ class _DangBaiChinhChu2State extends State<DangBaiChinhChu2> {
                                 ),
                                 PopupMenuButton<String>(
                                   icon: Image.asset(
-                                    "assets/list_tien.png",
+                                    "assets/images/list_tien.png",
                                     width: 24,
                                     height: 25,
                                     fit: BoxFit.fill,
@@ -381,7 +381,7 @@ class _DangBaiChinhChu2State extends State<DangBaiChinhChu2> {
                                             width: 24,
                                             height: 24,
                                             child: Image.asset(
-                                              "assets/taianhlen.png",
+                                              "assets/images/taianhlen.png",
                                               fit: BoxFit.fill,
                                             ),
                                           ),
@@ -461,7 +461,7 @@ class _DangBaiChinhChu2State extends State<DangBaiChinhChu2> {
                                             width: 24,
                                             height: 24,
                                             child: Image.asset(
-                                              "assets/taianhlen.png",
+                                              "assets/images/taianhlen.png",
                                               fit: BoxFit.fill,
                                             ),
                                           ),

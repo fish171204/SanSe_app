@@ -214,7 +214,7 @@ class _NotiEmergencyState extends State<NotiEmergency> {
                           width: 20,
                           height: 20,
                           child: Image.asset(
-                            "assets/danhmuc.png",
+                            "assets/images/danhmuc.png",
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -241,7 +241,7 @@ class _NotiEmergencyState extends State<NotiEmergency> {
                       '3 cha con sống trong căn nhà 2m2, cơm ăn bữa đói bữa no',
                   organization: 'Quỹ Cứu Trợ Người ...',
                   amount: '10.000.000 VND',
-                  imageAsset: 'assets/HinhAnh_0.png',
+                  imageAsset: 'assets/images/HinhAnh_0.png',
                   color: Colors.red,
                 ),
                 NotificationCard(
@@ -249,7 +249,7 @@ class _NotiEmergencyState extends State<NotiEmergency> {
                       'Cụ bà 90 tuổi bị 4 con bỏ rơi, tự bò ngoài đường bắt xe đi khám bệnh',
                   organization: 'Quỹ Thiện Tâm',
                   amount: '3.000.000 VND',
-                  imageAsset: 'assets/HinhAnh1.png',
+                  imageAsset: 'assets/images/HinhAnh1.png',
                   color: Colors.red,
                 ),
               ],

@@ -95,7 +95,7 @@ class CustomCardWidget2 extends StatelessWidget {
                             width: 14,
                             height: 20,
                             child: Image.asset(
-                              "assets/location.png",
+                              "assets/images/location.png",
                               fit: BoxFit.fill,
                             ),
                           ),

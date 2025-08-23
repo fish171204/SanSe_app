@@ -34,7 +34,7 @@ class XemBaiDemo extends StatelessWidget {
                             width: double.infinity,
                             decoration: const BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage("assets/nguoikhokhan8.jpg"),
+                                  image: AssetImage("assets/images/nguoikhokhan8.jpg"),
                                   fit: BoxFit.cover),
                             ),
                             child: Column(
@@ -60,7 +60,7 @@ class XemBaiDemo extends StatelessWidget {
                                               width: 35,
                                               height: 32,
                                               child: Image.asset(
-                                                "assets/quaylai.png",
+                                                "assets/images/quaylai.png",
                                                 fit: BoxFit.fill,
                                               ),
                                             ),
@@ -120,7 +120,7 @@ class XemBaiDemo extends StatelessWidget {
                                           width: 14,
                                           height: 20,
                                           child: Image.asset(
-                                            "assets/location.png",
+                                            "assets/images/location.png",
                                             fit: BoxFit.fill,
                                           )),
                                       const Expanded(
@@ -205,7 +205,7 @@ class XemBaiDemo extends StatelessWidget {
                                     width: 42,
                                     height: 40,
                                     child: Image.asset(
-                                      "assets/onghuy.png",
+                                      "assets/images/onghuy.png",
                                       fit: BoxFit.fill,
                                     )),
                                 IntrinsicHeight(
@@ -239,7 +239,7 @@ class XemBaiDemo extends StatelessWidget {
                                                   width: 20,
                                                   height: 20,
                                                   child: Image.asset(
-                                                    "assets/chuahoanthanh.png",
+                                                    "assets/images/chuahoanthanh.png",
                                                     fit: BoxFit.fill,
                                                   ),
                                                 ),
@@ -264,7 +264,7 @@ class XemBaiDemo extends StatelessWidget {
                                     width: 40,
                                     height: 38,
                                     child: Image.asset(
-                                      "assets/zalo.png",
+                                      "assets/images/zalo.png",
                                       fit: BoxFit.fill,
                                     )),
                               ]),
@@ -384,7 +384,7 @@ class XemBaiDemo extends StatelessWidget {
                                       width: 14,
                                       height: 12,
                                       child: Image.asset(
-                                        "assets/giupdo.png",
+                                        "assets/images/giupdo.png",
                                         fit: BoxFit.fill,
                                       ),
                                     ),
@@ -440,7 +440,7 @@ class XemBaiDemo extends StatelessWidget {
                                                   width: 18,
                                                   height: 18,
                                                   child: Image.asset(
-                                                    "assets/lichsu.png",
+                                                    "assets/images/lichsu.png",
                                                     fit: BoxFit.fill,
                                                   )),
                                             ]),
@@ -474,7 +474,7 @@ class XemBaiDemo extends StatelessWidget {
                                                   width: 22,
                                                   height: 22,
                                                   child: Image.asset(
-                                                    "assets/chiase.png",
+                                                    "assets/images/chiase.png",
                                                     fit: BoxFit.fill,
                                                   )),
                                               const IntrinsicHeight(
@@ -629,7 +629,7 @@ class XemBaiDemo extends StatelessWidget {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(30),
                                         child: Image.asset(
-                                          "assets/nguoikhokhan8.jpg",
+                                          "assets/images/nguoikhokhan8.jpg",
                                           fit: BoxFit
                                               .cover, // Đảm bảo ảnh không bị méo
                                         ),
@@ -646,7 +646,7 @@ class XemBaiDemo extends StatelessWidget {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(30),
                                         child: Image.asset(
-                                          "assets/nguoikhokhan3.jpg",
+                                          "assets/images/nguoikhokhan3.jpg",
                                           fit: BoxFit
                                               .cover, // Đảm bảo ảnh không bị méo
                                         ),

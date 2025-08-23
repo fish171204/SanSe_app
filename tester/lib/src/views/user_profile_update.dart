@@ -134,7 +134,7 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
-              "assets/Tab_Home.png",
+              "assets/images/Tab_Home.png",
               width: 24,
               height: 24,
             ),
@@ -142,7 +142,7 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              "assets/Tab_XuHuong.png",
+              "assets/images/Tab_XuHuong.png",
               width: 24,
               height: 24,
             ),
@@ -150,7 +150,7 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              "assets/Tab_ThongBao.png",
+              "assets/images/Tab_ThongBao.png",
               width: 24,
               height: 24,
             ),
@@ -158,7 +158,7 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              "assets/Tab_TrangCaNhan.png",
+              "assets/images/Tab_TrangCaNhan.png",
               width: 24,
               height: 24,
             ),

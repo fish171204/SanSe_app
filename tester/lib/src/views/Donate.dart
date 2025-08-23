@@ -87,7 +87,7 @@ class _DonateState extends State<Donate> {
                             width: double.infinity,
                             decoration: const BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage("assets/HinhAnh_Demo.jpg"),
+                                  image: AssetImage("assets/images/HinhAnh_Demo.jpg"),
                                   fit: BoxFit.cover),
                             ),
                             child: Column(
@@ -151,7 +151,7 @@ class _DonateState extends State<Donate> {
                                     width: 18,
                                     height: 18,
                                     child: Image.asset(
-                                      "assets/clock.png",
+                                      "assets/images/clock.png",
                                       fit: BoxFit.fill,
                                     )),
                                 const Expanded(

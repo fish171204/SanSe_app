@@ -167,7 +167,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                                           height: 25,
                                                           width: 25,
                                                           child: Image.asset(
-                                                            "assets/profile5.png",
+                                                            "assets/images/profile5.png",
                                                             fit: BoxFit.cover,
                                                           ),
                                                         ),
@@ -214,7 +214,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                                           BorderRadius.circular(
                                                               80),
                                                       child: Image.asset(
-                                                        "assets/AnhCV.jpg",
+                                                        "assets/images/AnhCV.jpg",
                                                         fit: BoxFit.cover,
                                                       ))),
                                             ]),
@@ -264,7 +264,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                       width: 18,
                                       height: 18,
                                       child: Image.asset(
-                                        "assets/phoneprofile.png",
+                                        "assets/images/phoneprofile.png",
                                         fit: BoxFit.cover,
                                       )),
                                   const Expanded(
@@ -338,7 +338,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                       width: 24,
                                       height: 24,
                                       child: Image.asset(
-                                        "assets/about.png",
+                                        "assets/images/about.png",
                                         fit: BoxFit.cover,
                                       )),
                                   const Text(
@@ -363,7 +363,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                     width: 12,
                                     height: 15,
                                     child: Image.asset(
-                                      "assets/xanh.png", // Replace image in container
+                                      "assets/images/xanh.png", // Replace image in container
                                       fit: BoxFit
                                           .cover, // Adjust image to cover container
                                     ),
@@ -388,7 +388,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                       width: 24,
                                       height: 24,
                                       child: Image.asset(
-                                        "assets/help.png",
+                                        "assets/images/help.png",
                                         fit: BoxFit.cover,
                                       )),
                                   const Text(
@@ -413,7 +413,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                     width: 12,
                                     height: 15,
                                     child: Image.asset(
-                                      "assets/xanh.png", // Replace image in container
+                                      "assets/images/xanh.png", // Replace image in container
                                       fit: BoxFit
                                           .cover, // Adjust image to cover container
                                     ),
@@ -438,7 +438,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                       width: 24,
                                       height: 24,
                                       child: Image.asset(
-                                        "assets/chat.png",
+                                        "assets/images/chat.png",
                                         fit: BoxFit.cover,
                                       )),
                                   const Text(
@@ -463,7 +463,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                     width: 12,
                                     height: 15,
                                     child: Image.asset(
-                                      "assets/xanh.png", // Replace image in container
+                                      "assets/images/xanh.png", // Replace image in container
                                       fit: BoxFit
                                           .cover, // Adjust image to cover container
                                     ),
@@ -488,7 +488,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                       width: 24,
                                       height: 24,
                                       child: Image.asset(
-                                        "assets/caidatvang.png",
+                                        "assets/images/caidatvang.png",
                                         fit: BoxFit.cover,
                                       )),
                                   const Text(
@@ -513,7 +513,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                     width: 12,
                                     height: 15,
                                     child: Image.asset(
-                                      "assets/xanh.png", // Replace image in container
+                                      "assets/images/xanh.png", // Replace image in container
                                       fit: BoxFit
                                           .cover, // Adjust image to cover container
                                     ),
@@ -549,7 +549,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                         width: 24,
                                         height: 24,
                                         child: Image.asset(
-                                          "assets/logout.png",
+                                          "assets/images/logout.png",
                                           fit: BoxFit.cover,
                                         )),
                                     const Expanded(

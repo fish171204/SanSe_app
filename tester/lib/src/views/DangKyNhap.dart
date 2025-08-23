@@ -99,7 +99,7 @@ class _DangkynhapState extends State<Dangkynhap> {
                 SizedBox(
                   width: 300,
                   height: 250,
-                  child: Image.asset("assets/logo.png"),
+                  child: Image.asset("assets/images/logo.png"),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(40, 0, 40, 10),
@@ -113,7 +113,7 @@ class _DangkynhapState extends State<Dangkynhap> {
                     ),
                     decoration: InputDecoration(
                       suffixIcon: Image.asset(
-                        "assets/cccd.png",
+                        "assets/images/cccd.png",
                         width: 10,
                         color: const Color(0xFF676060),
                       ),
@@ -164,8 +164,8 @@ class _DangkynhapState extends State<Dangkynhap> {
                           padding: const EdgeInsets.all(12.0),
                           child: Image.asset(
                             _isPasswordHidden
-                                ? "assets/icon_password.png"
-                                : "assets/mat.png",
+                                ? "assets/images/icon_password.png"
+                                : "assets/images/mat.png",
                             width: 24,
                             height: 24,
                           ),
@@ -280,7 +280,7 @@ class _DangkynhapState extends State<Dangkynhap> {
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10)),
                             border: Border.all(color: Colors.black, width: 2)),
-                        child: Image.asset("assets/icon_fb.png"),
+                        child: Image.asset("assets/images/icon_fb.png"),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -291,7 +291,7 @@ class _DangkynhapState extends State<Dangkynhap> {
                         ),
                         height: 60,
                         width: 60,
-                        child: Image.asset("assets/ic_gg.png"),
+                        child: Image.asset("assets/images/ic_gg.png"),
                       ),
                     ],
                   ),

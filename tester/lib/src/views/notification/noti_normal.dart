@@ -214,7 +214,7 @@ class _NotiNormalState extends State<NotiNormal> {
                           width: 20,
                           height: 20,
                           child: Image.asset(
-                            "assets/danhmuc.png",
+                            "assets/images/danhmuc.png",
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -241,7 +241,7 @@ class _NotiNormalState extends State<NotiNormal> {
                       'Tính mạng mong manh của bé gái 3 tuổi mắc bệnh xơ gan',
                   organization: 'Lê Thị Thuý Kiều',
                   amount: '5.000.000 VND',
-                  imageAsset: 'assets/HinhAnh_Demo.jpg',
+                  imageAsset: 'assets/images/HinhAnh_Demo.jpg',
                   color: Colors.red,
                 ),
                 NotificationCard(
@@ -249,7 +249,7 @@ class _NotiNormalState extends State<NotiNormal> {
                       'Cụ bà 90 tuổi bị 4 con bỏ rơi, tự bò ngoài đường bắt xe đi khám bệnh',
                   organization: 'Quỹ Thiện Tâm',
                   amount: '3.000.000 VND',
-                  imageAsset: 'assets/nguoikhokhan8.jpg',
+                  imageAsset: 'assets/images/nguoikhokhan8.jpg',
                   color: Colors.red,
                 ),
                 NotificationCard(
@@ -257,7 +257,7 @@ class _NotiNormalState extends State<NotiNormal> {
                       '3 cha con sống trong căn nhà 2m2, cơm ăn bữa đói bữa no',
                   organization: 'Nguyễn Văn Huy',
                   amount: '10.000.000 VND',
-                  imageAsset: 'assets/HinhAnh_0.png',
+                  imageAsset: 'assets/images/HinhAnh_0.png',
                   color: Colors.red,
                 ),
                 NotificationCard(
@@ -265,7 +265,7 @@ class _NotiNormalState extends State<NotiNormal> {
                       'Mẹ già 80 tuổi còng lưng chăm con trai suy thận, con gái mắc bệnh ung thư',
                   organization: 'Trương Anh Vịnh',
                   amount: '60.000.000 VND',
-                  imageAsset: 'assets/nguoikhokhan9.jpg',
+                  imageAsset: 'assets/images/nguoikhokhan9.jpg',
                   color: Colors.red,
                 ),
                 NotificationCard(
