@@ -9,6 +9,7 @@ import 'package:tester/src/views/XemBaiDangKhoKhanDemo.dart';
 import 'package:tester/src/views/notification/noti_emergency.dart';
 import 'package:tester/src/views/notification/cubit/notification_cubit.dart';
 import 'package:tester/src/views/notification/cubit/notification_state.dart';
+import 'package:tester/src/repositories/notification/notification_repository.dart';
 import 'package:tester/src/models/notification/notification_model.dart'
     as model;
 
@@ -31,7 +32,8 @@ class _NotiNormalState extends State<NotiNormal> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NotificationCubit()..loadNotifications(),
+      create: (context) =>
+          NotificationCubit(NotificationRepositoryImpl())..loadNotifications(),
       child: BlocBuilder<NotificationCubit, NotificationState>(
         builder: (context, state) {
           return Scaffold(

@@ -8,6 +8,7 @@ import 'package:tester/src/views/SharedPreferences.dart';
 import 'package:tester/src/views/MyNavigationBar.dart';
 import 'package:tester/src/views/notification/cubit/notification_cubit.dart';
 import 'package:tester/src/views/notification/cubit/notification_state.dart';
+import 'package:tester/src/repositories/notification/notification_repository.dart';
 import 'package:tester/src/models/notification/notification_model.dart'
     as model;
 
@@ -30,7 +31,8 @@ class _NotiEmergencyState extends State<NotiEmergency> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NotificationCubit()..loadNotifications(),
+      create: (context) =>
+          NotificationCubit(NotificationRepositoryImpl())..loadNotifications(),
       child: BlocBuilder<NotificationCubit, NotificationState>(
         builder: (context, state) {
           return Scaffold(
