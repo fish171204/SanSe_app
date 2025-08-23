@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/views/CampaignListScreen.dart';
+import 'package:tester/src/views/campaign/campaign_list_screen.dart';
 
 class FilterButtonWidget extends StatelessWidget {
   final String text;

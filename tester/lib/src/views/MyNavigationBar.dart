@@ -5,7 +5,7 @@ import 'package:tester/src/views/MainNguoiKK.dart';
 import 'package:tester/src/views/MainNhaHT.dart';
 import 'package:tester/src/views/DangKyNhap.dart';
 import 'package:tester/src/views/SharedPreferences.dart';
-import 'package:tester/src/views/CampaignListScreen.dart';
+import 'package:tester/src/views/campaign/campaign_list_screen.dart';
 
 class MyNavigationBar extends StatefulWidget {
   final int currentIndex;
