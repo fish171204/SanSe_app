@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tester/src/views/MainNguoiKK.dart';
 import 'package:tester/src/views/MainNhaHT.dart';
-import 'package:tester/src/views/DangKyNhap.dart';
+import 'package:tester/src/views/auth/signup/signup_screen.dart';
 import 'package:tester/src/views/SharedPreferences.dart';
 import 'package:tester/src/views/MyNavigationBar.dart';
 import 'package:tester/src/views/notification/cubit/notification_cubit.dart';
@@ -98,7 +98,7 @@ class _NotiEmergencyState extends State<NotiEmergency> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const Dangkynhap(),
+          builder: (context) => const SignupScreen(),
         ),
       );
     }

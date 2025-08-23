@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/views/DangKyNhap.dart';
+import 'package:tester/src/views/auth/signup/signup_screen.dart';
 import 'package:tester/src/views/admin/admin_post_management_tab.dart';
 import 'package:tester/src/views/admin/admin_user_management_tab.dart';
 
@@ -99,7 +99,7 @@ class _AdminScreenState extends State<AdminScreen> {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const Dangkynhap()),
+                  MaterialPageRoute(builder: (context) => const SignupScreen()),
                 );
               },
             ),

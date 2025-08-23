@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/views/DangKyNhap.dart';
-import 'package:tester/src/views/DanhKyNhap2.dart';
+import 'package:tester/src/views/auth/signup/signup_screen.dart';
+import 'package:tester/src/views/auth/signup/signup_type_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const Dangkynhap()),
+                                                  const SignupScreen()),
                                         );
                                       },
                                       child: const Text(
@@ -118,7 +118,8 @@ class WelcomeScreen extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Dangkynhap()),
+                                      builder: (context) =>
+                                          const SignupScreen()),
                                 );
                               },
                               child: const Text(
@@ -141,7 +142,7 @@ class WelcomeScreen extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const Dangkynhap2()),
+                                            const SignupTypeScreen()),
                                   );
                                 },
                                 child: const Text(

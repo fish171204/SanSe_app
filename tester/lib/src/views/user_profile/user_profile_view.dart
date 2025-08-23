@@ -1,7 +1,7 @@
 import 'package:tester/src/theme/app_theme/app_theme.dart';
 import 'package:tester/src/views/MainNguoiKK.dart';
 import 'package:tester/src/views/MainNhaHT.dart';
-import 'package:tester/src/views/DangKyNhap.dart';
+import 'package:tester/src/views/auth/signup/signup_screen.dart';
 import 'package:tester/src/views/SharedPreferences.dart';
 import 'package:tester/src/views/MyNavigationBar.dart';
 import 'package:tester/src/views/user_profile/user_profile_update.dart';
@@ -147,7 +147,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                                               MaterialPageRoute(
                                                                   builder:
                                                                       (context) =>
-                                                                          const Dangkynhap()),
+                                                                          const SignupScreen()),
                                                             );
                                                           }
                                                         },
@@ -529,7 +529,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const Dangkynhap()),
+                                            const SignupScreen()),
                                   );
                                 },
                                 child: Container(

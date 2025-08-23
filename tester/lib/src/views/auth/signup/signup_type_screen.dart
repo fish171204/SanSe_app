@@ -1,15 +1,15 @@
-import 'package:tester/src/views/FormDkyHT.dart';
-import 'package:tester/src/views/FormDkyKK.dart';
+import 'package:tester/src/views/auth/signup_detail/signup_detail_benefactor_screen.dart';
+import 'package:tester/src/views/auth/signup_detail/signup_detail_needy_person_screen.dart';
 import 'package:flutter/material.dart';
 
-class Dangkynhap2 extends StatefulWidget {
-  const Dangkynhap2({super.key});
+class SignupTypeScreen extends StatefulWidget {
+  const SignupTypeScreen({super.key});
 
   @override
-  _Dangkynhap2State createState() => _Dangkynhap2State();
+  _SignupTypeScreenState createState() => _SignupTypeScreenState();
 }
 
-class _Dangkynhap2State extends State<Dangkynhap2> {
+class _SignupTypeScreenState extends State<SignupTypeScreen> {
   String? selectedRole;
 
   @override
@@ -123,13 +123,15 @@ class _Dangkynhap2State extends State<Dangkynhap2> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const FormDKyHT()),
+                                      builder: (context) =>
+                                          const SignupDetailBenefactorScreen()),
                                 );
                               } else if (selectedRole == "nguoi_kho_khan") {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const FormDKyKK()),
+                                      builder: (context) =>
+                                          const SignupDetailNeedyPersonScreen()),
                                 );
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(

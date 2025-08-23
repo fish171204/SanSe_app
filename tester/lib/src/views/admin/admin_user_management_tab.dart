@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class UserManagementTab extends StatefulWidget {
-  final List<Map<String, dynamic>> users; // Nhận dữ liệu từ AdminScreen
+  final List<Map<String, dynamic>> users; 
 
   const UserManagementTab({super.key, required this.users});
 

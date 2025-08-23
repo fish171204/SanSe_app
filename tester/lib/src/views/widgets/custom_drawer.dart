@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/views/DangKyNhap.dart';
+import 'package:tester/src/views/auth/signup/signup_screen.dart';
 import 'package:tester/src/views/accesstrade/ac_affiliate_markteting.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -102,7 +102,7 @@ class CustomDrawer extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const Dangkynhap()),
+              MaterialPageRoute(builder: (context) => const SignupScreen()),
             );
           },
         ),

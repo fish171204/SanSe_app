@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/views/NotificationKK.dart';
-import 'package:tester/src/views/widgets/build_combo_box_province.dart';
-import 'package:tester/src/views/widgets/build_combo_box_district.dart';
-import 'package:tester/src/views/widgets/build_combo_box_ward.dart';
 import 'package:tester/src/models/user_location/user_district.dart';
 import 'package:tester/src/models/user_location/user_ward.dart';
 import 'package:tester/src/models/user_location/user_province.dart';
+import 'package:tester/src/views/auth/signup/widgets/notification_benefactor.dart';
+import 'package:tester/src/views/widgets/build_combo_box_ward.dart';
+import 'package:tester/src/views/widgets/build_combo_box_district.dart';
+import 'package:tester/src/views/widgets/build_combo_box_province.dart';
 
-class FormDKyKK extends StatefulWidget {
-  const FormDKyKK({super.key});
+class SignupDetailBenefactorScreen extends StatefulWidget {
+  const SignupDetailBenefactorScreen({super.key});
 
   @override
-  _FormDKyKKState createState() => _FormDKyKKState();
+  _SignupDetailBenefactorScreenState createState() =>
+      _SignupDetailBenefactorScreenState();
 }
 
-class _FormDKyKKState extends State<FormDKyKK> {
+class _SignupDetailBenefactorScreenState
+    extends State<SignupDetailBenefactorScreen> {
   bool _isChecked = false;
   String? _selectedTinhThanh;
   String? _selectedQuanHuyen;
@@ -53,7 +55,7 @@ class _FormDKyKKState extends State<FormDKyKK> {
                         ),
                         const Expanded(
                           child: Text(
-                            "Tài khoản người khó khăn",
+                            "Tài khoản nhà hảo tâm",
                             style: TextStyle(
                               color: Color(0xFF000000),
                               fontSize: 20,
@@ -65,18 +67,17 @@ class _FormDKyKKState extends State<FormDKyKK> {
                     ),
                     const SizedBox(height: 13),
                     // Form fields (e.g., Số CCCD/CMND, Họ tên, Số điện thoại Zalo, etc.)
-                    _buildFormField("Số CCCD/CMND", "045304004088",
+                    _buildFormField("Số CCCD/CMND", "054204003257",
                         isRequired: true),
-                    _buildFormField("Họ tên", "Lê Thị Thuý Kiều",
+                    _buildFormField("Họ tên", "Nguyễn Đăng Khoa",
                         isRequired: true),
-                    _buildFormField("Số điện thoại Zalo", "0973353674",
+                    _buildFormField("Số điện thoại Zalo", "0393416574",
                         isRequired: true),
-                    _buildFormField("Ngày sinh", "01/01/1991",
+                    _buildFormField("Ngày sinh", "17/12/2004",
                         isRequired: true),
-                    _buildFormField("Email", ""),
-                    _buildFormField("Mật khẩu", "nguoikhokhan",
-                        isRequired: true),
-                    _buildFormField("Nhập lại mật khẩu", "nguoikhokhan",
+                    _buildFormField("Email", "2221004199@sv.ufm.edu.vn"),
+                    _buildFormField("Mật khẩu", "nhahaotam", isRequired: true),
+                    _buildFormField("Nhập lại mật khẩu", "nhahaotam",
                         isRequired: true),
 
                     BuildComboBoxProvince(
@@ -104,6 +105,7 @@ class _FormDKyKKState extends State<FormDKyKK> {
                         });
                       },
                     ),
+
                     BuildComboBoxWard(
                       selectedPhuongXa: _selectedPhuongXa,
                       selectedQuanHuyen: _selectedQuanHuyen,
@@ -116,23 +118,31 @@ class _FormDKyKKState extends State<FormDKyKK> {
                       },
                     ),
 
-                    _buildFormField("Thôn/Xóm/Số nhà, tên đường", "Thôn Tân Lệ",
+                    _buildFormField(
+                        "Thôn/Xóm/Số nhà, tên đường", "Thôn Thành An",
                         isRequired: true),
 
-                    // Checkbox for "Đại diện cho người khó khăn"
+                    // Checkbox for "Đại diện cho tổ chức/doanh nghiệp"
                     Row(
+                      mainAxisAlignment: MainAxisAlignment
+                          .start, // Đảm bảo nội dung bắt đầu từ bên trái
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Checkbox(
-                          value: _isChecked,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              _isChecked = value ?? false;
-                            });
-                          },
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 8.0), // Thêm khoảng cách dưới checkbox
+                          child: Checkbox(
+                            value: _isChecked,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                _isChecked = value ?? false;
+                              });
+                            },
+                          ),
                         ),
                         const Expanded(
                           child: Text(
-                            "Bạn có đại diện cho người khó khăn không?",
+                            "Bạn có đại diện cho tổ chức/doanh nghiệp không?",
                             style: TextStyle(
                               color: Color(0xFF000000),
                               fontSize: 15,
@@ -142,16 +152,12 @@ class _FormDKyKKState extends State<FormDKyKK> {
                         ),
                       ],
                     ),
-
                     // Enable or disable the form fields based on checkbox value
-                    _buildFormField("Số CCCD/CMND người hỗ trợ",
-                        _isChecked ? "" : "05420400xxxx",
+                    _buildFormField("Tên tổ chức/doanh nghiệp",
+                        _isChecked ? "" : "Trường Đại học Tài chính Marketing",
                         isEnabled: _isChecked, isRequired: true),
-                    _buildFormField(
-                        "Họ tên người hỗ trợ", _isChecked ? "" : "Nguyễn Văn A",
-                        isEnabled: _isChecked, isRequired: true),
-                    _buildFormField(
-                        "Số Điện thoại Zalo", _isChecked ? "" : "039341xxxx",
+                    _buildFormField("Website tổ chức/doanh nghiệp",
+                        _isChecked ? "" : "uis.ufm.edu.vn",
                         isEnabled: _isChecked, isRequired: true),
 
                     // Register Button
@@ -176,7 +182,7 @@ class _FormDKyKKState extends State<FormDKyKK> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const NotificationKK(), // Chuyển đến NotificationKK
+                                      const NotificationBenefactor(), // Chuyển đến NotificationKK
                                 ),
                               );
                             },

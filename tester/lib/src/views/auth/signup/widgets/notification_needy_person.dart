@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/views/DangKyNhap.dart';
+import 'package:tester/src/views/auth/signup/signup_screen.dart';
 
-class NotificationKK extends StatelessWidget {
-  const NotificationKK({super.key});
+class NotificationNeedyPerson extends StatelessWidget {
+  const NotificationNeedyPerson({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,7 @@ class NotificationKK extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const Dangkynhap()),
+                          builder: (context) => const SignupScreen()),
                     );
                   },
                   child: const Text(

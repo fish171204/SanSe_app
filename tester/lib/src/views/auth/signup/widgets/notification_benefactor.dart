@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/views/DangKyNhap.dart';
+import 'package:tester/src/views/auth/signup/signup_screen.dart';
 
-/* da xem*/
-class NotificationHT extends StatelessWidget {
-  const NotificationHT({super.key});
+class NotificationBenefactor extends StatelessWidget {
+  const NotificationBenefactor({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +26,6 @@ class NotificationHT extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Header section with logo and title
                         IntrinsicHeight(
                           child: Container(
                             margin: const EdgeInsets.only(
@@ -48,7 +46,6 @@ class NotificationHT extends StatelessWidget {
                                 ]),
                           ),
                         ),
-                        // Image section
                         Container(
                           margin: const EdgeInsets.only(
                               bottom: 65, left: 89, right: 89),
@@ -59,7 +56,6 @@ class NotificationHT extends StatelessWidget {
                             fit: BoxFit.fill,
                           ),
                         ),
-                        // Success text
                         Container(
                           margin: const EdgeInsets.only(bottom: 17, left: 100),
                           child: const Text(
@@ -71,7 +67,6 @@ class NotificationHT extends StatelessWidget {
                             ),
                           ),
                         ),
-                        // Description text
                         Container(
                           margin: const EdgeInsets.only(
                               bottom: 250, left: 31, right: 31),
@@ -80,8 +75,7 @@ class NotificationHT extends StatelessWidget {
                             textAlign: TextAlign.center,
                             text: TextSpan(
                               style: const TextStyle(
-                                color: Color(
-                                    0xFF090A0A), // Default color for the rest of the text
+                                color: Color(0xFF090A0A),
                                 fontSize: 18,
                               ),
                               children: [
@@ -93,14 +87,13 @@ class NotificationHT extends StatelessWidget {
                                   text: "Cộng đồng San Sẻ",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        18, // You can adjust the font size here
+                                    fontSize: 18,
                                     foreground: Paint()
                                       ..shader = const LinearGradient(
                                         colors: [
                                           Color(0xFFFF4545),
                                           Color(0xFFFF4545)
-                                        ], // Gradient with the same color
+                                        ],
                                         begin: Alignment.topLeft,
                                         end: Alignment.bottomRight,
                                       ).createShader(const Rect.fromLTWH(
@@ -118,12 +111,10 @@ class NotificationHT extends StatelessWidget {
                         // Login Button
                         GestureDetector(
                           onTap: () {
-                            // Navigate to DangKyNhap screen
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const Dangkynhap()), // Ensure DangKyNhap.dart is imported
+                                  builder: (context) => const SignupScreen()),
                             );
                           },
                           child: IntrinsicHeight(

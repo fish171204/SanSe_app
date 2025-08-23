@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tester/src/views/DangKyNhap.dart';
+import 'package:tester/src/views/auth/signup/signup_screen.dart';
 import 'package:tester/src/views/MainNguoiKK.dart';
 import 'package:tester/src/views/MainNhaHT.dart';
 import 'package:tester/src/views/MyNavigationBar.dart';
@@ -60,7 +60,7 @@ class _CampaignListViewState extends State<_CampaignListView> {
             bool isLoggedIn = await SharedPreferencesHelper.getLoginStatus();
             String? userType = await SharedPreferencesHelper.getUserType();
 
-            Widget page = const Dangkynhap();
+            Widget page = const SignupScreen();
 
             if (isLoggedIn) {
               page = (userType == "nguoikhokhan" || userType == "045304004088")

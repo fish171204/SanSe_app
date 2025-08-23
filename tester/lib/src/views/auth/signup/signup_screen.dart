@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/views/DanhKyNhap2.dart';
+import 'package:tester/src/views/auth/signup/signup_type_screen.dart';
 import 'package:tester/src/views/MainNguoiKK.dart';
-import 'package:tester/src/views/AdminScreen.dart';
+
 import 'package:tester/src/views/MainNhaHT.dart';
 import 'package:tester/src/views/SharedPreferences.dart';
 import 'package:flutter/gestures.dart';
+import 'package:tester/src/views/admin/admin_screen.dart';
 
 //
-class Dangkynhap extends StatefulWidget {
-  const Dangkynhap({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  _DangkynhapState createState() => _DangkynhapState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
 bool _isPasswordHidden = true;
 
-class _DangkynhapState extends State<Dangkynhap> {
+class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _cccdController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -71,7 +72,7 @@ class _DangkynhapState extends State<Dangkynhap> {
 
   void _togglePasswordVisibility() {
     setState(() {
-      _isPasswordHidden = !_isPasswordHidden; // Đổi trạng thái ẩn/hiện mật khẩu
+      _isPasswordHidden = !_isPasswordHidden;
     });
   }
 
@@ -251,12 +252,12 @@ class _DangkynhapState extends State<Dangkynhap> {
                     children: [
                       const Divider(
                         thickness: 1,
-                        height: 20, // Tăng height để có khoảng trống cho chữ
+                        height: 20,
                         color: Colors.grey,
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        color: Colors.white, // Màu nền để che Divider
+                        color: Colors.white,
                         child: const Text(
                           "hoặc",
                           style: TextStyle(
@@ -304,7 +305,7 @@ class _DangkynhapState extends State<Dangkynhap> {
                         const TextSpan(
                           text: "Bạn chưa có tài khoản? ",
                           style: TextStyle(
-                            color: Colors.black, // Màu đen
+                            color: Colors.black,
                             fontSize: 18,
                             fontFamily: "WorkSans",
                           ),
@@ -312,7 +313,7 @@ class _DangkynhapState extends State<Dangkynhap> {
                         TextSpan(
                           text: "Tạo tài khoản",
                           style: const TextStyle(
-                            color: Color(0xFF0866FF), // Màu xanh
+                            color: Color(0xFF0866FF),
                             fontSize: 18,
                             fontFamily: "WorkSans",
                             fontWeight: FontWeight.bold,
@@ -322,7 +323,8 @@ class _DangkynhapState extends State<Dangkynhap> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const Dangkynhap2(),
+                                  builder: (context) =>
+                                      const SignupTypeScreen(),
                                 ),
                               );
                             },
