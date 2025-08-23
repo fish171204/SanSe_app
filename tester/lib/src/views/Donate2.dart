@@ -1,9 +1,5 @@
 import 'package:tester/src/views/Ayns/mainTest.dart';
-import 'package:tester/src/views/XemBaiDangKhoKhan2.dart';
-import 'package:tester/src/views/MainNhaHT.dart';
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_size.dart';
 import 'package:image_picker/image_picker.dart';

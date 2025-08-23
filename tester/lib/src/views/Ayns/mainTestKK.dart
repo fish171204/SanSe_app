@@ -796,19 +796,6 @@ class _mainTestKKState extends State<mainTestKK> {
   }
 }
 
-Widget _buildItemRow(String imagePath, String title) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 10),
-    child: Row(
-      children: [
-        Image.asset(imagePath, width: 24, height: 27),
-        const SizedBox(width: 10),
-        Text(title, style: const TextStyle(fontSize: 16)),
-      ],
-    ),
-  );
-}
-
 class CustomCardWidget extends StatelessWidget {
   final String imagePath;
   final String label;

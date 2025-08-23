@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tester/src/theme/app_responsive_ui.dart';
 import 'package:tester/src/theme/app_responsive_ui_config.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:tester/src/views/welcome_screen.dart';
 
 void main() async {

@@ -62,12 +62,6 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
     }
   }
 
-  final List<Widget> _screens = [
-    const Center(child: Text("Trang cá nhân")),
-    const Center(child: Text("Xu hướng")),
-    const Center(child: Text("Thông báo")),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

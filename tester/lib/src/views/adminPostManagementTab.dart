@@ -8,7 +8,6 @@ class PostManagementTab extends StatefulWidget {
 }
 
 class _PostManagementTabState extends State<PostManagementTab> {
-  final int _currentIndex = 0;
   String _searchQuery = "";
   String _selectedFilter = "Tất cả";
   final TextEditingController _searchController = TextEditingController();
@@ -402,22 +401,6 @@ class _PostManagementTabState extends State<PostManagementTab> {
           ),
         );
       },
-    );
-  }
-
-  Widget _buildCategoryButton(String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white70,
-          foregroundColor: Colors.black,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        ),
-        onPressed: () {},
-        child: Text(text),
-      ),
     );
   }
 }

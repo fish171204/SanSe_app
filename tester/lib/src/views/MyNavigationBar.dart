@@ -35,11 +35,9 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
 
         // Các nhóm userType
         final Set<String> nguoiKhoKhan = {"nguoikhokhan", "045304004088"};
-        final Set<String> nhaHaoTam = {"nhahaotam", "054204003257"};
 
         // Điều hướng theo tab
-        Widget page =
-            const Dangkynhap(); // Mặc định là trang đăng nhập nếu chưa đăng nhập
+        Widget page = const Dangkynhap();
 
         if (isLoggedIn) {
           switch (index) {

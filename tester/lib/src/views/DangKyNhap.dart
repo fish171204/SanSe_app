@@ -14,7 +14,6 @@ class Dangkynhap extends StatefulWidget {
   _DangkynhapState createState() => _DangkynhapState();
 }
 
-final TextEditingController _passwordController = TextEditingController();
 bool _isPasswordHidden = true;
 
 class _DangkynhapState extends State<Dangkynhap> {

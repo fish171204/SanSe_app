@@ -45,8 +45,6 @@ class _DangBaiChinhChu2State extends State<DangBaiChinhChu2> {
     }
   }
 
-  final int _currentIndex = 0;
-  final String _selectedAmount = "";
   bool _isSupporter = false;
   final bool _isWitness = false;
   String _selectedOption = "Tiền"; // Biến lưu giá trị được chọn

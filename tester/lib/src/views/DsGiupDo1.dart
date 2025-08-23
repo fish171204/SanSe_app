@@ -34,12 +34,12 @@ class _DsGiupDo1State extends State<DsGiupDo1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0, // Loại bỏ bóng cho AppBar
-        backgroundColor: Colors.blue.shade700, // Màu nền AppBar
-        automaticallyImplyLeading: false, // Tùy chỉnh nút quay lại
+        elevation: 0,
+        backgroundColor: Colors.blue.shade700,
+        automaticallyImplyLeading: false,
         leading: GestureDetector(
           onTap: () {
-            Navigator.pop(context); // Quay lại màn hình trước đó
+            Navigator.pop(context);
           },
           child: Container(
             margin: const EdgeInsets.all(8),
@@ -57,13 +57,13 @@ class _DsGiupDo1State extends State<DsGiupDo1> {
             child: InkWell(
               borderRadius: BorderRadius.circular(30),
               onTap: () {
-                Navigator.pop(context); // Quay lại màn hình trước đó
+                Navigator.pop(context);
               },
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Icon(
                   Icons.arrow_back,
-                  color: Colors.blue, // Icon màu trắng để nổi bật
+                  color: Colors.blue,
                   size: 28,
                 ),
               ),
@@ -84,9 +84,7 @@ class _DsGiupDo1State extends State<DsGiupDo1> {
               Icons.favorite,
               color: Colors.white,
             ),
-            onPressed: () {
-              // Hành động cho nút yêu thích
-            },
+            onPressed: () {},
           ),
         ],
       ),
@@ -102,11 +100,9 @@ class _DsGiupDo1State extends State<DsGiupDo1> {
               Expanded(
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  itemCount:
-                      nhaHaoTamData.length, // Số lượng phần tử trong danh sách
+                  itemCount: nhaHaoTamData.length,
                   itemBuilder: (context, index) {
-                    final nhaHaoTam =
-                        nhaHaoTamData[index]; // Lấy dữ liệu từng mục
+                    final nhaHaoTam = nhaHaoTamData[index];
                     return Card(
                       elevation: 3,
                       margin: const EdgeInsets.only(bottom: 16),
@@ -115,24 +111,21 @@ class _DsGiupDo1State extends State<DsGiupDo1> {
                       ),
                       child: ListTile(
                         leading: CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(nhaHaoTam["avatar"]), // Ảnh đại diện
+                          backgroundImage: NetworkImage(nhaHaoTam["avatar"]),
                           backgroundColor: Colors.grey.shade300,
                         ),
                         title: Text(
-                          nhaHaoTam["name"], // Tên nhà hảo tâm
+                          nhaHaoTam["name"],
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle:
-                            Text(nhaHaoTam["details"]), // Chi tiết đóng góp
+                        subtitle: Text(nhaHaoTam["details"]),
                         trailing: const Icon(
                           Icons.arrow_forward_ios,
                           size: 16,
                         ),
                         onTap: () {
-                          // Hành động khi bấm vào
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
@@ -152,7 +145,6 @@ class _DsGiupDo1State extends State<DsGiupDo1> {
                   },
                 ),
               ),
-              // Footer
             ],
           ),
         ),

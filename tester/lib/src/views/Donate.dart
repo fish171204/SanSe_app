@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_size.dart';
 import 'package:tester/src/views/Donate2.dart';
-import 'package:image_picker/image_picker.dart';
 
 class Donate extends StatefulWidget {
   const Donate({super.key});
@@ -13,33 +12,12 @@ class Donate extends StatefulWidget {
 }
 
 class _DonateState extends State<Donate> {
-  List<XFile>? _images;
-
-  Future<void> _pickImage() async {
-    final pickedFiles = await ImagePicker().pickMultiImage();
-
-    if (pickedFiles.length <= 5) {
-      setState(() {
-        _images = pickedFiles;
-      });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Bạn chỉ có thể tải tối đa 5 ảnh.")),
-      );
-    }
-  }
-
-  String? _selectedAmount;
-
   final TextEditingController _amountController = TextEditingController();
-  final NumberFormat _numberFormat =
-      NumberFormat("#,###", "vi_VN"); // Định dạng số VND
+  final NumberFormat _numberFormat = NumberFormat("#,###", "vi_VN");
 
-  // Hàm xử lý khi chọn mệnh giá tiền
   @override
   void initState() {
     super.initState();
-    // Lắng nghe sự thay đổi trên controller
     _amountController.addListener(_onAmountChanged);
   }
 
@@ -52,23 +30,19 @@ class _DonateState extends State<Donate> {
     '2.000.000',
     '5.000.000'
   ];
-  // Cập nhật giá trị khi người dùng chọn mệnh giá
   void _onAmountSelected(String amount) {
     setState(() {
-      _donationAmount =
-          '$amount VND'; // Cập nhật số tiền hiển thị trên nút "Giúp đỡ"
+      _donationAmount = '$amount VND';
       _amountController.text = amount;
     });
   }
 
-  // Hàm xử lý thay đổi khi người dùng nhập số tiền
   void _onAmountChanged() {
     final String text = _amountController.text.replaceAll('.', '');
     if (text.isNotEmpty) {
-      final int value = int.tryParse(text) ?? 0; // Chuyển thành số nguyên
+      final int value = int.tryParse(text) ?? 0;
       final String formattedText = _numberFormat.format(value);
       if (_amountController.text != formattedText) {
-        // Cập nhật giá trị mới vào controller
         _amountController.value = TextEditingValue(
           text: formattedText,
           selection: TextSelection.collapsed(offset: formattedText.length),
@@ -621,19 +595,8 @@ class _DonateState extends State<Donate> {
       elevation: 8.0,
     ).then((value) {
       if (value != null) {
-        _onAmountSelected(value); // Cập nhật số tiền khi người dùng chọn
+        _onAmountSelected(value);
       }
     });
-  }
-
-  String _formatNumber(String input) {
-    final cleanedInput =
-        input.replaceAll(RegExp(r'[^0-9]'), ''); // Loại bỏ ký tự không phải số
-    if (cleanedInput.isEmpty) return '';
-
-    final number = int.tryParse(cleanedInput) ?? 0;
-    final formatter =
-        NumberFormat("#,###", "vi_VN"); // Định dạng theo số Việt Nam
-    return formatter.format(number);
   }
 }
