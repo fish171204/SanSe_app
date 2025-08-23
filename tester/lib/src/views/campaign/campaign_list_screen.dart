@@ -5,6 +5,7 @@ import 'package:tester/src/views/MainNguoiKK.dart';
 import 'package:tester/src/views/MainNhaHT.dart';
 import 'package:tester/src/views/MyNavigationBar.dart';
 import 'package:tester/src/views/SharedPreferences.dart';
+import 'package:tester/src/repositories/campaign/campaign_repository.dart';
 import 'cubit/campaign_list_cubit.dart';
 
 class CampaignListScreen extends StatelessWidget {
@@ -13,7 +14,8 @@ class CampaignListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CampaignListCubit()..loadCampaigns(),
+      create: (context) =>
+          CampaignListCubit(CampaignRepositoryImpl())..loadCampaigns(),
       child: const _CampaignListView(),
     );
   }
@@ -53,7 +55,7 @@ class _CampaignListViewState extends State<_CampaignListView> {
         backgroundColor: Colors.blue,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () async {
             bool isLoggedIn = await SharedPreferencesHelper.getLoginStatus();
             String? userType = await SharedPreferencesHelper.getUserType();
