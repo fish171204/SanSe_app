@@ -3,9 +3,9 @@ import 'package:tester/src/views/NotificationKK.dart';
 import 'package:tester/src/views/widgets/build_combo_box_province.dart';
 import 'package:tester/src/views/widgets/build_combo_box_district.dart';
 import 'package:tester/src/views/widgets/build_combo_box_ward.dart';
-import 'package:tester/src/models/user_district.dart';
-import 'package:tester/src/models/user_ward.dart';
-import 'package:tester/src/models/user_province.dart';
+import 'package:tester/src/models/user_location/user_district.dart';
+import 'package:tester/src/models/user_location/user_ward.dart';
+import 'package:tester/src/models/user_location/user_province.dart';
 
 class FormDKyKK extends StatefulWidget {
   const FormDKyKK({super.key});

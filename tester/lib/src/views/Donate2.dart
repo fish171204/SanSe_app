@@ -1,5 +1,5 @@
 import 'package:tester/src/theme/app_theme/app_theme.dart';
-import 'package:tester/src/views/Ayns/mainTest.dart';
+import 'package:tester/src/views/ayns/mainTest.dart';
 import 'package:flutter/material.dart';
 import '../theme/app_size.dart';
 import 'package:image_picker/image_picker.dart';

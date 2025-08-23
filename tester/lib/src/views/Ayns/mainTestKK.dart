@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/theme/app_theme/app_theme.dart';
-import 'package:tester/src/views/Ayns/ViewUI.dart';
-import 'package:tester/src/views/Ayns/XemBaiDemo.dart';
+import 'package:tester/src/views/ayns/ViewUI.dart';
+import 'package:tester/src/views/ayns/XemBaiDemo.dart';
 import 'package:tester/src/views/DaDuocGiup.dart';
 import 'package:tester/src/views/DangBaiChinhChu2.dart';
 import 'package:tester/src/views/MyNavigationBar.dart';

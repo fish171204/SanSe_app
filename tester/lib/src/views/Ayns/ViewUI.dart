@@ -1,5 +1,5 @@
-import 'package:tester/src/views/Ayns/ViewUI2.dart';
-import 'package:tester/src/views/Ayns/mainTestKK.dart';
+import 'package:tester/src/views/ayns/ViewUI2.dart';
+import 'package:tester/src/views/ayns/mainTestKK.dart';
 import 'package:flutter/material.dart';
 
 class ViewUI extends StatelessWidget {
@@ -35,7 +35,8 @@ class ViewUI extends StatelessWidget {
                             width: double.infinity,
                             decoration: const BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage("assets/images/HinhAnh_Demo.jpg"),
+                                  image: AssetImage(
+                                      "assets/images/HinhAnh_Demo.jpg"),
                                   fit: BoxFit.cover),
                             ),
                             child: Column(

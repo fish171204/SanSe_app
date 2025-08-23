@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:tester/src/models/ac_category_data.dart';
+import 'package:tester/src/models/accesstrade/ac_category_data.dart';
 
 class affiliateMarkteting extends StatefulWidget {
   const affiliateMarkteting({super.key});

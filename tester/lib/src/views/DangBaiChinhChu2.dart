@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tester/src/theme/app_theme/app_theme.dart';
-import 'package:tester/src/views/Ayns/mainTestKK.dart';
+import 'package:tester/src/views/ayns/mainTestKK.dart';
 import 'package:image_picker/image_picker.dart'; // Import image_picker package
 import 'dart:io';
 import 'package:tester/src/views/MainNguoiKK.dart';

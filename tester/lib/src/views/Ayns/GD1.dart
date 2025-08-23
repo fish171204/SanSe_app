@@ -1,4 +1,4 @@
-import 'package:tester/src/views/Ayns/GD2.dart';
+import 'package:tester/src/views/ayns/GD2.dart';
 
 import 'package:flutter/material.dart';
 
@@ -35,7 +35,8 @@ class GD1 extends StatelessWidget {
                             width: double.infinity,
                             decoration: const BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage("assets/images/HinhAnh_Demo.jpg"),
+                                  image: AssetImage(
+                                      "assets/images/HinhAnh_Demo.jpg"),
                                   fit: BoxFit.cover),
                             ),
                             child: Column(

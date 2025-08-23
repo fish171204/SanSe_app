@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/theme/app_theme/app_theme.dart';
-import 'package:tester/src/views/Ayns/GD1.dart';
-import 'package:tester/src/views/Ayns/XemBaiDemo.dart';
-import 'package:tester/src/views/Ayns/mainTestKK.dart';
+import 'package:tester/src/views/ayns/GD1.dart';
+import 'package:tester/src/views/ayns/XemBaiDemo.dart';
+import 'package:tester/src/views/ayns/mainTestKK.dart';
 import 'package:tester/src/views/Donate.dart';
 import 'package:tester/src/views/MyNavigationBar.dart';
 import 'package:tester/src/views/XemBaiDangKhoKhan2.dart';
