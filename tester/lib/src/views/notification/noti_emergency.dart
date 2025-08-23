@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tester/src/views/MainNguoiKK.dart';
 import 'package:tester/src/views/MainNhaHT.dart';
 import 'package:tester/src/views/Notification/noti_normal.dart';
 import 'package:tester/src/views/DangKyNhap.dart';
 import 'package:tester/src/views/SharedPreferences.dart';
 import 'package:tester/src/views/MyNavigationBar.dart';
-import 'package:tester/src/models/notification/notification_model.dart'
-    as model;
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:tester/src/views/notification/cubit/notification_cubit.dart';
 import 'package:tester/src/views/notification/cubit/notification_state.dart';
+import 'package:tester/src/models/notification/notification_model.dart'
+    as model;
 
 class NotiEmergency extends StatefulWidget {
   const NotiEmergency({super.key});
