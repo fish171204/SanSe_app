@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart';
+import 'package:tester/src/theme/app_theme/app_theme.dart';
 
 class DsGiupDo1 extends StatefulWidget {
   const DsGiupDo1({super.key});

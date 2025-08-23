@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
+import 'package:tester/src/theme/app_theme/app_theme.dart';
+part 'size_extension.dart';
 
 class ScreenUtil {
   bool? _isSmallScreen;

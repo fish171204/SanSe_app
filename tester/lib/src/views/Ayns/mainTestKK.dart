@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tester/src/theme/app_theme/app_theme.dart';
 import 'package:tester/src/views/Ayns/ViewUI.dart';
 import 'package:tester/src/views/Ayns/XemBaiDemo.dart';
 import 'package:tester/src/views/DaDuocGiup.dart';
@@ -6,7 +7,6 @@ import 'package:tester/src/views/DangBaiChinhChu2.dart';
 import 'package:tester/src/views/MyNavigationBar.dart';
 import 'package:tester/src/views/XemBaiDangKhoKhan2.dart';
 import 'package:tester/src/views/widgets/custom_drawer_2.dart';
-import '../../theme/app_colors.dart';
 import 'package:tester/src/views/widgets/search_bar_widget%20.dart';
 import 'package:tester/src/views/widgets/filter_button_widget.dart';
 import 'package:tester/src/views/widgets/user_avatar_widget.dart';
@@ -478,7 +478,8 @@ class _mainTestKKState extends State<mainTestKK> {
                                 SizedBox(
                                   width: 388, // Set a fixed width for each card
                                   child: CustomCardWidget(
-                                    imagePath: "assets/images/nguoikhokhan1.jpg",
+                                    imagePath:
+                                        "assets/images/nguoikhokhan1.jpg",
                                     label: "Người già",
                                     location: "TP. HCM",
                                     description:
@@ -505,7 +506,8 @@ class _mainTestKKState extends State<mainTestKK> {
                                 SizedBox(
                                   width: 388, // Set a fixed width for each card
                                   child: CustomCardWidget(
-                                    imagePath: "assets/images/nguoikhokhan8.jpg",
+                                    imagePath:
+                                        "assets/images/nguoikhokhan8.jpg",
                                     label: "Người già",
                                     location: "Kiên Giang",
                                     description:
@@ -532,7 +534,8 @@ class _mainTestKKState extends State<mainTestKK> {
                                 SizedBox(
                                   width: 388, // Set a fixed width for each card
                                   child: CustomCardWidget(
-                                    imagePath: "assets/images/nguoikhokhan9.jpg",
+                                    imagePath:
+                                        "assets/images/nguoikhokhan9.jpg",
                                     label: "Đặc biệt",
                                     location: "Nam Định",
                                     description:

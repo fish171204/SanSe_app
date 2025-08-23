@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../theme/app_colors.dart';
+import 'package:tester/src/theme/app_theme/app_theme.dart';
 import '../theme/app_size.dart';
 
 class UserProfileUpdate extends StatefulWidget {

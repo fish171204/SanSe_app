@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
-import '../theme/app_colors.dart';
+import 'package:tester/src/theme/app_theme/app_theme.dart';
 import '../theme/app_size.dart';
 import 'package:tester/src/views/Donate2.dart';
 
@@ -87,7 +87,8 @@ class _DonateState extends State<Donate> {
                             width: double.infinity,
                             decoration: const BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage("assets/images/HinhAnh_Demo.jpg"),
+                                  image: AssetImage(
+                                      "assets/images/HinhAnh_Demo.jpg"),
                                   fit: BoxFit.cover),
                             ),
                             child: Column(

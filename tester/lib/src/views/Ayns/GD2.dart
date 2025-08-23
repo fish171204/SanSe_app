@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_colors.dart';
+import 'package:tester/src/theme/app_theme/app_theme.dart';
 
 class GD2 extends StatefulWidget {
   const GD2({super.key});

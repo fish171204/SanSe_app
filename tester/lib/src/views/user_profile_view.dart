@@ -1,3 +1,4 @@
+import 'package:tester/src/theme/app_theme/app_theme.dart';
 import 'package:tester/src/views/MainNguoiKK.dart';
 import 'package:tester/src/views/MainNhaHT.dart';
 import 'package:tester/src/views/DangKyNhap.dart';
@@ -5,7 +6,6 @@ import 'package:tester/src/views/SharedPreferences.dart';
 import 'package:tester/src/views/MyNavigationBar.dart';
 import 'package:tester/src/views/user_profile_update.dart';
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_size.dart';
 
 class UserProfileView extends StatefulWidget {
