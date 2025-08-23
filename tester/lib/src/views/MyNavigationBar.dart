@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/views/notification/noti_normal.dart';
+import 'package:tester/src/views/notification/noti_normal_screen.dart';
 import 'package:tester/src/views/xemProfile.dart';
 import 'package:tester/src/views/MainNguoiKK.dart';
 import 'package:tester/src/views/MainNhaHT.dart';
