@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:tester/src/views/MainNguoiKK.dart';
 import 'package:tester/src/views/MainNhaHT.dart';
 import 'package:tester/src/views/DangKyNhap.dart';
@@ -7,8 +7,8 @@ import 'package:tester/src/views/SharedPreferences.dart';
 import 'package:tester/src/views/MyNavigationBar.dart';
 import 'package:tester/src/views/XemBaiDangKhoKhanDemo.dart';
 import 'package:tester/src/views/notification/noti_emergency.dart';
-import 'package:tester/src/views/notification/cubit/notification_cubit.dart';
-import 'package:tester/src/views/notification/cubit/notification_state.dart';
+import 'package:tester/src/viewmodels/notification/notification_viewmodel.dart';
+import 'package:tester/src/repositories/impl/notification_repository_impl.dart';
 import 'package:tester/src/models/notification/notification_model.dart'
     as model;
 
@@ -30,13 +30,14 @@ class _NotiNormalState extends State<NotiNormal> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NotificationCubit()..loadNotifications(),
-      child: BlocBuilder<NotificationCubit, NotificationState>(
-        builder: (context, state) {
+    return ChangeNotifierProvider(
+      create: (context) => NotificationViewModel(NotificationRepositoryImpl())
+        ..loadNotifications(),
+      child: Consumer<NotificationViewModel>(
+        builder: (context, viewModel, child) {
           return Scaffold(
-            appBar: _buildAppBar(context, state),
-            body: _buildBody(context, state),
+            appBar: _buildAppBar(context, viewModel),
+            body: _buildBody(context, viewModel),
             bottomNavigationBar: MyNavigationBar(
               currentIndex: _currentIndex,
               onTap: _onTabTapped,
@@ -47,14 +48,8 @@ class _NotiNormalState extends State<NotiNormal> {
     );
   }
 
-  AppBar _buildAppBar(BuildContext context, NotificationState state) {
-    int normalCount = 0;
-    if (state is NotificationLoaded) {
-      normalCount = state.filteredNotifications
-          .where((notification) =>
-              notification.type == 'normal' && !notification.isRead)
-          .length;
-    }
+  AppBar _buildAppBar(BuildContext context, NotificationViewModel viewModel) {
+    int normalCount = viewModel.normalNotificationCount;
 
     return AppBar(
       backgroundColor: Colors.white,
@@ -139,7 +134,7 @@ class _NotiNormalState extends State<NotiNormal> {
     );
   }
 
-  Widget _buildBody(BuildContext context, NotificationState state) {
+  Widget _buildBody(BuildContext context, NotificationViewModel viewModel) {
     return Column(
       children: [
         Padding(
@@ -196,27 +191,26 @@ class _NotiNormalState extends State<NotiNormal> {
           ),
         ),
         Expanded(
-          child: _buildNotificationList(context, state),
+          child: _buildNotificationList(context, viewModel),
         ),
       ],
     );
   }
 
-  Widget _buildNotificationList(BuildContext context, NotificationState state) {
-    if (state is NotificationLoading) {
+  Widget _buildNotificationList(
+      BuildContext context, NotificationViewModel viewModel) {
+    if (viewModel.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (state is NotificationError) {
+    if (viewModel.hasError) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(state.message),
+            Text(viewModel.errorMessage),
             ElevatedButton(
-              onPressed: () {
-                context.read<NotificationCubit>().loadNotifications();
-              },
+              onPressed: () => viewModel.retry(),
               child: const Text('Thử lại'),
             ),
           ],
@@ -224,31 +218,23 @@ class _NotiNormalState extends State<NotiNormal> {
       );
     }
 
-    if (state is NotificationLoaded) {
-      // Filter to show only normal notifications
-      final normalNotifications = state.filteredNotifications
-          .where((notification) => notification.type == 'normal')
-          .toList();
-
-      if (normalNotifications.isEmpty) {
-        return const Center(
-          child: Text('Không có thông báo nào'),
-        );
-      }
-
-      return ListView.builder(
-        itemCount: normalNotifications.length,
-        itemBuilder: (context, index) {
-          final notification = normalNotifications[index];
-          return NotificationCardWidget(
-            notification: notification,
-            onTap: () => _handleNotificationTap(context, notification),
-          );
-        },
+    final normalNotifications = viewModel.normalNotifications;
+    if (normalNotifications.isEmpty) {
+      return const Center(
+        child: Text('Không có thông báo nào'),
       );
     }
 
-    return const Center(child: Text('Không có dữ liệu'));
+    return ListView.builder(
+      itemCount: normalNotifications.length,
+      itemBuilder: (context, index) {
+        final notification = normalNotifications[index];
+        return NotificationCardWidget(
+          notification: notification,
+          onTap: () => _handleNotificationTap(context, notification),
+        );
+      },
+    );
   }
 
   void _showFilterOptions(BuildContext context) {
@@ -308,7 +294,7 @@ class _NotiNormalState extends State<NotiNormal> {
   void _handleNotificationTap(
       BuildContext context, model.NotificationCard notification) {
     // Mark as read when tapped
-    context.read<NotificationCubit>().markAsRead(notification.id);
+    context.read<NotificationViewModel>().markAsRead(notification.id);
 
     // Only navigate if the title matches the specific one
     if (notification.title ==
