@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tester/src/theme/app_theme/app_theme.dart';
-import '../theme/app_size.dart';
+import '../../theme/app_size.dart';
 
 class UserProfileUpdate extends StatefulWidget {
   const UserProfileUpdate({super.key});
@@ -16,8 +16,7 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
-  final TextEditingController _cccdController =
-      TextEditingController(); // Thêm controller cho CCCD
+  final TextEditingController _cccdController = TextEditingController();
 
   @override
   void initState() {
@@ -128,7 +127,7 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
-            _currentIndex = index; // Cập nhật chỉ mục hiện tại
+            _currentIndex = index;
           });
         },
         items: [
@@ -189,7 +188,7 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
         const SizedBox(height: 8),
         TextField(
           controller: controller,
-          readOnly: !isEditable, // Điều chỉnh tính chỉnh sửa của trường
+          readOnly: !isEditable,
           decoration: InputDecoration(
             prefixIcon: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -199,12 +198,8 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
               borderRadius: BorderRadius.circular(8),
             ),
             filled: true,
-            fillColor: isEditable
-                ? Colors.white
-                : Colors.grey[300], // Làm mờ các trường không chỉnh sửa
-            hintText: isEditable
-                ? null
-                : "Không thể sửa", // Hiển thị thông báo không thể sửa nếu trường không chỉnh sửa
+            fillColor: isEditable ? Colors.white : Colors.grey[300],
+            hintText: isEditable ? null : "Không thể sửa",
             hintStyle: const TextStyle(color: Colors.grey),
           ),
         ),

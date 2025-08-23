@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/views/notification/noti_normal_screen.dart';
-import 'package:tester/src/views/xemProfile.dart';
+import 'package:tester/src/views/user_profile/user_profile_view.dart';
 import 'package:tester/src/views/MainNguoiKK.dart';
 import 'package:tester/src/views/MainNhaHT.dart';
 import 'package:tester/src/views/DangKyNhap.dart';
@@ -53,7 +53,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
               page = const NotiNormal();
               break;
             case 3: // Trang cá nhân
-              page = const Xemprofile();
+              page = const UserProfileView();
               break;
           }
         }

@@ -4,18 +4,18 @@ import 'package:tester/src/views/MainNhaHT.dart';
 import 'package:tester/src/views/DangKyNhap.dart';
 import 'package:tester/src/views/SharedPreferences.dart';
 import 'package:tester/src/views/MyNavigationBar.dart';
-import 'package:tester/src/views/user_profile_update.dart';
+import 'package:tester/src/views/user_profile/user_profile_update.dart';
 import 'package:flutter/material.dart';
-import '../theme/app_size.dart';
+import '../../theme/app_size.dart';
 
-class Xemprofile extends StatefulWidget {
-  const Xemprofile({super.key});
+class UserProfileView extends StatefulWidget {
+  const UserProfileView({super.key});
 
   @override
-  _XemprofileState createState() => _XemprofileState();
+  _UserProfileViewState createState() => _UserProfileViewState();
 }
 
-class _XemprofileState extends State<Xemprofile> {
+class _UserProfileViewState extends State<UserProfileView> {
   int _currentIndex = 3;
 
   void _onTabTapped(int index) {
