@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/views/auth/signup/signup_screen.dart';
+import 'package:tester/src/views/auth/login/login_screen.dart';
 import 'package:tester/src/views/auth/signup/signup_type_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const SignupScreen()),
+                                                  const LoginScreen()),
                                         );
                                       },
                                       child: const Text(
@@ -119,7 +119,7 @@ class WelcomeScreen extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const SignupScreen()),
+                                          const LoginScreen()),
                                 );
                               },
                               child: const Text(

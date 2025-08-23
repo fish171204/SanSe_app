@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/views/auth/signup/signup_screen.dart';
+import 'package:tester/src/views/auth/login/login_screen.dart';
 
 class NotificationBenefactor extends StatelessWidget {
   const NotificationBenefactor({super.key});
@@ -114,7 +114,7 @@ class NotificationBenefactor extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SignupScreen()),
+                                  builder: (context) => const LoginScreen()),
                             );
                           },
                           child: IntrinsicHeight(

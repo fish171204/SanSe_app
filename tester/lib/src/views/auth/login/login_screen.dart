@@ -8,16 +8,16 @@ import 'package:flutter/gestures.dart';
 import 'package:tester/src/views/admin/admin_screen.dart';
 
 //
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  _SignupScreenState createState() => _SignupScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
 bool _isPasswordHidden = true;
 
-class _SignupScreenState extends State<SignupScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _cccdController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
