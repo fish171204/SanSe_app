@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tester/src/models/user_location/user_district.dart';
 import 'package:tester/src/models/user_location/user_ward.dart';
 import 'package:tester/src/models/user_location/user_province.dart';
-import 'package:tester/src/views/auth/signup/widgets/notification_benefactor.dart';
+import 'package:tester/src/views/auth/widgets/notification_benefactor.dart';
 import 'package:tester/src/views/widgets/build_combo_box_ward.dart';
 import 'package:tester/src/views/widgets/build_combo_box_district.dart';
 import 'package:tester/src/views/widgets/build_combo_box_province.dart';

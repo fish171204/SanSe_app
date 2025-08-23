@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/views/auth/signup/widgets/notification_needy_person.dart';
+import 'package:tester/src/views/auth/widgets/notification_needy_person.dart';
 import 'package:tester/src/views/widgets/build_combo_box_province.dart';
 import 'package:tester/src/views/widgets/build_combo_box_district.dart';
 import 'package:tester/src/views/widgets/build_combo_box_ward.dart';
