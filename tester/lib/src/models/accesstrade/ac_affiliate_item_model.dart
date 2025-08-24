@@ -1,16 +1,16 @@
-class AffiliateItem {
+class AffiliateItemModel {
   final String image;
   final String title;
   final String? url;
 
-  const AffiliateItem({
+  const AffiliateItemModel({
     required this.image,
     required this.title,
     this.url,
   });
 
-  factory AffiliateItem.fromMap(Map<String, String> map) {
-    return AffiliateItem(
+  factory AffiliateItemModel.fromMap(Map<String, String> map) {
+    return AffiliateItemModel(
       image: map['image'] ?? '',
       title: map['title'] ?? '',
       url: map['url'],
@@ -28,7 +28,7 @@ class AffiliateItem {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is AffiliateItem &&
+    return other is AffiliateItemModel &&
         other.image == image &&
         other.title == title &&
         other.url == url;
@@ -39,6 +39,6 @@ class AffiliateItem {
 
   @override
   String toString() {
-    return 'AffiliateItem(image: $image, title: $title, url: $url)';
+    return 'AffiliateItemModel(image: $image, title: $title, url: $url)';
   }
 }

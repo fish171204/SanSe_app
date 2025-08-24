@@ -1,11 +1,11 @@
-import 'package:tester/src/models/accesstrade/ac_affiliate_item.dart';
+import 'package:tester/src/models/accesstrade/ac_affiliate_item_model.dart';
 
-import '../../models/accesstrade/ac_category_data.dart';
+import '../../models/accesstrade/ac_category_data_model.dart';
 
 abstract class AffiliateRepository {
   Future<List<String>> getCategories();
-  Future<List<AffiliateItem>> getItemsByCategory(String category);
-  Future<List<AffiliateItem>> searchItems(String query, String category);
+  Future<List<AffiliateItemModel>> getItemsByCategory(String category);
+  Future<List<AffiliateItemModel>> searchItems(String query, String category);
 }
 
 class AffiliateRepositoryImpl implements AffiliateRepository {
@@ -17,16 +17,17 @@ class AffiliateRepositoryImpl implements AffiliateRepository {
   }
 
   @override
-  Future<List<AffiliateItem>> getItemsByCategory(String category) async {
+  Future<List<AffiliateItemModel>> getItemsByCategory(String category) async {
     // Simulate network delay
     await Future.delayed(const Duration(milliseconds: 50));
 
     final items = categoryData[category] ?? [];
-    return items.map((item) => AffiliateItem.fromMap(item)).toList();
+    return items.map((item) => AffiliateItemModel.fromMap(item)).toList();
   }
 
   @override
-  Future<List<AffiliateItem>> searchItems(String query, String category) async {
+  Future<List<AffiliateItemModel>> searchItems(
+      String query, String category) async {
     // Simulate network delay
     await Future.delayed(const Duration(milliseconds: 50));
 

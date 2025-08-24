@@ -1,4 +1,4 @@
-class AffiliateMarketing {
+class AffiliateMarketingModel {
   final int idDoanhNghiep;
   final String tenDoanhNghiep;
   final String logoURL;
@@ -6,7 +6,7 @@ class AffiliateMarketing {
   final String? moTa;
   final int? idMuaHang;
 
-  AffiliateMarketing({
+  AffiliateMarketingModel({
     required this.idDoanhNghiep,
     required this.tenDoanhNghiep,
     required this.logoURL,
@@ -15,8 +15,8 @@ class AffiliateMarketing {
     this.idMuaHang,
   });
 
-  factory AffiliateMarketing.fromJson(Map<String, dynamic> json) {
-    return AffiliateMarketing(
+  factory AffiliateMarketingModel.fromJson(Map<String, dynamic> json) {
+    return AffiliateMarketingModel(
       idDoanhNghiep: json['IDDoanhNghiep'],
       tenDoanhNghiep: json['TenDoanhNghiep'],
       logoURL: json['LogoURL'],

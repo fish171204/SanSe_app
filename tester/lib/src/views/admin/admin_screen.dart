@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/views/auth/login/login_screen.dart';
-import 'package:tester/src/views/admin/admin_post_management_tab.dart';
-import 'package:tester/src/views/admin/admin_user_management_tab.dart';
+import 'admin_user_management_tab.dart';
+import 'admin_post_management_tab.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -11,69 +11,6 @@ class AdminScreen extends StatefulWidget {
 }
 
 class _AdminScreenState extends State<AdminScreen> {
-  List<Map<String, dynamic>> users = [
-    {
-      "name": "Nguyễn Đăng Khoa",
-      "cccd": "054204003257",
-      "avatar": "assets/images/AnhCV.jpg",
-      "lastLoginDate": "2025-04-01",
-    },
-    {
-      "name": "Lê Thị Thúy Kiều",
-      "cccd": "045304004088",
-      "avatar": "assets/images/HinhAnh_Demo.jpg",
-      "lastLoginDate": "2025-04-01",
-    },
-    {
-      "name": "Nguyễn Văn HH",
-      "cccd": "045304004214",
-      "avatar": "assets/images/onghuy.png",
-      "lastLoginDate": "2025-03-28",
-    },
-    {
-      "name": "Đinh Thị TT",
-      "cccd": "045304004888",
-      "avatar": "assets/images/HinhAnh_Demo1.jpg",
-      "lastLoginDate": "2025-03-28",
-    },
-    {
-      "name": "Nguyễn Văn Huy",
-      "cccd": "045304004311",
-      "avatar": "assets/images/nguoikhokhan1.jpg",
-      "lastLoginDate": "2025-03-05",
-    },
-    {
-      "name": "Nguyễn Thị Hòa",
-      "cccd": "045304005132",
-      "avatar": "assets/images/nguoikhokhan2.jpg",
-      "lastLoginDate": "2025-03-05",
-    },
-    {
-      "name": "Thái Thị Hoa",
-      "cccd": "045304005444",
-      "avatar": "assets/images/nguoikhokhan3.jpg",
-      "lastLoginDate": "2025-03-02",
-    },
-    {
-      "name": "Lại Tiến Dũng",
-      "cccd": "045304005326",
-      "avatar": "assets/images/nguoikhokhan4.jpg",
-      "lastLoginDate": "2025-03-02",
-    },
-    {
-      "name": "Trần Văn Kiên",
-      "cccd": "045304004888",
-      "avatar": "assets/images/nguoikhokhan5.jpg",
-      "lastLoginDate": "2025-03-01",
-    },
-    {
-      "name": "Nguyễn Thanh Trường",
-      "cccd": "045304004005",
-      "avatar": "assets/images/nguoikhokhan6.jpg",
-      "lastLoginDate": "2025-02-28",
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -95,7 +32,7 @@ class _AdminScreenState extends State<AdminScreen> {
           actions: [
             IconButton(
               icon: const Icon(Icons.exit_to_app, color: Colors.white),
-              iconSize: 30.0, // Điều chỉnh kích thước của icon
+              iconSize: 30.0,
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
@@ -112,10 +49,10 @@ class _AdminScreenState extends State<AdminScreen> {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            UserManagementTab(users: users),
-            const PostManagementTab(),
+            UserManagementScreen(),
+            PostManagementScreen(),
           ],
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../repositories/accesstrade/ac_affiliate_marketing_repository.dart';
-import '../../models/accesstrade/ac_affiliate_item.dart';
+import '../../models/accesstrade/ac_affiliate_item_model.dart';
 import 'cubit/ac_affilliate_marketing_cubit.dart';
 import 'cubit/ac_affilliate_marketing_state.dart';
 
@@ -145,7 +145,7 @@ class _AffiliateMarketingScreenViewState
     );
   }
 
-  Widget _buildItemGrid(List<AffiliateItem> items) {
+  Widget _buildItemGrid(List<AffiliateItemModel> items) {
     return Expanded(
       child: GridView.count(
         crossAxisCount: 2,
@@ -188,7 +188,7 @@ class _AffiliateMarketingScreenViewState
     );
   }
 
-  Widget _gridItem(AffiliateItem item) {
+  Widget _gridItem(AffiliateItemModel item) {
     return GestureDetector(
       onTap: () => context.read<AffiliateCubit>().openUrl(item.url),
       child: Column(

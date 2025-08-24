@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../../models/accesstrade/ac_affiliate_item.dart';
+import '../../../models/accesstrade/ac_affiliate_item_model.dart';
 
 abstract class AffiliateState extends Equatable {
   const AffiliateState();
@@ -15,8 +15,8 @@ class AffiliateLoading extends AffiliateState {}
 class AffiliateLoaded extends AffiliateState {
   final List<String> categories;
   final String selectedCategory;
-  final List<AffiliateItem> currentItems;
-  final List<AffiliateItem> filteredItems;
+  final List<AffiliateItemModel> currentItems;
+  final List<AffiliateItemModel> filteredItems;
   final String searchQuery;
 
   const AffiliateLoaded({
@@ -30,8 +30,8 @@ class AffiliateLoaded extends AffiliateState {
   AffiliateLoaded copyWith({
     List<String>? categories,
     String? selectedCategory,
-    List<AffiliateItem>? currentItems,
-    List<AffiliateItem>? filteredItems,
+    List<AffiliateItemModel>? currentItems,
+    List<AffiliateItemModel>? filteredItems,
     String? searchQuery,
   }) {
     return AffiliateLoaded(

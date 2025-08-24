@@ -1,39 +1,219 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../repositories/admin/user_management_repository.dart';
+import '../../models/admin/admin_user_model.dart';
+import 'cubit/user_management_cubit.dart';
+import 'cubit/user_management_state.dart';
 
-class UserManagementTab extends StatefulWidget {
-  final List<Map<String, dynamic>> users; 
-
-  const UserManagementTab({super.key, required this.users});
+class UserManagementScreen extends StatelessWidget {
+  const UserManagementScreen({super.key});
 
   @override
-  _UserManagementTabState createState() => _UserManagementTabState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          UserManagementCubit(UserRepositoryImpl())..loadUsers(),
+      child: const _UserManagementView(),
+    );
+  }
 }
 
-class _UserManagementTabState extends State<UserManagementTab> {
-  int _filterDays = 0;
+class _UserManagementView extends StatefulWidget {
+  const _UserManagementView();
 
-  int _calculateDaysInactive(String lastLoginDate) {
-    DateTime lastLogin = DateTime.parse(lastLoginDate);
-    DateTime now = DateTime.now();
-    return now.difference(lastLogin).inDays;
+  @override
+  State<_UserManagementView> createState() => _UserManagementViewState();
+}
+
+class _UserManagementViewState extends State<_UserManagementView> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<UserManagementCubit, UserManagementState>(
+      listener: (context, state) {
+        if (state is UserManagementActionSuccess) {
+          if (state.userName != null && state.userCCCD != null) {
+            _showSuccessDialog(state.message, state.userName!, state.userCCCD!);
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.message)),
+            );
+          }
+        } else if (state is UserManagementError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state is UserManagementLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is UserManagementLoaded) {
+          return _buildUserList(state);
+        } else if (state is UserManagementError) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(state.message),
+                ElevatedButton(
+                  onPressed: () =>
+                      context.read<UserManagementCubit>().loadUsers(),
+                  child: const Text('Thử lại'),
+                ),
+              ],
+            ),
+          );
+        }
+        return const SizedBox.shrink();
+      },
+    );
   }
 
-  List<Map<String, dynamic>> _getFilteredUsers() {
-    return widget.users.where((user) {
-      int daysInactive = _calculateDaysInactive(user['lastLoginDate']);
-      return daysInactive >= _filterDays;
-    }).toList();
+  Widget _buildUserList(UserManagementLoaded state) {
+    return Column(
+      children: [
+        _buildFilterSection(state),
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+            itemCount: state.filteredUsers.length,
+            itemBuilder: (context, index) {
+              final user = state.filteredUsers[index];
+              return _buildUserCard(user);
+            },
+          ),
+        ),
+      ],
+    );
   }
 
-  void _deleteUser(int index) {
-    String userName = widget.users[index]['name'];
-    String userCCCD = widget.users[index]['cccd'];
+  Widget _buildFilterSection(UserManagementLoaded state) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          const Text(
+            'Lọc theo số ngày hoạt động:',
+            style: TextStyle(fontSize: 16),
+          ),
+          const SizedBox(width: 10),
+          DropdownButton<int>(
+            value: state.filterDays,
+            onChanged: (newValue) {
+              if (newValue != null) {
+                context.read<UserManagementCubit>().filterUsers(newValue);
+              }
+            },
+            items: const [
+              DropdownMenuItem(
+                value: 0,
+                child: Text('Tất cả người dùng'),
+              ),
+              DropdownMenuItem(
+                value: 30,
+                child: Text('30 ngày trở đi'),
+              ),
+              DropdownMenuItem(
+                value: 60,
+                child: Text('60 ngày trở đi'),
+              ),
+              DropdownMenuItem(
+                value: 90,
+                child: Text('90 ngày trở đi'),
+              ),
+              DropdownMenuItem(
+                value: 365,
+                child: Text('1 năm trở đi'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 
+  Widget _buildUserCard(AdminUserModel user) {
+    final daysInactive = user.getDaysInactive();
+
+    return Card(
+      elevation: 4,
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(10),
+        leading: CircleAvatar(
+          radius: 30,
+          backgroundImage: AssetImage(user.avatar),
+        ),
+        title: Text(
+          user.name,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("CCCD: ${user.cccd}"),
+            Row(
+              children: [
+                const Text("Trạng thái: "),
+                Text(
+                  user.status,
+                  style: TextStyle(
+                    color:
+                        user.status == 'Hoạt động' ? Colors.green : Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Text("Số ngày không hoạt động: $daysInactive ngày"),
+          ],
+        ),
+        trailing: PopupMenuButton<String>(
+          onSelected: (value) {
+            switch (value) {
+              case 'delete':
+                _confirmDeleteUser(user);
+                break;
+              case 'suspend':
+                _confirmSuspendUser(user);
+                break;
+              case 'unlock':
+                _confirmUnlockUser(user);
+                break;
+            }
+          },
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+            const PopupMenuItem<String>(
+              value: 'delete',
+              child: Text('Xóa'),
+            ),
+            const PopupMenuItem<String>(
+              value: 'suspend',
+              child: Text('Tạm khóa'),
+            ),
+            const PopupMenuItem<String>(
+              value: 'unlock',
+              child: Text('Mở khóa'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _confirmDeleteUser(AdminUserModel user) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text("Xác nhận xóa"),
-        content: Text("Bạn có chắc muốn xóa $userName không?"),
+        content: Text("Bạn có chắc muốn xóa ${user.name} không?"),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -41,13 +221,8 @@ class _UserManagementTabState extends State<UserManagementTab> {
           ),
           TextButton(
             onPressed: () {
-              setState(() {
-                widget.users.removeAt(index);
-              });
               Navigator.pop(context);
-              Future.delayed(const Duration(milliseconds: 300), () {
-                _showSuccessDialog(userName, userCCCD);
-              });
+              context.read<UserManagementCubit>().deleteUser(user.cccd);
             },
             child: const Text("Xóa", style: TextStyle(color: Colors.red)),
           ),
@@ -56,8 +231,54 @@ class _UserManagementTabState extends State<UserManagementTab> {
     );
   }
 
-// Hiển thị thông báo xóa thành công với icon
-  void _showSuccessDialog(String name, String cccd) {
+  void _confirmSuspendUser(AdminUserModel user) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Xác nhận tạm khóa"),
+        content: Text("Bạn có chắc muốn tạm khóa ${user.name} không?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Hủy"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              context.read<UserManagementCubit>().suspendUser(user.cccd);
+            },
+            child:
+                const Text("Tạm khóa", style: TextStyle(color: Colors.orange)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _confirmUnlockUser(AdminUserModel user) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Xác nhận mở khóa"),
+        content: Text("Bạn có chắc muốn mở khóa ${user.name} không?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Hủy"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              context.read<UserManagementCubit>().unlockUser(user.cccd);
+            },
+            child: const Text("Mở khóa", style: TextStyle(color: Colors.green)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showSuccessDialog(String message, String name, String cccd) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -79,10 +300,11 @@ class _UserManagementTabState extends State<UserManagementTab> {
                   size: 60,
                 ),
                 const SizedBox(height: 15),
-                const Text(
-                  "Xóa người dùng thành công!",
+                Text(
+                  message,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -105,198 +327,6 @@ class _UserManagementTabState extends State<UserManagementTab> {
           ),
         );
       },
-    );
-  }
-
-  // Hàm để tạm khóa người dùng với thông báo xác nhận
-  void _suspendUser(int index) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Xác nhận tạm khóa"),
-        content: Text(
-            "Bạn có chắc muốn tạm khóa ${widget.users[index]['name']} không?"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Hủy"),
-          ),
-          TextButton(
-            onPressed: () {
-              setState(() {
-                widget.users[index]['status'] = 'Tạm khóa';
-              });
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Tạm khóa người dùng thành công")),
-              );
-            },
-            child:
-                const Text("Tạm khóa", style: TextStyle(color: Colors.orange)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Hàm mở khóa người dùng
-  void _unlockUser(int index) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Xác nhận mở khóa"),
-        content: Text(
-            "Bạn có chắc muốn mở khóa ${widget.users[index]['name']} không?"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Hủy"),
-          ),
-          TextButton(
-            onPressed: () {
-              setState(() {
-                widget.users[index]['status'] = 'Hoạt động';
-              });
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Mở khóa người dùng thành công")),
-              );
-            },
-            child: const Text("Mở khóa", style: TextStyle(color: Colors.green)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Bộ lọc số ngày không hoạt động
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const Text(
-                'Lọc theo số ngày hoạt động:',
-                style: TextStyle(fontSize: 16),
-              ),
-              const SizedBox(width: 10),
-              DropdownButton<int>(
-                value: _filterDays,
-                onChanged: (newValue) {
-                  setState(() {
-                    _filterDays = newValue!;
-                  });
-                },
-                items: const [
-                  DropdownMenuItem(
-                    value: 0,
-                    child: Text('Tất cả người dùng'),
-                  ),
-                  DropdownMenuItem(
-                    value: 30,
-                    child: Text('30 ngày trở đi'),
-                  ),
-                  DropdownMenuItem(
-                    value: 60,
-                    child: Text('60 ngày trở đi'),
-                  ),
-                  DropdownMenuItem(
-                    value: 90,
-                    child: Text('90 ngày trở đi'),
-                  ),
-                  DropdownMenuItem(
-                    value: 365,
-                    child: Text('1 năm trở đi'),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        // Danh sách người dùng sau khi lọc
-        Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-            itemCount: _getFilteredUsers().length,
-            itemBuilder: (context, index) {
-              Map<String, dynamic> user = _getFilteredUsers()[index];
-              int daysInactive = _calculateDaysInactive(user['lastLoginDate']);
-
-              return Card(
-                elevation: 4,
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(10),
-                  leading: CircleAvatar(
-                    radius: 30,
-                    backgroundImage: AssetImage(user['avatar']),
-                  ),
-                  title: Text(
-                    user['name']!,
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("CCCD: ${user['cccd']}"),
-                      Row(
-                        children: [
-                          const Text("Trạng thái: "),
-                          Text(
-                            user['status'] ?? 'Hoạt động',
-                            style: TextStyle(
-                              color:
-                                  (user['status'] ?? 'Hoạt động') == 'Hoạt động'
-                                      ? Colors.green
-                                      : Colors.red,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Text("Số ngày không hoạt động: $daysInactive ngày"),
-                    ],
-                  ),
-                  trailing: PopupMenuButton<String>(
-                    onSelected: (value) {
-                      if (value == 'delete') {
-                        _deleteUser(index);
-                      } else if (value == 'suspend') {
-                        _suspendUser(index);
-                      } else if (value == 'unlock') {
-                        _unlockUser(index);
-                      }
-                    },
-                    itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<String>>[
-                      const PopupMenuItem<String>(
-                        value: 'delete',
-                        child: Text('Xóa'),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'suspend',
-                        child: Text('Tạm khóa'),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'unlock',
-                        child: Text('Mở khóa'),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
     );
   }
 }

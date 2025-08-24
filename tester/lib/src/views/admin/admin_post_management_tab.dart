@@ -1,200 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tester/src/repositories/admin/post_management_repository.dart';
+import '../../models/admin/admin_post_model.dart';
+import 'cubit/post_management_cubit.dart';
+import 'cubit/post_management_state.dart';
 
-class PostManagementTab extends StatefulWidget {
-  const PostManagementTab({super.key});
+class PostManagementScreen extends StatelessWidget {
+  const PostManagementScreen({super.key});
 
   @override
-  _PostManagementTabState createState() => _PostManagementTabState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          PostManagementCubit(PostRepositoryImpl())..loadPosts(),
+      child: const _PostManagementView(),
+    );
+  }
 }
 
-class _PostManagementTabState extends State<PostManagementTab> {
-  String _searchQuery = "";
-  String _selectedFilter = "Tất cả";
+class _PostManagementView extends StatefulWidget {
+  const _PostManagementView();
+
+  @override
+  State<_PostManagementView> createState() => _PostManagementViewState();
+}
+
+class _PostManagementViewState extends State<_PostManagementView> {
   final TextEditingController _searchController = TextEditingController();
-  List<Map<String, dynamic>> posts = [
-    {
-      "imagePath": "assets/images/HinhAnh_Demo.jpg",
-      "title": "Tính mạng mong manh của bé gái 3 tuổi mắc bệnh xơ gan",
-      "subtitle": "1 lượt ủng hộ • Còn lại 18 ngày",
-      "amount": "5.000.000 đ",
-      "progress": 100,
-      "originalProgress": 100,
-      "isDeleted": false,
-      "status": "unavailable",
-    },
-    {
-      "imagePath": "assets/images/chiendich1.jpg",
-      "title": "Hành trình nhân đạo - Lan tỏa yêu thương",
-      "subtitle": "1403 lượt ủng hộ • Còn lại 23 ngày",
-      "amount": "143.888.455 đ",
-      "progress": 14,
-      "originalProgress": 14,
-      "isDeleted": false,
-      "status": "available",
-    },
-    {
-      "imagePath": "assets/images/chiendich2.jpg",
-      "title": "Chung tay mang yêu thương đến cho trẻ em",
-      "subtitle": "453 lượt ủng hộ • Còn lại 36 ngày",
-      "amount": "24.211.956 đ",
-      "progress": 40,
-      "originalProgress": 40,
-      "isDeleted": false,
-      "status": "unavailable",
-    },
-    {
-      "imagePath": "assets/images/chiendich3.jpg",
-      "title": "CON ĐƯỜNG MƠ ƯỚC SỐ 3",
-      "subtitle": "1177 lượt ủng hộ • Còn lại 38 ngày",
-      "amount": "28.934.033 đ",
-      "progress": 36,
-      "originalProgress": 36,
-      "isDeleted": false,
-      "status": "available",
-    },
-    {
-      "imagePath": "assets/images/chiendich4.jpg",
-      "title": "Cầu Mơ Ước số 8",
-      "subtitle": "192 lượt ủng hộ • Còn lại 39 ngày",
-      "amount": "6.471.490 đ",
-      "progress": 22,
-      "originalProgress": 22,
-      "isDeleted": false,
-      "status": "unavailable",
-    },
-    {
-      "imagePath": "assets/images/chiendich5.jpg",
-      "title": "Dự Án Xây Cầu Tại Xã Rạch Chèo; huyện Phú Tân; Tỉnh Cà Mau",
-      "subtitle": "784 lượt ủng hộ • Còn lại 2 ngày",
-      "amount": "105.471.490 đ",
-      "progress": 28,
-      "originalProgress": 28,
-      "isDeleted": false,
-      "status": "available",
-    },
-    {
-      "imagePath": "assets/images/chiendich6.jpg",
-      "title": "Quỹ Yêu thương HLC",
-      "subtitle": "1.804 lượt ủng hộ • Còn lại 1013 ngày",
-      "amount": "155.551.490 đ",
-      "progress": 44,
-      "originalProgress": 44,
-      "isDeleted": false,
-      "status": "available",
-    },
-    {
-      "imagePath": "assets/images/chiendich7.jpg",
-      "title": "Dự Án Hiện Thực Hoá Ước Mơ...",
-      "subtitle": "656 lượt ủng hộ • Còn lại 7 ngày",
-      "amount": "25.000.000 đ",
-      "progress": 100,
-      "originalProgress": 100,
-      "isDeleted": false,
-      "status": "available",
-    },
-    {
-      "imagePath": "assets/images/chiendich8.jpg",
-      "title": "Lời khẩn cầu của một người mẹ...",
-      "subtitle": "191 lượt ủng hộ • Còn lại 6 ngày",
-      "amount": "6.471.222 đ",
-      "progress": 59,
-      "originalProgress": 59,
-      "isDeleted": false,
-      "status": "available",
-    },
-    {
-      "imagePath": "assets/images/chiendich9.jpg",
-      "title": "Dự án cúng dường đại hồng...",
-      "subtitle": "2.517 lượt ủng hộ • Còn lại 29 ngày",
-      "amount": "73.397.490 đ",
-      "progress": 12,
-      "originalProgress": 12,
-      "isDeleted": false,
-      "status": "available",
-    },
-    {
-      "imagePath": "assets/images/chiendich10.jpg",
-      "title": "Dự án kêu gọi quỹ Mixed Nuts",
-      "subtitle": "4.623 lượt ủng hộ • Còn lại 24 ngày",
-      "amount": "160.020.490 đ",
-      "progress": 39,
-      "originalProgress": 39,
-      "isDeleted": false,
-      "status": "available",
-    },
-  ];
 
-  void _changeStatus(String title, String newStatus) {
-    setState(() {
-      var post = posts.firstWhere((post) => post["title"] == title);
-
-      if (newStatus == "unavailable") {
-        post["originalProgress"] = post["progress"];
-        post["status"] = "unavailable";
-        post["progress"] = 100;
-      } else if (newStatus == "available") {
-        post["status"] = "available";
-        post["progress"] = post["originalProgress"];
-      }
-    });
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
   }
 
-  void _onSearchChanged(String query) {
-    setState(() {
-      _searchQuery = query;
-    });
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged() {
+    context.read<PostManagementCubit>().searchPosts(_searchController.text);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: TextField(
-              controller: _searchController,
-              onChanged: _onSearchChanged,
-              decoration: InputDecoration(
-                hintText: "Nhập tên bài đăng",
-                prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                filled: true,
-                fillColor: Colors.grey[200],
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide.none,
-                ),
-              ),
+    return BlocConsumer<PostManagementCubit, PostManagementState>(
+      listener: (context, state) {
+        if (state is PostManagementActionSuccess) {
+          _showSuccessDialog(state.message);
+        } else if (state is PostManagementError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+              backgroundColor: Colors.red,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state is PostManagementLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is PostManagementLoaded) {
+          return _buildPostList(state);
+        } else if (state is PostManagementError) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Lọc bài đăng:",
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                DropdownButton<String>(
-                  value: _selectedFilter,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedFilter = value!;
-                    });
-                  },
-                  items: ["Tất cả", "Chưa hoàn thành", "Đã hoàn thành"]
-                      .map((filter) => DropdownMenuItem(
-                            value: filter,
-                            child: Text(filter),
-                          ))
-                      .toList(),
+                Text(state.message),
+                ElevatedButton(
+                  onPressed: () =>
+                      context.read<PostManagementCubit>().loadPosts(),
+                  child: const Text('Thử lại'),
                 ),
               ],
             ),
-          ),
+          );
+        }
+        return const SizedBox.shrink();
+      },
+    );
+  }
+
+  Widget _buildPostList(PostManagementLoaded state) {
+    return Scaffold(
+      body: Column(
+        children: [
+          _buildSearchBar(),
+          _buildFilterSection(state),
           Expanded(
             child: ListView(
-              children: _buildFilteredPosts(),
+              children: state.filteredPosts
+                  .map((post) => _buildPostItem(post))
+                  .toList(),
             ),
           ),
         ],
@@ -202,27 +103,55 @@ class _PostManagementTabState extends State<PostManagementTab> {
     );
   }
 
-  // Để hiển thị các bài đăng và trạng thái
-  List<Widget> _buildFilteredPosts() {
-    return posts
-        .where((post) =>
-            post["title"].toLowerCase().contains(_searchQuery.toLowerCase()) &&
-            !_isFilteredOut(post) && // Áp dụng bộ lọc
-            !post["isDeleted"])
-        .map((post) => _buildPostItem(
-              post["imagePath"],
-              post["title"],
-              post["subtitle"],
-              post["amount"],
-              post["progress"],
-              post["status"],
-            ))
-        .toList();
+  Widget _buildSearchBar() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: TextField(
+        controller: _searchController,
+        decoration: InputDecoration(
+          hintText: "Nhập tên bài đăng",
+          prefixIcon: const Icon(Icons.search, color: Colors.grey),
+          filled: true,
+          fillColor: Colors.grey[200],
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide: BorderSide.none,
+          ),
+        ),
+      ),
+    );
   }
 
-  // Xây dựng item cho bài đăng
-  Widget _buildPostItem(String imagePath, String title, String subtitle,
-      String amount, int progress, String status) {
+  Widget _buildFilterSection(PostManagementLoaded state) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            "Lọc bài đăng:",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          DropdownButton<String>(
+            value: state.selectedFilter,
+            onChanged: (value) {
+              if (value != null) {
+                context.read<PostManagementCubit>().filterPosts(value);
+              }
+            },
+            items: ["Tất cả", "Chưa hoàn thành", "Đã hoàn thành"]
+                .map((filter) => DropdownMenuItem(
+                      value: filter,
+                      child: Text(filter),
+                    ))
+                .toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPostItem(AdminPostModel post) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -232,37 +161,53 @@ class _PostManagementTabState extends State<PostManagementTab> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.asset(imagePath,
-                  width: 80, height: 80, fit: BoxFit.cover),
+              child: Image.asset(
+                post.imagePath,
+                width: 80,
+                height: 80,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    width: 80,
+                    height: 80,
+                    color: Colors.grey[300],
+                    child: const Icon(Icons.image_not_supported),
+                  );
+                },
+              ),
             ),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text(
+                    post.title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
                   const SizedBox(height: 4),
-                  Text(subtitle, style: TextStyle(color: Colors.grey[600])),
+                  Text(
+                    post.subtitle,
+                    style: TextStyle(color: Colors.grey[600]),
+                  ),
                   const SizedBox(height: 4),
-                  Text(amount,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.orange)),
+                  Text(
+                    post.amount,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.orange),
+                  ),
                   const SizedBox(height: 4),
                   LinearProgressIndicator(
-                    value: progress / 100,
+                    value: post.progress / 100,
                     backgroundColor: Colors.grey[300],
                     color: Colors.orange,
                   ),
                   const SizedBox(height: 4),
-                  // Hiển thị trạng thái (available/unavailable)
                   Text(
-                    progress == 100
-                        ? "Trạng thái: Đã hoàn thành"
-                        : "Trạng thái: Chưa hoàn thành",
+                    post.statusText,
                     style: TextStyle(
-                      color: progress == 100 ? Colors.green : Colors.red,
+                      color: post.isCompleted ? Colors.green : Colors.red,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -274,33 +219,13 @@ class _PostManagementTabState extends State<PostManagementTab> {
               onSelected: (value) {
                 switch (value) {
                   case 1:
-                    _showConfirmationDialog('Xóa bài đăng',
-                        'Bạn có chắc chắn muốn xóa bài đăng này?', () {
-                      setState(() {
-                        posts.firstWhere(
-                                (post) => post["title"] == title)["isDeleted"] =
-                            true;
-                      });
-                      _showSuccessDialog('Xóa bài đăng thành công!');
-                    });
+                    _confirmDeletePost(post);
                     break;
                   case 2:
-                    _showConfirmationDialog('Chuyển sang Unavailable',
-                        'Bạn có chắc chắn muốn chuyển trạng thái bài đăng này sang Unavailable (Đã hoàn thành) ?',
-                        () {
-                      _changeStatus(title, "unavailable");
-                      _showSuccessDialog(
-                          'Chuyển trạng thái sang Unavailable thành công!');
-                    });
+                    _confirmChangeStatus(post, "unavailable");
                     break;
                   case 3:
-                    _showConfirmationDialog('Chuyển sang Available',
-                        'Bạn có chắc chắn muốn chuyển trạng thái bài đăng này sang Available (Chưa hoàn thành) ?',
-                        () {
-                      _changeStatus(title, "available");
-                      _showSuccessDialog(
-                          'Chuyển trạng thái sang Available thành công!');
-                    });
+                    _confirmChangeStatus(post, "available");
                     break;
                 }
               },
@@ -316,13 +241,29 @@ class _PostManagementTabState extends State<PostManagementTab> {
     );
   }
 
-  bool _isFilteredOut(Map<String, dynamic> post) {
-    if (_selectedFilter == "Chưa hoàn thành") {
-      return post["progress"] == 100;
-    } else if (_selectedFilter == "Đã hoàn thành") {
-      return post["progress"] < 100;
-    }
-    return false; // Nếu không có bộ lọc nào được chọn (Tất cả), thì không lọc bài đăng nào.
+  void _confirmDeletePost(AdminPostModel post) {
+    _showConfirmationDialog(
+      'Xóa bài đăng',
+      'Bạn có chắc chắn muốn xóa bài đăng này?',
+      () => context.read<PostManagementCubit>().deletePost(post.title),
+    );
+  }
+
+  void _confirmChangeStatus(AdminPostModel post, String newStatus) {
+    final title = newStatus == "unavailable"
+        ? 'Chuyển sang Unavailable'
+        : 'Chuyển sang Available';
+    final message = newStatus == "unavailable"
+        ? 'Bạn có chắc chắn muốn chuyển trạng thái bài đăng này sang Unavailable (Đã hoàn thành)?'
+        : 'Bạn có chắc chắn muốn chuyển trạng thái bài đăng này sang Available (Chưa hoàn thành)?';
+
+    _showConfirmationDialog(
+      title,
+      message,
+      () => context
+          .read<PostManagementCubit>()
+          .updatePostStatus(post.title, newStatus),
+    );
   }
 
   void _showConfirmationDialog(
@@ -335,15 +276,13 @@ class _PostManagementTabState extends State<PostManagementTab> {
           content: Text(message),
           actions: <Widget>[
             TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              onPressed: () => Navigator.of(context).pop(),
               child: const Text('Hủy'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                onConfirm(); // Call the action on confirm
+                onConfirm();
               },
               child: const Text('Xác nhận'),
             ),
