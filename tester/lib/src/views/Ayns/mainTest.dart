@@ -3,8 +3,8 @@ import 'package:tester/src/theme/app_theme/app_theme.dart';
 import 'package:tester/src/views/ayns/GD1.dart';
 import 'package:tester/src/views/ayns/XemBaiDemo.dart';
 import 'package:tester/src/views/ayns/mainTestKK.dart';
-import 'package:tester/src/views/Donate.dart';
-import 'package:tester/src/views/MyNavigationBar.dart';
+import 'package:tester/src/views/user_donate/user_donate_screen.dart';
+import 'package:tester/src/views/manage/my_navigation_bar.dart';
 import 'package:tester/src/views/XemBaiDangKhoKhan2.dart';
 import 'package:tester/src/views/widgets/custom_card_widget_2.dart';
 import 'package:tester/src/views/widgets/custom_drawer.dart';
@@ -566,7 +566,8 @@ class _mainTestState extends State<mainTest> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const Donate()),
+                                          builder: (context) =>
+                                              const DonateScreen()),
                                     );
                                   },
                                 ),
@@ -592,7 +593,8 @@ class _mainTestState extends State<mainTest> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const Donate()),
+                                          builder: (context) =>
+                                              const DonateScreen()),
                                     );
                                   },
                                 ),

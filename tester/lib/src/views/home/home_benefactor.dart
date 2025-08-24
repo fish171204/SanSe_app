@@ -7,10 +7,10 @@ import 'package:tester/src/views/widgets/custom_drawer.dart';
 import 'package:tester/src/views/widgets/search_bar_widget%20.dart';
 import 'package:tester/src/views/widgets/filter_button_widget.dart';
 import 'package:tester/src/views/widgets/user_avatar_widget.dart';
-import 'package:tester/src/views/MyNavigationBar.dart';
+import 'package:tester/src/views/manage/my_navigation_bar.dart';
 import 'package:tester/src/views/XemBaiDangKhoKhan2.dart';
 import 'package:tester/src/views/XemBaiDangKhoKhanDemo.dart';
-import 'package:tester/src/views/Donate.dart';
+import 'package:tester/src/views/user_donate/user_donate_screen.dart';
 import 'dart:async';
 
 class MainNguoiHT extends StatefulWidget {
@@ -568,7 +568,8 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const Donate()),
+                                          builder: (context) =>
+                                              const DonateScreen()),
                                     );
                                   },
                                 ),
@@ -594,7 +595,8 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const Donate()),
+                                          builder: (context) =>
+                                              const DonateScreen()),
                                     );
                                   },
                                 ),

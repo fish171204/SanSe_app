@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tester/src/views/auth/login/login_screen.dart';
-import 'package:tester/src/views/MainNguoiKK.dart';
-import 'package:tester/src/views/MainNhaHT.dart';
-import 'package:tester/src/views/MyNavigationBar.dart';
-import 'package:tester/src/views/SharedPreferences.dart';
+import 'package:tester/src/views/home/home_needy_person.dart';
+import 'package:tester/src/views/home/home_benefactor.dart';
+import 'package:tester/src/views/manage/my_navigation_bar.dart';
+import 'package:tester/src/views/manage/shared_preferences.dart';
 import 'package:tester/src/repositories/campaign/campaign_repository.dart';
 import 'cubit/campaign_list_cubit.dart';
 

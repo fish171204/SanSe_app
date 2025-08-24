@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tester/src/views/Donate.dart';
+import 'package:tester/src/views/user_donate/user_donate_screen.dart';
 
 class XemBaiDemo extends StatelessWidget {
   const XemBaiDemo({super.key});
@@ -34,7 +34,8 @@ class XemBaiDemo extends StatelessWidget {
                             width: double.infinity,
                             decoration: const BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage("assets/images/nguoikhokhan8.jpg"),
+                                  image: AssetImage(
+                                      "assets/images/nguoikhokhan8.jpg"),
                                   fit: BoxFit.cover),
                             ),
                             child: Column(
@@ -349,7 +350,7 @@ class XemBaiDemo extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Donate()),
+                                    builder: (context) => const DonateScreen()),
                               );
                             },
                             child: IntrinsicHeight(

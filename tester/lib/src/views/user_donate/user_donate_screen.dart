@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 import 'package:tester/src/theme/app_theme/app_theme.dart';
-import '../theme/app_size.dart';
-import 'package:tester/src/views/Donate2.dart';
+import '../../theme/app_size.dart';
+import 'package:tester/src/views/user_donate/user_donate_detail_screen.dart';
 
-class Donate extends StatefulWidget {
-  const Donate({super.key});
+class DonateScreen extends StatefulWidget {
+  const DonateScreen({super.key});
   @override
-  _DonateState createState() => _DonateState();
+  _DonateScreenState createState() => _DonateScreenState();
 }
 
-class _DonateState extends State<Donate> {
+class _DonateScreenState extends State<DonateScreen> {
   final TextEditingController _amountController = TextEditingController();
   final NumberFormat _numberFormat = NumberFormat("#,###", "vi_VN");
 
@@ -524,7 +524,8 @@ class _DonateState extends State<Donate> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Donate2()),
+                                      builder: (context) =>
+                                          const DonateDetailScreen()),
                                 );
                               },
                               child: Container(

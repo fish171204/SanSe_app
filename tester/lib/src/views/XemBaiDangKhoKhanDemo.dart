@@ -1,5 +1,5 @@
 import 'package:tester/src/views/ayns/ViewUI2.dart';
-import 'package:tester/src/views/Donate.dart';
+import 'package:tester/src/views/user_donate/user_donate_screen.dart';
 import 'package:flutter/material.dart';
 
 class XemBaiDangKhoKhanDemo extends StatelessWidget {
@@ -352,7 +352,7 @@ class XemBaiDangKhoKhanDemo extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Donate()),
+                                    builder: (context) => const DonateScreen()),
                               );
                             },
                             child: IntrinsicHeight(

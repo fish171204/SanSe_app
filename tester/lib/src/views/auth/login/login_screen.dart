@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/views/auth/signup/signup_type_screen.dart';
-import 'package:tester/src/views/MainNguoiKK.dart';
+import 'package:tester/src/views/home/home_needy_person.dart';
 
-import 'package:tester/src/views/MainNhaHT.dart';
-import 'package:tester/src/views/SharedPreferences.dart';
+import 'package:tester/src/views/home/home_benefactor.dart';
+import 'package:tester/src/views/manage/shared_preferences.dart';
 import 'package:flutter/gestures.dart';
 import 'package:tester/src/views/admin/admin_screen.dart';
 

@@ -4,7 +4,7 @@ import 'package:tester/src/views/ayns/ViewUI.dart';
 import 'package:tester/src/views/ayns/XemBaiDemo.dart';
 import 'package:tester/src/views/DaDuocGiup.dart';
 import 'package:tester/src/views/DangBaiChinhChu2.dart';
-import 'package:tester/src/views/MyNavigationBar.dart';
+import 'package:tester/src/views/manage/my_navigation_bar.dart';
 import 'package:tester/src/views/XemBaiDangKhoKhan2.dart';
 import 'package:tester/src/views/widgets/custom_drawer_2.dart';
 import 'package:tester/src/views/widgets/search_bar_widget%20.dart';

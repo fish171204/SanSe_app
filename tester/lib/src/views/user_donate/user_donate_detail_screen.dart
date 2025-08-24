@@ -1,18 +1,18 @@
 import 'package:tester/src/theme/app_theme/app_theme.dart';
 import 'package:tester/src/views/ayns/mainTest.dart';
 import 'package:flutter/material.dart';
-import '../theme/app_size.dart';
+import '../../theme/app_size.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
 
-class Donate2 extends StatefulWidget {
-  const Donate2({super.key});
+class DonateDetailScreen extends StatefulWidget {
+  const DonateDetailScreen({super.key});
   @override
-  _Donate2State createState() => _Donate2State();
+  _DonateDetailScreenState createState() => _DonateDetailScreenState();
 }
 
-class _Donate2State extends State<Donate2> {
+class _DonateDetailScreenState extends State<DonateDetailScreen> {
   List<XFile>? _images;
 
   Future<void> _pickImage() async {
@@ -74,22 +74,20 @@ class _Donate2State extends State<Donate2> {
             Container(
               padding: const EdgeInsets.only(top: 10, left: 8, bottom: 5),
               decoration: BoxDecoration(
-                color: Colors.red
-                    .withOpacity(0.1), // Light blue background for highlighting
-                borderRadius: BorderRadius.circular(
-                    8), // Rounded corners for a modern look
+                color: Colors.red.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
               ),
               child: const Text(
                 'Ngày 01 Tháng 04',
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.bold, // Bold text to make it stand out
-                  color: Colors.blue, // Blue text color to enhance visibility
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
                 ),
               ),
             ),
             _buildInfoRow('Tên ngân hàng:', 'Agribank'),
-            buildAccountNumberRow(), // The row with the copy icon
+            buildAccountNumberRow(),
             _buildInfoRow('Tên chủ tài khoản:', 'Le Thi Thuy Kieu'),
             _buildInfoRow('Số tiền ủng hộ:', '5.000.000 VND',
                 valueColor: Colors.blue),
@@ -108,54 +106,40 @@ class _Donate2State extends State<Donate2> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Container(
-                padding: const EdgeInsets.all(
-                    16), // Increased padding for a more spacious look
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                      12), // Increased border radius for rounded edges
+                  borderRadius: BorderRadius.circular(12),
                   gradient: LinearGradient(
-                    colors: [
-                      Colors.blue.shade500,
-                      Colors.blue.shade700
-                    ], // Gradient effect from blue to a darker blue
+                    colors: [Colors.blue.shade500, Colors.blue.shade700],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.blue
-                          .shade300, // Soft shadow for a more elevated effect
+                      color: Colors.blue.shade300,
                       offset: const Offset(0, 4),
                       blurRadius: 8,
                     ),
                   ],
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .spaceBetween, // Align icon and text at both ends
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Text inside the container
                     const Expanded(
                       child: Text(
                         'ABKVUWDMVU8VSV7CS9f',
                         style: TextStyle(
-                          fontSize:
-                              18, // Increased font size for better readability
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors
-                              .white, // Text color set to white for contrast against the blue background
-                          letterSpacing:
-                              1.2, // Slight letter spacing for improved readability
+                          color: Colors.white,
+                          letterSpacing: 1.2,
                         ),
-                        overflow: TextOverflow
-                            .ellipsis, // Truncate text if it's too long
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    // IconButton to copy the text to clipboard
                     IconButton(
                       icon: const Icon(Icons.copy, color: Colors.white),
                       onPressed: () {
-                        // Copy the text to clipboard
                         Clipboard.setData(
                             const ClipboardData(text: 'ABKVUWDMVU8VSV7CS9f'));
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -182,27 +166,21 @@ class _Donate2State extends State<Donate2> {
                 ),
               ),
             ),
-            // Container tải ảnh
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0),
               child: Column(
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                          12), // Increased border radius for rounded edges
+                      borderRadius: BorderRadius.circular(12),
                       gradient: LinearGradient(
-                        colors: [
-                          Colors.blue.shade500,
-                          Colors.blue.shade700
-                        ], // Gradient effect for a more dynamic look
+                        colors: [Colors.blue.shade500, Colors.blue.shade700],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.blue
-                              .shade300, // Adding a subtle shadow to lift the button
+                          color: Colors.blue.shade300,
                           offset: const Offset(0, 4),
                           blurRadius: 8,
                         ),
@@ -220,8 +198,7 @@ class _Donate2State extends State<Donate2> {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30),
-                              color: Colors
-                                  .transparent, // Transparent container for the inner button
+                              color: Colors.transparent,
                             ),
                             padding: const EdgeInsets.symmetric(
                                 vertical: 14, horizontal: 16),
@@ -244,8 +221,7 @@ class _Donate2State extends State<Donate2> {
                                     color: Colors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
-                                    letterSpacing:
-                                        1.2, // Slight letter spacing to make the text more readable
+                                    letterSpacing: 1.2,
                                   ),
                                 ),
                               ],
@@ -255,10 +231,7 @@ class _Donate2State extends State<Donate2> {
                       ],
                     ),
                   ),
-                  const SizedBox(
-                      height:
-                          16), // Space between the button and images section
-                  // Display selected images if available
+                  const SizedBox(height: 16),
                   if (_images != null && _images!.isNotEmpty)
                     Column(
                       children: _images!.map((image) {
@@ -274,19 +247,16 @@ class _Donate2State extends State<Donate2> {
                 ],
               ),
             ),
-            const SizedBox(height: 20), // Add space before the button
+            const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
-                // Show a success message or navigate to the next screen
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      backgroundColor:
-                          Colors.blue.shade50, // Soft background color
+                      backgroundColor: Colors.blue.shade50,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(15), // Rounded corners
+                        borderRadius: BorderRadius.circular(15),
                       ),
                       content: const Row(
                         children: [
@@ -295,7 +265,7 @@ class _Donate2State extends State<Donate2> {
                             color: Colors.blue,
                             size: 40,
                           ),
-                          SizedBox(width: 15), // Space between icon and text
+                          SizedBox(width: 15),
                           Text(
                             'Chúc mừng bạn đã \ngiúp đỡ thành công!',
                             style: TextStyle(
@@ -420,10 +390,9 @@ class _Donate2State extends State<Donate2> {
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.copy, color: Colors.blue), // Copy icon
+                  icon: const Icon(Icons.copy, color: Colors.blue),
                   onPressed: () {
-                    Clipboard.setData(ClipboardData(
-                        text: accountNumber)); // Copy to clipboard
+                    Clipboard.setData(ClipboardData(text: accountNumber));
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                           content: Text('Số tài khoản đã được sao chép!')),
