@@ -1,5 +1,4 @@
-// NhaHaoTam
-class NhaHaoTam {
+class BenefactorModel {
   final int idNhaHT;
   final String cccd;
   final String hoTen;
@@ -11,7 +10,7 @@ class NhaHaoTam {
   final String? tenDN;
   final String? websiteDN;
 
-  NhaHaoTam({
+  BenefactorModel({
     required this.idNhaHT,
     required this.cccd,
     required this.hoTen,
@@ -24,8 +23,8 @@ class NhaHaoTam {
     this.websiteDN,
   });
 
-  factory NhaHaoTam.fromJson(Map<String, dynamic> json) {
-    return NhaHaoTam(
+  factory BenefactorModel.fromJson(Map<String, dynamic> json) {
+    return BenefactorModel(
       idNhaHT: json['IDNhaHT'],
       cccd: json['CCCD'],
       hoTen: json['HoTen'],

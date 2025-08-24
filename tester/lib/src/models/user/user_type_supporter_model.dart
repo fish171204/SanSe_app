@@ -1,4 +1,4 @@
-class NguoiHoTro {
+class SupporterModel {
   final String cccd;
   final String hoTen;
   final String soDTzalo;
@@ -8,7 +8,7 @@ class NguoiHoTro {
   final String diaChiNha;
   final String? email;
 
-  NguoiHoTro({
+  SupporterModel({
     required this.cccd,
     required this.hoTen,
     required this.soDTzalo,
@@ -19,8 +19,8 @@ class NguoiHoTro {
     this.email,
   });
 
-  factory NguoiHoTro.fromJson(Map<String, dynamic> json) {
-    return NguoiHoTro(
+  factory SupporterModel.fromJson(Map<String, dynamic> json) {
+    return SupporterModel(
       cccd: json['CCCD'],
       hoTen: json['HoTen'],
       soDTzalo: json['SoDTzalo'],

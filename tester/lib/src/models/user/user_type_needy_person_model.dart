@@ -1,5 +1,5 @@
-// NguoiKhoKhan
-class NguoiKhoKhan {
+// NeedyPersonModel
+class NeedyPersonModel {
   final String cccd;
   final String hoTen;
   final String soDTzalo;
@@ -11,7 +11,7 @@ class NguoiKhoKhan {
   final String matKhau;
   final String? idNguoiHoTro;
 
-  NguoiKhoKhan({
+  NeedyPersonModel({
     required this.cccd,
     required this.hoTen,
     required this.soDTzalo,
@@ -24,8 +24,8 @@ class NguoiKhoKhan {
     this.idNguoiHoTro,
   });
 
-  factory NguoiKhoKhan.fromJson(Map<String, dynamic> json) {
-    return NguoiKhoKhan(
+  factory NeedyPersonModel.fromJson(Map<String, dynamic> json) {
+    return NeedyPersonModel(
       cccd: json['CCCD'],
       hoTen: json['HoTen'],
       soDTzalo: json['SoDTzalo'],
