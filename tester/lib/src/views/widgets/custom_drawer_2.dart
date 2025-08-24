@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/views/auth/login/login_screen.dart';
-import 'package:tester/src/views/accesstrade/ac_affiliate_markteting.dart';
+import 'package:tester/src/views/accesstrade/ac_affiliate_marketing_screen.dart';
 
 class CustomDrawer02 extends StatelessWidget {
   const CustomDrawer02({super.key});
@@ -27,7 +27,7 @@ class CustomDrawer02 extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const affiliateMarkteting()),
+                          builder: (context) => const AffiliateMarketingScreen()),
                     );
                   },
                 ),
