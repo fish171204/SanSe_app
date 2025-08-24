@@ -8,8 +8,8 @@ import 'package:tester/src/views/widgets/search_bar_widget%20.dart';
 import 'package:tester/src/views/widgets/filter_button_widget.dart';
 import 'package:tester/src/views/widgets/user_avatar_widget.dart';
 import 'package:tester/src/views/manage/my_navigation_bar.dart';
-import 'package:tester/src/views/XemBaiDangKhoKhan2.dart';
-import 'package:tester/src/views/XemBaiDangKhoKhanDemo.dart';
+import 'package:tester/src/views/post/post_needy_detail_test.dart';
+import 'package:tester/src/views/post/post_needy_detail.dart';
 import 'package:tester/src/views/user_donate/user_donate_screen.dart';
 import 'dart:async';
 
@@ -386,7 +386,7 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const XemBaiDangKhoKhanDemo(),
+                                            const PostNeedyDetail(),
                                       ),
                                     );
                                   },
@@ -395,7 +395,7 @@ class _MainNguoiHTState extends State<MainNguoiHT> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const XemBaiDangKhoKhanDemo()),
+                                              const PostNeedyDetail()),
                                     );
                                   },
                                 ),

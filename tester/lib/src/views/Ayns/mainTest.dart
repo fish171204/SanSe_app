@@ -5,7 +5,7 @@ import 'package:tester/src/views/ayns/XemBaiDemo.dart';
 import 'package:tester/src/views/ayns/mainTestKK.dart';
 import 'package:tester/src/views/user_donate/user_donate_screen.dart';
 import 'package:tester/src/views/manage/my_navigation_bar.dart';
-import 'package:tester/src/views/XemBaiDangKhoKhan2.dart';
+import 'package:tester/src/views/post/post_needy_detail_test.dart';
 import 'package:tester/src/views/widgets/custom_card_widget_2.dart';
 import 'package:tester/src/views/widgets/custom_drawer.dart';
 import 'package:tester/src/views/widgets/search_bar_widget%20.dart';

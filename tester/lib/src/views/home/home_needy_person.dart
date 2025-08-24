@@ -8,9 +8,9 @@ import 'package:tester/src/views/widgets/filter_button_widget.dart';
 import 'package:tester/src/views/widgets/user_avatar_widget.dart';
 import 'package:tester/src/views/widgets/custom_drawer_2.dart';
 import 'package:tester/src/views/manage/my_navigation_bar.dart';
-import 'package:tester/src/views/XemBaiDangKhoKhan2.dart';
-import 'package:tester/src/views/DaDuocGiup.dart';
-import 'package:tester/src/views/DangBaiChinhChu2.dart';
+import 'package:tester/src/views/post/post_needy_detail_test.dart';
+import 'package:tester/src/views/post/post_needy_detail_test_02.dart';
+import 'package:tester/src/views/post/post_needy_create.dart';
 import 'dart:async';
 
 class MainNguoiKK extends StatefulWidget {
@@ -383,7 +383,7 @@ class _MainNguoiKKState extends State<MainNguoiKK> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const DangBaiChinhChu2()),
+                                            const PostNeedyCreate()),
                                   );
                                 },
                                 child: const Text(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/theme/app_theme/app_theme.dart';
-import 'package:tester/src/views/DaDuocGiup.dart';
+import 'package:tester/src/views/post/post_needy_detail_test_02.dart';
 
 class ViewUI2 extends StatelessWidget {
   const ViewUI2({super.key});

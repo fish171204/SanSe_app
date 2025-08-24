@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tester/src/theme/app_theme/app_theme.dart';
 import 'package:tester/src/views/ayns/ViewUI.dart';
 import 'package:tester/src/views/ayns/XemBaiDemo.dart';
-import 'package:tester/src/views/DaDuocGiup.dart';
-import 'package:tester/src/views/DangBaiChinhChu2.dart';
+import 'package:tester/src/views/post/post_needy_detail_test_02.dart';
+import 'package:tester/src/views/post/post_needy_create.dart';
 import 'package:tester/src/views/manage/my_navigation_bar.dart';
-import 'package:tester/src/views/XemBaiDangKhoKhan2.dart';
+import 'package:tester/src/views/post/post_needy_detail_test.dart';
 import 'package:tester/src/views/widgets/custom_drawer_2.dart';
 import 'package:tester/src/views/widgets/search_bar_widget%20.dart';
 import 'package:tester/src/views/widgets/filter_button_widget.dart';
@@ -382,7 +382,7 @@ class _mainTestKKState extends State<mainTestKK> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const DangBaiChinhChu2()),
+                                            const PostNeedyCreate()),
                                   );
                                 },
                                 child: const Text(

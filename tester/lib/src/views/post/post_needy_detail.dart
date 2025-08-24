@@ -2,8 +2,8 @@ import 'package:tester/src/views/ayns/ViewUI2.dart';
 import 'package:tester/src/views/user_donate/user_donate_screen.dart';
 import 'package:flutter/material.dart';
 
-class XemBaiDangKhoKhanDemo extends StatelessWidget {
-  const XemBaiDangKhoKhanDemo({super.key});
+class PostNeedyDetail extends StatelessWidget {
+  const PostNeedyDetail({super.key});
 
   @override
   Widget build(BuildContext context) {

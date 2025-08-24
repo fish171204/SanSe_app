@@ -6,14 +6,14 @@ import 'package:image_picker/image_picker.dart'; // Import image_picker package
 import 'dart:io';
 import 'package:tester/src/views/home/home_needy_person.dart';
 
-class DangBaiChinhChu2 extends StatefulWidget {
-  const DangBaiChinhChu2({super.key});
+class PostNeedyCreate extends StatefulWidget {
+  const PostNeedyCreate({super.key});
 
   @override
-  _DangBaiChinhChu2State createState() => _DangBaiChinhChu2State();
+  _PostNeedyCreateState createState() => _PostNeedyCreateState();
 }
 
-class _DangBaiChinhChu2State extends State<DangBaiChinhChu2> {
+class _PostNeedyCreateState extends State<PostNeedyCreate> {
   List<XFile>? _images;
   List<XFile>? _images2;
 
@@ -47,8 +47,8 @@ class _DangBaiChinhChu2State extends State<DangBaiChinhChu2> {
 
   bool _isSupporter = false;
   final bool _isWitness = false;
-  String _selectedOption = "Tiền"; // Biến lưu giá trị được chọn
-  bool _isUrgent = false; // Biến lưu trạng thái của checkbox "Khẩn cấp"
+  String _selectedOption = "Tiền";
+  bool _isUrgent = false;
   bool _isAgree = false;
 
   final TextEditingController _amountController2 = TextEditingController();
@@ -172,11 +172,10 @@ class _DangBaiChinhChu2State extends State<DangBaiChinhChu2> {
                           ),
                         ),
                         const Divider(
-                          color: Color.fromARGB(
-                              255, 115, 114, 114), // Màu của đường kẻ
-                          thickness: 1, // Độ dày của đường kẻ
-                          indent: 0, // Lề bên trái của đường kẻ
-                          endIndent: 0, // Lề bên phải của đường kẻ
+                          color: Color.fromARGB(255, 115, 114, 114),
+                          thickness: 1,
+                          indent: 0,
+                          endIndent: 0,
                         ),
 
                         // Số CCCD

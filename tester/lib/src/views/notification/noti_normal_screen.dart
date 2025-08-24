@@ -5,7 +5,7 @@ import 'package:tester/src/views/home/home_benefactor.dart';
 import 'package:tester/src/views/auth/login/login_screen.dart';
 import 'package:tester/src/views/manage/shared_preferences.dart';
 import 'package:tester/src/views/manage/my_navigation_bar.dart';
-import 'package:tester/src/views/XemBaiDangKhoKhanDemo.dart';
+import 'package:tester/src/views/post/post_needy_detail.dart';
 import 'package:tester/src/views/notification/cubit/notification_cubit.dart';
 import 'package:tester/src/views/notification/cubit/notification_state.dart';
 import 'package:tester/src/views/notification/widgets/notification_app_bar.dart';
@@ -170,7 +170,7 @@ class _NotiNormalState extends State<NotiNormal> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const XemBaiDangKhoKhanDemo(),
+          builder: (context) => const PostNeedyDetail(),
         ),
       );
     }

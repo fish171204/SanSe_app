@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/theme/app_theme/app_theme.dart';
 
-class DsGiupDo1 extends StatefulWidget {
-  const DsGiupDo1({super.key});
+class DonorListScreen extends StatefulWidget {
+  const DonorListScreen({super.key});
   @override
-  _DsGiupDo1State createState() => _DsGiupDo1State();
+  _DonorListScreenState createState() => _DonorListScreenState();
 }
 
-class _DsGiupDo1State extends State<DsGiupDo1> {
+class _DonorListScreenState extends State<DonorListScreen> {
   @override
   final List<Map<String, dynamic>> nhaHaoTamData = [
     {

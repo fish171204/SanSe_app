@@ -1,4 +1,4 @@
-import 'package:tester/src/views/DsGiupDo1.dart';
+import 'package:tester/src/views/post/donor_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class Daduocgiup extends StatelessWidget {
@@ -322,7 +322,8 @@ class Daduocgiup extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const DsGiupDo1()),
+                                    builder: (context) =>
+                                        const DonorListScreen()),
                               );
                             },
                             child: IntrinsicHeight(
