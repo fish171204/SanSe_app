@@ -1,11 +1,11 @@
 {
-    "name": "tester",
-    "short_name": "tester",
+    "name": "San Sẻ",
+    "short_name": "San Sẻ",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#hexcode",
     "theme_color": "#hexcode",
-    "description": "A new Flutter project.",
+    "description": "San Sẻ - Ứng dụng từ thiện xã hội",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
