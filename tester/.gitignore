@@ -41,3 +41,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Files containing API keys - ignore to prevent key exposure
+android/local.properties
+android/app/src/main/AndroidManifest.xml
+ios/Runner/AppDelegate.swift

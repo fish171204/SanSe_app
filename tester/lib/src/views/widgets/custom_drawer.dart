@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/views/auth/login/login_screen.dart';
 import 'package:tester/src/views/accesstrade/ac_affiliate_marketing_screen.dart';
+import 'package:tester/src/views/map/map_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -27,7 +28,20 @@ class CustomDrawer extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const AffiliateMarketingScreen()),
+                          builder: (context) =>
+                              const AffiliateMarketingScreen()),
+                    );
+                  },
+                ),
+                _buildItemRow(
+                  context,
+                  Icons.map,
+                  "Bản đồ người khó khăn",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MapScreen()),
                     );
                   },
                 ),
