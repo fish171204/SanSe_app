@@ -12,6 +12,7 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   GoogleMapController? _mapController;
   final _searchCtrl = TextEditingController();
+  MapType _mapType = MapType.normal;
 
   // Vị trí mặc định: Việt Nam
   static const _vnCenter = LatLng(15.9, 105.8);
@@ -73,7 +74,7 @@ class _MapScreenState extends State<MapScreen> {
               setState(() => _loading = false);
             },
             markers: _markers,
-            mapType: MapType.normal,
+            mapType: _mapType,
             myLocationEnabled: false,
             myLocationButtonEnabled: false,
             zoomControlsEnabled: false,
@@ -287,6 +288,28 @@ class _MapScreenState extends State<MapScreen> {
                     );
                   },
                   child: const Icon(Icons.remove),
+                ),
+                const SizedBox(height: 8),
+
+                // 🔁 Toggle map type (Normal <-> Satellite)
+                FloatingActionButton.small(
+                  heroTag: 'mapType', // nút mới
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black87,
+                  elevation: 3,
+                  onPressed: () {
+                    setState(() {
+                      _mapType = (_mapType == MapType.normal)
+                          ? MapType.satellite
+                          : MapType.normal;
+                    });
+                  },
+                  tooltip: 'Đổi chế độ bản đồ',
+                  child: Icon(
+                    _mapType == MapType.normal
+                        ? Icons.satellite_alt
+                        : Icons.layers_outlined,
+                  ),
                 ),
                 const SizedBox(height: 8),
 
