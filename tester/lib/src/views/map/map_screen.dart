@@ -25,7 +25,7 @@ class _MapScreenState extends State<MapScreen> {
   // State filter
   final List<String> _tags = ['Xóa nghèo', 'Xóa đói', 'Trẻ em', 'Người'];
   final Set<String> _selectedTags = {'Xóa nghèo'};
-  String _campaignType = 'Chiến dịch';
+  String _campaignType = 'Người khó khăn';
 
   // Demo markers (bạn thay bằng data thật)
   final Set<Marker> _markers = {
@@ -110,7 +110,8 @@ class _MapScreenState extends State<MapScreen> {
                         filled: true,
                         fillColor: Colors.white,
                         contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12,
+                          horizontal: 16,
+                          vertical: 12,
                         ),
                       ),
                       onSubmitted: (q) {
@@ -165,12 +166,39 @@ class _MapScreenState extends State<MapScreen> {
                           ),
                         ],
                       ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: _campaignType,
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          items: const [
-                            DropdownMenuItem(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(18),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.08),
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: PopupMenuButton<String>(
+                          offset: const Offset(0, 40),
+                          color: Colors.white,
+                          elevation: 8,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          itemBuilder: (context) => const [
+                            PopupMenuItem(
+                              value: 'Người khó khăn',
+                              child: Row(
+                                children: [
+                                  Icon(Icons.person_search, size: 18),
+                                  SizedBox(width: 6),
+                                  Text('Người khó khăn'),
+                                ],
+                              ),
+                            ),
+                            PopupMenuItem(
                               value: 'Chiến dịch',
                               child: Row(
                                 children: [
@@ -180,7 +208,7 @@ class _MapScreenState extends State<MapScreen> {
                                 ],
                               ),
                             ),
-                            DropdownMenuItem(
+                            PopupMenuItem(
                               value: 'Sự kiện',
                               child: Row(
                                 children: [
@@ -191,11 +219,31 @@ class _MapScreenState extends State<MapScreen> {
                               ),
                             ),
                           ],
-                          onChanged: (v) {
-                            if (v == null) return;
-                            setState(() => _campaignType = v);
+                          onSelected: (value) {
+                            setState(() => _campaignType = value);
                             // TODO: filter by campaign type
                           },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                _campaignType == 'Người khó khăn'
+                                    ? Icons.person_search
+                                    : _campaignType == 'Chiến dịch'
+                                        ? Icons.campaign
+                                        : Icons.event,
+                                size: 18,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                _campaignType,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              const SizedBox(width: 4),
+                              const Icon(Icons.keyboard_arrow_down, size: 16),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -205,17 +253,53 @@ class _MapScreenState extends State<MapScreen> {
             ),
           ),
 
-          // Locate button (bottom-right, nhỏ tròn)
+          // Zoom controls và Locate button (bottom-right)
           Positioned(
             right: 12,
             bottom: 120,
-            child: FloatingActionButton.small(
-              heroTag: 'locate',
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.black87,
-              elevation: 3,
-              onPressed: _goToVN, // TODO: move to user location
-              child: const Icon(Icons.my_location),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Zoom in button
+                FloatingActionButton.small(
+                  heroTag: 'zoomIn',
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black87,
+                  elevation: 3,
+                  onPressed: () async {
+                    await _mapController?.animateCamera(
+                      CameraUpdate.zoomIn(),
+                    );
+                  },
+                  child: const Icon(Icons.add),
+                ),
+                const SizedBox(height: 8),
+
+                // Zoom out button
+                FloatingActionButton.small(
+                  heroTag: 'zoomOut',
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black87,
+                  elevation: 3,
+                  onPressed: () async {
+                    await _mapController?.animateCamera(
+                      CameraUpdate.zoomOut(),
+                    );
+                  },
+                  child: const Icon(Icons.remove),
+                ),
+                const SizedBox(height: 8),
+
+                // Locate button
+                FloatingActionButton.small(
+                  heroTag: 'locate',
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black87,
+                  elevation: 3,
+                  onPressed: _goToVN, // TODO: move to user location
+                  child: const Icon(Icons.my_location),
+                ),
+              ],
             ),
           ),
 
@@ -234,7 +318,8 @@ class _MapScreenState extends State<MapScreen> {
                     Expanded(
                       child: _BadgeButton(
                         icon: Icons.place_outlined,
-                        label: '147 chiến dịch xung quanh', // TODO: bind số thật
+                        label:
+                            '147 chiến dịch xung quanh', // TODO: bind số thật
                         color: Colors.white,
                         foreground: Colors.black87,
                         onTap: () {
@@ -343,7 +428,7 @@ class _PrimaryRoundButton extends StatelessWidget {
               Text(
                 label,
                 style: const TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.w700),
+                    color: Colors.white, fontWeight: FontWeight.w700),
               ),
             ],
           ),
