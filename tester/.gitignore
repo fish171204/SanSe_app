@@ -51,3 +51,6 @@ app.*.map.json
 android/local.properties
 android/app/src/main/AndroidManifest.xml
 ios/Runner/AppDelegate.swift
+
+# Firebase configuration files - contains sensitive keys
+lib/firebase_options.dart

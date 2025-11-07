@@ -86,38 +86,58 @@ class _MapScreenState extends State<MapScreen> {
               child: const Center(child: CircularProgressIndicator()),
             ),
 
-          // TOP controls (search + chips + dropdown)
+          // TOP controls (back button + search + chips + dropdown)
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Search bar
-                  Material(
-                    elevation: 2,
-                    borderRadius: BorderRadius.circular(24),
-                    child: TextField(
-                      controller: _searchCtrl,
-                      textInputAction: TextInputAction.search,
-                      decoration: InputDecoration(
-                        hintText: 'Tìm kiếm theo tên chiến dịch, địa điểm',
-                        prefixIcon: const Icon(Icons.search),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(24),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 12,
+                  // Back button và Search bar
+                  Row(
+                    children: [
+                      // Back button
+                      Container(
+                        margin: const EdgeInsets.only(right: 8),
+                        child: FloatingActionButton.small(
+                          heroTag: 'back',
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.black87,
+                          elevation: 2,
+                          onPressed: () => Navigator.pop(context),
+                          child: const Icon(Icons.arrow_back, size: 20),
                         ),
                       ),
-                      onSubmitted: (q) {
-                        // TODO: trigger search
-                      },
-                    ),
+                      // Search bar
+                      Expanded(
+                        child: Material(
+                          elevation: 2,
+                          borderRadius: BorderRadius.circular(24),
+                          child: TextField(
+                            controller: _searchCtrl,
+                            textInputAction: TextInputAction.search,
+                            decoration: InputDecoration(
+                              hintText:
+                                  'Tìm kiếm theo tên chiến dịch, địa điểm',
+                              prefixIcon: const Icon(Icons.search),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(24),
+                                borderSide: BorderSide.none,
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
+                              ),
+                            ),
+                            onSubmitted: (q) {
+                              // TODO: trigger search
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 8),
 
@@ -153,76 +173,56 @@ class _MapScreenState extends State<MapScreen> {
                   // Campaign dropdown (small pill)
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
+                    child: Material(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(18),
+                      elevation: 2,
+                      child: PopupMenuButton<String>(
+                        offset: const Offset(0, 40),
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(18),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.08),
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
+                        elevation: 8,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        itemBuilder: (context) => const [
+                          PopupMenuItem(
+                            value: 'Người khó khăn',
+                            child: Row(
+                              children: [
+                                Icon(Icons.person_search, size: 18),
+                                SizedBox(width: 6),
+                                Text('Người khó khăn'),
+                              ],
+                            ),
+                          ),
+                          PopupMenuItem(
+                            value: 'Chiến dịch',
+                            child: Row(
+                              children: [
+                                Icon(Icons.campaign, size: 18),
+                                SizedBox(width: 6),
+                                Text('Chiến dịch'),
+                              ],
+                            ),
+                          ),
+                          PopupMenuItem(
+                            value: 'Sự kiện',
+                            child: Row(
+                              children: [
+                                Icon(Icons.event, size: 18),
+                                SizedBox(width: 6),
+                                Text('Sự kiện'),
+                              ],
+                            ),
                           ),
                         ],
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(18),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.08),
-                              blurRadius: 6,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: PopupMenuButton<String>(
-                          offset: const Offset(0, 40),
-                          color: Colors.white,
-                          elevation: 8,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          itemBuilder: (context) => const [
-                            PopupMenuItem(
-                              value: 'Người khó khăn',
-                              child: Row(
-                                children: [
-                                  Icon(Icons.person_search, size: 18),
-                                  SizedBox(width: 6),
-                                  Text('Người khó khăn'),
-                                ],
-                              ),
-                            ),
-                            PopupMenuItem(
-                              value: 'Chiến dịch',
-                              child: Row(
-                                children: [
-                                  Icon(Icons.campaign, size: 18),
-                                  SizedBox(width: 6),
-                                  Text('Chiến dịch'),
-                                ],
-                              ),
-                            ),
-                            PopupMenuItem(
-                              value: 'Sự kiện',
-                              child: Row(
-                                children: [
-                                  Icon(Icons.event, size: 18),
-                                  SizedBox(width: 6),
-                                  Text('Sự kiện'),
-                                ],
-                              ),
-                            ),
-                          ],
-                          onSelected: (value) {
-                            setState(() => _campaignType = value);
-                            // TODO: filter by campaign type
-                          },
+                        onSelected: (value) {
+                          setState(() => _campaignType = value);
+                          // TODO: filter by campaign type
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 8),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
