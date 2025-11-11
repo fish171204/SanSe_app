@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+
+import 'package:tester/src/models/video/video_needy_person_model.dart';
+import 'package:tester/src/repositories/video/video_needy_person_repo.dart';
+import 'package:tester/src/views/video/cubit/video_needy_person_cubit.dart';
+import 'package:tester/src/views/video/cubit/video_needy_person_state.dart';
 
 class VideoNeedyReelsScreen extends StatefulWidget {
   const VideoNeedyReelsScreen({super.key});
@@ -9,86 +16,93 @@ class VideoNeedyReelsScreen extends StatefulWidget {
 
 class _VideoNeedyReelsScreenState extends State<VideoNeedyReelsScreen> {
   final PageController _pageController = PageController();
-  final List<_ReelItem> _items = const [
-    _ReelItem(
-      name: "Chị Hoa (Q.8)",
-      caption: "Cần hỗ trợ học phí cho 2 bé trong năm học mới.",
-      likes: 1240,
-      comments: 57,
-      shares: 12,
-      // demo: dùng ảnh nền màu + icon play; sau này thay bằng video player
-      color: Colors.black87,
-    ),
-    _ReelItem(
-      name: "Bác Tư (Gò Vấp)",
-      caption: "Phẫu thuật mắt – mong nhận được sự giúp đỡ.",
-      likes: 980,
-      comments: 33,
-      shares: 9,
-      color: Colors.black,
-    ),
-    _ReelItem(
-      name: "Em Minh (Cần Giờ)",
-      caption: "Ước mơ có chiếc xe đạp đến trường.",
-      likes: 1560,
-      comments: 61,
-      shares: 18,
-      color: Colors.black54,
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: PageView.builder(
-        controller: _pageController,
-        scrollDirection: Axis.vertical,
-        itemCount: _items.length,
-        itemBuilder: (context, index) {
-          final item = _items[index];
-          return _ReelCard(item: item);
-        },
+    return BlocProvider(
+      create: (_) => VideoNeedyPersonCubit(
+        repository: VideoNeedyPersonRepositoryImpl(),
+      )..loadVideos(),
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: Stack(
+          children: [
+            BlocBuilder<VideoNeedyPersonCubit, VideoNeedyPersonState>(
+              builder: (context, state) {
+                if (state is VideoNeedyPersonLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(color: Colors.white),
+                  );
+                }
+                if (state is VideoNeedyPersonError) {
+                  return Center(
+                    child: Text(
+                      'Lỗi: ${state.message}',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  );
+                }
+                if (state is VideoNeedyPersonLoaded) {
+                  return PageView.builder(
+                    controller: _pageController,
+                    scrollDirection: Axis.vertical,
+                    itemCount: state.videos.length,
+                    onPageChanged: (i) => context
+                        .read<VideoNeedyPersonCubit>()
+                        .changeVideoIndex(i),
+                    itemBuilder: (_, i) => _ReelCard(video: state.videos[i]),
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
+
+            // Back button
+            Positioned(
+              top: MediaQuery.of(context).padding.top + 16,
+              left: 16,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: IconButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
-class _ReelItem {
-  final String name;
-  final String caption;
-  final int likes;
-  final int comments;
-  final int shares;
-  final Color color;
-
-  const _ReelItem({
-    required this.name,
-    required this.caption,
-    required this.likes,
-    required this.comments,
-    required this.shares,
-    required this.color,
-  });
-}
-
 class _ReelCard extends StatelessWidget {
-  const _ReelCard({required this.item});
-  final _ReelItem item;
+  const _ReelCard({required this.video});
+  final VideoNeedyPersonModel video;
 
   @override
   Widget build(BuildContext context) {
+    // nền demo (thay bằng video player sau)
+    final demoBg = [
+      Colors.black,
+      Colors.black87,
+      Colors.black54,
+      Colors.black45,
+    ][video.id.hashCode % 4];
+
     return Stack(
       children: [
-        // Nền (tạm thời màu + icon play)
         Container(
-          color: item.color,
+          color: demoBg,
           alignment: Alignment.center,
           child: const Icon(Icons.play_circle_fill,
               size: 96, color: Colors.white70),
         ),
 
-        // Gradient đen ở dưới để đọc text dễ hơn
+        // gradient dưới cho dễ đọc
         const Positioned.fill(
           child: IgnorePointer(
             child: DecoratedBox(
@@ -103,24 +117,39 @@ class _ReelCard extends StatelessWidget {
           ),
         ),
 
-        // Cột actions bên phải
+        // actions bên phải
         Positioned(
           right: 12,
-          bottom: 80,
+          bottom: 84,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _ActionButton(icon: Icons.favorite, label: "${item.likes}"),
+              _ActionButton(
+                icon: Icons.favorite,
+                label: '${video.likes}',
+                onPressed: () =>
+                    context.read<VideoNeedyPersonCubit>().likeVideo(video.id),
+              ),
               const SizedBox(height: 14),
               _ActionButton(
-                  icon: Icons.mode_comment_outlined, label: "${item.comments}"),
+                icon: Icons.mode_comment_outlined,
+                label: '${video.comments}',
+                onPressed: () {
+                  // TODO: mở bình luận
+                },
+              ),
               const SizedBox(height: 14),
-              _ActionButton(icon: Icons.share, label: "${item.shares}"),
+              _ActionButton(
+                icon: Icons.share,
+                label: '${video.shares}',
+                onPressed: () =>
+                    context.read<VideoNeedyPersonCubit>().shareVideo(video.id),
+              ),
             ],
           ),
         ),
 
-        // Thông tin người cần giúp + caption ở dưới
+        // thông tin dưới
         Positioned(
           left: 12,
           right: 80,
@@ -128,18 +157,29 @@ class _ReelCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Avatar + tên
+              // ===== MINI CAMPAIGN CARD (tap để đi tới bài viết) =====
+              _CampaignMiniCard(
+                imagePath: video.campaignImageUrl,
+                title: video.campaignTitle,
+                subtitle: video.campaignSubtitle,
+                amount: _formatVnCurrency(
+                    video.currentAmount), // số tiền đã gây quỹ
+                progress: video.progressPercentage,
+                onTap: () {
+                  // TODO: điều hướng tới trang bài viết/chiến dịch
+                  // Navigator.pushNamed(context, '/campaign/detail', arguments: video.id);
+                },
+              ),
+              const SizedBox(height: 10),
+
+              // Avatar + tên người đăng
               Row(
                 children: [
-                  const CircleAvatar(
-                    radius: 18,
-                    backgroundColor: Colors.white24,
-                    child: Icon(Icons.person, color: Colors.white),
-                  ),
+                  _Avatar(url: video.avatarUrl),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      item.name,
+                      '${video.name} (${video.location})',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -151,19 +191,28 @@ class _ReelCard extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      // TODO: chuyển tới trang chi tiết / quyên góp
+                      // TODO: chuyển tới màn hình quyên góp
                     },
-                    child: const Text("Ủng hộ",
+                    child: const Text('Ủng hộ',
                         style: TextStyle(color: Colors.white)),
                   ),
                 ],
               ),
               const SizedBox(height: 8),
+
+              // caption
               Text(
-                item.caption,
+                video.caption,
                 style: const TextStyle(color: Colors.white, fontSize: 14),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 4),
+
+              // tiến độ tổng quan
+              Text(
+                'Đã quyên góp: ${_formatVnCurrency(video.currentAmount)} / ${_formatVnCurrency(video.targetAmount)}',
+                style: const TextStyle(color: Colors.white70, fontSize: 12),
               ),
             ],
           ),
@@ -173,10 +222,118 @@ class _ReelCard extends StatelessWidget {
   }
 }
 
+/// MINI CARD (giống layout bạn gửi)
+class _CampaignMiniCard extends StatelessWidget {
+  final String imagePath;
+  final String title;
+  final String subtitle;
+  final String amount;
+  final int progress;
+  final VoidCallback? onTap;
+
+  const _CampaignMiniCard({
+    required this.imagePath,
+    required this.title,
+    required this.subtitle,
+    required this.amount,
+    required this.progress,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final card = Card(
+      margin: const EdgeInsets.only(right: 24), // tránh đè vào cột action
+      color: Colors.white.withOpacity(0.95),
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: _imageAuto(imagePath),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16)),
+                  const SizedBox(height: 4),
+                  Text(subtitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: Colors.grey[700])),
+                  const SizedBox(height: 6),
+                  Text(amount,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.orange,
+                      )),
+                  const SizedBox(height: 6),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(4),
+                    child: LinearProgressIndicator(
+                      value: (progress.clamp(0, 100)) / 100,
+                      backgroundColor: Colors.grey[300],
+                      color: Colors.orange,
+                      minHeight: 6,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    if (onTap == null) return card;
+    return InkWell(
+        onTap: onTap, borderRadius: BorderRadius.circular(12), child: card);
+  }
+
+  Widget _imageAuto(String path) {
+    final isNet = path.startsWith('http');
+    final img = isNet
+        ? Image.network(path, width: 80, height: 80, fit: BoxFit.cover)
+        : Image.asset(path, width: 80, height: 80, fit: BoxFit.cover);
+    return SizedBox(width: 80, height: 80, child: img);
+  }
+}
+
+class _Avatar extends StatelessWidget {
+  const _Avatar({required this.url});
+  final String url;
+
+  @override
+  Widget build(BuildContext context) {
+    final isNet = url.startsWith('http');
+    return CircleAvatar(
+      radius: 18,
+      backgroundColor: Colors.white24,
+      backgroundImage:
+          isNet ? NetworkImage(url) : AssetImage(url) as ImageProvider,
+      onBackgroundImageError: (_, __) {},
+      child:
+          (url.isEmpty) ? const Icon(Icons.person, color: Colors.white) : null,
+    );
+  }
+}
+
 class _ActionButton extends StatelessWidget {
-  const _ActionButton({required this.icon, required this.label});
+  const _ActionButton(
+      {required this.icon, required this.label, this.onPressed});
+
   final IconData icon;
   final String label;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -184,18 +341,27 @@ class _ActionButton extends StatelessWidget {
       children: [
         DecoratedBox(
           decoration: const BoxDecoration(
-              shape: BoxShape.circle, color: Colors.white12),
+            shape: BoxShape.circle,
+            color: Colors.white12,
+          ),
           child: IconButton(
-            onPressed: () {},
+            onPressed: onPressed,
             icon: Icon(icon, color: Colors.white),
           ),
         ),
         const SizedBox(height: 4),
-        Text(
-          label,
-          style: const TextStyle(color: Colors.white, fontSize: 12),
-        ),
+        Text(label, style: const TextStyle(color: Colors.white, fontSize: 12)),
       ],
     );
+  }
+}
+
+String _formatVnCurrency(double amount) {
+  try {
+    final f =
+        NumberFormat.currency(locale: 'vi_VN', symbol: 'đ', decimalDigits: 0);
+    return f.format(amount);
+  } catch (_) {
+    return '${amount.toStringAsFixed(0)} đ';
   }
 }
