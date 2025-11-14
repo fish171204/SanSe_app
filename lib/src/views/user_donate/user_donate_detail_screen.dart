@@ -78,7 +78,7 @@ class _DonateDetailScreenState extends State<DonateDetailScreen> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Text(
-                'Ngày 17 Tháng 09',
+                'Ngày 15 Tháng 11',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
