@@ -82,14 +82,14 @@ class MapController {
         scale: 0.75,
       );
       final clusterIcon288 = await createClusterMarker(
-        count: 4,
+        count: 1,
         scale: 0.75,
       );
 
       // 2. "Vẽ" các icon cluster mới (số lượng nhỏ 1, 2, 3)
       final clusterIcon1 = await createClusterMarker(count: 1, scale: 0.75);
-      final clusterIcon2 = await createClusterMarker(count: 2, scale: 0.75);
-      final clusterIcon3 = await createClusterMarker(count: 3, scale: 0.75);
+      final clusterIcon2 = await createClusterMarker(count: 1, scale: 0.75);
+      final clusterIcon3 = await createClusterMarker(count: 1, scale: 0.75);
 
       // 3. Tạo 3 marker cũ
       final marker1 = Marker(
