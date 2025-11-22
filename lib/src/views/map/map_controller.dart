@@ -53,8 +53,7 @@ class MapController {
   }
 
   void toggleMapType() {
-    _mapType =
-        (_mapType == MapType.normal) ? MapType.satellite : MapType.normal;
+    _mapType = (_mapType == MapType.normal) ? MapType.hybrid : MapType.normal;
   }
 
   void toggleTag(String tag, bool selected) {
