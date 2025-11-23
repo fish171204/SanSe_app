@@ -6,6 +6,7 @@ import 'package:tester/src/models/video/video_needy_person_model.dart';
 import 'package:tester/src/repositories/video/video_needy_person_repo.dart';
 import 'package:tester/src/views/video/cubit/video_needy_person_cubit.dart';
 import 'package:tester/src/views/video/cubit/video_needy_person_state.dart';
+import 'package:tester/src/views/video/video_item_player_widget.dart';
 
 class VideoNeedyReelsScreen extends StatefulWidget {
   const VideoNeedyReelsScreen({super.key});
@@ -85,24 +86,14 @@ class _ReelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // nền demo (thay bằng video player sau)
-    final demoBg = [
-      Colors.black,
-      Colors.black87,
-      Colors.black54,
-      Colors.black45,
-    ][video.id.hashCode % 4];
-
     return Stack(
       children: [
-        Container(
-          color: demoBg,
-          alignment: Alignment.center,
-          child: const Icon(Icons.play_circle_fill,
-              size: 96, color: Colors.white70),
+        // LỚP 1: VIDEO PLAYER (Thay thế nền màu đen cũ)
+        Positioned.fill(
+          child: VideoItemPlayer(videoUrl: video.videoUrl),
         ),
 
-        // gradient dưới cho dễ đọc
+        // LỚP 2: Gradient đen mờ ở dưới để chữ dễ đọc
         const Positioned.fill(
           child: IgnorePointer(
             child: DecoratedBox(
@@ -110,7 +101,8 @@ class _ReelCard extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.center,
-                  colors: [Colors.black54, Colors.transparent],
+                  colors: [Colors.black87, Colors.transparent],
+                  stops: [0.0, 0.6], // Chỉnh lại gradient cho đẹp hơn
                 ),
               ),
             ),
@@ -173,7 +165,7 @@ class _ReelCard extends StatelessWidget {
               const SizedBox(height: 10),
 
               // Avatar + tên người đăng
-              Row(
+            Row(
                 children: [
                   _Avatar(url: video.avatarUrl),
                   const SizedBox(width: 8),
@@ -181,24 +173,18 @@ class _ReelCard extends StatelessWidget {
                     child: Text(
                       '${video.name} (${video.location})',
                       style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
+                        color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700,
+                        shadows: [Shadow(color: Colors.black, blurRadius: 2)], // Thêm bóng chữ
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1, overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      // TODO: chuyển tới màn hình quyên góp
-                    },
-                    child: const Text('Ủng hộ',
-                        style: TextStyle(color: Colors.white)),
+                   TextButton(
+                    onPressed: () {},
+                    child: const Text('Ủng hộ', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
 
               // caption
               Text(

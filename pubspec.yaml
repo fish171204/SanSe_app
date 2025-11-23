@@ -46,6 +46,7 @@ dependencies:
   provider: ^6.1.2
   google_maps_flutter: ^2.5.0
   google_maps_cluster_manager: ^3.1.0
+  video_player: ^2.8.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -83,6 +84,7 @@ flutter:
     # Or specifically include all images in assets/images/
     - assets/images/
     - assets/app/
+    - assets/videos/
 
   fonts:
     - family: Inter
