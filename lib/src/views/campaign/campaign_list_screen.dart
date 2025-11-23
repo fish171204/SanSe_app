@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tester/src/views/auth/login/login_screen.dart';
 import 'package:tester/src/views/home/home_needy_person.dart';
 import 'package:tester/src/views/home/home_benefactor.dart';
-import 'package:tester/src/views/manage/my_navigation_bar.dart';
 import 'package:tester/src/views/manage/shared_preferences.dart';
 import 'package:tester/src/repositories/campaign/campaign_repository.dart';
 import 'cubit/campaign_list_cubit.dart';
@@ -29,7 +28,6 @@ class _CampaignListView extends StatefulWidget {
 }
 
 class _CampaignListViewState extends State<_CampaignListView> {
-  int _currentIndex = 1;
   final TextEditingController _searchController = TextEditingController();
 
   @override
@@ -147,14 +145,6 @@ class _CampaignListViewState extends State<_CampaignListView> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: MyNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
       ),
     );
   }

@@ -4,7 +4,6 @@ import 'package:tester/src/views/home/home_needy_person.dart';
 import 'package:tester/src/views/home/home_benefactor.dart';
 import 'package:tester/src/views/auth/login/login_screen.dart';
 import 'package:tester/src/views/manage/shared_preferences.dart';
-import 'package:tester/src/views/manage/my_navigation_bar.dart';
 import 'package:tester/src/views/post/post_needy_detail.dart';
 import 'package:tester/src/views/notification/cubit/notification_cubit.dart';
 import 'package:tester/src/views/notification/cubit/notification_state.dart';
@@ -24,14 +23,6 @@ class NotiNormal extends StatefulWidget {
 }
 
 class _NotiNormalState extends State<NotiNormal> {
-  int _currentIndex = 2;
-
-  void _onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -46,10 +37,6 @@ class _NotiNormalState extends State<NotiNormal> {
               isEmergency: false,
             ),
             body: _buildBody(context),
-            bottomNavigationBar: MyNavigationBar(
-              currentIndex: _currentIndex,
-              onTap: _onTabTapped,
-            ),
           );
         },
       ),
