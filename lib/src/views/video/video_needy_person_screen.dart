@@ -165,7 +165,7 @@ class _ReelCard extends StatelessWidget {
               const SizedBox(height: 10),
 
               // Avatar + tên người đăng
-            Row(
+              Row(
                 children: [
                   _Avatar(url: video.avatarUrl),
                   const SizedBox(width: 8),
@@ -173,15 +173,21 @@ class _ReelCard extends StatelessWidget {
                     child: Text(
                       '${video.name} (${video.location})',
                       style: const TextStyle(
-                        color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700,
-                        shadows: [Shadow(color: Colors.black, blurRadius: 2)], // Thêm bóng chữ
+                        color: Colors.white, fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        shadows: [
+                          Shadow(color: Colors.black, blurRadius: 2)
+                        ], // Thêm bóng chữ
                       ),
-                      maxLines: 1, overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                   TextButton(
+                  TextButton(
                     onPressed: () {},
-                    child: const Text('Ủng hộ', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                    child: const Text('Ủng hộ',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),
@@ -214,7 +220,7 @@ class _CampaignMiniCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String amount;
-  final int progress;
+  final double progress;
   final VoidCallback? onTap;
 
   const _CampaignMiniCard({

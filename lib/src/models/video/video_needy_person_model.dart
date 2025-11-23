@@ -19,7 +19,7 @@ class VideoNeedyPersonModel {
   final String campaignTitle;
   final String campaignSubtitle;
   final String campaignImageUrl;
-  final int progressPercentage;
+  final double progressPercentage;
 
   const VideoNeedyPersonModel({
     required this.id,
@@ -62,7 +62,7 @@ class VideoNeedyPersonModel {
     String? campaignTitle,
     String? campaignSubtitle,
     String? campaignImageUrl,
-    int? progressPercentage,
+    double? progressPercentage,
   }) {
     return VideoNeedyPersonModel(
       id: id ?? this.id,
@@ -131,7 +131,7 @@ class VideoNeedyPersonModel {
       campaignTitle: json['campaignTitle'] as String,
       campaignSubtitle: json['campaignSubtitle'] as String,
       campaignImageUrl: json['campaignImageUrl'] as String,
-      progressPercentage: json['progressPercentage'] as int,
+      progressPercentage: (json['progressPercentage'] as num).toDouble(),
     );
   }
 
@@ -152,7 +152,8 @@ class VideoNeedyPersonModel {
         other.avatarUrl == avatarUrl &&
         other.targetAmount == targetAmount &&
         other.currentAmount == currentAmount &&
-        other.createdAt == createdAt;
+        other.createdAt == createdAt &&
+        other.progressPercentage == progressPercentage;
   }
 
   @override
@@ -172,11 +173,12 @@ class VideoNeedyPersonModel {
       targetAmount,
       currentAmount,
       createdAt,
+      progressPercentage,
     );
   }
 
   @override
   String toString() {
-    return 'VideoNeedyPersonModel(id: $id, name: $name, location: $location, caption: $caption)';
+    return 'VideoNeedyPersonModel(id: $id, name: $name, location: $location, caption: $caption, progress: $progressPercentage%)';
   }
 }
