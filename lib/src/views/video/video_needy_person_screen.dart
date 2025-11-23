@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import 'package:tester/src/models/video/video_needy_person_model.dart';
 import 'package:tester/src/repositories/video/video_needy_person_repo.dart';
+import 'package:tester/src/views/ayns/post_video_test_id5.dart';
 import 'package:tester/src/views/video/cubit/video_needy_person_cubit.dart';
 import 'package:tester/src/views/video/cubit/video_needy_person_state.dart';
 import 'package:tester/src/views/video/video_item_player_widget.dart';
@@ -154,12 +155,29 @@ class _ReelCard extends StatelessWidget {
                 imagePath: video.campaignImageUrl,
                 title: video.campaignTitle,
                 subtitle: video.campaignSubtitle,
-                amount: _formatVnCurrency(
-                    video.currentAmount), // số tiền đã gây quỹ
+                amount: _formatVnCurrency(video.currentAmount),
                 progress: video.progressPercentage,
-                onTap: () {
-                  // TODO: điều hướng tới trang bài viết/chiến dịch
-                  // Navigator.pushNamed(context, '/campaign/detail', arguments: video.id);
+
+                // --- LOGIC ĐIỀU HƯỚNG Ở ĐÂY ---
+               onTap: () {
+                  if (video.id == '5') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PostVideoTestPageId5(),
+                      ),
+                    );
+                  } else if (video.id == '8') { 
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PostVideoTestPageId8(),
+                      ),
+                    );
+                  } else {
+                    print("Bạn đã bấm vào video id: ${video.id}");
+                    // Có thể thêm logic cho các id khác tại đây
+                  }
                 },
               ),
               const SizedBox(height: 10),

@@ -136,29 +136,29 @@ class VideoNeedyPersonRepositoryImpl implements VideoNeedyPersonRepository {
       progressPercentage: 84.0,
     ),
 
-    // Video 4: Cụ bà 90 tuổi nhặt ve chai
+    // Video 8: Bà 70 tuổi bán lặt vặt sơri, dâu tây, mứt dâu tằm
     VideoNeedyPersonModel(
-      id: '4',
-      name: 'Anh Nguyễn Vĩ Nhân',
+      id: '8',
+      name: 'saigonhoale.vn',
       location: 'TP. Thủ Đức, TP.HCM',
       caption:
-          'Hơn 90 tuổi rồi vẫn lặn lội đi nhặt phế liệu ở thùng rác để nuôi người con hơn 60t bị bại liệt 😔🥡',
+          'Gánh hàng rong tuổi 70: Bà cụ bán từng bịch sơ ri, dâu tằm mưu sinh qua ngày giữa Sài Gòn 🍒🍓',
       description:
-          'Cụ Lành đã ở cái tuổi "gần đất xa trời" nhưng chưa một ngày được ngơi nghỉ. Con trai duy nhất của cụ bị bại liệt nằm một chỗ hơn 40 năm nay. Dù lưng còng, mắt kém, cụ vẫn cố gắng bới từng thùng rác để kiếm tiền mua thuốc và cháo cho con.',
+          'Bà Tư năm nay đã ngoài 70, ngày ngày ngồi góc đường bán từng bịch sơ ri, dâu tây, hũ mứt dâu tằm tự làm. Lời lãi chẳng bao nhiêu nhưng là nguồn sống duy nhất để bà trang trải tiền nhà trọ và thuốc thang tuổi già. Mong mọi người ghé ủng hộ bà.',
       likes: 1,
       comments: 0,
       shares: 0,
-      videoUrl: 'assets/videos/video_4.mp4',
-      thumbnailUrl: 'assets/videos/image_4.png',
-      avatarUrl: 'assets/videos/image_4_4.jpeg',
+      videoUrl: 'assets/videos/video_8.mp4',
+      thumbnailUrl: 'assets/videos/image_8.png',
+      avatarUrl: 'assets/videos/image_8_8.jpeg',
       targetAmount: 20000000.0,
-      currentAmount: 12000000.0,
+      currentAmount: 2000000.0,
       createdAt: DateTime.now().subtract(const Duration(days: 1)),
-      tags: ['nguoi_gia', 'bai_liet', 've_chai', 'hoan_canh_dac_biet'],
-      campaignTitle: 'Gánh nặng tuổi xế chiều',
-      campaignSubtitle: 'Giúp cụ Lành nuôi con bại liệt',
-      campaignImageUrl: 'assets/videos/image_4.png',
-      progressPercentage: 60.0,
+      tags: ['nguoi_gia', 'muu_sinh', 'buon_ban', 'hoan_canh_kho_khan'],
+      campaignTitle: 'Gánh hàng rong của Ngoại',
+      campaignSubtitle: 'Hỗ trợ vốn nhập hàng & thuốc men',
+      campaignImageUrl: 'assets/videos/image_8.png',
+      progressPercentage: 10.0,
     ),
 
     // Video 5: Bà cụ lớn tuổi đi lụm ve chai, thông điệp về chữ Hiếu
@@ -186,28 +186,28 @@ class VideoNeedyPersonRepositoryImpl implements VideoNeedyPersonRepository {
       progressPercentage: 75.0,
     ),
 
-    // Video 8: Bà 70 tuổi bán lặt vặt sơri, dâu tây, mứt dâu tằm
+    // Video 4: Cụ bà 90 tuổi nhặt ve chai
     VideoNeedyPersonModel(
-      id: '8',
-      name: 'saigonhoale.vn',
+      id: '4',
+      name: 'Anh Nguyễn Vĩ Nhân',
       location: 'TP. Thủ Đức, TP.HCM',
       caption:
-          'Gánh hàng rong tuổi 70: Bà cụ bán từng bịch sơ ri, dâu tằm mưu sinh qua ngày giữa Sài Gòn 🍒🍓',
+          'Hơn 90 tuổi rồi vẫn lặn lội đi nhặt phế liệu ở thùng rác để nuôi người con hơn 60t bị bại liệt 😔🥡',
       description:
-          'Bà Tư năm nay đã ngoài 70, ngày ngày ngồi góc đường bán từng bịch sơ ri, dâu tây, hũ mứt dâu tằm tự làm. Lời lãi chẳng bao nhiêu nhưng là nguồn sống duy nhất để bà trang trải tiền nhà trọ và thuốc thang tuổi già. Mong mọi người ghé ủng hộ bà.',
+          'Cụ Lành đã ở cái tuổi "gần đất xa trời" nhưng chưa một ngày được ngơi nghỉ. Con trai duy nhất của cụ bị bại liệt nằm một chỗ hơn 40 năm nay. Dù lưng còng, mắt kém, cụ vẫn cố gắng bới từng thùng rác để kiếm tiền mua thuốc và cháo cho con.',
       likes: 1,
       comments: 0,
       shares: 0,
-      videoUrl: 'assets/videos/video_8.mp4',
-      thumbnailUrl: 'assets/videos/image_8.png',
-      avatarUrl: 'assets/videos/image_8_8.jpeg',
+      videoUrl: 'assets/videos/video_4.mp4',
+      thumbnailUrl: 'assets/videos/image_4.png',
+      avatarUrl: 'assets/videos/image_4_4.jpeg',
       targetAmount: 20000000.0,
-      currentAmount: 2000000.0,
+      currentAmount: 12000000.0,
       createdAt: DateTime.now().subtract(const Duration(days: 1)),
-      tags: ['nguoi_gia', 'muu_sinh', 'buon_ban', 'hoan_canh_kho_khan'],
-      campaignTitle: 'Gánh hàng rong của Ngoại',
-      campaignSubtitle: 'Hỗ trợ vốn nhập hàng & thuốc men',
-      campaignImageUrl: 'assets/videos/image_8.png',
+      tags: ['nguoi_gia', 'bai_liet', 've_chai', 'hoan_canh_dac_biet'],
+      campaignTitle: 'Gánh nặng tuổi xế chiều',
+      campaignSubtitle: 'Giúp cụ Lành nuôi con bại liệt',
+      campaignImageUrl: 'assets/videos/image_4.png',
       progressPercentage: 60.0,
     ),
 
