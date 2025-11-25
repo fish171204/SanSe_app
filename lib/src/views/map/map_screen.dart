@@ -15,17 +15,22 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = MapController();
-    _loadMarkers(); // Tải các marker demo khi màn hình bật
-  }
 
-  Future<void> _loadMarkers() async {
-    final markers = await _controller.buildDemoMarkers();
-    if (mounted) {
-      setState(() {
-        _controller.updateMarkers(markers);
-      });
-    }
+    // 1. Khởi tạo Controller
+    _controller = MapController(
+      onMarkerUpdate: (markers) {
+        if (mounted) {
+          setState(() {
+            // Rebuild UI khi marker thay đổi do zoom in/out
+          });
+        }
+      },
+    );
+
+    // 2. Load dữ liệu demo
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _controller.loadDemoData();
+    });
   }
 
   @override
@@ -42,15 +47,19 @@ class _MapScreenState extends State<MapScreen> {
         children: [
           GoogleMap(
             initialCameraPosition: _controller.initialCamera,
+            mapType: _controller.mapType,
+            markers: _controller.markers, // Lấy marker từ controller
+            myLocationEnabled: false,
+            myLocationButtonEnabled: false,
+            zoomControlsEnabled: false,
+
             onMapCreated: (c) {
               _controller.setMapController(c);
               setState(() {});
             },
-            markers: _controller.markers,
-            mapType: _controller.mapType,
-            myLocationEnabled: false,
-            myLocationButtonEnabled: false,
-            zoomControlsEnabled: false,
+            // --- QUAN TRỌNG: Bắt sự kiện zoom để tính lại cluster ---
+            onCameraMove: _controller.onCameraMove,
+            // -------------------------------------------------------
           ),
 
           // Loading overlay
@@ -61,6 +70,7 @@ class _MapScreenState extends State<MapScreen> {
             ),
 
           // TOP controls (back button + search + chips + dropdown)
+          // (Phần này giữ nguyên UI như yêu cầu của bạn)
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
@@ -260,7 +270,7 @@ class _MapScreenState extends State<MapScreen> {
 
                 // 🔁 Toggle map type (Normal <-> Satellite)
                 FloatingActionButton.small(
-                  heroTag: 'mapType', // nút mới
+                  heroTag: 'mapType',
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.black87,
                   elevation: 3,
@@ -284,7 +294,7 @@ class _MapScreenState extends State<MapScreen> {
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.black87,
                   elevation: 3,
-                  onPressed: _controller.goToVN, // TODO: move to user location
+                  onPressed: _controller.goToVN,
                   child: const Icon(Icons.my_location),
                 ),
               ],
