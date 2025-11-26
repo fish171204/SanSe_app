@@ -174,8 +174,7 @@ class MapController {
           id: '10', position: const LatLng(21.003117, 105.920140), value: 1),
       MapItem(
           id: '11', position: const LatLng(21.003117, 105.720140), value: 1),
-      MapItem(
-          id: '12', position: const LatLng(21.003117, 105.620140), value: 1),
+      MapItem(id: '12', position: const LatLng(13.7829, 109.2196), value: 1),
 
       // Cụm Đà Nẵng
       MapItem(id: '7', position: const LatLng(16.0544, 108.2022), value: 1),

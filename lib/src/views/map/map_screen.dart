@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:tester/src/views/ayns/GD1.dart';
+import 'package:tester/src/views/ayns/XemBaiDemo.dart';
+import 'package:tester/src/views/ayns/post_video_test_id1.dart';
+import 'package:tester/src/views/ayns/post_video_test_id2.dart';
+import 'package:tester/src/views/ayns/post_video_test_id3.dart';
+import 'package:tester/src/views/ayns/post_video_test_id4.dart';
+import 'package:tester/src/views/ayns/post_video_test_id5.dart';
+import 'package:tester/src/views/ayns/post_video_test_id6.dart';
+import 'package:tester/src/views/ayns/post_video_test_id7.dart';
+import 'package:tester/src/views/ayns/post_video_test_id8.dart';
+
 import 'package:tester/src/views/map/cluster_utils.dart';
 import 'package:tester/src/views/map/map_campaign_model.dart';
+import 'package:tester/src/views/post/post_needy_detail_test.dart';
 import 'map_controller.dart';
 
 class MapScreen extends StatefulWidget {
@@ -120,7 +132,15 @@ class _MapScreenState extends State<MapScreen> {
                       itemCount: campaignsToShow.length,
                       separatorBuilder: (_, __) => const SizedBox(height: 12),
                       itemBuilder: (context, index) {
-                        return CampaignCard(data: campaignsToShow[index]);
+                        final campaign = campaignsToShow[index];
+
+                        // Wrap CampaignCard bằng GestureDetector để xử lý onTap
+                        return GestureDetector(
+                          onTap: () {
+                            _navigateToDetail(context, campaign.id);
+                          },
+                          child: CampaignCard(data: campaign),
+                        );
                       },
                     ),
                   ),
@@ -130,6 +150,61 @@ class _MapScreenState extends State<MapScreen> {
           },
         );
       },
+    );
+  }
+
+  void _navigateToDetail(BuildContext context, String id) {
+    Widget page;
+    switch (id) {
+      case '1':
+        page = const PostVideoTestPageId1();
+        break;
+      case '2':
+        page = const PostVideoTestPageId2();
+        break;
+      case '3':
+        page = const PostVideoTestPageId3();
+        break;
+      case '4':
+        page = const PostVideoTestPageId4();
+        break;
+      case '5':
+        page = const PostVideoTestPageId5();
+        break;
+      case '6':
+        page = const PostVideoTestPageId6();
+        break;
+      case '7':
+        page = const PostVideoTestPageId7();
+        break;
+      case '8':
+        page = const PostVideoTestPageId8();
+        break;
+      case '9':
+        page = const XemBaiDangKhoKhan2();
+        break;
+      case '10':
+        page = const XemBaiDemo();
+        break;
+      case '12':
+        page = const GD1();
+        break;
+      // Bạn cần tạo thêm các file page tương ứng nếu chưa có
+      // case '9': page = const PostVideoTestPageId9(); break;
+      // case '10': page = const PostVideoTestPageId10(); break;
+      // case '11': page = const PostVideoTestPageId11(); break;
+      // case '12': page = const PostVideoTestPageId12(); break;
+      default:
+        print("Chưa có trang chi tiết cho ID: $id");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Chưa có nội dung cho bài viết #$id")),
+        );
+        return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => page),
     );
   }
 
