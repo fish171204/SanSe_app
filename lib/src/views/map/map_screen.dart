@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:tester/src/views/map/cluster_utils.dart';
+import 'package:tester/src/views/map/map_campaign_model.dart';
 import 'map_controller.dart';
 
 class MapScreen extends StatefulWidget {
@@ -19,18 +21,116 @@ class _MapScreenState extends State<MapScreen> {
     // 1. Khởi tạo Controller
     _controller = MapController(
       onMarkerUpdate: (markers) {
-        if (mounted) {
-          setState(() {
-            // Rebuild UI khi marker thay đổi do zoom in/out
-          });
-        }
+        if (mounted) setState(() {});
+      },
+      // --- XỬ LÝ SỰ KIỆN NHẤN VÀO MARKER/CLUSTER ---
+      onClusterTap: (items) {
+        _showCampaignListDialog(context, items);
       },
     );
 
-    // 2. Load dữ liệu demo
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.loadDemoData();
     });
+  }
+
+  void _showCampaignListDialog(BuildContext context, List<MapItem> items) {
+    // Lọc ra danh sách CampaignModel tương ứng với MapItem.id
+    // Ở đây mình lấy ngẫu nhiên hoặc theo ID nếu trùng khớp
+    // Logic thực tế: Dùng items[i].id để query DB lấy CampaignModel
+    List<MapCampaignModel> campaignsToShow = [];
+
+    for (var item in items) {
+      // Tìm campaign có id trùng với marker id
+      // Nếu không thấy thì lấy đại cái đầu tiên để demo hiển thị cho đẹp
+      var camp = dummyCampaigns.firstWhere(
+        (c) => c.id == item.id,
+        orElse: () => dummyCampaigns[0],
+      );
+      campaignsToShow.add(camp);
+    }
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true, // Cho phép sheet cao lên
+      backgroundColor: Colors.transparent,
+      isDismissible: true, // QUAN TRỌNG: Cho phép bấm ra ngoài để đóng
+      enableDrag: true, // Cho phép kéo xuống để đóng
+      builder: (context) {
+        // Tính toán chiều cao khởi tạo dựa trên số lượng item
+        // Ít item thì hiện thấp, nhiều item thì hiện cao
+        double initialSize = (campaignsToShow.length <= 2) ? 0.4 : 0.6;
+
+        return DraggableScrollableSheet(
+          initialChildSize: initialSize,
+          minChildSize: 0.2,
+          maxChildSize: 0.85,
+          expand:
+              false, // QUAN TRỌNG: Để nó không chiếm hết màn hình, giúp vùng click bên ngoài hoạt động tốt hơn
+          builder: (context, scrollController) {
+            return Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  // Thanh kéo nhỏ ở trên (Handle)
+                  Center(
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      width: 40,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ),
+
+                  // Header: Tiêu đề + Nút đóng
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Danh sách (${campaignsToShow.length})',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      // Nút đóng nhỏ (User experience tốt hơn)
+                      InkWell(
+                        onTap: () => Navigator.pop(context),
+                        child: const Padding(
+                          padding: EdgeInsets.all(4.0),
+                          child:
+                              Icon(Icons.close, size: 24, color: Colors.grey),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+
+                  // List Items
+                  Expanded(
+                    child: ListView.separated(
+                      controller: scrollController,
+                      itemCount: campaignsToShow.length,
+                      separatorBuilder: (_, __) => const SizedBox(height: 12),
+                      itemBuilder: (context, index) {
+                        return CampaignCard(data: campaignsToShow[index]);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -316,8 +416,7 @@ class _MapScreenState extends State<MapScreen> {
                     Expanded(
                       child: _BadgeButton(
                         icon: Icons.place_outlined,
-                        label:
-                            '147 chiến dịch xung quanh', // TODO: bind số thật
+                        label: '12 hoàn cảnh xung quanh', // TODO: bind số thật
                         color: Colors.white,
                         foreground: Colors.black87,
                         onTap: () {

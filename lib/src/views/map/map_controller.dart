@@ -24,9 +24,37 @@ class MapController {
   final Set<String> _selectedTags = {'Xóa nghèo'};
   String _campaignType = 'Người khó khăn';
 
+  // Logic Clustering
+  double _currentZoom = 5.6;
+  List<MapItem> _sourceItems = [];
+  Set<Marker> _markers = {};
+
+  // Callback để báo UI update Marker
+  final Function(Set<Marker>) onMarkerUpdate;
+
+  // --- THÊM MỚI: Callback khi nhấn vào Cluster/Marker ---
+  // Trả về danh sách các MapItem nằm trong cụm đó
+  final Function(List<MapItem>)? onClusterTap;
+
+  MapController({
+    required this.onMarkerUpdate,
+    this.onClusterTap, // Nhận callback từ UI
+  });
+
+  // Getters & Setters (Giữ nguyên như cũ)
+  TextEditingController get searchController => _searchCtrl;
+  MapType get mapType => _mapType;
+  CameraPosition get initialCamera => _initialCam;
+  bool get loading => _loading;
+  Set<Marker> get markers => _markers;
   List<String> get tags => _tags;
   Set<String> get selectedTags => _selectedTags;
   String get campaignType => _campaignType;
+
+  void setMapController(GoogleMapController controller) {
+    _mapController = controller;
+    _loading = false;
+  }
 
   void setCampaignType(String type) => _campaignType = type;
   void toggleTag(String tag, bool selected) {
@@ -35,29 +63,6 @@ class MapController {
     } else {
       _selectedTags.remove(tag);
     }
-  }
-  // -----------------------
-
-  // Logic Clustering
-  double _currentZoom = 5.6;
-  List<MapItem> _sourceItems = []; // Dữ liệu gốc
-  Set<Marker> _markers = {};
-
-  // Callback để báo UI update
-  final Function(Set<Marker>) onMarkerUpdate;
-
-  MapController({required this.onMarkerUpdate});
-
-  // Getters
-  TextEditingController get searchController => _searchCtrl;
-  MapType get mapType => _mapType;
-  CameraPosition get initialCamera => _initialCam;
-  bool get loading => _loading;
-  Set<Marker> get markers => _markers;
-
-  void setMapController(GoogleMapController controller) {
-    _mapController = controller;
-    _loading = false;
   }
 
   // --- LOGIC QUAN TRỌNG: XỬ LÝ CAMERA MOVE ---
@@ -124,28 +129,19 @@ class MapController {
             "cluster_${cluster.center.latitude}_${cluster.center.longitude}"),
         position: cluster.center,
         icon: icon,
-        zIndex:
-            cluster.items.length.toDouble(), // Marker to nằm trên marker nhỏ
+        zIndex: cluster.items.length.toDouble(),
+        // --- SỬA ĐỔI SỰ KIỆN ONTAP ---
         onTap: () {
-          // [DEBUG LOG] Khi user tap vào marker
-          print(
-              '👆 Tapped on Marker at [${cluster.center.latitude}, ${cluster.center.longitude}]');
-          print('   - Is Cluster: $isCluster');
-          print('   - Total Value: ${cluster.totalValue}');
-          print('   - Items count: ${cluster.items.length}');
-
-          // Nếu là cluster (gộp nhiều điểm), tap vào sẽ zoom in vào cluster đó
-          if (isCluster) {
-            _mapController?.animateCamera(
-              CameraUpdate.newLatLngZoom(cluster.center, _currentZoom + 2),
-            );
+          // Thay vì zoom, ta gọi callback để show Dialog
+          if (onClusterTap != null) {
+            onClusterTap!(cluster.items);
           }
         },
       ));
     }
 
     _markers = newMarkers;
-    onMarkerUpdate(_markers); // Báo UI vẽ lại
+    onMarkerUpdate(_markers);
   }
 
   // --- HÀM TẠO DỮ LIỆU GIẢ LẬP ---

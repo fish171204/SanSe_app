@@ -4,7 +4,13 @@ import 'package:intl/intl.dart';
 
 import 'package:tester/src/models/video/video_needy_person_model.dart';
 import 'package:tester/src/repositories/video/video_needy_person_repo.dart';
+import 'package:tester/src/views/ayns/post_video_test_id1.dart';
+import 'package:tester/src/views/ayns/post_video_test_id2.dart';
+import 'package:tester/src/views/ayns/post_video_test_id3.dart';
+import 'package:tester/src/views/ayns/post_video_test_id4.dart';
 import 'package:tester/src/views/ayns/post_video_test_id5.dart';
+import 'package:tester/src/views/ayns/post_video_test_id6.dart';
+import 'package:tester/src/views/ayns/post_video_test_id7.dart';
 import 'package:tester/src/views/ayns/post_video_test_id8.dart';
 import 'package:tester/src/views/video/cubit/video_needy_person_cubit.dart';
 import 'package:tester/src/views/video/cubit/video_needy_person_state.dart';
@@ -160,24 +166,72 @@ class _ReelCard extends StatelessWidget {
                 progress: video.progressPercentage,
 
                 // --- LOGIC ĐIỀU HƯỚNG Ở ĐÂY ---
-               onTap: () {
-                  if (video.id == '5') {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PostVideoTestPageId5(),
-                      ),
-                    );
-                  } else if (video.id == '8') { 
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PostVideoTestPageId8(),
-                      ),
-                    );
-                  } else {
-                    print("Bạn đã bấm vào video id: ${video.id}");
-                    // Có thể thêm logic cho các id khác tại đây
+                onTap: () {
+                  switch (video.id) {
+                    case '1':
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PostVideoTestPageId1()),
+                      );
+                      break;
+                    case '2':
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PostVideoTestPageId2()),
+                      );
+                      break;
+                    case '3':
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PostVideoTestPageId3()),
+                      );
+                      break;
+                    case '4':
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PostVideoTestPageId4()),
+                      );
+                      break;
+                    case '5':
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PostVideoTestPageId5()),
+                      );
+                      break;
+                    case '6':
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PostVideoTestPageId6()),
+                      );
+                      break;
+                    case '7':
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PostVideoTestPageId7()),
+                      );
+                      break;
+                    case '8':
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PostVideoTestPageId8()),
+                      );
+                      break;
+                    default:
+                      print("Chưa có trang chi tiết cho video id: ${video.id}");
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content: Text(
+                                "Chưa có bài viết chi tiết cho ID: ${video.id}")),
+                      );
+                      break;
                   }
                 },
               ),
