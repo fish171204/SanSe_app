@@ -12,6 +12,18 @@ class PostManagementInitial extends PostManagementState {}
 
 class PostManagementLoading extends PostManagementState {}
 
+class PostManagementExporting extends PostManagementState {}
+
+class PostManagementExportSuccess extends PostManagementState {
+ final String filePath;
+ final String message;
+
+ const PostManagementExportSuccess(this.filePath, this.message);
+
+ @override
+ List<Object?> get props => [filePath, message];
+}
+
 class PostManagementLoaded extends PostManagementState {
   final List<AdminPostModel> posts;
   final List<AdminPostModel> filteredPosts;
