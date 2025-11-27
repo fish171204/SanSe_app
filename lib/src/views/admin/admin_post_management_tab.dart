@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tester/src/repositories/admin/post_management_repository.dart';
+import '../../repositories/admin/post_management_repository.dart';
 import '../../models/admin/admin_post_model.dart';
 import 'cubit/post_management_cubit.dart';
 import 'cubit/post_management_state.dart';
@@ -42,15 +42,22 @@ class _PostManagementViewState extends State<_PostManagementView> {
   }
 
   void _onSearchChanged() {
-    context.read<PostManagementCubit>().searchPosts(_searchController.text);
+    if (mounted) {
+      context.read<PostManagementCubit>().searchPosts(_searchController.text);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PostManagementCubit, PostManagementState>(
-      listener: (context, state) {
+      listener: (context, state) async {
+        // Thêm async ở đây
         if (state is PostManagementActionSuccess) {
+          // Hiển thị dialog và chờ nó đóng
           _showSuccessDialog(state.message);
+          // SAU KHI DIALOG ĐÓNG, ta load lại danh sách bài đăng
+          // Gọi lại hàm loadPosts để load lại data
+          context.read<PostManagementCubit>().loadPosts();
         } else if (state is PostManagementError) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -64,7 +71,7 @@ class _PostManagementViewState extends State<_PostManagementView> {
         if (state is PostManagementLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is PostManagementLoaded) {
-          return _buildPostList(state);
+          return _buildPostList(context, state);
         } else if (state is PostManagementError) {
           return Center(
             child: Column(
@@ -80,26 +87,32 @@ class _PostManagementViewState extends State<_PostManagementView> {
             ),
           );
         }
+        // --- FIX: Hiển thị loading khi đang ở trạng thái Success (chờ reload list) ---
+        else if (state is PostManagementActionSuccess) {
+          return const SizedBox.shrink();
+        }
+
         return const SizedBox.shrink();
       },
     );
   }
 
-  Widget _buildPostList(PostManagementLoaded state) {
-    return Scaffold(
-      body: Column(
-        children: [
-          _buildSearchBar(),
-          _buildFilterSection(state),
-          Expanded(
-            child: ListView(
-              children: state.filteredPosts
-                  .map((post) => _buildPostItem(post))
-                  .toList(),
-            ),
+  Widget _buildPostList(BuildContext context, PostManagementLoaded state) {
+    // Bỏ Scaffold lồng nhau để tránh lỗi UI
+    return Column(
+      children: [
+        _buildSearchBar(),
+        _buildFilterSection(context, state),
+        Expanded(
+          child: ListView.builder(
+            itemCount: state.filteredPosts.length,
+            itemBuilder: (ctx, index) {
+              final post = state.filteredPosts[index];
+              return _buildPostItem(context, post);
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -122,7 +135,7 @@ class _PostManagementViewState extends State<_PostManagementView> {
     );
   }
 
-  Widget _buildFilterSection(PostManagementLoaded state) {
+  Widget _buildFilterSection(BuildContext context, PostManagementLoaded state) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
@@ -151,7 +164,8 @@ class _PostManagementViewState extends State<_PostManagementView> {
     );
   }
 
-  Widget _buildPostItem(AdminPostModel post) {
+  Widget _buildPostItem(BuildContext context, AdminPostModel post) {
+    final cubit = context.read<PostManagementCubit>();
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -185,11 +199,13 @@ class _PostManagementViewState extends State<_PostManagementView> {
                     post.title,
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 16),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
                   Text(
                     post.subtitle,
-                    style: TextStyle(color: Colors.grey[600]),
+                    style: TextStyle(color: Colors.grey[600], fontSize: 12),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -209,6 +225,7 @@ class _PostManagementViewState extends State<_PostManagementView> {
                     style: TextStyle(
                       color: post.isCompleted ? Colors.green : Colors.red,
                       fontWeight: FontWeight.bold,
+                      fontSize: 12,
                     ),
                   ),
                 ],
@@ -219,21 +236,30 @@ class _PostManagementViewState extends State<_PostManagementView> {
               onSelected: (value) {
                 switch (value) {
                   case 1:
-                    _confirmDeletePost(post);
+                    _confirmDeletePost(cubit, post);
                     break;
                   case 2:
-                    _confirmChangeStatus(post, "unavailable");
+                    _confirmChangeStatus(cubit, post, "unavailable");
                     break;
                   case 3:
-                    _confirmChangeStatus(post, "available");
+                    _confirmChangeStatus(cubit, post, "available");
                     break;
                 }
               },
-              itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
-                const PopupMenuItem<int>(value: 1, child: Text('Xóa')),
-                const PopupMenuItem<int>(value: 2, child: Text('Unavailable')),
-                const PopupMenuItem<int>(value: 3, child: Text('Available')),
-              ],
+              itemBuilder: (BuildContext context) {
+                List<PopupMenuEntry<int>> items = [
+                  const PopupMenuItem<int>(value: 1, child: Text('Xóa')),
+                ];
+                if (post.status == 'available') {
+                  items.add(const PopupMenuItem<int>(
+                      value: 2,
+                      child: Text('Đánh dấu hoàn thành (Unavailable)')));
+                } else if (post.status == 'unavailable') {
+                  items.add(const PopupMenuItem<int>(
+                      value: 3, child: Text('Mở lại chiến dịch (Available)')));
+                }
+                return items;
+              },
             ),
           ],
         ),
@@ -241,28 +267,27 @@ class _PostManagementViewState extends State<_PostManagementView> {
     );
   }
 
-  void _confirmDeletePost(AdminPostModel post) {
+  void _confirmDeletePost(PostManagementCubit cubit, AdminPostModel post) {
     _showConfirmationDialog(
       'Xóa bài đăng',
-      'Bạn có chắc chắn muốn xóa bài đăng này?',
-      () => context.read<PostManagementCubit>().deletePost(post.title),
+      'Bạn có chắc chắn muốn xóa bài đăng "${post.title}" không?',
+      () => cubit.deletePost(post.title),
     );
   }
 
-  void _confirmChangeStatus(AdminPostModel post, String newStatus) {
+  void _confirmChangeStatus(
+      PostManagementCubit cubit, AdminPostModel post, String newStatus) {
     final title = newStatus == "unavailable"
-        ? 'Chuyển sang Unavailable'
-        : 'Chuyển sang Available';
+        ? 'Đánh dấu hoàn thành'
+        : 'Mở lại chiến dịch';
     final message = newStatus == "unavailable"
-        ? 'Bạn có chắc chắn muốn chuyển trạng thái bài đăng này sang Unavailable (Đã hoàn thành)?'
-        : 'Bạn có chắc chắn muốn chuyển trạng thái bài đăng này sang Available (Chưa hoàn thành)?';
+        ? 'Bạn có chắc chắn muốn chuyển trạng thái bài đăng này sang "Đã hoàn thành"?\n(Progress sẽ set về 100%)'
+        : 'Bạn có chắc chắn muốn mở lại bài đăng này?\n(Progress sẽ khôi phục về trạng thái cũ)';
 
     _showConfirmationDialog(
       title,
       message,
-      () => context
-          .read<PostManagementCubit>()
-          .updatePostStatus(post.title, newStatus),
+      () => cubit.updatePostStatus(post.title, newStatus),
     );
   }
 
@@ -270,18 +295,18 @@ class _PostManagementViewState extends State<_PostManagementView> {
       String title, String message, VoidCallback onConfirm) {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (BuildContext dialogContext) {
         return AlertDialog(
           title: Text(title),
           content: Text(message),
           actions: <Widget>[
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => Navigator.of(dialogContext).pop(),
               child: const Text('Hủy'),
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(dialogContext).pop();
                 onConfirm();
               },
               child: const Text('Xác nhận'),
@@ -304,8 +329,9 @@ class _PostManagementViewState extends State<_PostManagementView> {
           elevation: 10,
           child: Container(
             padding: const EdgeInsets.all(20),
-            height: 260,
+            // Bỏ chiều cao cố định để tránh overflow
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(
@@ -323,7 +349,7 @@ class _PostManagementViewState extends State<_PostManagementView> {
                 Text(
                   message,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 16, color: Colors.grey),
+                  style: const TextStyle(fontSize: 14, color: Colors.grey),
                 ),
                 const SizedBox(height: 15),
                 TextButton(

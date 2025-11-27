@@ -87,12 +87,10 @@ class PostManagementCubit extends Cubit<PostManagementState> {
     try {
       await _repository.deletePost(title);
 
-      // Reload posts after deletion
-      await _refreshPosts();
-
+      // 1. Emit Success để hiện thông báo
       emit(const PostManagementActionSuccess('Xóa bài đăng thành công!'));
 
-      // Return to loaded state
+      // 2. Load lại data mới và Emit Loaded để hiện lại list
       await _refreshPosts();
     } catch (e) {
       emit(PostManagementError('Không thể xóa bài đăng: ${e.toString()}'));
@@ -101,21 +99,21 @@ class PostManagementCubit extends Cubit<PostManagementState> {
 
   Future<void> updatePostStatus(String title, String newStatus) async {
     final currentState = state;
+    // We save the current loaded state to potentially restore it or use its filter settings
     if (currentState is! PostManagementLoaded) return;
 
     try {
       await _repository.updatePostStatus(title, newStatus);
 
-      // Reload posts after status change
-      await _refreshPosts();
-
       final statusMessage = newStatus == "unavailable"
           ? 'Chuyển trạng thái sang Unavailable thành công!'
           : 'Chuyển trạng thái sang Available thành công!';
 
+      // 1. Emit Success -> Triggers the Dialog in UI Listener
       emit(PostManagementActionSuccess(statusMessage));
 
-      // Return to loaded state
+      // 2. Immediately reload data -> Will emit PostManagementLoaded
+      // This brings the UI back to the list view
       await _refreshPosts();
     } catch (e) {
       emit(PostManagementError(

@@ -51,7 +51,8 @@ class _UserManagementViewState extends State<_UserManagementView> {
         if (state is UserManagementLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is UserManagementLoaded) {
-          return _buildUserList(state);
+          // Truyền context gốc (có chứa Provider) vào hàm build list
+          return _buildUserList(context, state);
         } else if (state is UserManagementError) {
           return Center(
             child: Column(
@@ -72,17 +73,17 @@ class _UserManagementViewState extends State<_UserManagementView> {
     );
   }
 
-  Widget _buildUserList(UserManagementLoaded state) {
+  Widget _buildUserList(BuildContext context, UserManagementLoaded state) {
     return Column(
       children: [
-        _buildFilterSection(state),
+        _buildFilterSection(context, state),
         Expanded(
           child: ListView.builder(
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
             itemCount: state.filteredUsers.length,
-            itemBuilder: (context, index) {
+            itemBuilder: (ctx, index) {
               final user = state.filteredUsers[index];
-              return _buildUserCard(user);
+              return _buildUserCard(context, user);
             },
           ),
         ),
@@ -90,7 +91,7 @@ class _UserManagementViewState extends State<_UserManagementView> {
     );
   }
 
-  Widget _buildFilterSection(UserManagementLoaded state) {
+  Widget _buildFilterSection(BuildContext context, UserManagementLoaded state) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Row(
@@ -136,8 +137,11 @@ class _UserManagementViewState extends State<_UserManagementView> {
     );
   }
 
-  Widget _buildUserCard(AdminUserModel user) {
+  Widget _buildUserCard(BuildContext context, AdminUserModel user) {
     final daysInactive = user.getDaysInactive();
+
+    // Lấy instance của Cubit từ context gốc để truyền vào Dialog sau này
+    final cubit = context.read<UserManagementCubit>();
 
     return Card(
       elevation: 4,
@@ -165,8 +169,9 @@ class _UserManagementViewState extends State<_UserManagementView> {
                 Text(
                   user.status,
                   style: TextStyle(
-                    color:
-                        user.status == 'Hoạt động' ? Colors.green : Colors.red,
+                    color: user.status == 'Hoạt động'
+                        ? Colors.green
+                        : Colors.orange, // Màu cam cho Tạm khóa
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -179,50 +184,61 @@ class _UserManagementViewState extends State<_UserManagementView> {
           onSelected: (value) {
             switch (value) {
               case 'delete':
-                _confirmDeleteUser(user);
+                _confirmDeleteUser(context, cubit, user);
                 break;
               case 'suspend':
-                _confirmSuspendUser(user);
+                _confirmSuspendUser(context, cubit, user);
                 break;
               case 'unlock':
-                _confirmUnlockUser(user);
+                _confirmUnlockUser(context, cubit, user);
                 break;
             }
           },
-          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-            const PopupMenuItem<String>(
-              value: 'delete',
-              child: Text('Xóa'),
-            ),
-            const PopupMenuItem<String>(
-              value: 'suspend',
-              child: Text('Tạm khóa'),
-            ),
-            const PopupMenuItem<String>(
-              value: 'unlock',
-              child: Text('Mở khóa'),
-            ),
-          ],
+          itemBuilder: (BuildContext context) {
+            List<PopupMenuEntry<String>> menuItems = [
+              const PopupMenuItem<String>(
+                value: 'delete',
+                child: Text('Xóa'),
+              ),
+            ];
+
+            // Logic hiển thị menu dựa trên trạng thái hiện tại
+            if (user.status == 'Hoạt động') {
+              menuItems.add(const PopupMenuItem<String>(
+                value: 'suspend',
+                child: Text('Tạm khóa'),
+              ));
+            } else if (user.status == 'Tạm khóa') {
+              menuItems.add(const PopupMenuItem<String>(
+                value: 'unlock',
+                child: Text('Mở khóa'),
+              ));
+            }
+
+            return menuItems;
+          },
         ),
       ),
     );
   }
 
-  void _confirmDeleteUser(AdminUserModel user) {
+  // Truyền cubit vào để gọi hàm, tránh lỗi ProviderNotFoundException
+  void _confirmDeleteUser(
+      BuildContext context, UserManagementCubit cubit, AdminUserModel user) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: const Text("Xác nhận xóa"),
         content: Text("Bạn có chắc muốn xóa ${user.name} không?"),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(dialogContext),
             child: const Text("Hủy"),
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
-              context.read<UserManagementCubit>().deleteUser(user.cccd);
+              Navigator.pop(dialogContext);
+              cubit.deleteUser(user.cccd);
             },
             child: const Text("Xóa", style: TextStyle(color: Colors.red)),
           ),
@@ -231,21 +247,22 @@ class _UserManagementViewState extends State<_UserManagementView> {
     );
   }
 
-  void _confirmSuspendUser(AdminUserModel user) {
+  void _confirmSuspendUser(
+      BuildContext context, UserManagementCubit cubit, AdminUserModel user) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: const Text("Xác nhận tạm khóa"),
         content: Text("Bạn có chắc muốn tạm khóa ${user.name} không?"),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(dialogContext),
             child: const Text("Hủy"),
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
-              context.read<UserManagementCubit>().suspendUser(user.cccd);
+              Navigator.pop(dialogContext);
+              cubit.suspendUser(user.cccd);
             },
             child:
                 const Text("Tạm khóa", style: TextStyle(color: Colors.orange)),
@@ -255,21 +272,22 @@ class _UserManagementViewState extends State<_UserManagementView> {
     );
   }
 
-  void _confirmUnlockUser(AdminUserModel user) {
+  void _confirmUnlockUser(
+      BuildContext context, UserManagementCubit cubit, AdminUserModel user) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: const Text("Xác nhận mở khóa"),
-        content: Text("Bạn có chắc muốn mở khóa ${user.name} không?"),
+        content: Text("Bạn có chắc muốn mở khóa tài khoản ${user.name} không?"),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(dialogContext),
             child: const Text("Hủy"),
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
-              context.read<UserManagementCubit>().unlockUser(user.cccd);
+              Navigator.pop(dialogContext);
+              cubit.unlockUser(user.cccd);
             },
             child: const Text("Mở khóa", style: TextStyle(color: Colors.green)),
           ),
