@@ -56,9 +56,8 @@ class _PostManagementViewState extends State<_PostManagementView> {
   }
 
   // --- HÀM GỌI EXPORT ---
-  Future<void> _handleExport(
-      BuildContext context, List<AdminPostModel> posts) async {
-    // Hiển thị loading
+  Future<void> _handleExport(BuildContext context, List<AdminPostModel> posts,
+      String filterName) async {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -66,13 +65,10 @@ class _PostManagementViewState extends State<_PostManagementView> {
     );
 
     try {
-      // Gọi service để xuất PDF
-      await _pdfService.exportPostsToPdf(posts);
+      await _exportToPdf(context, posts, filterName);
 
-      // Tắt loading sau khi xong (hoặc khi người dùng đóng trình xem PDF)
       if (context.mounted) Navigator.pop(context);
     } catch (e) {
-      // Tắt loading nếu lỗi
       if (context.mounted) Navigator.pop(context);
 
       if (context.mounted) {
@@ -186,9 +182,9 @@ class _PostManagementViewState extends State<_PostManagementView> {
                     .toList(),
               ),
               const SizedBox(width: 10),
-              // --- GỌI HÀM EXPORT MỚI ---
               IconButton(
-                onPressed: () => _handleExport(context, state.filteredPosts),
+                onPressed: () => _handleExport(
+                    context, state.filteredPosts, state.selectedFilter),
                 icon: const Icon(Icons.picture_as_pdf, color: Colors.red),
                 tooltip: "Xuất PDF",
               ),
@@ -199,10 +195,9 @@ class _PostManagementViewState extends State<_PostManagementView> {
     );
   }
 
-  // --- MỚI: Hàm xử lý xuất PDF ---
-  Future<void> _exportToPdf(
-      BuildContext context, List<AdminPostModel> posts) async {
-    // Hiển thị loading dialog trong lúc tạo PDF
+  // --- HÀM XỬ LÝ XUẤT PDF ĐÃ CẬP NHẬT ---
+  Future<void> _exportToPdf(BuildContext context, List<AdminPostModel> posts,
+      String filterName) async {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -211,10 +206,9 @@ class _PostManagementViewState extends State<_PostManagementView> {
 
     try {
       final doc = pw.Document();
-
-      // Tải font hỗ trợ tiếng Việt (Roboto)
       final font = await PdfGoogleFonts.robotoRegular();
       final fontBold = await PdfGoogleFonts.robotoBold();
+      final fontItalic = await PdfGoogleFonts.robotoItalic();
 
       doc.addPage(
         pw.MultiPage(
@@ -222,18 +216,38 @@ class _PostManagementViewState extends State<_PostManagementView> {
           theme: pw.ThemeData.withFont(
             base: font,
             bold: fontBold,
+            italic: fontItalic,
           ),
           build: (pw.Context context) {
             return [
               pw.Header(
                 level: 0,
                 child: pw.Center(
-                  child: pw.Text("DANH SÁCH BÀI ĐĂNG",
-                      style: pw.TextStyle(
-                          fontSize: 24, fontWeight: pw.FontWeight.bold)),
+                  child: pw.Column(
+                    mainAxisSize: pw.MainAxisSize.min,
+                    children: [
+                      pw.Text(
+                        "DANH SÁCH BÀI ĐĂNG",
+                        style: pw.TextStyle(
+                          fontSize: 24,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.SizedBox(height: 4),
+                      pw.Text(
+                        "($filterName)",
+                        style: pw.TextStyle(
+                          fontSize: 14,
+                          color: PdfColors.grey600,
+                          fontStyle: pw.FontStyle.italic,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               pw.SizedBox(height: 20),
+              // --- CẬP NHẬT BẢNG ---
               pw.TableHelper.fromTextArray(
                 context: context,
                 border: pw.TableBorder.all(),
@@ -242,27 +256,42 @@ class _PostManagementViewState extends State<_PostManagementView> {
                 headerDecoration: const pw.BoxDecoration(color: PdfColors.blue),
                 cellAlignment: pw.Alignment.centerLeft,
                 headerAlignment: pw.Alignment.center,
+                // Điều chỉnh độ rộng cột để chứa thêm cột mới
                 columnWidths: {
                   0: const pw.FlexColumnWidth(3), // Tên bài
-                  1: const pw.FlexColumnWidth(2), // Số tiền
-                  2: const pw.FlexColumnWidth(1), // Tiến độ
-                  3: const pw.FlexColumnWidth(1), // Trạng thái
+                  1: const pw.FlexColumnWidth(1.5), // Số tiền gốc
+                  2: const pw.FlexColumnWidth(0.8), // Tiến độ
+                  3: const pw.FlexColumnWidth(1.2), // Trạng thái
+                  4: const pw.FlexColumnWidth(2), // CỘT MỚI: Nhà hảo tâm
                 },
+                // Thêm Header mới
                 headers: <String>[
                   'Tên bài đăng',
                   'Số tiền',
                   'Tiến độ',
-                  'Trạng thái'
+                  'Trạng thái',
+                  'Nhà hảo tâm'
                 ],
+                // Map dữ liệu
                 data: posts.map((post) {
+                  String statusText;
+                  if (post.status == 'available' || post.status == 'pending') {
+                    statusText = "Chưa hoàn thành";
+                  } else {
+                    statusText = "Đã hoàn thành";
+                  }
+
                   return [
                     post.title,
                     post.amount,
                     "${post.progress}%",
-                    post.status == 'available' ? "Đang chạy" : "Đã xong",
+                    statusText,
+                    // Dữ liệu cột mới: Tên + Số tiền (giống cột số tiền)
+                    "Nguyễn Đăng Khoa\n${post.amount}",
                   ];
                 }).toList(),
               ),
+              // ---------------------
               pw.SizedBox(height: 20),
               pw.Align(
                 alignment: pw.Alignment.centerRight,
@@ -277,16 +306,13 @@ class _PostManagementViewState extends State<_PostManagementView> {
         ),
       );
 
-      // Đóng loading dialog
       if (context.mounted) Navigator.pop(context);
 
-      // Mở trình xem/lưu PDF của thiết bị
       await Printing.layoutPdf(
         onLayout: (PdfPageFormat format) async => doc.save(),
-        name: 'danh_sach_bai_dang.pdf', // Tên file mặc định
+        name: 'danh_sach_bai_dang.pdf',
       );
     } catch (e) {
-      // Đóng loading dialog nếu có lỗi
       if (context.mounted) Navigator.pop(context);
 
       if (context.mounted) {

@@ -240,7 +240,7 @@ class PostRepositoryImpl implements PostRepository {
     {
       "imagePath": "assets/images/chiendich3.jpg",
       "title": "CON ĐƯỜNG MƠ ƯỚC SỐ 3",
-      "subtitle": "1177 lượt ủng hộ • Còn lại 38 ngày",
+      "subtitle": "1 lượt ủng hộ • Còn lại 38 ngày",
       "amount": "28.934.033 đ",
       "progress": 36,
       "originalProgress": 36,
@@ -250,7 +250,7 @@ class PostRepositoryImpl implements PostRepository {
     {
       "imagePath": "assets/images/chiendich4.jpg",
       "title": "Cầu Mơ Ước số 8",
-      "subtitle": "192 lượt ủng hộ • Còn lại 39 ngày",
+      "subtitle": "1 lượt ủng hộ • Còn lại 39 ngày",
       "amount": "6.471.490 đ",
       "progress": 22,
       "originalProgress": 22,
@@ -260,7 +260,7 @@ class PostRepositoryImpl implements PostRepository {
     {
       "imagePath": "assets/images/chiendich5.jpg",
       "title": "Dự Án Xây Cầu Tại Xã Rạch Chèo; huyện Phú Tân; Tỉnh Cà Mau",
-      "subtitle": "784 lượt ủng hộ • Còn lại 2 ngày",
+      "subtitle": "1 lượt ủng hộ • Còn lại 2 ngày",
       "amount": "105.471.490 đ",
       "progress": 28,
       "originalProgress": 28,
@@ -270,7 +270,7 @@ class PostRepositoryImpl implements PostRepository {
     {
       "imagePath": "assets/images/chiendich6.jpg",
       "title": "Quỹ Yêu thương HLC",
-      "subtitle": "1.804 lượt ủng hộ • Còn lại 1013 ngày",
+      "subtitle": "1 lượt ủng hộ • Còn lại 1013 ngày",
       "amount": "155.551.490 đ",
       "progress": 44,
       "originalProgress": 44,
@@ -280,7 +280,7 @@ class PostRepositoryImpl implements PostRepository {
     {
       "imagePath": "assets/images/chiendich7.jpg",
       "title": "Dự Án Hiện Thực Hoá Ước Mơ...",
-      "subtitle": "656 lượt ủng hộ • Còn lại 7 ngày",
+      "subtitle": "1 lượt ủng hộ • Còn lại 7 ngày",
       "amount": "25.000.000 đ",
       "progress": 100,
       "originalProgress": 100,
@@ -290,7 +290,7 @@ class PostRepositoryImpl implements PostRepository {
     {
       "imagePath": "assets/images/chiendich8.jpg",
       "title": "Lời khẩn cầu của một người mẹ...",
-      "subtitle": "191 lượt ủng hộ • Còn lại 6 ngày",
+      "subtitle": "1 lượt ủng hộ • Còn lại 6 ngày",
       "amount": "6.471.222 đ",
       "progress": 59,
       "originalProgress": 59,
@@ -300,7 +300,7 @@ class PostRepositoryImpl implements PostRepository {
     {
       "imagePath": "assets/images/chiendich9.jpg",
       "title": "Dự án cúng dường đại hồng...",
-      "subtitle": "2.517 lượt ủng hộ • Còn lại 29 ngày",
+      "subtitle": "1 lượt ủng hộ • Còn lại 29 ngày",
       "amount": "73.397.490 đ",
       "progress": 12,
       "originalProgress": 12,
@@ -310,7 +310,7 @@ class PostRepositoryImpl implements PostRepository {
     {
       "imagePath": "assets/images/chiendich10.jpg",
       "title": "Dự án kêu gọi quỹ Mixed Nuts",
-      "subtitle": "4.623 lượt ủng hộ • Còn lại 24 ngày",
+      "subtitle": "1 lượt ủng hộ • Còn lại 24 ngày",
       "amount": "160.020.490 đ",
       "progress": 39,
       "originalProgress": 39,
