@@ -783,15 +783,21 @@ class _PostNeedyCreateState extends State<PostNeedyCreate> {
                                           Center(
                                             child: ElevatedButton(
                                               onPressed: () {
-                                                Navigator.pop(
-                                                    context); // Đóng dialog
+                                                Navigator.pop(context);
+                                                // Navigator.pushReplacement(
+                                                //   context,
+                                                //   MaterialPageRoute(
+                                                //     builder: (context) =>
+                                                //         const mainTestKK(),
+                                                //   ),
+                                                // );
                                                 Navigator.pushReplacement(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const mainTestKK(),
+                                                        const MainNguoiKK(),
                                                   ),
-                                                ); // Chuyển tới màn hình MainNguoiKK
+                                                );
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 padding:

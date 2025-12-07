@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tester/src/views/auth/signup/signup_type_screen.dart';
+import 'package:tester/src/views/ayns/mainTestKK.dart';
 import 'package:tester/src/views/home/home_needy_person.dart';
 
 import 'package:tester/src/views/home/home_benefactor.dart';
@@ -46,6 +47,14 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const MainNguoiKK()),
+      );
+    } else if (cccd == "045304004088" && password == "nguoikhokhan2") {
+      // Lưu trạng thái đăng nhập vào SharedPreferences
+      await SharedPreferencesHelper.setLoginStatus(true, "nguoikhokhan");
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const mainTestKK()),
       );
     } else if (cccd == "nhahaotam" && password == "nhahaotam") {
       // Lưu trạng thái đăng nhập vào SharedPreferences
