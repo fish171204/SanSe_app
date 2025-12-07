@@ -1,11 +1,8 @@
-import 'package:tester/src/theme/app_theme/app_theme.dart';
-import 'package:tester/src/views/home/home_needy_person.dart';
-import 'package:tester/src/views/home/home_benefactor.dart';
+import 'package:flutter/material.dart';
 import 'package:tester/src/views/auth/login/login_screen.dart';
 import 'package:tester/src/views/manage/shared_preferences.dart';
+import 'package:tester/src/views/user_profile/user_history_campaign_screen.dart';
 import 'package:tester/src/views/user_profile/user_profile_update.dart';
-import 'package:flutter/material.dart';
-import '../../theme/app_size.dart';
 
 class UserProfileView extends StatefulWidget {
   const UserProfileView({super.key});
@@ -15,551 +12,387 @@ class UserProfileView extends StatefulWidget {
 }
 
 class _UserProfileViewState extends State<UserProfileView> {
+  final Color primaryColor = const Color(0xFF0288D1);
+  final Color backgroundColor = const Color(0xFFF5F7FA);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          constraints: const BoxConstraints.expand(),
-          color: MyColors.surfaceContainerLowest,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xFFF6F3F3),
-                  ),
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: SingleChildScrollView(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          IntrinsicHeight(
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                  bottom: 10, left: 30, right: 50),
-                              width: double.infinity,
-                              child: Row(children: [
-                                IntrinsicHeight(
-                                  child: Container(
-                                    margin: const EdgeInsets.only(right: 2),
-                                    width: 40,
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          IntrinsicHeight(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color:
-                                                      const Color(0xFFD2D2D2),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(24),
-                                                color: MyColors
-                                                    .surfaceContainerLowest,
-                                              ),
-                                              padding: const EdgeInsets.only(
-                                                  left: 9, right: 9),
-                                              margin: const EdgeInsets.only(
-                                                  top: 20, bottom: 180),
-                                              width: double.infinity,
-                                              child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    GestureDetector(
-                                                      onTap: () async {
-                                                        // Lấy trạng thái đăng nhập và loại tài khoản
-                                                        bool isLoggedIn =
-                                                            await SharedPreferencesHelper
-                                                                .getLoginStatus();
-                                                        String? userType =
-                                                            await SharedPreferencesHelper
-                                                                .getUserType();
+      backgroundColor: backgroundColor,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _buildHeader(),
+            const SizedBox(height: 20),
+            _buildMenuSection(context),
+            const SizedBox(height: 10),
+            _buildLogoutButton(context),
+            const SizedBox(height: 10),
+          ],
+        ),
+      ),
+    );
+  }
 
-                                                        // Điều hướng dựa trên loại tài khoản
-                                                        if (isLoggedIn &&
-                                                            userType ==
-                                                                "nguoikhokhan") {
-                                                          Navigator
-                                                              .pushReplacement(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        const MainNguoiKK()),
-                                                          );
-                                                        } else if (isLoggedIn &&
-                                                            userType ==
-                                                                "045304004088") {
-                                                          Navigator
-                                                              .pushReplacement(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        const MainNguoiKK()),
-                                                          );
-                                                        } else if (isLoggedIn &&
-                                                            userType ==
-                                                                "nhahaotam") {
-                                                          Navigator
-                                                              .pushReplacement(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        const MainNguoiHT()),
-                                                          );
-                                                        } else if (isLoggedIn &&
-                                                            userType ==
-                                                                "054204003257") {
-                                                          Navigator
-                                                              .pushReplacement(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        const MainNguoiHT()),
-                                                          );
-                                                        } else {
-                                                          // Nếu chưa đăng nhập, điều hướng đến màn hình đăng nhập
-                                                          Navigator
-                                                              .pushReplacement(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        const LoginScreen()),
-                                                          );
-                                                        }
-                                                      },
-                                                      child: Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(1),
-                                                        ),
-                                                        margin: const EdgeInsets
-                                                            .only(
-                                                            top: 5, bottom: 5),
-                                                        height: 25,
-                                                        width: 25,
-                                                        child: Image.asset(
-                                                          "assets/images/profile5.png",
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ]),
-                                            ),
-                                          ),
-                                        ]),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: IntrinsicHeight(
-                                    child: SizedBox(
-                                      width: double.infinity,
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              margin: const EdgeInsets.only(
-                                                  bottom: 8, left: 40),
-                                              width: double.infinity,
-                                              child: const Text(
-                                                "TRANG CÁ NHÂN",
-                                                style: TextStyle(
-                                                  color: Color(0xFF512D13),
-                                                  fontSize: 23,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(80),
-                                                ),
-                                                margin: const EdgeInsets.only(
-                                                    left: 60),
-                                                height: 160,
-                                                width: 160,
-                                                child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            80),
-                                                    child: Image.asset(
-                                                      "assets/images/AnhCV.jpg",
-                                                      fit: BoxFit.cover,
-                                                    ))),
-                                          ]),
-                                    ),
-                                  ),
-                                ),
-                              ]),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 12, left: 30),
-                            child: const Text(
-                              "Số điện thoại", // Dòng chữ "Số điện thoại"
-                              style: TextStyle(
-                                color: MyColors.shadow,
-                                fontSize: MyFontSize.body_medium,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          IntrinsicHeight(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: const Color(0xFFD2D2D2),
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                                color: MyColors.surfaceContainerLowest,
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color(0x26F4694C),
-                                    blurRadius: 14,
-                                    offset: Offset(0, 0),
-                                  ),
-                                ],
-                              ),
-                              padding: const EdgeInsets.only(
-                                  top: 12, bottom: 12, left: 17, right: 17),
-                              margin: const EdgeInsets.only(
-                                  bottom: 18, left: 27, right: 27),
-                              width: double.infinity,
-                              child: Row(children: [
-                                Container(
-                                    margin: const EdgeInsets.only(right: 20),
-                                    width: 18,
-                                    height: 18,
-                                    child: Image.asset(
-                                      "assets/images/phoneprofile.png",
-                                      fit: BoxFit.cover,
-                                    )),
-                                const Expanded(
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: Text(
-                                      "0393416574",
-                                      style: TextStyle(
-                                        color: MyColors.shadow,
-                                        fontSize: MyFontSize.body_medium,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ]),
-                            ),
-                          ),
-                          IntrinsicHeight(
-                            child: GestureDetector(
-                              onTap: () {
-                                // Điều hướng tới màn hình updateProfile.dart
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const UserProfileUpdate()),
-                                );
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: const Color(0xFFFFB800),
-                                ),
-                                padding: const EdgeInsets.only(
-                                    top: 13, bottom: 13, left: 80, right: 43),
-                                margin: const EdgeInsets.only(
-                                    bottom: 27, left: 26, right: 26),
-                                width: double.infinity,
-                                child: const Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "CHỈNH SỬA TRANG CÁ NHÂN",
-                                      style: TextStyle(
-                                        color: Color(0xFF512D13),
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          IntrinsicHeight(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: MyColors.surfaceContainerLowest,
-                              ),
-                              padding: const EdgeInsets.only(
-                                  top: 10, bottom: 10, left: 9, right: 9),
-                              margin: const EdgeInsets.only(
-                                  bottom: 12, left: 16, right: 16),
-                              width: double.infinity,
-                              child: Row(children: [
-                                Container(
-                                    margin: const EdgeInsets.only(right: 16),
-                                    width: 24,
-                                    height: 24,
-                                    child: Image.asset(
-                                      "assets/images/about.png",
-                                      fit: BoxFit.cover,
-                                    )),
-                                const Text(
-                                  "About San Sẻ",
-                                  style: TextStyle(
-                                    color: MyColors.shadow,
-                                    fontSize: MyFontSize.body_large,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Expanded(
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: SizedBox(),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1),
-                                    color: MyColors.surfaceContainerLowest,
-                                  ),
-                                  width: 12,
-                                  height: 15,
-                                  child: Image.asset(
-                                    "assets/images/xanh.png", // Thay thế hình ảnh trong container
-                                    fit: BoxFit
-                                        .cover, // Điều chỉnh hình ảnh để phủ kín container
-                                  ),
-                                ),
-                              ]),
-                            ),
-                          ),
-                          IntrinsicHeight(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: MyColors.surfaceContainerLowest,
-                              ),
-                              padding: const EdgeInsets.only(
-                                  top: 10, bottom: 10, left: 9, right: 9),
-                              margin: const EdgeInsets.only(
-                                  bottom: 12, left: 16, right: 16),
-                              width: double.infinity,
-                              child: Row(children: [
-                                Container(
-                                    margin: const EdgeInsets.only(right: 14),
-                                    width: 24,
-                                    height: 24,
-                                    child: Image.asset(
-                                      "assets/images/help.png",
-                                      fit: BoxFit.cover,
-                                    )),
-                                const Text(
-                                  "Trung tâm hỗ trợ",
-                                  style: TextStyle(
-                                    color: MyColors.shadow,
-                                    fontSize: MyFontSize.body_large,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Expanded(
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: SizedBox(),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1),
-                                    color: MyColors.surfaceContainerLowest,
-                                  ),
-                                  width: 12,
-                                  height: 15,
-                                  child: Image.asset(
-                                    "assets/images/xanh.png", // Thay thế hình ảnh trong container
-                                    fit: BoxFit
-                                        .cover, // Điều chỉnh hình ảnh để phủ kín container
-                                  ),
-                                ),
-                              ]),
-                            ),
-                          ),
-                          IntrinsicHeight(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: MyColors.surfaceContainerLowest,
-                              ),
-                              padding: const EdgeInsets.only(
-                                  top: 10, bottom: 10, left: 9, right: 9),
-                              margin: const EdgeInsets.only(
-                                  bottom: 12, left: 16, right: 16),
-                              width: double.infinity,
-                              child: Row(children: [
-                                Container(
-                                    margin: const EdgeInsets.only(right: 14),
-                                    width: 24,
-                                    height: 24,
-                                    child: Image.asset(
-                                      "assets/images/chat.png",
-                                      fit: BoxFit.cover,
-                                    )),
-                                const Text(
-                                  "Chat with San Sẻ",
-                                  style: TextStyle(
-                                    color: MyColors.shadow,
-                                    fontSize: MyFontSize.body_large,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Expanded(
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: SizedBox(),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1),
-                                    color: MyColors.surfaceContainerLowest,
-                                  ),
-                                  width: 12,
-                                  height: 15,
-                                  child: Image.asset(
-                                    "assets/images/xanh.png", // Thay thế hình ảnh trong container
-                                    fit: BoxFit
-                                        .cover, // Điều chỉnh hình ảnh để phủ kín container
-                                  ),
-                                ),
-                              ]),
-                            ),
-                          ),
-                          IntrinsicHeight(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: MyColors.surfaceContainerLowest,
-                              ),
-                              padding: const EdgeInsets.only(
-                                  top: 10, bottom: 10, left: 9, right: 9),
-                              margin: const EdgeInsets.only(
-                                  bottom: 38, left: 16, right: 16),
-                              width: double.infinity,
-                              child: Row(children: [
-                                Container(
-                                    margin: const EdgeInsets.only(right: 13),
-                                    width: 24,
-                                    height: 24,
-                                    child: Image.asset(
-                                      "assets/images/caidatvang.png",
-                                      fit: BoxFit.cover,
-                                    )),
-                                const Text(
-                                  "Cài đặt",
-                                  style: TextStyle(
-                                    color: MyColors.shadow,
-                                    fontSize: MyFontSize.body_large,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Expanded(
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: SizedBox(),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1),
-                                    color: MyColors.surfaceContainerLowest,
-                                  ),
-                                  width: 12,
-                                  height: 15,
-                                  child: Image.asset(
-                                    "assets/images/xanh.png", // Thay thế hình ảnh trong container
-                                    fit: BoxFit
-                                        .cover, // Điều chỉnh hình ảnh để phủ kín container
-                                  ),
-                                ),
-                              ]),
-                            ),
-                          ),
-                          IntrinsicHeight(
-                            child: GestureDetector(
-                              onTap: () {
-                                // Điều hướng tới màn hình DangKyNhap.dart
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const LoginScreen()),
-                                );
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: MyColors.surfaceContainerLowest,
-                                ),
-                                padding: const EdgeInsets.only(
-                                    top: 10, bottom: 10, left: 9, right: 9),
-                                margin: const EdgeInsets.only(
-                                    bottom: 50, left: 16, right: 16),
-                                width: double.infinity,
-                                child: Row(children: [
-                                  Container(
-                                      margin: const EdgeInsets.only(right: 11),
-                                      width: 24,
-                                      height: 24,
-                                      child: Image.asset(
-                                        "assets/images/logout.png",
-                                        fit: BoxFit.cover,
-                                      )),
-                                  const Expanded(
-                                    child: SizedBox(
-                                      width: double.infinity,
-                                      child: Text(
-                                        "Đăng xuất",
-                                        style: TextStyle(
-                                          color: MyColors.shadow,
-                                          fontSize: MyFontSize.body_large,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
+  // --- 1. HEADER (Avatar + Info + Edit Button) ---
+  Widget _buildHeader() {
+    return Stack(
+      alignment: Alignment.center,
+      clipBehavior: Clip.none,
+      children: [
+        // Background Blue Curve
+        Container(
+          height: 220,
+          decoration: BoxDecoration(
+            color: primaryColor,
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30),
+            ),
+          ),
+        ),
+        // Title
+        const Positioned(
+          top: 2,
+          child: Text(
+            "Hồ sơ cá nhân",
+            style: TextStyle(
+              color: Color(0xFF0288D1),
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        // Profile Card Container
+        Container(
+          margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 15,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              // Avatar
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 4),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                      offset: const Offset(0, 5),
+                    )
+                  ],
+                ),
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.grey[200],
+                  backgroundImage: const AssetImage("assets/images/AnhCV.jpg"),
+                ),
+              ),
+              const SizedBox(height: 12),
+              // Name (Giả sử lấy từ API hoặc SharedPref)
+              const Text(
+                "Dang Khoa Nguyen",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF333333),
+                ),
+              ),
+              const SizedBox(height: 4),
+              // Phone
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.phone_iphone, size: 16, color: Colors.grey[600]),
+                  const SizedBox(width: 4),
+                  Text(
+                    "0393416574",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              // Edit Profile Button
+              SizedBox(
+                width: 160,
+                height: 40,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const UserProfileUpdate()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: const Text(
+                    "Chỉnh sửa hồ sơ",
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
                 ),
               ),
             ],
           ),
         ),
+      ],
+    );
+  }
+
+  // --- 2. MENU LIST ---
+  Widget _buildMenuSection(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        children: [
+          // Mục riêng lẻ: Hành trình nhân ái
+          ProfileMenuItem(
+            icon: Icons.volunteer_activism,
+            iconColor: Colors.redAccent,
+            title: "Hành trình nhân ái",
+            subtitle: "Lịch sử giúp đỡ & Quyên góp",
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HistoryCampaignScreen(),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 16),
+
+          // Nhóm Menu
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.03),
+                  blurRadius: 10,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                ProfileMenuItem(
+                  icon: Icons.info_outline_rounded,
+                  iconColor: Colors.blueAccent,
+                  title: "Về San Sẻ",
+                  isGrouped: true,
+                  showDivider: true,
+                  onTap: () {},
+                ),
+                // --- MỤC MỚI THÊM VÀO ĐÂY ---
+                ProfileMenuItem(
+                  icon: Icons.menu_book_rounded, // Icon sách hướng dẫn
+                  iconColor: Colors.green, // Màu xanh lá
+                  title: "Hướng dẫn sử dụng",
+                  isGrouped: true,
+                  showDivider: true,
+                  onTap: () {
+                    // TODO: Điều hướng tới trang hướng dẫn
+                  },
+                ),
+                // -----------------------------
+                ProfileMenuItem(
+                  icon: Icons.help_outline_rounded,
+                  iconColor: Colors.orangeAccent,
+                  title: "Trung tâm hỗ trợ",
+                  isGrouped: true,
+                  showDivider: true,
+                  onTap: () {},
+                ),
+                ProfileMenuItem(
+                  icon: Icons.settings_outlined,
+                  iconColor: Colors.grey,
+                  title: "Cài đặt",
+                  isGrouped: true,
+                  showDivider: false,
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
+  }
+
+  // --- 3. LOGOUT BUTTON ---
+  Widget _buildLogoutButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: TextButton(
+        onPressed: () async {
+          bool isLoggedIn = await SharedPreferencesHelper.getLoginStatus();
+          String? userType = await SharedPreferencesHelper.getUserType();
+
+          if (!context.mounted) return;
+
+          if (isLoggedIn && userType == "nguoikhokhan") {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => const LoginScreen()));
+          } else if (isLoggedIn && userType == "045304004088") {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => const LoginScreen()));
+          } else if (isLoggedIn && userType == "nhahaotam") {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => const LoginScreen()));
+          } else if (isLoggedIn && userType == "054204003257") {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => const LoginScreen()));
+          } else {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => const LoginScreen()));
+          }
+        },
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          backgroundColor: const Color(0xFFFFEBEE),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.logout, color: Colors.red),
+            SizedBox(width: 8),
+            Text(
+              "Đăng xuất",
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// --- WIDGET TÁI SỬ DỤNG CHO MENU ITEM ---
+class ProfileMenuItem extends StatelessWidget {
+  final IconData icon;
+  final Color iconColor;
+  final String title;
+  final String? subtitle;
+  final VoidCallback onTap;
+  final bool isGrouped;
+  final bool showDivider;
+
+  const ProfileMenuItem({
+    super.key,
+    required this.icon,
+    required this.iconColor,
+    required this.title,
+    required this.onTap,
+    this.subtitle,
+    this.isGrouped = false,
+    this.showDivider = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Widget content = Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: isGrouped ? null : BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: iconColor.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(icon, color: iconColor, size: 22),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF333333),
+                      ),
+                    ),
+                    if (subtitle != null) ...[
+                      const SizedBox(height: 2),
+                      Text(
+                        subtitle!,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey[500],
+                        ),
+                      ),
+                    ]
+                  ],
+                ),
+              ),
+              const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    if (isGrouped) {
+      return Column(
+        children: [
+          content,
+          if (showDivider)
+            const Divider(
+                height: 1, indent: 60, endIndent: 20, color: Color(0xFFEEEEEE)),
+        ],
+      );
+    } else {
+      return Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.03),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: content,
+      );
+    }
   }
 }
