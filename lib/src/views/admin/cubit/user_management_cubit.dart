@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../repositories/admin/user_management_repository.dart';
+import '../../../models/admin/admin_user_model.dart';
+
 import 'user_management_state.dart';
 
 class UserManagementCubit extends Cubit<UserManagementState> {
@@ -10,131 +12,124 @@ class UserManagementCubit extends Cubit<UserManagementState> {
   Future<void> loadUsers() async {
     try {
       emit(UserManagementLoading());
-
       final users = await _repository.getAllUsers();
-
-      emit(UserManagementLoaded(
-        users: users,
-        filteredUsers: users,
-      ));
+      emit(UserManagementLoaded(users: users, filteredUsers: users));
     } catch (e) {
-      emit(UserManagementError(
-          'Không thể tải danh sách người dùng: ${e.toString()}'));
+      emit(UserManagementError('Lỗi tải danh sách: ${e.toString()}'));
     }
   }
 
-  Future<void> filterUsers(int filterDays) async {
+  List<AdminUserModel> _calculateFilteredUsers(
+      List<AdminUserModel> sourceList) {
+    final currentState = state;
+    if (currentState is! UserManagementLoaded) return sourceList;
+
+    var result = sourceList;
+
+    // --- Tìm kiếm theo Tên HOẶC CCCD ---
+    if (currentState.searchQuery.isNotEmpty) {
+      final query = currentState.searchQuery.toLowerCase();
+      result = result.where((u) {
+        final nameMatch = u.name.toLowerCase().contains(query);
+        final cccdMatch = u.cccd.toLowerCase().contains(query);
+        return nameMatch || cccdMatch;
+      }).toList();
+    }
+
+    if (currentState.filterStatus != "Tất cả") {
+      result =
+          result.where((u) => u.status == currentState.filterStatus).toList();
+    }
+
+    if (currentState.filterDays > 0) {
+      result = result
+          .where((u) => u.getDaysInactive() >= currentState.filterDays)
+          .toList();
+    }
+
+    return result;
+  }
+
+  // --- 3. APPLY FILTERS (DÙNG CHO UI SEARCH/FILTER) ---
+  void _emitFilteredList() {
     final currentState = state;
     if (currentState is! UserManagementLoaded) return;
 
-    try {
-      emit(UserManagementLoading());
+    final filtered = _calculateFilteredUsers(currentState.users);
 
-      final filteredUsers = await _repository.getFilteredUsers(filterDays);
+    emit(currentState.copyWith(filteredUsers: filtered));
+  }
 
-      emit(currentState.copyWith(
-        filteredUsers: filteredUsers,
-        filterDays: filterDays,
-      ));
-    } catch (e) {
-      emit(UserManagementError('Không thể lọc người dùng: ${e.toString()}'));
+  void searchUsers(String query) {
+    final currentState = state;
+    if (currentState is UserManagementLoaded) {
+      emit(currentState.copyWith(searchQuery: query));
+      _emitFilteredList();
+    }
+  }
+
+  void filterByStatus(String status) {
+    final currentState = state;
+    if (currentState is UserManagementLoaded) {
+      emit(currentState.copyWith(filterStatus: status));
+      _emitFilteredList();
+    }
+  }
+
+  void filterByDays(int days) {
+    final currentState = state;
+    if (currentState is UserManagementLoaded) {
+      emit(currentState.copyWith(filterDays: days));
+      _emitFilteredList();
+    }
+  }
+
+  void clearActionMessage() {
+    final currentState = state;
+    if (currentState is UserManagementLoaded) {
+      emit(currentState.copyWith(clearMessage: true));
     }
   }
 
   Future<void> deleteUser(String cccd) async {
-    final currentState = state;
-    if (currentState is! UserManagementLoaded) return;
-
-    try {
-      // Find user info before deletion
-      final user = currentState.users.firstWhere((u) => u.cccd == cccd);
-
-      await _repository.deleteUser(cccd);
-
-      // Reload users after deletion
-      final updatedUsers = await _repository.getAllUsers();
-      final filteredUsers =
-          await _repository.getFilteredUsers(currentState.filterDays);
-
-      emit(currentState.copyWith(
-        users: updatedUsers,
-        filteredUsers: filteredUsers,
-      ));
-
-      // Emit success state with user info
-      emit(UserManagementActionSuccess(
-        'Xóa người dùng thành công!',
-        userName: user.name,
-        userCCCD: user.cccd,
-      ));
-
-      // Return to loaded state
-      emit(currentState.copyWith(
-        users: updatedUsers,
-        filteredUsers: filteredUsers,
-      ));
-    } catch (e) {
-      emit(UserManagementError('Không thể xóa người dùng: ${e.toString()}'));
-    }
+    await _performAction(
+        cccd, (id) => _repository.deleteUser(id), "Xóa người dùng thành công!");
   }
 
   Future<void> suspendUser(String cccd) async {
-    final currentState = state;
-    if (currentState is! UserManagementLoaded) return;
-
-    try {
-      await _repository.suspendUser(cccd);
-
-      // Reload users after suspension
-      final updatedUsers = await _repository.getAllUsers();
-      final filteredUsers =
-          await _repository.getFilteredUsers(currentState.filterDays);
-
-      emit(currentState.copyWith(
-        users: updatedUsers,
-        filteredUsers: filteredUsers,
-      ));
-
-      emit(const UserManagementActionSuccess('Tạm khóa người dùng thành công'));
-
-      // Return to loaded state
-      emit(currentState.copyWith(
-        users: updatedUsers,
-        filteredUsers: filteredUsers,
-      ));
-    } catch (e) {
-      emit(UserManagementError(
-          'Không thể tạm khóa người dùng: ${e.toString()}'));
-    }
+    await _performAction(
+        cccd, (id) => _repository.suspendUser(id), "Đã tạm khóa tài khoản!");
   }
 
   Future<void> unlockUser(String cccd) async {
+    await _performAction(
+        cccd, (id) => _repository.unlockUser(id), "Đã mở khóa tài khoản!");
+  }
+
+  Future<void> _performAction(String cccd, Future<void> Function(String) action,
+      String successMsg) async {
     final currentState = state;
     if (currentState is! UserManagementLoaded) return;
 
     try {
-      await _repository.unlockUser(cccd);
+      final targetUser = currentState.users.firstWhere((u) => u.cccd == cccd,
+          orElse: () => currentState.users.first);
 
-      // Reload users after unlocking
+      await action(cccd);
+
       final updatedUsers = await _repository.getAllUsers();
-      final filteredUsers =
-          await _repository.getFilteredUsers(currentState.filterDays);
+
+      final updatedFilteredUsers = _calculateFilteredUsers(updatedUsers);
 
       emit(currentState.copyWith(
         users: updatedUsers,
-        filteredUsers: filteredUsers,
-      ));
-
-      emit(const UserManagementActionSuccess('Mở khóa người dùng thành công'));
-
-      // Return to loaded state
-      emit(currentState.copyWith(
-        users: updatedUsers,
-        filteredUsers: filteredUsers,
+        filteredUsers: updatedFilteredUsers,
+        actionMessage: successMsg,
+        actionUser: targetUser,
       ));
     } catch (e) {
-      emit(
-          UserManagementError('Không thể mở khóa người dùng: ${e.toString()}'));
+      emit(UserManagementError('Lỗi xử lý: ${e.toString()}'));
+      loadUsers();
     }
   }
 }

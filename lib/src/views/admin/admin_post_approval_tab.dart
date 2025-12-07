@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 import '../../repositories/admin/post_management_repository.dart';
 import '../../models/admin/admin_post_model.dart';
 import 'cubit/post_approval_cubit.dart';
@@ -26,6 +30,183 @@ class _PostApprovalView extends StatefulWidget {
 }
 
 class _PostApprovalViewState extends State<_PostApprovalView> {
+  // --- 1. HÀM XỬ LÝ EXPORT ---
+  Future<void> _handleExport(BuildContext context, List<AdminPostModel> posts,
+      String title, bool isSpamMode) async {
+    if (posts.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text("Danh sách trống, không có gì để xuất!"),
+            backgroundColor: Colors.orange),
+      );
+      return;
+    }
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => const Center(child: CircularProgressIndicator()),
+    );
+
+    try {
+      await _exportToPdf(context, posts, title, isSpamMode);
+      if (context.mounted) Navigator.pop(context);
+    } catch (e) {
+      if (context.mounted) Navigator.pop(context);
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text("Lỗi xuất PDF: $e"), backgroundColor: Colors.red),
+        );
+      }
+    }
+  }
+
+  // --- 2. HÀM TẠO PDF ---
+  Future<void> _exportToPdf(BuildContext context, List<AdminPostModel> posts,
+      String title, bool isSpamMode) async {
+    final doc = pw.Document();
+    final font = await PdfGoogleFonts.robotoRegular();
+    final fontBold = await PdfGoogleFonts.robotoBold();
+    final fontItalic = await PdfGoogleFonts.robotoItalic();
+
+    List<String> headers;
+    List<List<dynamic>> data;
+    Map<int, pw.TableColumnWidth> columnWidths;
+
+    if (isSpamMode) {
+      headers = [
+        'STT',
+        'Tiêu đề bài viết',
+        'Người đăng',
+        'Số tiền',
+        'Ngày đăng',
+        'Số lượng'
+      ];
+      columnWidths = {
+        0: const pw.FixedColumnWidth(30), // Cột STT nhỏ
+        1: const pw.FlexColumnWidth(3), // Tên
+        2: const pw.FlexColumnWidth(2), // Người đăng
+        3: const pw.FlexColumnWidth(1.5), // Tiền
+        4: const pw.FlexColumnWidth(1.2), // Ngày
+        5: const pw.FlexColumnWidth(0.8), // Số lượng
+      };
+
+      // Gom nhóm
+      Map<String, int> spamCounts = {};
+      Map<String, AdminPostModel> uniqueSpamPosts = {};
+
+      for (var post in posts) {
+        final key = "${post.title}_${post.senderName}";
+        if (!spamCounts.containsKey(key)) {
+          spamCounts[key] = 0;
+          uniqueSpamPosts[key] = post;
+        }
+        spamCounts[key] = spamCounts[key]! + 1;
+      }
+
+      final uniqueList = uniqueSpamPosts.entries.toList();
+
+      data = List.generate(uniqueList.length, (index) {
+        final entry = uniqueList[index];
+        final post = entry.value;
+        final count = spamCounts[entry.key];
+        return [
+          (index + 1).toString(),
+          post.title,
+          post.senderName,
+          post.amount,
+          post.submissionDate,
+          count.toString(),
+        ];
+      });
+    } else {
+      headers = [
+        'STT',
+        'Tiêu đề bài viết',
+        'Người đăng',
+        'Số tiền',
+        'Ngày gửi'
+      ];
+      columnWidths = {
+        0: const pw.FixedColumnWidth(35),
+        1: const pw.FlexColumnWidth(3),
+        2: const pw.FlexColumnWidth(2),
+        3: const pw.FlexColumnWidth(1.5),
+        4: const pw.FlexColumnWidth(1.2),
+      };
+
+      data = List.generate(posts.length, (index) {
+        final post = posts[index];
+        return [
+          (index + 1).toString(), // STT = index + 1
+          post.title,
+          post.senderName,
+          post.amount,
+          post.submissionDate,
+        ];
+      });
+    }
+
+    doc.addPage(
+      pw.MultiPage(
+        pageFormat: PdfPageFormat.a4,
+        theme: pw.ThemeData.withFont(
+          base: font,
+          bold: fontBold,
+          italic: fontItalic,
+        ),
+        build: (pw.Context context) {
+          return [
+            // Header
+            pw.Header(
+              level: 0,
+              child: pw.Center(
+                child: pw.Text(
+                  title.toUpperCase(),
+                  style: pw.TextStyle(
+                    fontSize: 24,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            pw.SizedBox(height: 20),
+
+            // Table
+            pw.TableHelper.fromTextArray(
+              context: context,
+              border: pw.TableBorder.all(),
+              headerStyle: pw.TextStyle(
+                  fontWeight: pw.FontWeight.bold, color: PdfColors.white),
+              headerDecoration: const pw.BoxDecoration(color: PdfColors.blue),
+              cellAlignment: pw.Alignment.centerLeft,
+              headerAlignment: pw.Alignment.center,
+              columnWidths: columnWidths,
+              headers: headers,
+              data: data,
+            ),
+
+            // Footer
+            pw.SizedBox(height: 20),
+            pw.Align(
+              alignment: pw.Alignment.centerRight,
+              child: pw.Text(
+                "Ngày xuất: ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now())}",
+                style: const pw.TextStyle(fontSize: 10, color: PdfColors.grey),
+              ),
+            ),
+          ];
+        },
+      ),
+    );
+
+    await Printing.layoutPdf(
+      onLayout: (PdfPageFormat format) async => doc.save(),
+      name: isSpamMode ? 'danh_sach_spam.pdf' : 'danh_sach_cho_duyet.pdf',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PostApprovalCubit, PostApprovalState>(
@@ -47,7 +228,7 @@ class _PostApprovalViewState extends State<_PostApprovalView> {
         } else if (state is PostApprovalLoaded) {
           return Column(
             children: [
-              _buildControlBar(context, state.isFilterSpamActive),
+              _buildControlBar(context, state),
               if (state.isFilterSpamActive && state.pendingPosts.isNotEmpty)
                 _buildBulkActionBar(context, state),
               Expanded(
@@ -92,7 +273,8 @@ class _PostApprovalViewState extends State<_PostApprovalView> {
     );
   }
 
-  Widget _buildControlBar(BuildContext context, bool isFilterActive) {
+  Widget _buildControlBar(BuildContext context, PostApprovalLoaded state) {
+    final isFilterActive = state.isFilterSpamActive;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       color: Colors.grey[100],
@@ -103,24 +285,43 @@ class _PostApprovalViewState extends State<_PostApprovalView> {
             "Danh sách chờ duyệt",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          OutlinedButton.icon(
-            onPressed: () {
-              context.read<PostApprovalCubit>().toggleSpamFilter();
-            },
-            icon: Icon(
-              isFilterActive ? Icons.filter_alt_off : Icons.filter_alt,
-              color: isFilterActive ? Colors.white : Colors.orange,
-            ),
-            label: Text(
-              isFilterActive ? "Tắt lọc Spam" : "Check Spam",
-              style: TextStyle(
-                color: isFilterActive ? Colors.white : Colors.orange,
+          Row(
+            children: [
+              OutlinedButton.icon(
+                onPressed: () {
+                  context.read<PostApprovalCubit>().toggleSpamFilter();
+                },
+                icon: Icon(
+                  isFilterActive ? Icons.filter_alt_off : Icons.filter_alt,
+                  color: isFilterActive ? Colors.white : Colors.orange,
+                ),
+                label: Text(
+                  isFilterActive ? "Tắt lọc Spam" : "Check Spam",
+                  style: TextStyle(
+                    color: isFilterActive ? Colors.white : Colors.orange,
+                  ),
+                ),
+                style: OutlinedButton.styleFrom(
+                  backgroundColor:
+                      isFilterActive ? Colors.orange : Colors.white,
+                  side: const BorderSide(color: Colors.orange),
+                ),
               ),
-            ),
-            style: OutlinedButton.styleFrom(
-              backgroundColor: isFilterActive ? Colors.orange : Colors.white,
-              side: const BorderSide(color: Colors.orange),
-            ),
+              const SizedBox(width: 8),
+              // --- NÚT PDF ---
+              IconButton(
+                onPressed: () {
+                  String pdfTitle = isFilterActive
+                      ? "DANH SÁCH SPAM CẦN XỬ LÝ"
+                      : "DANH SÁCH BÀI ĐĂNG CHỜ DUYỆT";
+
+                  _handleExport(
+                      context, state.pendingPosts, pdfTitle, isFilterActive);
+                },
+                icon: const Icon(Icons.picture_as_pdf, color: Colors.red),
+                tooltip: "Xuất PDF danh sách này",
+              ),
+            ],
           ),
         ],
       ),
@@ -129,10 +330,8 @@ class _PostApprovalViewState extends State<_PostApprovalView> {
 
   Widget _buildBulkActionBar(BuildContext context, PostApprovalLoaded state) {
     final selectedCount = state.selectedPostTitles.length;
-
     final uniqueTitlesCount =
         state.pendingPosts.map((e) => e.title).toSet().length;
-
     final isAllSelected =
         selectedCount == uniqueTitlesCount && uniqueTitlesCount > 0;
 
@@ -141,7 +340,6 @@ class _PostApprovalViewState extends State<_PostApprovalView> {
       color: Colors.red[50],
       child: Row(
         children: [
-          // Checkbox chọn tất cả
           Checkbox(
             value: isAllSelected,
             activeColor: Colors.red,
@@ -151,9 +349,7 @@ class _PostApprovalViewState extends State<_PostApprovalView> {
           ),
           const Text("Chọn tất cả",
               style: TextStyle(fontWeight: FontWeight.bold)),
-
           const Spacer(),
-
           if (selectedCount > 0)
             ElevatedButton.icon(
               onPressed: () => _confirmBulkAction(context, selectedCount),
@@ -175,7 +371,6 @@ class _PostApprovalViewState extends State<_PostApprovalView> {
     );
   }
 
-  // Card Item (Đã cập nhật để thêm Checkbox)
   Widget _buildApprovalCard(BuildContext context, AdminPostModel post,
       bool isSelected, bool isSpamMode) {
     final cubit = context.read<PostApprovalCubit>();
@@ -194,7 +389,6 @@ class _PostApprovalViewState extends State<_PostApprovalView> {
         borderRadius: BorderRadius.circular(12),
         child: Column(
           children: [
-            // Phần thông tin bài đăng
             Padding(
               padding: const EdgeInsets.all(12),
               child: Row(
@@ -214,9 +408,6 @@ class _PostApprovalViewState extends State<_PostApprovalView> {
                         ),
                       ),
                     ),
-                  // -----------------------------------------------------
-
-                  // Ảnh
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.asset(
@@ -233,8 +424,6 @@ class _PostApprovalViewState extends State<_PostApprovalView> {
                     ),
                   ),
                   const SizedBox(width: 12),
-
-                  // Nội dung text
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -247,7 +436,6 @@ class _PostApprovalViewState extends State<_PostApprovalView> {
                               fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                         const SizedBox(height: 6),
-                        // Người đăng
                         Row(
                           children: [
                             const Icon(Icons.person,
@@ -268,13 +456,11 @@ class _PostApprovalViewState extends State<_PostApprovalView> {
                           ],
                         ),
                         const SizedBox(height: 4),
-                        // Số tiền
                         Text("Số tiền: ${post.amount}",
                             style: const TextStyle(
                                 color: Colors.orange,
                                 fontWeight: FontWeight.bold)),
                         const SizedBox(height: 4),
-                        // Thời gian
                         Row(
                           children: [
                             const Icon(Icons.access_time,
@@ -291,9 +477,7 @@ class _PostApprovalViewState extends State<_PostApprovalView> {
                 ],
               ),
             ),
-
             const Divider(height: 1),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

@@ -195,7 +195,7 @@ class _PostManagementViewState extends State<_PostManagementView> {
     );
   }
 
-  // --- HÀM XỬ LÝ XUẤT PDF ĐÃ CẬP NHẬT ---
+  // --- HÀM XỬ LÝ XUẤT PDF ---
   Future<void> _exportToPdf(BuildContext context, List<AdminPostModel> posts,
       String filterName) async {
     showDialog(
@@ -247,7 +247,6 @@ class _PostManagementViewState extends State<_PostManagementView> {
                 ),
               ),
               pw.SizedBox(height: 20),
-              // --- CẬP NHẬT BẢNG ---
               pw.TableHelper.fromTextArray(
                 context: context,
                 border: pw.TableBorder.all(),
@@ -256,24 +255,25 @@ class _PostManagementViewState extends State<_PostManagementView> {
                 headerDecoration: const pw.BoxDecoration(color: PdfColors.blue),
                 cellAlignment: pw.Alignment.centerLeft,
                 headerAlignment: pw.Alignment.center,
-                // Điều chỉnh độ rộng cột để chứa thêm cột mới
                 columnWidths: {
-                  0: const pw.FlexColumnWidth(3), // Tên bài
-                  1: const pw.FlexColumnWidth(1.5), // Số tiền gốc
-                  2: const pw.FlexColumnWidth(0.8), // Tiến độ
-                  3: const pw.FlexColumnWidth(1.2), // Trạng thái
-                  4: const pw.FlexColumnWidth(2), // CỘT MỚI: Nhà hảo tâm
+                  0: const pw.FixedColumnWidth(33), // Cột STT nhỏ
+                  1: const pw.FlexColumnWidth(3), // Tên bài
+                  2: const pw.FlexColumnWidth(1.5), // Số tiền
+                  3: const pw.FlexColumnWidth(0.8), // Tiến độ
+                  4: const pw.FlexColumnWidth(1.2), // Trạng thái
+                  5: const pw.FlexColumnWidth(2), // Nhà hảo tâm
                 },
-                // Thêm Header mới
                 headers: <String>[
+                  'STT',
                   'Tên bài đăng',
                   'Số tiền',
                   'Tiến độ',
                   'Trạng thái',
                   'Nhà hảo tâm'
                 ],
-                // Map dữ liệu
-                data: posts.map((post) {
+                data: List.generate(posts.length, (index) {
+                  final post = posts[index];
+
                   String statusText;
                   if (post.status == 'available' || post.status == 'pending') {
                     statusText = "Chưa hoàn thành";
@@ -282,16 +282,15 @@ class _PostManagementViewState extends State<_PostManagementView> {
                   }
 
                   return [
+                    (index + 1).toString(),
                     post.title,
                     post.amount,
                     "${post.progress}%",
                     statusText,
-                    // Dữ liệu cột mới: Tên + Số tiền (giống cột số tiền)
                     "Nguyễn Đăng Khoa\n${post.amount}",
                   ];
-                }).toList(),
+                }),
               ),
-              // ---------------------
               pw.SizedBox(height: 20),
               pw.Align(
                 alignment: pw.Alignment.centerRight,

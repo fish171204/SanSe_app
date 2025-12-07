@@ -29,7 +29,7 @@ final List<MapCampaignModel> dummyCampaigns = [
     imageUrl: 'assets/videos/image_1.png',
     supportCount: 1,
     daysLeft: 23,
-    raisedAmount: '80.000.000 đ',
+    raisedAmount: '15.500.000 đ',
     progress: 19.3,
   ),
   MapCampaignModel(
@@ -38,7 +38,7 @@ final List<MapCampaignModel> dummyCampaigns = [
     imageUrl: 'assets/videos/image_2.png',
     supportCount: 1,
     daysLeft: 36,
-    raisedAmount: '25.000.000 đ',
+    raisedAmount: '18.000.000 đ',
     progress: 72.0,
   ),
   MapCampaignModel(
@@ -47,7 +47,7 @@ final List<MapCampaignModel> dummyCampaigns = [
     imageUrl: 'assets/videos/image_3.png',
     supportCount: 1,
     daysLeft: 38,
-    raisedAmount: '5.000.000 đ',
+    raisedAmount: '4.200.000 đ',
     progress: 84.0,
   ),
   MapCampaignModel(
@@ -56,7 +56,7 @@ final List<MapCampaignModel> dummyCampaigns = [
     imageUrl: 'assets/videos/image_8.png',
     supportCount: 1,
     daysLeft: 39,
-    raisedAmount: '20.000.000 đ',
+    raisedAmount: '2.000.000 đ',
     progress: 10.0,
   ),
   MapCampaignModel(
@@ -65,7 +65,7 @@ final List<MapCampaignModel> dummyCampaigns = [
     imageUrl: 'assets/videos/image_5.png',
     supportCount: 1,
     daysLeft: 33,
-    raisedAmount: '30.000.000 đ',
+    raisedAmount: '8.500.000 đ',
     progress: 75.0,
   ),
   MapCampaignModel(
@@ -83,7 +83,7 @@ final List<MapCampaignModel> dummyCampaigns = [
     imageUrl: 'assets/videos/image_6.png',
     supportCount: 1,
     daysLeft: 15,
-    raisedAmount: '40.000.000 đ',
+    raisedAmount: '12.500.000 đ',
     progress: 31.2,
   ),
   MapCampaignModel(
