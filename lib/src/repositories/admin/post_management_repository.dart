@@ -2,10 +2,14 @@ import '../../models/admin/admin_post_model.dart';
 
 abstract class PostRepository {
   Future<List<AdminPostModel>> getAllPosts();
+  Future<List<AdminPostModel>> getPendingPosts();
   Future<List<AdminPostModel>> searchPosts(String query);
   Future<List<AdminPostModel>> getFilteredPosts(String filter);
   Future<void> deletePost(String title);
   Future<void> updatePostStatus(String title, String newStatus);
+  Future<void> approvePost(String title);
+  Future<void> rejectPost(String title);
+  Future<List<AdminPostModel>> getSpamPosts();
 }
 
 class PostRepositoryImpl implements PostRepository {
@@ -122,25 +126,117 @@ class PostRepositoryImpl implements PostRepository {
       "status": "available",
     },
     {
-      "imagePath": "assets/images/chiendich1.jpg",
-      "title": "Hành trình nhân đạo - Lan tỏa yêu thương",
-      "subtitle": "1403 lượt ủng hộ • Còn lại 23 ngày",
-      "amount": "143.888.455 đ",
-      "progress": 14,
-      "originalProgress": 14,
+      "imagePath": "assets/images/HinhAnh_Demo.jpg",
+      "title": "Tính mạng mong manh của bé gái 3 tuổi mắc bệnh xơ gan",
+      "senderName": "Lê Thị Thúy Kiều",
+      "subtitle": "Người gửi: Lê Thị Thúy Kiều",
+      "amount": "5.000.000 đ",
+      "progress": 0,
+      "originalProgress": 0,
       "isDeleted": false,
-      "status": "available",
+      "status": "pending",
+      "submissionDate": "13/12/2025",
     },
     {
-      "imagePath": "assets/images/chiendich2.jpg",
-      "title": "Chung tay mang yêu thương đến cho trẻ em",
-      "subtitle": "453 lượt ủng hộ • Còn lại 36 ngày",
-      "amount": "24.211.956 đ",
-      "progress": 40,
-      "originalProgress": 40,
+      "imagePath": "assets/images/nguoikhokhan8.jpg",
+      "title": "Cụ bà 90 tuổi bị 4 con bỏ rơi, tự bò ngoài đường...",
+      "subtitle": "Người gửi: Hội từ thiện X",
+      "amount": "20.000.000 đ",
+      "progress": 0,
+      "originalProgress": 0,
       "isDeleted": false,
-      "status": "unavailable",
+      "status": "pending",
+      "submissionDate": "06/12/2025",
     },
+    // SPAM EXAMPLES
+    {
+      "imagePath": "assets/images/chiendich1.jpg",
+      "title": "Cần tiền gấp hỗ trợ mổ tim",
+      "subtitle": "Người gửi: Nguyễn Văn Spam",
+      "senderName": "Nguyễn Văn Spam",
+      "amount": "100.000.000 đ",
+      "progress": 0,
+      "originalProgress": 0,
+      "isDeleted": false,
+      "status": "pending",
+      "submissionDate": "14/12/2025 09:00",
+    },
+    {
+      "imagePath": "assets/images/chiendich1.jpg",
+      "title": "Cần tiền gấp hỗ trợ mổ tim",
+      "subtitle": "Người gửi: Nguyễn Văn Spam",
+      "senderName": "Nguyễn Văn Spam",
+      "amount": "100.000.000 đ",
+      "progress": 0,
+      "originalProgress": 0,
+      "isDeleted": false,
+      "status": "pending",
+      "submissionDate": "14/12/2025 09:05",
+    },
+    {
+      "imagePath": "assets/images/chiendich1.jpg",
+      "title": "Cần tiền gấp hỗ trợ mổ tim",
+      "subtitle": "Người gửi: Nguyễn Văn Spam",
+      "senderName": "Nguyễn Văn Spam",
+      "amount": "100.000.000 đ",
+      "progress": 0,
+      "originalProgress": 0,
+      "isDeleted": false,
+      "status": "pending",
+      "submissionDate": "14/12/2025 09:10",
+    },
+    {
+      "imagePath": "assets/images/chiendich5.jpg",
+      "title": "Hỗ trợ xây cầu vượt lũ miền Trung",
+      "subtitle": "Người gửi: Trần Văn Spam",
+      "senderName": "Trần Văn Spam",
+      "amount": "500.000.000 đ",
+      "progress": 0,
+      "originalProgress": 0,
+      "isDeleted": false,
+      "status": "pending",
+      "submissionDate": "15/12/2025 10:00",
+    },
+    {
+      "imagePath": "assets/images/chiendich5.jpg",
+      "title": "Hỗ trợ xây cầu vượt lũ miền Trung",
+      "subtitle": "Người gửi: Trần Văn Spam",
+      "senderName": "Trần Văn Spam",
+      "amount": "500.000.000 đ",
+      "progress": 0,
+      "originalProgress": 0,
+      "isDeleted": false,
+      "status": "pending",
+      "submissionDate": "15/12/2025 10:05",
+    },
+
+    // --- MỚI THÊM: SPAM GROUP 3: PHẠM THỊ SPAM (2 bài) ---
+    {
+      "imagePath": "assets/images/chiendich6.jpg",
+      "title": "Quyên góp sách vở cho vùng cao",
+      "subtitle": "Người gửi: Phạm Thị Spam",
+      "senderName": "Phạm Thị Spam",
+      "amount": "20.000.000 đ",
+      "progress": 0,
+      "originalProgress": 0,
+      "isDeleted": false,
+      "status": "pending",
+      "submissionDate": "16/12/2025 14:00",
+    },
+    {
+      "imagePath": "assets/images/chiendich6.jpg",
+      "title": "Quyên góp sách vở cho vùng cao",
+      "subtitle": "Người gửi: Phạm Thị Spam",
+      "senderName": "Phạm Thị Spam",
+      "amount": "20.000.000 đ",
+      "progress": 0,
+      "originalProgress": 0,
+      "isDeleted": false,
+      "status": "pending",
+      "submissionDate": "16/12/2025 14:30",
+    },
+
+    // END SPAM
     {
       "imagePath": "assets/images/chiendich3.jpg",
       "title": "CON ĐƯỜNG MƠ ƯỚC SỐ 3",
@@ -224,8 +320,65 @@ class PostRepositoryImpl implements PostRepository {
   ];
 
   @override
+  Future<List<AdminPostModel>> getSpamPosts() async {
+    List<AdminPostModel> allPending = await getPendingPosts();
+
+    Map<String, List<AdminPostModel>> groupedPosts = {};
+
+    for (var post in allPending) {
+      String uniqueKey = "${post.senderName}_${post.title}";
+      if (!groupedPosts.containsKey(uniqueKey)) {
+        groupedPosts[uniqueKey] = [];
+      }
+      groupedPosts[uniqueKey]!.add(post);
+    }
+
+    List<AdminPostModel> spamResult = [];
+
+    groupedPosts.forEach((key, postsInGroup) {
+      if (postsInGroup.length > 1) {
+        spamResult.addAll(postsInGroup.sublist(1));
+      }
+    });
+
+    return spamResult;
+  }
+
+  @override
+  Future<List<AdminPostModel>> getPendingPosts() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return _postsData
+        .where((post) => !post['isDeleted'] && post['status'] == 'pending')
+        .map((postData) => AdminPostModel.fromMap(postData))
+        .toList();
+  }
+
+  @override
+  Future<void> approvePost(String title) async {
+    await Future.delayed(const Duration(milliseconds: 300));
+
+    final index = _postsData.indexWhere(
+        (post) => post['title'] == title && post['status'] == 'pending');
+    if (index != -1) {
+      _postsData[index]['status'] = 'available';
+    }
+  }
+
+  @override
+  Future<void> rejectPost(String title) async {
+    await Future.delayed(const Duration(milliseconds: 300));
+
+    final index = _postsData.indexWhere(
+        (post) => post['title'] == title && post['status'] == 'pending');
+
+    if (index != -1) {
+      _postsData[index]['status'] = 'rejected';
+      _postsData[index]['isDeleted'] = true;
+    }
+  }
+
+  @override
   Future<List<AdminPostModel>> getAllPosts() async {
-    // Simulate network delay
     await Future.delayed(const Duration(milliseconds: 500));
     return _postsData
         .where((post) => !post['isDeleted'])
@@ -237,7 +390,6 @@ class PostRepositoryImpl implements PostRepository {
   Future<List<AdminPostModel>> searchPosts(String query) async {
     final posts = await getAllPosts();
     if (query.isEmpty) return posts;
-
     return posts.where((post) {
       return post.title.toLowerCase().contains(query.toLowerCase());
     }).toList();
@@ -246,7 +398,6 @@ class PostRepositoryImpl implements PostRepository {
   @override
   Future<List<AdminPostModel>> getFilteredPosts(String filter) async {
     final posts = await getAllPosts();
-
     switch (filter) {
       case "Chưa hoàn thành":
         return posts.where((post) => post.progress < 100).toList();
@@ -259,7 +410,6 @@ class PostRepositoryImpl implements PostRepository {
 
   @override
   Future<void> deletePost(String title) async {
-    // Simulate network delay
     await Future.delayed(const Duration(milliseconds: 300));
     final index = _postsData.indexWhere((post) => post['title'] == title);
     if (index != -1) {
@@ -269,7 +419,6 @@ class PostRepositoryImpl implements PostRepository {
 
   @override
   Future<void> updatePostStatus(String title, String newStatus) async {
-    // Simulate network delay
     await Future.delayed(const Duration(milliseconds: 300));
     final index = _postsData.indexWhere((post) => post['title'] == title);
     if (index != -1) {

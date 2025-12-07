@@ -1,8 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tester/src/views/auth/login/login_screen.dart';
 import 'package:tester/src/views/manage/shared_preferences.dart';
 import 'package:tester/src/views/user_profile/user_history_campaign_screen.dart';
 import 'package:tester/src/views/user_profile/user_profile_update.dart';
+
+enum DonationRank {
+  bronze("Người Bạn Đồng Hành", Color(0xFFCD7F32), 0),
+  silver("Tấm Lòng Vàng", Color(0xFF9E9E9E), 10000000),
+  gold("Quý Ông Thiện Nguyện", Color(0xFFFFD700), 50000000),
+  platinum("Đại Sứ Nhân Ái", Color(0xFFE5E4E2), 200000000),
+  diamond("Trái Tim Kim Cương", Color(0xFF00BFFF), 500000000);
+
+  final String title;
+  final Color color;
+  final double minAmount;
+
+  const DonationRank(this.title, this.color, this.minAmount);
+}
+
+class MapCampaignModel {
+  final String raisedAmount;
+  final double progress;
+  late final String userDonatedAmount;
+
+  MapCampaignModel({
+    required this.raisedAmount,
+    required this.progress,
+  }) {
+    userDonatedAmount = _calculateUserDonation(raisedAmount, progress);
+  }
+
+  String _calculateUserDonation(
+      String raisedAmountStr, double progressPercent) {
+    try {
+      String cleanAmount =
+          raisedAmountStr.replaceAll('.', '').replaceAll('đ', '').trim();
+      double totalAmount = double.parse(cleanAmount);
+      double donatedValue = totalAmount * (progressPercent / 100);
+      final currencyFormatter = NumberFormat('#,###', 'vi_VN');
+      return "${currencyFormatter.format(donatedValue)} đ";
+    } catch (e) {
+      return "0 đ";
+    }
+  }
+}
 
 class UserProfileView extends StatefulWidget {
   const UserProfileView({super.key});
@@ -15,34 +57,79 @@ class _UserProfileViewState extends State<UserProfileView> {
   final Color primaryColor = const Color(0xFF0288D1);
   final Color backgroundColor = const Color(0xFFF5F7FA);
 
+  // --- DỮ LIỆU GIẢ LẬP ĐỂ TÍNH DANH HIỆU (Copy từ màn hình History) ---
+  // Trong thực tế, bạn nên lưu tổng tiền vào SharedPreferences hoặc API để không phải tính lại ở mỗi màn hình
+  final List<MapCampaignModel> allDonations = [
+    MapCampaignModel(raisedAmount: '5.000.000 đ', progress: 100.0),
+    MapCampaignModel(raisedAmount: '15.500.000 đ', progress: 19.3),
+    MapCampaignModel(raisedAmount: '18.000.000 đ', progress: 72.0),
+    MapCampaignModel(raisedAmount: '4.200.000 đ', progress: 84.0),
+    MapCampaignModel(raisedAmount: '2.000.000 đ', progress: 10.0),
+    MapCampaignModel(raisedAmount: '8.500.000 đ', progress: 75.0),
+    MapCampaignModel(raisedAmount: '20.000.000 đ', progress: 60.0),
+    MapCampaignModel(raisedAmount: '12.500.000 đ', progress: 31.2),
+    MapCampaignModel(raisedAmount: '20.000.000 đ', progress: 20.0),
+    MapCampaignModel(raisedAmount: '20.000.000 đ', progress: 20.0),
+    MapCampaignModel(raisedAmount: '10.000.000 đ', progress: 10.0),
+    MapCampaignModel(raisedAmount: '40.000.000 đ', progress: 5.0),
+  ];
+
+  double _calculateTotalLifetimeDonation() {
+    double total = 0;
+    for (var item in allDonations) {
+      if (item.userDonatedAmount.isNotEmpty) {
+        String cleanAmount = item.userDonatedAmount
+            .replaceAll('.', '')
+            .replaceAll(' đ', '')
+            .trim();
+        total += double.tryParse(cleanAmount) ?? 0;
+      }
+    }
+    return total;
+  }
+
+  DonationRank _calculateRank(double totalAmount) {
+    if (totalAmount >= DonationRank.diamond.minAmount)
+      return DonationRank.diamond;
+    if (totalAmount >= DonationRank.platinum.minAmount)
+      return DonationRank.platinum;
+    if (totalAmount >= DonationRank.gold.minAmount) return DonationRank.gold;
+    if (totalAmount >= DonationRank.silver.minAmount)
+      return DonationRank.silver;
+    return DonationRank.bronze;
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Tính toán danh hiệu hiện tại
+    final totalLifetime = _calculateTotalLifetimeDonation();
+    final currentRank = _calculateRank(totalLifetime);
+
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _buildHeader(),
-            const SizedBox(height: 20),
+            _buildHeader(currentRank), // Truyền rank vào Header
+            const SizedBox(height: 10),
             _buildMenuSection(context),
             const SizedBox(height: 10),
             _buildLogoutButton(context),
-            const SizedBox(height: 10),
           ],
         ),
       ),
     );
   }
 
-  // --- 1. HEADER (Avatar + Info + Edit Button) ---
-  Widget _buildHeader() {
+  // --- 1. HEADER (Avatar + Info + Edit Button + RANK) ---
+  Widget _buildHeader(DonationRank rank) {
     return Stack(
       alignment: Alignment.center,
       clipBehavior: Clip.none,
       children: [
         // Background Blue Curve
         Container(
-          height: 220,
+          height: 230,
           decoration: BoxDecoration(
             color: primaryColor,
             borderRadius: const BorderRadius.only(
@@ -53,7 +140,7 @@ class _UserProfileViewState extends State<UserProfileView> {
         ),
         // Title
         const Positioned(
-          top: 2,
+          top: 10,
           child: Text(
             "Hồ sơ cá nhân",
             style: TextStyle(
@@ -65,8 +152,8 @@ class _UserProfileViewState extends State<UserProfileView> {
         ),
         // Profile Card Container
         Container(
-          margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
-          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
+          padding: const EdgeInsets.symmetric(vertical: 5),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
@@ -100,7 +187,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                 ),
               ),
               const SizedBox(height: 12),
-              // Name (Giả sử lấy từ API hoặc SharedPref)
+              // Name
               const Text(
                 "Dang Khoa Nguyen",
                 style: TextStyle(
@@ -109,7 +196,37 @@ class _UserProfileViewState extends State<UserProfileView> {
                   color: Color(0xFF333333),
                 ),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 8),
+
+              // --- HIỂN THỊ DANH HIỆU (RANK BADGE) ---
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: rank.color.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                  border:
+                      Border.all(color: rank.color.withOpacity(0.5), width: 1),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.military_tech, color: rank.color, size: 18),
+                    const SizedBox(width: 6),
+                    Text(
+                      rank.title,
+                      style: TextStyle(
+                        color: rank.color,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // ----------------------------------------
+
+              const SizedBox(height: 8),
               // Phone
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -126,7 +243,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 10),
               // Edit Profile Button
               SizedBox(
                 width: 160,
@@ -205,7 +322,6 @@ class _UserProfileViewState extends State<UserProfileView> {
                   showDivider: true,
                   onTap: () {},
                 ),
-                // --- MỤC MỚI THÊM VÀO ĐÂY ---
                 ProfileMenuItem(
                   icon: Icons.menu_book_rounded, // Icon sách hướng dẫn
                   iconColor: Colors.green, // Màu xanh lá
@@ -216,7 +332,6 @@ class _UserProfileViewState extends State<UserProfileView> {
                     // TODO: Điều hướng tới trang hướng dẫn
                   },
                 ),
-                // -----------------------------
                 ProfileMenuItem(
                   icon: Icons.help_outline_rounded,
                   iconColor: Colors.orangeAccent,
@@ -252,16 +367,7 @@ class _UserProfileViewState extends State<UserProfileView> {
 
           if (!context.mounted) return;
 
-          if (isLoggedIn && userType == "nguoikhokhan") {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (_) => const LoginScreen()));
-          } else if (isLoggedIn && userType == "045304004088") {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (_) => const LoginScreen()));
-          } else if (isLoggedIn && userType == "nhahaotam") {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (_) => const LoginScreen()));
-          } else if (isLoggedIn && userType == "054204003257") {
+          if (isLoggedIn) {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (_) => const LoginScreen()));
           } else {

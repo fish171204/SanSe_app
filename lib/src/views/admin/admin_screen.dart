@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tester/src/views/admin/admin_post_approval_tab.dart';
 import 'package:tester/src/views/auth/login/login_screen.dart';
 import 'admin_user_management_tab.dart';
 import 'admin_post_management_tab.dart';
@@ -14,7 +15,7 @@ class _AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -46,6 +47,7 @@ class _AdminScreenState extends State<AdminScreen> {
             tabs: [
               Tab(icon: Icon(Icons.people), text: "Người dùng"),
               Tab(icon: Icon(Icons.article), text: "Bài đăng"),
+              Tab(icon: Icon(Icons.fact_check), text: "Duyệt bài"),
             ],
           ),
         ),
@@ -53,6 +55,7 @@ class _AdminScreenState extends State<AdminScreen> {
           children: [
             UserManagementScreen(),
             PostManagementScreen(),
+            PostApprovalScreen(),
           ],
         ),
       ),

@@ -6,7 +6,9 @@ class AdminPostModel {
   final int progress;
   final int originalProgress;
   final bool isDeleted;
-  final String status;
+  final String status; // 'available', 'unavailable', 'pending', 'rejected'
+  final String submissionDate;
+  final String senderName;
 
   const AdminPostModel({
     required this.imagePath,
@@ -17,6 +19,8 @@ class AdminPostModel {
     required this.originalProgress,
     this.isDeleted = false,
     this.status = 'available',
+    this.submissionDate = '',
+    this.senderName = '',
   });
 
   factory AdminPostModel.fromMap(Map<String, dynamic> map) {
@@ -29,6 +33,8 @@ class AdminPostModel {
       originalProgress: map['originalProgress'] ?? 0,
       isDeleted: map['isDeleted'] ?? false,
       status: map['status'] ?? 'available',
+      submissionDate: map['submissionDate'] ?? '01/01/2025',
+      senderName: map['senderName'] ?? 'Ẩn danh',
     );
   }
 
@@ -42,6 +48,8 @@ class AdminPostModel {
       'originalProgress': originalProgress,
       'isDeleted': isDeleted,
       'status': status,
+      'submissionDate': submissionDate,
+      'senderName': senderName,
     };
   }
 
@@ -54,6 +62,8 @@ class AdminPostModel {
     int? originalProgress,
     bool? isDeleted,
     String? status,
+    String? submissionDate,
+    String? senderName,
   }) {
     return AdminPostModel(
       imagePath: imagePath ?? this.imagePath,
@@ -64,6 +74,8 @@ class AdminPostModel {
       originalProgress: originalProgress ?? this.originalProgress,
       isDeleted: isDeleted ?? this.isDeleted,
       status: status ?? this.status,
+      submissionDate: submissionDate ?? this.submissionDate,
+      senderName: senderName ?? this.senderName,
     );
   }
 
